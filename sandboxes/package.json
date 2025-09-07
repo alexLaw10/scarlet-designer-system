@@ -1,0 +1,33 @@
+{
+  "name": "scarlet-sandboxes",
+  "version": "1.0.0",
+  "description": "Sandboxes for testing Scarlet Design System with different frameworks",
+  "private": true,
+  "scripts": {
+    "install:all": "npm run install:vue && npm run install:angular && npm run install:react && npm run install:vanilla",
+    "install:vue": "cd vue && npm install",
+    "install:angular": "cd angular && npm install",
+    "install:react": "cd react && npm install",
+    "install:vanilla": "cd vanilla && npm install",
+    "dev:vue": "cd vue && npm run dev",
+    "dev:angular": "cd angular && npm start",
+    "dev:react": "cd react && npm run dev",
+    "dev:vanilla": "cd vanilla && npm run dev",
+    "build:vue": "cd vue && npm run build",
+    "build:angular": "cd angular && npm run build",
+    "build:react": "cd react && npm run build",
+    "build:vanilla": "cd vanilla && npm run build",
+    "serve:vue": "cd vue && npm run serve",
+    "serve:angular": "cd angular && npm run serve",
+    "serve:react": "cd react && npm run serve",
+    "serve:vanilla": "cd vanilla && npm run serve",
+    "clean:all": "npm run clean:vue && npm run clean:angular && npm run clean:react && npm run clean:vanilla",
+    "clean:vue": "cd vue && rm -rf node_modules dist",
+    "clean:angular": "cd angular && rm -rf node_modules dist",
+    "clean:react": "cd react && rm -rf node_modules dist",
+    "clean:vanilla": "cd vanilla && rm -rf node_modules dist"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

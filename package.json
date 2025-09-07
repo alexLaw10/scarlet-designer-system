@@ -28,7 +28,14 @@
     "clean": "rimraf dist",
     "pre-commit": "npm run lint && npm run format:check && npm run type-check",
     "prepare": "husky install",
-    "prepublishOnly": "npm run clean && npm run build"
+    "prepublishOnly": "npm run clean && npm run build",
+    "sandbox:install": "cd sandboxes && npm run install:all",
+    "sandbox:vue": "cd sandboxes && npm run dev:vue",
+    "sandbox:angular": "cd sandboxes && npm run dev:angular",
+    "sandbox:react": "cd sandboxes && npm run dev:react",
+    "sandbox:vanilla": "cd sandboxes && npm run dev:vanilla",
+    "sandbox:all": "cd sandboxes && concurrently \"npm run dev:vue\" \"npm run dev:angular\" \"npm run dev:react\" \"npm run dev:vanilla\"",
+    "sandbox:clean": "cd sandboxes && npm run clean:all"
   },
   "keywords": [
     "design-system",
@@ -56,6 +63,7 @@
     "lint-staged": "^15.2.0",
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^18.4.3",
+    "concurrently": "^8.2.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "prettier": "^3.0.3",
