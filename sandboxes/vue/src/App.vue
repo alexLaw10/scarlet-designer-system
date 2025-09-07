@@ -6,73 +6,7 @@
     </header>
 
     <main class="main">
-      <section class="section">
-        <h2>Buttons</h2>
-        <div class="button-group">
-          <scarlet-button variant="primary">Primary Button</scarlet-button>
-          <scarlet-button variant="secondary">Secondary Button</scarlet-button>
-          <scarlet-button variant="outline">Outline Button</scarlet-button>
-          <scarlet-button variant="ghost">Ghost Button</scarlet-button>
-          <scarlet-button variant="link">Link Button</scarlet-button>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Inputs</h2>
-        <div class="input-group">
-          <scarlet-input 
-            label="Name" 
-            placeholder="Enter your name"
-            v-model="inputValue"
-          />
-          <scarlet-input 
-            type="email" 
-            label="Email" 
-            placeholder="Enter your email"
-          />
-          <scarlet-input 
-            type="password" 
-            label="Password" 
-            placeholder="Enter your password"
-          />
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Cards</h2>
-        <div class="card-group">
-          <scarlet-card variant="default">
-            <h3>Default Card</h3>
-            <p>This is a default card component.</p>
-          </scarlet-card>
-          <scarlet-card variant="elevated">
-            <h3>Elevated Card</h3>
-            <p>This is an elevated card component.</p>
-          </scarlet-card>
-          <scarlet-card variant="outlined">
-            <h3>Outlined Card</h3>
-            <p>This is an outlined card component.</p>
-          </scarlet-card>
-        </div>
-      </section>
-
-      <section class="section">
-        <h2>Alerts</h2>
-        <div class="alert-group">
-          <scarlet-alert variant="info">
-            This is an info alert
-          </scarlet-alert>
-          <scarlet-alert variant="success">
-            This is a success alert
-          </scarlet-alert>
-          <scarlet-alert variant="warning">
-            This is a warning alert
-          </scarlet-alert>
-          <scarlet-alert variant="error">
-            This is an error alert
-          </scarlet-alert>
-        </div>
-      </section>
+      chamada dos futuros Components
     </main>
   </div>
 </template>
