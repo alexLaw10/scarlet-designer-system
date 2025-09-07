@@ -1,0 +1,136 @@
+// Scarlet Design System - Typography Tokens
+
+// Font Families
+--scarlet-font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+--scarlet-font-family-mono: 'JetBrains Mono', 'Fira Code', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+
+// Font Sizes
+--scarlet-font-size-xs: 0.75rem;    // 12px
+--scarlet-font-size-sm: 0.875rem;   // 14px
+--scarlet-font-size-base: 1rem;     // 16px
+--scarlet-font-size-lg: 1.125rem;   // 18px
+--scarlet-font-size-xl: 1.25rem;    // 20px
+--scarlet-font-size-2xl: 1.5rem;    // 24px
+--scarlet-font-size-3xl: 1.875rem;  // 30px
+--scarlet-font-size-4xl: 2.25rem;   // 36px
+--scarlet-font-size-5xl: 3rem;      // 48px
+--scarlet-font-size-6xl: 3.75rem;   // 60px
+
+// Font Weights
+--scarlet-font-weight-thin: 100;
+--scarlet-font-weight-extralight: 200;
+--scarlet-font-weight-light: 300;
+--scarlet-font-weight-normal: 400;
+--scarlet-font-weight-medium: 500;
+--scarlet-font-weight-semibold: 600;
+--scarlet-font-weight-bold: 700;
+--scarlet-font-weight-extrabold: 800;
+--scarlet-font-weight-black: 900;
+
+// Line Heights
+--scarlet-line-height-none: 1;
+--scarlet-line-height-tight: 1.25;
+--scarlet-line-height-snug: 1.375;
+--scarlet-line-height-normal: 1.5;
+--scarlet-line-height-relaxed: 1.625;
+--scarlet-line-height-loose: 2;
+
+// Letter Spacing
+--scarlet-letter-spacing-tighter: -0.05em;
+--scarlet-letter-spacing-tight: -0.025em;
+--scarlet-letter-spacing-normal: 0em;
+--scarlet-letter-spacing-wide: 0.025em;
+--scarlet-letter-spacing-wider: 0.05em;
+--scarlet-letter-spacing-widest: 0.1em;
+
+// Typography Scale
+--scarlet-text-display-2xl: {
+  font-size: var(--scarlet-font-size-6xl);
+  font-weight: var(--scarlet-font-weight-bold);
+  line-height: var(--scarlet-line-height-none);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+};
+
+--scarlet-text-display-xl: {
+  font-size: var(--scarlet-font-size-5xl);
+  font-weight: var(--scarlet-font-weight-bold);
+  line-height: var(--scarlet-line-height-none);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+};
+
+--scarlet-text-display-lg: {
+  font-size: var(--scarlet-font-size-4xl);
+  font-weight: var(--scarlet-font-weight-bold);
+  line-height: var(--scarlet-line-height-tight);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+};
+
+--scarlet-text-display-md: {
+  font-size: var(--scarlet-font-size-3xl);
+  font-weight: var(--scarlet-font-weight-bold);
+  line-height: var(--scarlet-line-height-tight);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+};
+
+--scarlet-text-display-sm: {
+  font-size: var(--scarlet-font-size-2xl);
+  font-weight: var(--scarlet-font-weight-bold);
+  line-height: var(--scarlet-line-height-snug);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+};
+
+--scarlet-text-heading-xl: {
+  font-size: var(--scarlet-font-size-2xl);
+  font-weight: var(--scarlet-font-weight-semibold);
+  line-height: var(--scarlet-line-height-snug);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+};
+
+--scarlet-text-heading-lg: {
+  font-size: var(--scarlet-font-size-xl);
+  font-weight: var(--scarlet-font-weight-semibold);
+  line-height: var(--scarlet-line-height-snug);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+};
+
+--scarlet-text-heading-md: {
+  font-size: var(--scarlet-font-size-lg);
+  font-weight: var(--scarlet-font-weight-semibold);
+  line-height: var(--scarlet-line-height-snug);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+};
+
+--scarlet-text-heading-sm: {
+  font-size: var(--scarlet-font-size-base);
+  font-weight: var(--scarlet-font-weight-semibold);
+  line-height: var(--scarlet-line-height-snug);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+};
+
+--scarlet-text-body-lg: {
+  font-size: var(--scarlet-font-size-lg);
+  font-weight: var(--scarlet-font-weight-normal);
+  line-height: var(--scarlet-line-height-relaxed);
+  letter-spacing: var(--scarlet-letter-spacing-normal);
+};
+
+--scarlet-text-body-md: {
+  font-size: var(--scarlet-font-size-base);
+  font-weight: var(--scarlet-font-weight-normal);
+  line-height: var(--scarlet-line-height-normal);
+  letter-spacing: var(--scarlet-letter-spacing-normal);
+};
+
+--scarlet-text-body-sm: {
+  font-size: var(--scarlet-font-size-sm);
+  font-weight: var(--scarlet-font-weight-normal);
+  line-height: var(--scarlet-line-height-normal);
+  letter-spacing: var(--scarlet-letter-spacing-normal);
+};
+
+--scarlet-text-caption: {
+  font-size: var(--scarlet-font-size-xs);
+  font-weight: var(--scarlet-font-weight-normal);
+  line-height: var(--scarlet-line-height-normal);
+  letter-spacing: var(--scarlet-letter-spacing-wide);
+};

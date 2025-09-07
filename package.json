@@ -1,0 +1,66 @@
+{
+  "name": "@scarlet/design-system",
+  "version": "1.0.0",
+  "description": "Scarlet Designer System - A comprehensive design system built with Stencil.js Web Components",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "collection": "dist/collection/collection-manifest.json",
+  "types": "dist/types/components.d.ts",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "scripts": {
+    "build": "stencil build --docs",
+    "dev": "stencil build --dev --watch --serve",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "test.spec": "stencil test --spec",
+    "test.e2e": "stencil test --e2e",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix",
+    "type-check": "tsc --noEmit",
+    "clean": "rimraf dist",
+    "prepublishOnly": "npm run clean && npm run build"
+  },
+  "keywords": [
+    "design-system",
+    "web-components",
+    "stencil",
+    "typescript",
+    "ui-components",
+    "scarlet"
+  ],
+  "author": "Scarlet Design Team",
+  "license": "MIT",
+  "devDependencies": {
+    "@stencil/core": "^4.0.0",
+    "@stencil/sass": "^2.0.0",
+    "@stencil/postcss": "^2.0.0",
+    "@stencil/eslint-plugin": "^0.4.0",
+    "@types/jest": "^29.5.8",
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "eslint": "^8.53.0",
+    "eslint-plugin-react": "^7.33.2",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "puppeteer": "^21.5.0",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.2.2",
+    "@storybook/addon-essentials": "^7.5.0",
+    "@storybook/addon-interactions": "^7.5.0",
+    "@storybook/addon-links": "^7.5.0",
+    "@storybook/blocks": "^7.5.0",
+    "@storybook/web-components": "^7.5.0",
+    "@storybook/web-components-vite": "^7.5.0",
+    "storybook": "^7.5.0"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.31"
+  }
+}

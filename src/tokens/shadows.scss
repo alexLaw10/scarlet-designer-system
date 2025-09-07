@@ -1,0 +1,35 @@
+// Scarlet Design System - Shadow Tokens
+
+// Box Shadows
+--scarlet-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+--scarlet-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+--scarlet-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+--scarlet-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+--scarlet-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+--scarlet-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+--scarlet-shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+
+// Colored Shadows
+--scarlet-shadow-primary: 0 4px 6px -1px rgba(14, 165, 233, 0.1), 0 2px 4px -1px rgba(14, 165, 233, 0.06);
+--scarlet-shadow-secondary: 0 4px 6px -1px rgba(217, 70, 239, 0.1), 0 2px 4px -1px rgba(217, 70, 239, 0.06);
+--scarlet-shadow-success: 0 4px 6px -1px rgba(34, 197, 94, 0.1), 0 2px 4px -1px rgba(34, 197, 94, 0.06);
+--scarlet-shadow-warning: 0 4px 6px -1px rgba(245, 158, 11, 0.1), 0 2px 4px -1px rgba(245, 158, 11, 0.06);
+--scarlet-shadow-error: 0 4px 6px -1px rgba(239, 68, 68, 0.1), 0 2px 4px -1px rgba(239, 68, 68, 0.06);
+
+// Focus Shadows
+--scarlet-shadow-focus: 0 0 0 3px rgba(14, 165, 233, 0.1);
+--scarlet-shadow-focus-error: 0 0 0 3px rgba(239, 68, 68, 0.1);
+
+// Elevation Shadows
+--scarlet-shadow-elevation-1: var(--scarlet-shadow-sm);
+--scarlet-shadow-elevation-2: var(--scarlet-shadow-md);
+--scarlet-shadow-elevation-3: var(--scarlet-shadow-lg);
+--scarlet-shadow-elevation-4: var(--scarlet-shadow-xl);
+--scarlet-shadow-elevation-5: var(--scarlet-shadow-2xl);
+
+// Drop Shadows
+--scarlet-drop-shadow-sm: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05));
+--scarlet-drop-shadow-md: drop-shadow(0 4px 3px rgba(0, 0, 0, 0.07)) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.06));
+--scarlet-drop-shadow-lg: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04)) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1));
+--scarlet-drop-shadow-xl: drop-shadow(0 20px 13px rgba(0, 0, 0, 0.03)) drop-shadow(0 8px 5px rgba(0, 0, 0, 0.08));
+--scarlet-drop-shadow-2xl: drop-shadow(0 25px 25px rgba(0, 0, 0, 0.15));

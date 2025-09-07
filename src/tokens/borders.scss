@@ -1,0 +1,54 @@
+// Scarlet Design System - Border Tokens
+
+// Border Width
+--scarlet-border-width-0: 0;
+--scarlet-border-width-1: 1px;
+--scarlet-border-width-2: 2px;
+--scarlet-border-width-4: 4px;
+--scarlet-border-width-8: 8px;
+
+// Border Radius
+--scarlet-border-radius-none: 0;
+--scarlet-border-radius-sm: 0.125rem;   // 2px
+--scarlet-border-radius-md: 0.25rem;    // 4px
+--scarlet-border-radius-lg: 0.375rem;   // 6px
+--scarlet-border-radius-xl: 0.5rem;     // 8px
+--scarlet-border-radius-2xl: 0.75rem;   // 12px
+--scarlet-border-radius-3xl: 1rem;      // 16px
+--scarlet-border-radius-full: 9999px;
+
+// Border Styles
+--scarlet-border-style-solid: solid;
+--scarlet-border-style-dashed: dashed;
+--scarlet-border-style-dotted: dotted;
+--scarlet-border-style-double: double;
+--scarlet-border-style-none: none;
+
+// Component Border Radius
+--scarlet-border-radius-button: var(--scarlet-border-radius-md);
+--scarlet-border-radius-input: var(--scarlet-border-radius-md);
+--scarlet-border-radius-card: var(--scarlet-border-radius-lg);
+--scarlet-border-radius-modal: var(--scarlet-border-radius-xl);
+--scarlet-border-radius-badge: var(--scarlet-border-radius-full);
+--scarlet-border-radius-avatar: var(--scarlet-border-radius-full);
+
+// Border Colors (using color tokens)
+--scarlet-border-color-primary: var(--scarlet-color-border-primary);
+--scarlet-border-color-secondary: var(--scarlet-color-border-secondary);
+--scarlet-border-color-focus: var(--scarlet-color-border-focus);
+--scarlet-border-color-error: var(--scarlet-color-border-error);
+--scarlet-border-color-success: var(--scarlet-color-success-500);
+--scarlet-border-color-warning: var(--scarlet-color-warning-500);
+--scarlet-border-color-info: var(--scarlet-color-info-500);
+
+// Outline
+--scarlet-outline-none: none;
+--scarlet-outline-1: 1px;
+--scarlet-outline-2: 2px;
+--scarlet-outline-4: 4px;
+--scarlet-outline-8: 8px;
+--scarlet-outline-offset-0: 0;
+--scarlet-outline-offset-1: 1px;
+--scarlet-outline-offset-2: 2px;
+--scarlet-outline-offset-4: 4px;
+--scarlet-outline-offset-8: 8px;

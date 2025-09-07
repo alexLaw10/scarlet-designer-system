@@ -1,0 +1,51 @@
+// Scarlet Design System - Global Styles
+// This file contains global styles and CSS custom properties
+
+:root {
+  // Import design tokens
+  @import '../tokens/colors.scss';
+  @import '../tokens/typography.scss';
+  @import '../tokens/spacing.scss';
+  @import '../tokens/shadows.scss';
+  @import '../tokens/borders.scss';
+}
+
+// Reset and base styles
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--scarlet-font-family-primary);
+  font-size: var(--scarlet-font-size-base);
+  line-height: var(--scarlet-line-height-base);
+  color: var(--scarlet-color-text-primary);
+  background-color: var(--scarlet-color-background-primary);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Utility classes
+.scarlet-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.scarlet-focus-visible {
+  outline: 2px solid var(--scarlet-color-focus);
+  outline-offset: 2px;
+}

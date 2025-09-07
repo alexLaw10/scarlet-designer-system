@@ -1,0 +1,67 @@
+// Scarlet Design System - Spacing Tokens
+
+// Base spacing unit (8px)
+--scarlet-space-unit: 0.5rem;
+
+// Spacing Scale
+--scarlet-space-0: 0;
+--scarlet-space-px: 1px;
+--scarlet-space-0-5: calc(var(--scarlet-space-unit) * 0.25);  // 2px
+--scarlet-space-1: calc(var(--scarlet-space-unit) * 0.5);     // 4px
+--scarlet-space-1-5: calc(var(--scarlet-space-unit) * 0.75);  // 6px
+--scarlet-space-2: var(--scarlet-space-unit);                 // 8px
+--scarlet-space-2-5: calc(var(--scarlet-space-unit) * 1.25);  // 10px
+--scarlet-space-3: calc(var(--scarlet-space-unit) * 1.5);     // 12px
+--scarlet-space-3-5: calc(var(--scarlet-space-unit) * 1.75);  // 14px
+--scarlet-space-4: calc(var(--scarlet-space-unit) * 2);       // 16px
+--scarlet-space-5: calc(var(--scarlet-space-unit) * 2.5);     // 20px
+--scarlet-space-6: calc(var(--scarlet-space-unit) * 3);       // 24px
+--scarlet-space-7: calc(var(--scarlet-space-unit) * 3.5);     // 28px
+--scarlet-space-8: calc(var(--scarlet-space-unit) * 4);       // 32px
+--scarlet-space-9: calc(var(--scarlet-space-unit) * 4.5);     // 36px
+--scarlet-space-10: calc(var(--scarlet-space-unit) * 5);      // 40px
+--scarlet-space-11: calc(var(--scarlet-space-unit) * 5.5);    // 44px
+--scarlet-space-12: calc(var(--scarlet-space-unit) * 6);      // 48px
+--scarlet-space-14: calc(var(--scarlet-space-unit) * 7);      // 56px
+--scarlet-space-16: calc(var(--scarlet-space-unit) * 8);      // 64px
+--scarlet-space-20: calc(var(--scarlet-space-unit) * 10);     // 80px
+--scarlet-space-24: calc(var(--scarlet-space-unit) * 12);     // 96px
+--scarlet-space-28: calc(var(--scarlet-space-unit) * 14);     // 112px
+--scarlet-space-32: calc(var(--scarlet-space-unit) * 16);     // 128px
+--scarlet-space-36: calc(var(--scarlet-space-unit) * 18);     // 144px
+--scarlet-space-40: calc(var(--scarlet-space-unit) * 20);     // 160px
+--scarlet-space-44: calc(var(--scarlet-space-unit) * 22);     // 176px
+--scarlet-space-48: calc(var(--scarlet-space-unit) * 24);     // 192px
+--scarlet-space-52: calc(var(--scarlet-space-unit) * 26);     // 208px
+--scarlet-space-56: calc(var(--scarlet-space-unit) * 28);     // 224px
+--scarlet-space-60: calc(var(--scarlet-space-unit) * 30);     // 240px
+--scarlet-space-64: calc(var(--scarlet-space-unit) * 32);     // 256px
+--scarlet-space-72: calc(var(--scarlet-space-unit) * 36);     // 288px
+--scarlet-space-80: calc(var(--scarlet-space-unit) * 40);     // 320px
+--scarlet-space-96: calc(var(--scarlet-space-unit) * 48);     // 384px
+
+// Semantic Spacing
+--scarlet-space-xs: var(--scarlet-space-1);     // 4px
+--scarlet-space-sm: var(--scarlet-space-2);     // 8px
+--scarlet-space-md: var(--scarlet-space-4);     // 16px
+--scarlet-space-lg: var(--scarlet-space-6);     // 24px
+--scarlet-space-xl: var(--scarlet-space-8);     // 32px
+--scarlet-space-2xl: var(--scarlet-space-12);   // 48px
+--scarlet-space-3xl: var(--scarlet-space-16);   // 64px
+--scarlet-space-4xl: var(--scarlet-space-24);   // 96px
+--scarlet-space-5xl: var(--scarlet-space-32);   // 128px
+
+// Component Spacing
+--scarlet-space-component-xs: var(--scarlet-space-1);
+--scarlet-space-component-sm: var(--scarlet-space-2);
+--scarlet-space-component-md: var(--scarlet-space-3);
+--scarlet-space-component-lg: var(--scarlet-space-4);
+--scarlet-space-component-xl: var(--scarlet-space-6);
+
+// Layout Spacing
+--scarlet-space-layout-xs: var(--scarlet-space-4);
+--scarlet-space-layout-sm: var(--scarlet-space-6);
+--scarlet-space-layout-md: var(--scarlet-space-8);
+--scarlet-space-layout-lg: var(--scarlet-space-12);
+--scarlet-space-layout-xl: var(--scarlet-space-16);
+--scarlet-space-layout-2xl: var(--scarlet-space-24);
