@@ -107,7 +107,7 @@ export default {
 
 .header h1 {
   margin: 0 0 10px 0;
-  color: #0ea5e9;
+  color: #e11d48;
 }
 
 .header p {

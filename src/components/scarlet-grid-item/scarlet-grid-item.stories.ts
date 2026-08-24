@@ -7,7 +7,7 @@ interface ScarletGridItemArgs {
 }
 
 const cell = (label: string) => html`
-  <div style="padding: 16px; background: var(--scarlet-color-primary-100, #e0f2fe); border-radius: 6px; text-align: center; height: 100%; box-sizing: border-box;">
+  <div style="padding: 16px; background: var(--scarlet-color-primary-100, #ffe4e6); border-radius: 6px; text-align: center; height: 100%; box-sizing: border-box;">
     ${label}
   </div>
 `;

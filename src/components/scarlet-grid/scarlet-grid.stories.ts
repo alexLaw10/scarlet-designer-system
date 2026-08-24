@@ -7,7 +7,7 @@ interface ScarletGridArgs {
 }
 
 const cell = (label: string) => html`
-  <div style="padding: 16px; background: var(--scarlet-color-primary-100, #e0f2fe); border-radius: 6px; text-align: center;">${label}</div>
+  <div style="padding: 16px; background: var(--scarlet-color-primary-100, #ffe4e6); border-radius: 6px; text-align: center;">${label}</div>
 `;
 
 const meta: Meta<ScarletGridArgs> = {

@@ -10,7 +10,7 @@ interface ScarletStackArgs {
 }
 
 const box = (label: string) => html`
-  <div style="padding: 12px 16px; background: var(--scarlet-color-primary-100, #e0f2fe); border-radius: 6px;">${label}</div>
+  <div style="padding: 12px 16px; background: var(--scarlet-color-primary-100, #ffe4e6); border-radius: 6px;">${label}</div>
 `;
 
 const meta: Meta<ScarletStackArgs> = {

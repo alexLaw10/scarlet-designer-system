@@ -20,7 +20,7 @@ const meta: Meta<ScarletContainerArgs> = {
   render: (args) => html`
     <div style="background: var(--scarlet-color-background-secondary, #f1f5f9);">
       <scarlet-container max-width=${args.maxWidth} ?padding=${args.padding}>
-        <div style="background: var(--scarlet-color-primary-100, #e0f2fe); padding: 24px; border-radius: 6px;">
+        <div style="background: var(--scarlet-color-primary-100, #ffe4e6); padding: 24px; border-radius: 6px;">
           Conteúdo centralizado, com largura máxima de "${args.maxWidth}".
         </div>
       </scarlet-container>
