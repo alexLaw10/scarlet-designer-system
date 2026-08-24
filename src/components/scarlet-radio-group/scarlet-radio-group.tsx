@@ -46,17 +46,21 @@ export class ScarletRadioGroup {
     this.syncChildren();
   }
 
-  @Listen('scarletChange')
+  // capture: true is load-bearing, not just stopImmediatePropagation: the
+  // group re-emits its own scarletChange on this same element once it's
+  // done processing the child's event, so the original event must never
+  // reach a bubble-phase listener here (e.g. a consumer's addEventListener).
+  // Per the DOM spec, a capture-phase listener on an ancestor always runs
+  // before any bubble-phase listener on that same node, regardless of
+  // registration order — stopImmediatePropagation alone depends on that
+  // order and isn't reliable here.
+  @Listen('scarletChange', { capture: true })
   handleChildChange(event: CustomEvent<boolean>): void {
     const target = event.target as ScarletRadioElement | null;
     const isChildRadio = target?.tagName?.toLowerCase() === 'scarlet-radio';
     if (!target || !isChildRadio || !event.detail) {
       return;
     }
-    // stopImmediatePropagation (not just stopPropagation): the group
-    // re-emits its own scarletChange right below, so the original child
-    // event must not also reach listeners already attached to this same
-    // host element, or consumers would see scarletChange fire twice.
     event.stopImmediatePropagation();
     this.value = target.value;
     this.syncChildren();
