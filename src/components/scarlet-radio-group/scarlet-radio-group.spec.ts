@@ -41,12 +41,11 @@ describe('scarlet-radio-group', () => {
     const radioB = radios.find((radio) => radio.value === 'b');
     const input = radioB.shadowRoot.querySelector('input');
     input.checked = true;
-    // The group now listens for this native "change" bubbling up (not the
-    // custom "scarletChange"), so it must be dispatched as bubbling +
-    // composed to actually cross the radio's shadow boundary and reach an
-    // ancestor listener — real user-driven change events do this
-    // automatically; a manually constructed Event does not by default.
-    input.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
+    // Dispatched directly on the input scarlet-radio's own onChange is
+    // bound to, so this fires regardless of bubbles/composed; the group
+    // finds out via scarlet-radio's internal scarletRadioChange event, not
+    // by observing this native one.
+    input.dispatchEvent(new Event('change'));
     await page.waitForChanges();
 
     expect(changeSpy).toHaveBeenCalledTimes(1);

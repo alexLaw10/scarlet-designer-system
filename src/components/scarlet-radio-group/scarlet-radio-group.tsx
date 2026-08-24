@@ -46,22 +46,21 @@ export class ScarletRadioGroup {
     this.syncChildren();
   }
 
-  // Deliberately listens for the native "change" event bubbling out of each
-  // <scarlet-radio>'s internal <input>, not for the custom "scarletChange"
-  // event those radios also emit. Two attempts at intercepting/stopping the
-  // custom event before it reached a consumer's own addEventListener on
-  // this same element (stopImmediatePropagation, then a capture-phase
-  // listener) both still let it through — this component's mock-doc test
-  // environment doesn't appear to honor capture/bubble ordering the way a
-  // real browser does. Listening for a differently-named event sidesteps
-  // the problem entirely: it can never collide with a consumer's listener
-  // for the group's own "scarletChange". Shadow-DOM event retargeting means
-  // event.target here is already the <scarlet-radio> host, same as before.
-  @Listen('change')
-  handleChildChange(event: Event): void {
+  // Listens for scarlet-radio's internal-only "scarletRadioChange" event,
+  // not its public "scarletChange" — a consumer's own addEventListener for
+  // "scarletChange" on this group would otherwise also catch the child's
+  // bubbling event (boolean detail) in addition to the group's own (string
+  // detail) re-emission below, firing twice with the wrong detail on the
+  // first hit. Different event names avoids that collision outright,
+  // without depending on stopPropagation/capture-phase ordering (which
+  // turned out not to reliably prevent it here) or on a raw native event
+  // crossing the shadow boundary on a manual dispatch (which turned out not
+  // to reliably happen here either — Stencil's own EventEmitter does).
+  @Listen('scarletRadioChange')
+  handleChildChange(event: CustomEvent<boolean>): void {
     const target = event.target as ScarletRadioElement | null;
     const isChildRadio = target?.tagName?.toLowerCase() === 'scarlet-radio';
-    if (!target || !isChildRadio || !target.checked) {
+    if (!target || !isChildRadio || !event.detail) {
       return;
     }
     this.value = target.value;

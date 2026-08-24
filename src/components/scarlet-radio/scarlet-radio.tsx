@@ -31,10 +31,20 @@ export class ScarletRadio {
   /** Emitted when this radio becomes selected via user interaction. */
   @Event() scarletChange!: EventEmitter<boolean>;
 
+  /**
+   * @internal Emitted alongside `scarletChange`, under a name a parent
+   * `<scarlet-radio-group>` can listen for without colliding with a
+   * consumer's own `scarletChange` listener on the group (which carries a
+   * different, string `detail`). Not meant for direct use outside this
+   * component pair.
+   */
+  @Event() scarletRadioChange!: EventEmitter<boolean>;
+
   private handleChange = (event: Event): void => {
     const target = event.target as HTMLInputElement;
     this.checked = target.checked;
     this.scarletChange.emit(this.checked);
+    this.scarletRadioChange.emit(this.checked);
   };
 
   render() {
