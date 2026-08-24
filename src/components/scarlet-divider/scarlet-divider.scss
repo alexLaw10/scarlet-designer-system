@@ -4,7 +4,7 @@
   display: block;
 }
 
-.scarlet-divider-host--horizontal {
+:host(.scarlet-divider-host--horizontal) {
   display: flex;
   align-items: center;
   width: 100%;
@@ -13,13 +13,13 @@
   background-color: var(--scarlet-color-border-secondary);
 }
 
-.scarlet-divider-host--horizontal:has(.scarlet-divider__label) {
+:host(.scarlet-divider-host--horizontal):has(.scarlet-divider__label) {
   height: auto;
   background-color: transparent;
   gap: var(--scarlet-space-3);
 }
 
-.scarlet-divider-host--vertical {
+:host(.scarlet-divider-host--vertical) {
   display: inline-block;
   width: var(--scarlet-border-width-1);
   align-self: stretch;

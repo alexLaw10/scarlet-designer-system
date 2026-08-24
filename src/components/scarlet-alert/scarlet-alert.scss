@@ -69,18 +69,18 @@ $scarlet-alert-statuses: success, warning, error, info;
 }
 
 @each $status in $scarlet-alert-statuses {
-  .scarlet-alert-host--soft.scarlet-alert-host--#{$status} {
+  :host(.scarlet-alert-host--soft.scarlet-alert-host--#{$status}) {
     background-color: var(--scarlet-color-#{$status}-50);
     color: var(--scarlet-color-#{$status}-800);
   }
 
-  .scarlet-alert-host--outline.scarlet-alert-host--#{$status} {
+  :host(.scarlet-alert-host--outline.scarlet-alert-host--#{$status}) {
     background-color: transparent;
     border-color: var(--scarlet-color-#{$status}-500);
     color: var(--scarlet-color-#{$status}-700);
   }
 
-  .scarlet-alert-host--solid.scarlet-alert-host--#{$status} {
+  :host(.scarlet-alert-host--solid.scarlet-alert-host--#{$status}) {
     background-color: var(--scarlet-color-#{$status}-500);
     color: var(--scarlet-color-text-inverse);
   }

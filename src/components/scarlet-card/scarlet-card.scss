@@ -5,19 +5,19 @@
   overflow: hidden;
 }
 
-.scarlet-card-host--elevated {
+:host(.scarlet-card-host--elevated) {
   box-shadow: var(--scarlet-shadow-md);
 }
 
-.scarlet-card-host--outlined {
+:host(.scarlet-card-host--outlined) {
   border: var(--scarlet-border-width-1) solid var(--scarlet-color-border-primary);
 }
 
-.scarlet-card-host--flat {
+:host(.scarlet-card-host--flat) {
   box-shadow: none;
 }
 
-.scarlet-card-host--interactive {
+:host(.scarlet-card-host--interactive) {
   cursor: pointer;
   transition:
     box-shadow 0.15s ease,

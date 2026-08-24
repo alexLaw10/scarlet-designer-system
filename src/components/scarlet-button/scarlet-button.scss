@@ -6,7 +6,7 @@ $scarlet-button-colors: primary, secondary, success, warning, error, info, neutr
   display: inline-block;
 }
 
-.scarlet-button-host--full-width {
+:host(.scarlet-button-host--full-width) {
   display: block;
   width: 100%;
 }

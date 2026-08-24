@@ -16,40 +16,40 @@ $scarlet-toast-statuses: success, warning, error, info;
   box-shadow: var(--scarlet-shadow-lg);
 }
 
-.scarlet-toast-host--top-right {
+:host(.scarlet-toast-host--top-right) {
   top: var(--scarlet-space-4);
   right: var(--scarlet-space-4);
 }
 
-.scarlet-toast-host--top-left {
+:host(.scarlet-toast-host--top-left) {
   top: var(--scarlet-space-4);
   left: var(--scarlet-space-4);
 }
 
-.scarlet-toast-host--bottom-right {
+:host(.scarlet-toast-host--bottom-right) {
   bottom: var(--scarlet-space-4);
   right: var(--scarlet-space-4);
 }
 
-.scarlet-toast-host--bottom-left {
+:host(.scarlet-toast-host--bottom-left) {
   bottom: var(--scarlet-space-4);
   left: var(--scarlet-space-4);
 }
 
-.scarlet-toast-host--top-center {
+:host(.scarlet-toast-host--top-center) {
   top: var(--scarlet-space-4);
   left: 50%;
   transform: translateX(-50%);
 }
 
-.scarlet-toast-host--bottom-center {
+:host(.scarlet-toast-host--bottom-center) {
   bottom: var(--scarlet-space-4);
   left: 50%;
   transform: translateX(-50%);
 }
 
 @each $status in $scarlet-toast-statuses {
-  .scarlet-toast-host--#{$status} {
+  :host(.scarlet-toast-host--#{$status}) {
     box-shadow: var(--scarlet-shadow-lg), inset 3px 0 0 var(--scarlet-color-#{$status}-500);
   }
 }

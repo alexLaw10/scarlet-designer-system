@@ -2,18 +2,18 @@
   display: grid;
 }
 
-.scarlet-grid-host--align-start {
+:host(.scarlet-grid-host--align-start) {
   align-items: start;
 }
 
-.scarlet-grid-host--align-center {
+:host(.scarlet-grid-host--align-center) {
   align-items: center;
 }
 
-.scarlet-grid-host--align-end {
+:host(.scarlet-grid-host--align-end) {
   align-items: end;
 }
 
-.scarlet-grid-host--align-stretch {
+:host(.scarlet-grid-host--align-stretch) {
   align-items: stretch;
 }
