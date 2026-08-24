@@ -46,22 +46,24 @@ export class ScarletRadioGroup {
     this.syncChildren();
   }
 
-  // capture: true is load-bearing, not just stopImmediatePropagation: the
-  // group re-emits its own scarletChange on this same element once it's
-  // done processing the child's event, so the original event must never
-  // reach a bubble-phase listener here (e.g. a consumer's addEventListener).
-  // Per the DOM spec, a capture-phase listener on an ancestor always runs
-  // before any bubble-phase listener on that same node, regardless of
-  // registration order — stopImmediatePropagation alone depends on that
-  // order and isn't reliable here.
-  @Listen('scarletChange', { capture: true })
-  handleChildChange(event: CustomEvent<boolean>): void {
+  // Deliberately listens for the native "change" event bubbling out of each
+  // <scarlet-radio>'s internal <input>, not for the custom "scarletChange"
+  // event those radios also emit. Two attempts at intercepting/stopping the
+  // custom event before it reached a consumer's own addEventListener on
+  // this same element (stopImmediatePropagation, then a capture-phase
+  // listener) both still let it through — this component's mock-doc test
+  // environment doesn't appear to honor capture/bubble ordering the way a
+  // real browser does. Listening for a differently-named event sidesteps
+  // the problem entirely: it can never collide with a consumer's listener
+  // for the group's own "scarletChange". Shadow-DOM event retargeting means
+  // event.target here is already the <scarlet-radio> host, same as before.
+  @Listen('change')
+  handleChildChange(event: Event): void {
     const target = event.target as ScarletRadioElement | null;
     const isChildRadio = target?.tagName?.toLowerCase() === 'scarlet-radio';
-    if (!target || !isChildRadio || !event.detail) {
+    if (!target || !isChildRadio || !target.checked) {
       return;
     }
-    event.stopImmediatePropagation();
     this.value = target.value;
     this.syncChildren();
     this.scarletChange.emit(this.value);

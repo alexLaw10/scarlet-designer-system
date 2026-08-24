@@ -22,7 +22,7 @@ describe('scarlet-radio-group', () => {
     expect(checkedValues).toEqual(['b']);
   });
 
-  it('selects a radio and unchecks the previous one when a child emits scarletChange', async () => {
+  it('selects a radio and unchecks the previous one when a child input changes', async () => {
     const page = await newSpecPage({
       components: [ScarletRadioGroup, ScarletRadio],
       html: `
@@ -41,7 +41,12 @@ describe('scarlet-radio-group', () => {
     const radioB = radios.find((radio) => radio.value === 'b');
     const input = radioB.shadowRoot.querySelector('input');
     input.checked = true;
-    input.dispatchEvent(new Event('change'));
+    // The group now listens for this native "change" bubbling up (not the
+    // custom "scarletChange"), so it must be dispatched as bubbling +
+    // composed to actually cross the radio's shadow boundary and reach an
+    // ancestor listener — real user-driven change events do this
+    // automatically; a manually constructed Event does not by default.
+    input.dispatchEvent(new Event('change', { bubbles: true, composed: true }));
     await page.waitForChanges();
 
     expect(changeSpy).toHaveBeenCalledTimes(1);
