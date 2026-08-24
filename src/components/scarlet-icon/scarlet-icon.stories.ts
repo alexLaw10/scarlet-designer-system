@@ -35,16 +35,32 @@ export const WithAccessibleLabel: Story = {
 
 export const AllIcons: Story = {
   render: () => html`
-    <div style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 16px; font-size: 24px; text-align: center;">
-      ${scarletIconNames.map(
-        (name) => html`
-          <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-            <scarlet-icon name=${name}></scarlet-icon>
-            <span style="font-size: 10px; font-family: sans-serif;">${name}</span>
-          </div>
-        `,
-      )}
-    </div>
+    <table style="border-collapse: collapse; width: 100%; max-width: 560px; font-family: sans-serif; font-size: 13px;">
+      <thead>
+        <tr>
+          <th style="text-align: left; padding: 8px 16px 8px 4px; border-bottom: 2px solid #e2e8f0; color: #64748b;">Ícone</th>
+          <th style="text-align: left; padding: 8px 16px 8px 4px; border-bottom: 2px solid #e2e8f0; color: #64748b;">Nome</th>
+          <th style="text-align: left; padding: 8px 4px; border-bottom: 2px solid #e2e8f0; color: #64748b;">Uso</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${scarletIconNames.map(
+          (name) => html`
+            <tr>
+              <td style="padding: 8px 16px 8px 4px; border-bottom: 1px solid #e2e8f0; font-size: 20px;">
+                <scarlet-icon name=${name}></scarlet-icon>
+              </td>
+              <td style="padding: 8px 16px 8px 4px; border-bottom: 1px solid #e2e8f0;">
+                <code>${name}</code>
+              </td>
+              <td style="padding: 8px 4px; border-bottom: 1px solid #e2e8f0; color: #64748b; white-space: nowrap;">
+                <code>&lt;scarlet-icon name="${name}"&gt;</code>
+              </td>
+            </tr>
+          `,
+        )}
+      </tbody>
+    </table>
   `,
 };
 
