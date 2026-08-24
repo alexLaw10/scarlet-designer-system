@@ -1,0 +1,91 @@
+:host {
+  display: flex;
+}
+
+.scarlet-stack-host--row {
+  flex-direction: row;
+}
+
+.scarlet-stack-host--column {
+  flex-direction: column;
+}
+
+.scarlet-stack-host--row-reverse {
+  flex-direction: row-reverse;
+}
+
+.scarlet-stack-host--column-reverse {
+  flex-direction: column-reverse;
+}
+
+.scarlet-stack-host--gap-xs {
+  gap: var(--scarlet-space-1);
+}
+
+.scarlet-stack-host--gap-sm {
+  gap: var(--scarlet-space-2);
+}
+
+.scarlet-stack-host--gap-md {
+  gap: var(--scarlet-space-4);
+}
+
+.scarlet-stack-host--gap-lg {
+  gap: var(--scarlet-space-6);
+}
+
+.scarlet-stack-host--gap-xl {
+  gap: var(--scarlet-space-8);
+}
+
+.scarlet-stack-host--align-start {
+  align-items: flex-start;
+}
+
+.scarlet-stack-host--align-center {
+  align-items: center;
+}
+
+.scarlet-stack-host--align-end {
+  align-items: flex-end;
+}
+
+.scarlet-stack-host--align-stretch {
+  align-items: stretch;
+}
+
+.scarlet-stack-host--justify-start {
+  justify-content: flex-start;
+}
+
+.scarlet-stack-host--justify-center {
+  justify-content: center;
+}
+
+.scarlet-stack-host--justify-end {
+  justify-content: flex-end;
+}
+
+.scarlet-stack-host--justify-between {
+  justify-content: space-between;
+}
+
+.scarlet-stack-host--justify-around {
+  justify-content: space-around;
+}
+
+.scarlet-stack-host--justify-evenly {
+  justify-content: space-evenly;
+}
+
+.scarlet-stack-host--wrap-nowrap {
+  flex-wrap: nowrap;
+}
+
+.scarlet-stack-host--wrap-wrap {
+  flex-wrap: wrap;
+}
+
+.scarlet-stack-host--wrap-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}

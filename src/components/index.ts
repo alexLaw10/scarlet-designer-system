@@ -1,6 +1,13 @@
 // Export all components here
 // This file will be automatically updated as components are added
 
+// Layout
+export { ScarletStack } from './scarlet-stack/scarlet-stack';
+export { ScarletGrid } from './scarlet-grid/scarlet-grid';
+export { ScarletGridItem } from './scarlet-grid-item/scarlet-grid-item';
+export { ScarletContainer } from './scarlet-container/scarlet-container';
+export type { ScarletContainerMaxWidth } from './scarlet-container/scarlet-container';
+
 // Foundation
 export { ScarletIcon } from './scarlet-icon/scarlet-icon';
 export type { ScarletIconName } from './scarlet-icon/icons';

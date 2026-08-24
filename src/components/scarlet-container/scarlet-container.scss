@@ -1,0 +1,38 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.scarlet-container-host--sm {
+  max-width: 640px;
+}
+
+.scarlet-container-host--md {
+  max-width: 768px;
+}
+
+.scarlet-container-host--lg {
+  max-width: 1024px;
+}
+
+.scarlet-container-host--xl {
+  max-width: 1280px;
+}
+
+.scarlet-container-host--2xl {
+  max-width: 1536px;
+}
+
+.scarlet-container-host--full {
+  max-width: none;
+}
+
+.scarlet-container-host--padding {
+  padding-left: var(--scarlet-space-4);
+  padding-right: var(--scarlet-space-4);
+}
+
+.scarlet-container-host--center {
+  margin-left: auto;
+  margin-right: auto;
+}
