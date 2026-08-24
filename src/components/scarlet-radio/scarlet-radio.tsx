@@ -28,15 +28,22 @@ export class ScarletRadio {
   /** Visible label rendered next to the radio. */
   @Prop() readonly label?: string;
 
-  /** Emitted when this radio becomes selected via user interaction. */
-  @Event() scarletChange!: EventEmitter<boolean>;
+  /**
+   * Emitted when this radio becomes selected via user interaction.
+   * Deliberately non-bubbling: a parent `<scarlet-radio-group>` re-emits
+   * its own `scarletChange` (with a different, string `detail`) once it
+   * has processed this one, so this event must never reach a listener
+   * attached to the group too, or such a listener would see both fire
+   * under the same name. Listen directly on the radio (which still works
+   * for standalone usage — the "at target" phase runs regardless of
+   * `bubbles`) or on the group, not both.
+   */
+  @Event({ bubbles: false }) scarletChange!: EventEmitter<boolean>;
 
   /**
-   * @internal Emitted alongside `scarletChange`, under a name a parent
-   * `<scarlet-radio-group>` can listen for without colliding with a
-   * consumer's own `scarletChange` listener on the group (which carries a
-   * different, string `detail`). Not meant for direct use outside this
-   * component pair.
+   * @internal Emitted alongside `scarletChange`, under a name and with the
+   * bubbling behavior a parent `<scarlet-radio-group>` needs to coordinate
+   * selection. Not meant for direct use outside this component pair.
    */
   @Event() scarletRadioChange!: EventEmitter<boolean>;
 
