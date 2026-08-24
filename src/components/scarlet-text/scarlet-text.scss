@@ -1,0 +1,84 @@
+@import '../../tokens/typography-mixins';
+
+:host {
+  display: block;
+}
+
+.scarlet-text-host--inline {
+  display: inline;
+}
+
+.scarlet-text {
+  margin: 0;
+  font-family: var(--scarlet-font-family-primary);
+}
+
+.scarlet-text--body-lg {
+  @include scarlet-text-body-lg;
+}
+
+.scarlet-text--body-md {
+  @include scarlet-text-body-md;
+}
+
+.scarlet-text--body-sm {
+  @include scarlet-text-body-sm;
+}
+
+.scarlet-text--caption {
+  @include scarlet-text-caption;
+}
+
+.scarlet-text--color-primary {
+  color: var(--scarlet-color-text-primary);
+}
+
+.scarlet-text--color-secondary {
+  color: var(--scarlet-color-text-secondary);
+}
+
+.scarlet-text--color-tertiary {
+  color: var(--scarlet-color-text-tertiary);
+}
+
+.scarlet-text--color-inverse {
+  color: var(--scarlet-color-text-inverse);
+}
+
+.scarlet-text--color-disabled {
+  color: var(--scarlet-color-text-disabled);
+}
+
+.scarlet-text--align-left {
+  text-align: left;
+}
+
+.scarlet-text--align-center {
+  text-align: center;
+}
+
+.scarlet-text--align-right {
+  text-align: right;
+}
+
+.scarlet-text--weight-normal {
+  font-weight: var(--scarlet-font-weight-normal);
+}
+
+.scarlet-text--weight-medium {
+  font-weight: var(--scarlet-font-weight-medium);
+}
+
+.scarlet-text--weight-semibold {
+  font-weight: var(--scarlet-font-weight-semibold);
+}
+
+.scarlet-text--weight-bold {
+  font-weight: var(--scarlet-font-weight-bold);
+}
+
+.scarlet-text--truncate {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
