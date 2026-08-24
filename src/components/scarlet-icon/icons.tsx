@@ -41,7 +41,8 @@ export type ScarletIconName =
   | 'more-horizontal'
   | 'more-vertical';
 
-type IconRenderer = () => unknown;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type IconRenderer = () => any;
 
 export const scarletIcons: Record<ScarletIconName, IconRenderer> = {
   check: () => <polyline points="4,12 9,17 20,6" />,

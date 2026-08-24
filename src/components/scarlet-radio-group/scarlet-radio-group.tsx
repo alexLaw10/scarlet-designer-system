@@ -20,6 +20,8 @@ interface ScarletRadioElement extends HTMLElement {
   shadow: true,
 })
 export class ScarletRadioGroup {
+  private slotEl?: HTMLSlotElement;
+
   @Element() el!: HTMLElement;
 
   /** Name applied to every radio in the group, so they submit together in a form. */
@@ -73,6 +75,16 @@ export class ScarletRadioGroup {
     });
   };
 
+  // Attached via ref instead of a JSX `onSlotchange` prop, since that event
+  // name isn't part of every JSX typings surface for <slot>. Guarded so the
+  // listener is only ever attached once, even though `ref` fires on re-renders.
+  private handleSlotRef = (el?: HTMLSlotElement): void => {
+    if (el && el !== this.slotEl) {
+      el.addEventListener('slotchange', this.syncChildren);
+    }
+    this.slotEl = el;
+  };
+
   render() {
     return (
       <Host
@@ -80,7 +92,7 @@ export class ScarletRadioGroup {
         role="radiogroup"
         aria-label={this.ariaLabel}
       >
-        <slot onSlotchange={this.syncChildren} />
+        <slot ref={this.handleSlotRef} />
       </Host>
     );
   }
