@@ -70,6 +70,7 @@
     "prettier": "^3.0.3",
     "puppeteer": "^21.5.0",
     "rimraf": "^5.0.5",
+    "sass": "^1.103.1",
     "typescript": "^5.2.2",
     "@storybook/addon-essentials": "^7.5.0",
     "@storybook/addon-interactions": "^7.5.0",
