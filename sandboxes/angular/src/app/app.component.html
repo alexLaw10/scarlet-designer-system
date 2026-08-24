@@ -5,6 +5,58 @@
   </header>
 
   <main class="main">
-   chamada dos futuros Components
+    <section class="section">
+      <h2>Button</h2>
+      <div class="button-group">
+        <scarlet-button variant="solid" color="primary" (scarletClick)="onButtonClick('Primary')">Primary</scarlet-button>
+        <scarlet-button variant="solid" color="secondary" (scarletClick)="onButtonClick('Secondary')">Secondary</scarlet-button>
+        <scarlet-button variant="outline" (scarletClick)="onButtonClick('Outline')">Outline</scarlet-button>
+        <scarlet-button variant="ghost" (scarletClick)="onButtonClick('Ghost')">Ghost</scarlet-button>
+        <scarlet-button variant="link" (scarletClick)="onButtonClick('Link')">Link</scarlet-button>
+        <scarlet-button variant="solid" disabled="true">Disabled</scarlet-button>
+      </div>
+      <p>Último clicado: <strong>{{ lastClicked }}</strong> — Total de cliques: <strong>{{ clickCount }}</strong></p>
+    </section>
+
+    <section class="section">
+      <h2>Input</h2>
+      <div class="input-group">
+        <scarlet-input label="Nome" placeholder="Digite seu nome" [value]="inputValue" (scarletInput)="onInputChange($event)"></scarlet-input>
+        <scarlet-input type="email" label="E-mail" placeholder="voce@exemplo.com"></scarlet-input>
+        <scarlet-input type="password" label="Senha" helper-text="Mínimo de 8 caracteres"></scarlet-input>
+        <scarlet-input label="Com erro" error-message="Este campo é obrigatório" invalid="true"></scarlet-input>
+      </div>
+      <p>Valor digitado: <strong>{{ inputValue || '-' }}</strong></p>
+    </section>
+
+    <section class="section">
+      <h2>Card</h2>
+      <div class="card-group">
+        <scarlet-card variant="elevated">
+          <span slot="header">Card elevado</span>
+          <p>Conteúdo de exemplo dentro do card.</p>
+        </scarlet-card>
+        <scarlet-card variant="outlined">
+          <span slot="header">Card com borda</span>
+          <p>Conteúdo de exemplo dentro do card.</p>
+        </scarlet-card>
+        <scarlet-card interactive="true" (scarletClick)="onButtonClick('Card interativo')">
+          <span slot="header">Card interativo</span>
+          <p>Clique em qualquer lugar deste card.</p>
+        </scarlet-card>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Alert</h2>
+      <div class="alert-group">
+        <scarlet-alert status="info">Este é um alerta informativo.</scarlet-alert>
+        <scarlet-alert status="success">Operação concluída com sucesso.</scarlet-alert>
+        <scarlet-alert status="warning">Atenção: revise os dados informados.</scarlet-alert>
+        <scarlet-alert *ngIf="alertVisible" status="error" dismissible="true" (scarletDismiss)="onAlertDismiss()">
+          Ocorreu um erro ao processar sua solicitação.
+        </scarlet-alert>
+      </div>
+    </section>
   </main>
 </div>

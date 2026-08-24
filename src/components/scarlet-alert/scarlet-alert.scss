@@ -1,0 +1,87 @@
+@import '../../tokens/typography-mixins';
+
+$scarlet-alert-statuses: success, warning, error, info;
+
+:host {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--scarlet-space-3);
+  padding: var(--scarlet-space-4);
+  border-radius: var(--scarlet-border-radius-lg);
+  border: var(--scarlet-border-width-1) solid transparent;
+}
+
+.scarlet-alert__icon {
+  flex-shrink: 0;
+  width: var(--scarlet-space-5);
+  height: var(--scarlet-space-5);
+  margin-top: var(--scarlet-space-0-5);
+}
+
+.scarlet-alert__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.scarlet-alert__title {
+  @include scarlet-text-heading-sm;
+  display: none;
+}
+
+.scarlet-alert__title:has(::slotted(*)) {
+  display: block;
+  margin-bottom: var(--scarlet-space-1);
+}
+
+.scarlet-alert__message {
+  @include scarlet-text-body-sm;
+}
+
+.scarlet-alert__dismiss {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--scarlet-space-6);
+  height: var(--scarlet-space-6);
+  padding: 0;
+  border: none;
+  border-radius: var(--scarlet-border-radius-md);
+  background: transparent;
+  color: currentColor;
+  cursor: pointer;
+  opacity: 0.7;
+
+  svg {
+    width: var(--scarlet-space-4);
+    height: var(--scarlet-space-4);
+  }
+
+  &:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--scarlet-shadow-focus);
+  }
+}
+
+@each $status in $scarlet-alert-statuses {
+  .scarlet-alert-host--soft.scarlet-alert-host--#{$status} {
+    background-color: var(--scarlet-color-#{$status}-50);
+    color: var(--scarlet-color-#{$status}-800);
+  }
+
+  .scarlet-alert-host--outline.scarlet-alert-host--#{$status} {
+    background-color: transparent;
+    border-color: var(--scarlet-color-#{$status}-500);
+    color: var(--scarlet-color-#{$status}-700);
+  }
+
+  .scarlet-alert-host--solid.scarlet-alert-host--#{$status} {
+    background-color: var(--scarlet-color-#{$status}-500);
+    color: var(--scarlet-color-text-inverse);
+  }
+}

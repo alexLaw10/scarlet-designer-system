@@ -6,7 +6,59 @@
     </header>
 
     <main class="main">
-      chamada dos futuros Components
+      <section class="section">
+        <h2>Button</h2>
+        <div class="button-group">
+          <scarlet-button variant="solid" color="primary" @scarlet-click="onButtonClick('Primary')">Primary</scarlet-button>
+          <scarlet-button variant="solid" color="secondary" @scarlet-click="onButtonClick('Secondary')">Secondary</scarlet-button>
+          <scarlet-button variant="outline" @scarlet-click="onButtonClick('Outline')">Outline</scarlet-button>
+          <scarlet-button variant="ghost" @scarlet-click="onButtonClick('Ghost')">Ghost</scarlet-button>
+          <scarlet-button variant="link" @scarlet-click="onButtonClick('Link')">Link</scarlet-button>
+          <scarlet-button variant="solid" disabled>Disabled</scarlet-button>
+        </div>
+        <p>Último clicado: <strong>{{ lastClicked }}</strong> — Total de cliques: <strong>{{ clickCount }}</strong></p>
+      </section>
+
+      <section class="section">
+        <h2>Input</h2>
+        <div class="input-group">
+          <scarlet-input label="Nome" placeholder="Digite seu nome" :value="inputValue" @scarlet-input="onInputChange" />
+          <scarlet-input type="email" label="E-mail" placeholder="voce@exemplo.com" />
+          <scarlet-input type="password" label="Senha" helper-text="Mínimo de 8 caracteres" />
+          <scarlet-input label="Com erro" error-message="Este campo é obrigatório" invalid />
+        </div>
+        <p>Valor digitado: <strong>{{ inputValue || '-' }}</strong></p>
+      </section>
+
+      <section class="section">
+        <h2>Card</h2>
+        <div class="card-group">
+          <scarlet-card variant="elevated">
+            <span slot="header">Card elevado</span>
+            <p>Conteúdo de exemplo dentro do card.</p>
+          </scarlet-card>
+          <scarlet-card variant="outlined">
+            <span slot="header">Card com borda</span>
+            <p>Conteúdo de exemplo dentro do card.</p>
+          </scarlet-card>
+          <scarlet-card interactive @scarlet-click="onButtonClick('Card interativo')">
+            <span slot="header">Card interativo</span>
+            <p>Clique em qualquer lugar deste card.</p>
+          </scarlet-card>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Alert</h2>
+        <div class="alert-group">
+          <scarlet-alert status="info">Este é um alerta informativo.</scarlet-alert>
+          <scarlet-alert status="success">Operação concluída com sucesso.</scarlet-alert>
+          <scarlet-alert status="warning">Atenção: revise os dados informados.</scarlet-alert>
+          <scarlet-alert v-if="alertVisible" status="error" dismissible @scarlet-dismiss="alertVisible = false">
+            Ocorreu um erro ao processar sua solicitação.
+          </scarlet-alert>
+        </div>
+      </section>
     </main>
   </div>
 </template>
@@ -16,8 +68,20 @@ export default {
   name: 'App',
   data() {
     return {
-      inputValue: ''
+      inputValue: '',
+      lastClicked: '-',
+      clickCount: 0,
+      alertVisible: true
     };
+  },
+  methods: {
+    onButtonClick(name) {
+      this.lastClicked = name;
+      this.clickCount += 1;
+    },
+    onInputChange(event) {
+      this.inputValue = event.detail;
+    }
   }
 };
 </script>
