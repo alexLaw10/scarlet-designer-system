@@ -1,14 +1,15 @@
 // Scarlet Design System - Global Styles
 // This file contains global styles and CSS custom properties
 
-:root {
-  // Import design tokens
-  @import '../tokens/colors.scss';
-  @import '../tokens/typography.scss';
-  @import '../tokens/spacing.scss';
-  @import '../tokens/shadows.scss';
-  @import '../tokens/borders.scss';
-}
+// Design tokens: each of these already wraps its own custom properties in
+// `:root { ... }`, so they're self-contained and valid on their own — no
+// outer :root wrapper here (nesting one inside another would compile to the
+// descendant selector `:root :root`, which matches nothing).
+@import '../tokens/colors.scss';
+@import '../tokens/typography.scss';
+@import '../tokens/spacing.scss';
+@import '../tokens/shadows.scss';
+@import '../tokens/borders.scss';
 
 // Reset and base styles
 *,

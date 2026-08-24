@@ -1,3 +1,4 @@
+:root {
 // Scarlet Design System - Typography Tokens
 
 // Font Families
@@ -50,3 +51,4 @@
 // The composite text styles (display/heading/body/caption) now live as Sass
 // mixins in `typography-mixins.scss` — `@include` them from component
 // styles, e.g. `@include scarlet-text-heading-lg;`.
+}

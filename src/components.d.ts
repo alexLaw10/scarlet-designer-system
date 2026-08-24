@@ -1126,6 +1126,7 @@ declare global {
     };
     interface HTMLScarletRadioElementEventMap {
         "scarletChange": boolean;
+        "scarletRadioChange": boolean;
     }
     /**
      * A single radio option. Use inside a `<scarlet-radio-group>` for mutually
@@ -1836,9 +1837,10 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * Emitted when this radio becomes selected via user interaction.
+          * Emitted when this radio becomes selected via user interaction. Deliberately non-bubbling: a parent `<scarlet-radio-group>` re-emits its own `scarletChange` (with a different, string `detail`) once it has processed this one, so this event must never reach a listener attached to the group too, or such a listener would see both fire under the same name. Listen directly on the radio (which still works for standalone usage — the "at target" phase runs regardless of `bubbles`) or on the group, not both.
          */
         "onScarletChange"?: (event: ScarletRadioCustomEvent<boolean>) => void;
+        "onScarletRadioChange"?: (event: ScarletRadioCustomEvent<boolean>) => void;
         /**
           * Value identifying this option within its group.
          */
