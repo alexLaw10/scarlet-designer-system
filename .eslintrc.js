@@ -7,8 +7,8 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    '@typescript-eslint/recommended',
-    '@stencil/eslint-config',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@stencil/recommended',
     'prettier'
   ],
   parser: '@typescript-eslint/parser',
