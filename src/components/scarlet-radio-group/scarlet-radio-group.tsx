@@ -5,6 +5,7 @@ interface ScarletRadioElement extends HTMLElement {
   checked: boolean;
   disabled: boolean;
   name?: string;
+  focusable: boolean;
 }
 
 /**
@@ -68,13 +69,53 @@ export class ScarletRadioGroup {
     this.scarletChange.emit(this.value);
   }
 
+  // Implements the WAI-ARIA radiogroup keyboard pattern: the group has a
+  // single Tab stop (roving tabindex — one radio at a time is focusable(),
+  // computed below), and arrow keys move both focus and selection among the
+  // enabled radios, matching how native <input type="radio"> groups behave.
+  // Without this, each <scarlet-radio> would keep its own independent tab
+  // stop (they can't be natively grouped by `name` across shadow-DOM
+  // boundaries), forcing keyboard users to Tab through every single option.
+  @Listen('keydown')
+  handleKeyDown(event: KeyboardEvent): void {
+    const radios = this.getRadios().filter((radio) => !radio.disabled);
+    if (radios.length === 0) return;
+
+    const currentIndex = radios.findIndex((radio) => radio.value === this.value);
+    let nextIndex: number | null = null;
+
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+      nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % radios.length;
+    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+      nextIndex = currentIndex === -1 ? radios.length - 1 : (currentIndex - 1 + radios.length) % radios.length;
+    } else if (event.key === 'Home') {
+      nextIndex = 0;
+    } else if (event.key === 'End') {
+      nextIndex = radios.length - 1;
+    }
+
+    if (nextIndex === null) return;
+
+    event.preventDefault();
+    const nextRadio = radios[nextIndex];
+    this.value = nextRadio.value;
+    this.syncChildren();
+    this.scarletChange.emit(this.value);
+    nextRadio.shadowRoot?.querySelector('input')?.focus();
+  }
+
   private getRadios(): ScarletRadioElement[] {
     return Array.from(this.el.querySelectorAll('scarlet-radio')) as unknown as ScarletRadioElement[];
   }
 
   private syncChildren = (): void => {
-    this.getRadios().forEach((radio) => {
+    const radios = this.getRadios();
+    const checkedRadio = radios.find((radio) => radio.value === this.value);
+    const focusTarget = checkedRadio ?? radios.find((radio) => !radio.disabled) ?? radios[0];
+
+    radios.forEach((radio) => {
       radio.checked = radio.value === this.value;
+      radio.focusable = radio === focusTarget;
       if (this.name) {
         radio.name = this.name;
       }

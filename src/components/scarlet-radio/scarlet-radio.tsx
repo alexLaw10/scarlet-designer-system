@@ -29,6 +29,16 @@ export class ScarletRadio {
   @Prop() readonly label?: string;
 
   /**
+   * Whether this radio is a tab stop. A parent `<scarlet-radio-group>` keeps
+   * this `true` on exactly one radio at a time (roving tabindex, per the
+   * WAI-ARIA radiogroup pattern) so the group has a single Tab stop and
+   * arrow keys move both focus and selection — matching how native radio
+   * buttons behave. Standalone (no group), this defaults to `true` so a
+   * lone radio is reachable by Tab like any other control.
+   */
+  @Prop({ mutable: true }) focusable = true;
+
+  /**
    * Emitted when this radio becomes selected via user interaction.
    * Deliberately non-bubbling: a parent `<scarlet-radio-group>` re-emits
    * its own `scarletChange` (with a different, string `detail`) once it
@@ -66,6 +76,7 @@ export class ScarletRadio {
             disabled={this.disabled}
             name={this.name}
             value={this.value}
+            tabIndex={this.focusable ? 0 : -1}
             onChange={this.handleChange}
           />
           <span class="scarlet-radio__dot" aria-hidden="true" />

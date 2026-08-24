@@ -42,4 +42,18 @@ describe('scarlet-radio', () => {
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
     expect(input.disabled).toBe(true);
   });
+
+  it('is a tab stop by default (standalone usage), and skippable when focusable=false', async () => {
+    const standalone = await newSpecPage({
+      components: [ScarletRadio],
+      html: `<scarlet-radio value="a"></scarlet-radio>`,
+    });
+    expect((standalone.root?.shadowRoot?.querySelector('input') as HTMLInputElement).tabIndex).toBe(0);
+
+    const grouped = await newSpecPage({
+      components: [ScarletRadio],
+      html: `<scarlet-radio value="a" focusable="false"></scarlet-radio>`,
+    });
+    expect((grouped.root?.shadowRoot?.querySelector('input') as HTMLInputElement).tabIndex).toBe(-1);
+  });
 });

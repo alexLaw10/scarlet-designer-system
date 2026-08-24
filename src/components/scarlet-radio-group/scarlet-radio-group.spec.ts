@@ -57,6 +57,93 @@ describe('scarlet-radio-group', () => {
     expect(radioB.checked).toBe(true);
   });
 
+  it('gives exactly one radio a tab stop (roving tabindex), matching the checked one', async () => {
+    const page = await newSpecPage({
+      components: [ScarletRadioGroup, ScarletRadio],
+      html: `
+        <scarlet-radio-group value="b">
+          <scarlet-radio value="a"></scarlet-radio>
+          <scarlet-radio value="b"></scarlet-radio>
+          <scarlet-radio value="c"></scarlet-radio>
+        </scarlet-radio-group>
+      `,
+    });
+    await page.waitForChanges();
+
+    const radios = Array.from(page.root!.querySelectorAll('scarlet-radio')) as any[];
+    expect(radios.map((radio) => radio.focusable)).toEqual([false, true, false]);
+  });
+
+  it('falls back the tab stop to the first enabled radio when none is checked', async () => {
+    const page = await newSpecPage({
+      components: [ScarletRadioGroup, ScarletRadio],
+      html: `
+        <scarlet-radio-group>
+          <scarlet-radio value="a"></scarlet-radio>
+          <scarlet-radio value="b"></scarlet-radio>
+        </scarlet-radio-group>
+      `,
+    });
+    await page.waitForChanges();
+
+    const radios = Array.from(page.root!.querySelectorAll('scarlet-radio')) as any[];
+    expect(radios.map((radio) => radio.focusable)).toEqual([true, false]);
+  });
+
+  it('moves selection and the tab stop with ArrowRight/ArrowLeft, wrapping around', async () => {
+    const page = await newSpecPage({
+      components: [ScarletRadioGroup, ScarletRadio],
+      html: `
+        <scarlet-radio-group value="a">
+          <scarlet-radio value="a"></scarlet-radio>
+          <scarlet-radio value="b"></scarlet-radio>
+          <scarlet-radio value="c"></scarlet-radio>
+        </scarlet-radio-group>
+      `,
+    });
+    await page.waitForChanges();
+
+    const changeSpy = jest.fn();
+    page.root?.addEventListener('scarletChange', changeSpy);
+
+    page.root?.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }));
+    await page.waitForChanges();
+    expect(page.rootInstance.value).toBe('b');
+
+    page.root?.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true, cancelable: true }));
+    await page.waitForChanges();
+    expect(page.rootInstance.value).toBe('a');
+
+    // Wraps from the first option back to the last on ArrowLeft.
+    page.root?.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true, cancelable: true }));
+    await page.waitForChanges();
+    expect(page.rootInstance.value).toBe('c');
+
+    expect(changeSpy).toHaveBeenCalledTimes(3);
+
+    const radios = Array.from(page.root!.querySelectorAll('scarlet-radio')) as any[];
+    expect(radios.map((radio) => radio.focusable)).toEqual([false, false, true]);
+  });
+
+  it('skips disabled radios when navigating with arrow keys', async () => {
+    const page = await newSpecPage({
+      components: [ScarletRadioGroup, ScarletRadio],
+      html: `
+        <scarlet-radio-group value="a">
+          <scarlet-radio value="a"></scarlet-radio>
+          <scarlet-radio value="b" disabled></scarlet-radio>
+          <scarlet-radio value="c"></scarlet-radio>
+        </scarlet-radio-group>
+      `,
+    });
+    await page.waitForChanges();
+
+    page.root?.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }));
+    await page.waitForChanges();
+
+    expect(page.rootInstance.value).toBe('c');
+  });
+
   it('propagates name and disabled down to every child radio', async () => {
     const page = await newSpecPage({
       components: [ScarletRadioGroup, ScarletRadio],
