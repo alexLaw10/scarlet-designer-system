@@ -1,4 +1,5 @@
 import { Component, Prop, Watch, Event, type EventEmitter, h, Host, Method } from '@stencil/core';
+import { generateId } from '../../utils';
 
 export type ScarletModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
 
@@ -17,6 +18,9 @@ export type ScarletModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
 })
 export class ScarletModal {
   private dialogEl?: HTMLDialogElement;
+  private readonly headerId = generateId('scarlet-modal-header');
+  /** Element focused right before the modal opened, restored to on close per WCAG 2.4.3. */
+  private lastFocusedEl?: HTMLElement;
 
   /** Whether the modal is open. */
   @Prop({ mutable: true }) open = false;
@@ -24,7 +28,12 @@ export class ScarletModal {
   /** Size of the modal. */
   @Prop() readonly size: ScarletModalSize = 'md';
 
-  /** Accessible label for the dialog, used when there is no visible header slot. */
+  /**
+   * Accessible label for the dialog. When omitted, the `header` slot's
+   * content is used instead (via `aria-labelledby`) — set this explicitly
+   * only when the modal has no visible header, or the header text alone
+   * isn't a good accessible name.
+   */
   @Prop() readonly ariaLabel?: string;
 
   /** Closes the modal when the backdrop (area outside the dialog box) is clicked. */
@@ -55,14 +64,38 @@ export class ScarletModal {
       this.openDialog();
     } else if (this.dialogEl?.open) {
       this.dialogEl.close();
+      this.restoreFocus();
     }
   }
 
   private openDialog(): void {
     if (this.dialogEl && !this.dialogEl.open) {
+      // Native <dialog> moves focus inside itself on showModal(), but never
+      // restores it on close — that's on us (WCAG 2.4.3 Focus Order).
+      this.lastFocusedEl = this.getDeepActiveElement();
       this.dialogEl.showModal();
       this.scarletShow.emit();
     }
+  }
+
+  // document.activeElement stops at the host of the outermost open shadow
+  // tree (e.g. a <scarlet-button> trigger, not the native <button> inside
+  // it) — that host usually isn't itself focusable, so .focus() on it would
+  // silently no-op. Walk into .shadowRoot.activeElement to find the real
+  // focused element before capturing it.
+  private getDeepActiveElement(): HTMLElement | undefined {
+    let active = document.activeElement as HTMLElement | null;
+    while (active?.shadowRoot?.activeElement) {
+      active = active.shadowRoot.activeElement as HTMLElement;
+    }
+    return active ?? undefined;
+  }
+
+  private restoreFocus(): void {
+    if (this.lastFocusedEl?.isConnected) {
+      this.lastFocusedEl.focus();
+    }
+    this.lastFocusedEl = undefined;
   }
 
   /** Opens the modal. */
@@ -106,12 +139,15 @@ export class ScarletModal {
           ref={(el) => (this.dialogEl = el)}
           class={{ 'scarlet-modal': true, [`scarlet-modal--${this.size}`]: true }}
           aria-label={this.ariaLabel}
+          aria-labelledby={this.ariaLabel ? undefined : this.headerId}
           onCancel={this.handleCancel}
           onClick={this.handleDialogClick}
         >
           <div class="scarlet-modal__box">
             <div class="scarlet-modal__header">
-              <slot name="header" />
+              <span id={this.headerId}>
+                <slot name="header" />
+              </span>
               <button type="button" class="scarlet-modal__close" part="close" aria-label="Fechar" onClick={this.requestClose}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                   <line x1="6" y1="6" x2="18" y2="18" stroke-linecap="round" />

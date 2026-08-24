@@ -69,6 +69,11 @@
   border-bottom: var(--scarlet-border-width-1) solid var(--scarlet-color-border-secondary);
 }
 
+.scarlet-modal__header > span {
+  flex: 1;
+  min-width: 0;
+}
+
 ::slotted([slot='header']) {
   @include scarlet-text-heading-lg;
   color: var(--scarlet-color-text-primary);

@@ -144,4 +144,44 @@ describe('scarlet-modal', () => {
     await page.waitForChanges();
     expect(page.rootInstance.open).toBe(false);
   });
+
+  it('labels the dialog via the header slot by default, and via aria-label when provided', async () => {
+    const withHeader = await newSpecPage({
+      components: [ScarletModal],
+      html: `<scarlet-modal><span slot="header">Confirmar</span></scarlet-modal>`,
+    });
+    const headerDialog = withHeader.root?.shadowRoot?.querySelector('dialog') as HTMLDialogElement;
+    const headerSpan = withHeader.root?.shadowRoot?.querySelector('.scarlet-modal__header > span') as HTMLElement;
+    expect(headerDialog.getAttribute('aria-labelledby')).toBe(headerSpan.id);
+    expect(headerDialog.hasAttribute('aria-label')).toBe(false);
+
+    const withAriaLabel = await newSpecPage({
+      components: [ScarletModal],
+      html: `<scarlet-modal aria-label="Confirmar exclusão"><span slot="header">Ignorado</span></scarlet-modal>`,
+    });
+    const labeledDialog = withAriaLabel.root?.shadowRoot?.querySelector('dialog') as HTMLDialogElement;
+    expect(labeledDialog.getAttribute('aria-label')).toBe('Confirmar exclusão');
+    expect(labeledDialog.hasAttribute('aria-labelledby')).toBe(false);
+  });
+
+  it('restores focus to the previously focused element when closed', async () => {
+    const page = await newSpecPage({
+      components: [ScarletModal],
+      html: `<scarlet-modal></scarlet-modal>`,
+    });
+    stubDialog(page);
+
+    const trigger = page.doc.createElement('button');
+    page.body.appendChild(trigger);
+    trigger.focus();
+    expect(page.doc.activeElement).toBe(trigger);
+
+    page.rootInstance.open = true;
+    await page.waitForChanges();
+
+    await page.rootInstance.hide();
+    await page.waitForChanges();
+
+    expect(page.doc.activeElement).toBe(trigger);
+  });
 });
