@@ -30,7 +30,7 @@ body {
 
 .header h1 {
   margin: 0 0 10px 0;
-  color: #e11d48;
+  color: #be123c;
 }
 
 .header p {
@@ -101,5 +101,5 @@ body {
 
 .demo-group span {
   font-weight: 600;
-  color: #e11d48;
+  color: #be123c;
 }

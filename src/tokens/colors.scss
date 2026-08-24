@@ -2,28 +2,36 @@
 // Scarlet Design System - Color Tokens
 
 // Primary Colors — "scarlet" ruby/rose red, matching the design system's name
+//
+// 500/600/700 were shifted two steps darker from the original scale (they
+// hold the values 700/800/900 used to have) so that solid-background text
+// (white on 500, per Button/Badge/Toast) clears WCAG AA's 4.5:1 minimum —
+// the original 500 (#f43f5e) only reached 3.67:1. 800/900 are new, darker
+// than before. 50–400 are unchanged (never used as solid-fill text
+// backgrounds, so contrast wasn't at risk there).
 --scarlet-color-primary-50: #fff1f2;
 --scarlet-color-primary-100: #ffe4e6;
 --scarlet-color-primary-200: #fecdd3;
 --scarlet-color-primary-300: #fda4af;
 --scarlet-color-primary-400: #fb7185;
---scarlet-color-primary-500: #f43f5e;
---scarlet-color-primary-600: #e11d48;
---scarlet-color-primary-700: #be123c;
---scarlet-color-primary-800: #9f1239;
---scarlet-color-primary-900: #881337;
+--scarlet-color-primary-500: #be123c;
+--scarlet-color-primary-600: #9f1239;
+--scarlet-color-primary-700: #881337;
+--scarlet-color-primary-800: #6d0e2c;
+--scarlet-color-primary-900: #4a0a1e;
 
-// Secondary Colors
+// Secondary Colors — same contrast-driven shift as Primary (original 500,
+// #d946ef, only reached 3.46:1 with white text).
 --scarlet-color-secondary-50: #fdf4ff;
 --scarlet-color-secondary-100: #fae8ff;
 --scarlet-color-secondary-200: #f5d0fe;
 --scarlet-color-secondary-300: #f0abfc;
 --scarlet-color-secondary-400: #e879f9;
---scarlet-color-secondary-500: #d946ef;
---scarlet-color-secondary-600: #c026d3;
---scarlet-color-secondary-700: #a21caf;
---scarlet-color-secondary-800: #86198f;
---scarlet-color-secondary-900: #701a75;
+--scarlet-color-secondary-500: #a21caf;
+--scarlet-color-secondary-600: #86198f;
+--scarlet-color-secondary-700: #701a75;
+--scarlet-color-secondary-800: #591261;
+--scarlet-color-secondary-900: #3d0c42;
 
 // Neutral Colors
 --scarlet-color-neutral-50: #f8fafc;
@@ -38,49 +46,56 @@
 --scarlet-color-neutral-900: #0f172a;
 
 // Semantic Colors
+//
+// success/warning/error/info 500/600/700 got the same contrast-driven shift
+// as Primary/Secondary above. Green and amber needed it most: the original
+// success-500 (#22c55e) and warning-500 (#f59e0b) only reached 2.28:1 and
+// 2.15:1 against white — badly under the 4.5:1 minimum, since bright
+// greens/yellows read as much lighter than reds/blues of the same nominal
+// "weight" (green alone is ~71% of perceived luminance in the WCAG formula).
 --scarlet-color-success-50: #f0fdf4;
 --scarlet-color-success-100: #dcfce7;
 --scarlet-color-success-200: #bbf7d0;
 --scarlet-color-success-300: #86efac;
 --scarlet-color-success-400: #4ade80;
---scarlet-color-success-500: #22c55e;
---scarlet-color-success-600: #16a34a;
---scarlet-color-success-700: #15803d;
---scarlet-color-success-800: #166534;
---scarlet-color-success-900: #14532d;
+--scarlet-color-success-500: #15803d;
+--scarlet-color-success-600: #166534;
+--scarlet-color-success-700: #14532d;
+--scarlet-color-success-800: #0f3d21;
+--scarlet-color-success-900: #0a2917;
 
 --scarlet-color-warning-50: #fffbeb;
 --scarlet-color-warning-100: #fef3c7;
 --scarlet-color-warning-200: #fde68a;
 --scarlet-color-warning-300: #fcd34d;
 --scarlet-color-warning-400: #fbbf24;
---scarlet-color-warning-500: #f59e0b;
---scarlet-color-warning-600: #d97706;
---scarlet-color-warning-700: #b45309;
---scarlet-color-warning-800: #92400e;
---scarlet-color-warning-900: #78350f;
+--scarlet-color-warning-500: #b45309;
+--scarlet-color-warning-600: #92400e;
+--scarlet-color-warning-700: #78350f;
+--scarlet-color-warning-800: #5c2a0c;
+--scarlet-color-warning-900: #451f09;
 
 --scarlet-color-error-50: #fef2f2;
 --scarlet-color-error-100: #fee2e2;
 --scarlet-color-error-200: #fecaca;
 --scarlet-color-error-300: #fca5a5;
 --scarlet-color-error-400: #f87171;
---scarlet-color-error-500: #ef4444;
---scarlet-color-error-600: #dc2626;
---scarlet-color-error-700: #b91c1c;
---scarlet-color-error-800: #991b1b;
---scarlet-color-error-900: #7f1d1d;
+--scarlet-color-error-500: #b91c1c;
+--scarlet-color-error-600: #991b1b;
+--scarlet-color-error-700: #7f1d1d;
+--scarlet-color-error-800: #671616;
+--scarlet-color-error-900: #4a1010;
 
 --scarlet-color-info-50: #f0f9ff;
 --scarlet-color-info-100: #e0f2fe;
 --scarlet-color-info-200: #bae6fd;
 --scarlet-color-info-300: #7dd3fc;
 --scarlet-color-info-400: #38bdf8;
---scarlet-color-info-500: #0ea5e9;
---scarlet-color-info-600: #0284c7;
---scarlet-color-info-700: #0369a1;
---scarlet-color-info-800: #075985;
---scarlet-color-info-900: #0c4a6e;
+--scarlet-color-info-500: #0369a1;
+--scarlet-color-info-600: #075985;
+--scarlet-color-info-700: #0c4a6e;
+--scarlet-color-info-800: #073349;
+--scarlet-color-info-900: #042230;
 
 // Text Colors
 --scarlet-color-text-primary: var(--scarlet-color-neutral-900);
