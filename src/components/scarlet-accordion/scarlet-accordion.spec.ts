@@ -97,7 +97,8 @@ describe('scarlet-accordion', () => {
     await page.waitForChanges();
 
     const triggerC = page.root?.shadowRoot?.querySelector('[data-index="2"]') as HTMLButtonElement;
-    expect(triggerC.disabled).toBe(true);
+    // mock-doc doesn't reflect .disabled as an IDL property on <button>.
+    expect(triggerC.hasAttribute('disabled')).toBe(true);
     triggerC.click();
     await page.waitForChanges();
 

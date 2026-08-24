@@ -14,7 +14,9 @@ describe('scarlet-button', () => {
     expect(button.classList.contains('scarlet-button--primary')).toBe(true);
     expect(button.classList.contains('scarlet-button--md')).toBe(true);
     expect(button.type).toBe('button');
-    expect(button.disabled).toBe(false);
+    // Stencil's mock-doc doesn't reflect .disabled as an IDL property on
+    // <button> the way it does on <input>, so check the attribute instead.
+    expect(button.hasAttribute('disabled')).toBe(false);
   });
 
   it('disables the native button and blocks scarletClick when disabled', async () => {
@@ -27,7 +29,7 @@ describe('scarlet-button', () => {
     page.root?.addEventListener('scarletClick', clickSpy);
 
     const button = page.root?.shadowRoot?.querySelector('button') as HTMLButtonElement;
-    expect(button.disabled).toBe(true);
+    expect(button.hasAttribute('disabled')).toBe(true);
 
     button.click();
     await page.waitForChanges();
@@ -46,7 +48,7 @@ describe('scarlet-button', () => {
 
     const button = page.root?.shadowRoot?.querySelector('button') as HTMLButtonElement;
     expect(button.getAttribute('aria-busy')).toBe('true');
-    expect(button.disabled).toBe(true);
+    expect(button.hasAttribute('disabled')).toBe(true);
 
     button.click();
     await page.waitForChanges();

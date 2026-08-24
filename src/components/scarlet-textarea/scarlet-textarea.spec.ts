@@ -13,7 +13,8 @@ describe('scarlet-textarea', () => {
 
     expect(label.textContent?.trim()).toBe('Comentário');
     expect(label.getAttribute('for')).toBe(textarea.id);
-    expect(textarea.rows).toBe(4);
+    // mock-doc doesn't reflect .rows as an IDL property on <textarea>.
+    expect(textarea.getAttribute('rows')).toBe('4');
   });
 
   it('emits scarletInput on keystrokes and updates value', async () => {

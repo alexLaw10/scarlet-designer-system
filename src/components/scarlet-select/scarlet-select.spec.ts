@@ -26,8 +26,9 @@ describe('scarlet-select', () => {
 
     const placeholderOption = page.root?.shadowRoot?.querySelector('option[value=""]') as HTMLOptionElement;
     expect(placeholderOption).not.toBeNull();
-    expect(placeholderOption.disabled).toBe(true);
-    expect(placeholderOption.selected).toBe(true);
+    // mock-doc doesn't reflect .disabled/.selected as IDL properties on <option>.
+    expect(placeholderOption.hasAttribute('disabled')).toBe(true);
+    expect(placeholderOption.hasAttribute('selected')).toBe(true);
   });
 
   it('emits scarletChange with the new value on selection', async () => {

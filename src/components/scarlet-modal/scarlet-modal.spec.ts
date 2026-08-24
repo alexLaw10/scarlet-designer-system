@@ -16,18 +16,21 @@ function stubDialog(page: Awaited<ReturnType<typeof newSpecPage>>) {
 }
 
 describe('scarlet-modal', () => {
-  it('calls showModal() and emits scarletShow when loaded already open', async () => {
+  it('calls showModal() and emits scarletShow when open becomes true', async () => {
     const page = await newSpecPage({
       components: [ScarletModal],
       html: `<scarlet-modal></scarlet-modal>`,
     });
     const dialog = stubDialog(page);
-    page.rootInstance.open = true;
 
+    // Listener must be attached before the state change: setting `open`
+    // triggers @Watch('open') synchronously, which is what actually opens
+    // the dialog and emits scarletShow here (not the componentDidLoad path,
+    // which only matters when the component starts out already open).
     const showSpy = jest.fn();
     page.root?.addEventListener('scarletShow', showSpy);
 
-    await page.rootInstance.componentDidLoad();
+    page.rootInstance.open = true;
     await page.waitForChanges();
 
     expect(dialog.showModal).toHaveBeenCalledTimes(1);

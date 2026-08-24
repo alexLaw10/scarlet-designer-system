@@ -37,7 +37,13 @@ describe('scarlet-text', () => {
     const tagWithout = withoutWeight.root?.shadowRoot?.firstElementChild;
     const tagWith = withWeight.root?.shadowRoot?.firstElementChild;
 
-    expect(Array.from(tagWithout?.classList ?? []).some((c) => c.startsWith('scarlet-text--weight-'))).toBe(false);
+    // .filter(Boolean) guards against sparse/undefined entries mock-doc's
+    // classList can produce for a token that was never actually added.
+    expect(
+      Array.from(tagWithout?.classList ?? [])
+        .filter(Boolean)
+        .some((c) => c.startsWith('scarlet-text--weight-')),
+    ).toBe(false);
     expect(tagWith?.classList.contains('scarlet-text--weight-bold')).toBe(true);
   });
 

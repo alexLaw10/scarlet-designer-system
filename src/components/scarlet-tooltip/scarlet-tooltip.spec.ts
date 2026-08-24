@@ -1,6 +1,13 @@
 import { newSpecPage } from '@stencil/core/testing';
 import { ScarletTooltip } from './scarlet-tooltip';
 
+// Real (short) timers are used instead of jest.useFakeTimers()/advanceTimersByTime():
+// Stencil's newSpecPage relies on its own internal scheduling for
+// waitForChanges(), and mixing that with Jest's fake timers reliably hangs
+// the test until the suite timeout — and, worse, leaks into later tests if
+// the hang happens before jest.useRealTimers() is reached.
+const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 describe('scarlet-tooltip', () => {
   it('is hidden by default', async () => {
     const page = await newSpecPage({
@@ -14,36 +21,32 @@ describe('scarlet-tooltip', () => {
   });
 
   it('shows after the delay on mouseover and emits scarletShow', async () => {
-    jest.useFakeTimers();
     const page = await newSpecPage({
       components: [ScarletTooltip],
-      html: `<scarlet-tooltip content="Dica" delay="100">Trigger</scarlet-tooltip>`,
+      html: `<scarlet-tooltip content="Dica" delay="20">Trigger</scarlet-tooltip>`,
     });
 
     const showSpy = jest.fn();
     page.root?.addEventListener('scarletShow', showSpy);
 
     page.root?.dispatchEvent(new Event('mouseover', { bubbles: true }));
-    jest.advanceTimersByTime(100);
+    await wait(50);
     await page.waitForChanges();
 
     expect(showSpy).toHaveBeenCalledTimes(1);
     const tooltip = page.root?.shadowRoot?.querySelector('.scarlet-tooltip');
     expect(tooltip?.classList.contains('scarlet-tooltip--visible')).toBe(true);
     expect(page.root?.getAttribute('aria-describedby')).toBe(tooltip?.id ?? null);
-
-    jest.useRealTimers();
   });
 
   it('hides on mouseout and emits scarletHide', async () => {
-    jest.useFakeTimers();
     const page = await newSpecPage({
       components: [ScarletTooltip],
       html: `<scarlet-tooltip content="Dica" delay="0">Trigger</scarlet-tooltip>`,
     });
 
     page.root?.dispatchEvent(new Event('mouseover', { bubbles: true }));
-    jest.advanceTimersByTime(0);
+    await wait(20);
     await page.waitForChanges();
 
     const hideSpy = jest.fn();
@@ -55,24 +58,19 @@ describe('scarlet-tooltip', () => {
     expect(hideSpy).toHaveBeenCalledTimes(1);
     const tooltip = page.root?.shadowRoot?.querySelector('.scarlet-tooltip');
     expect(tooltip?.classList.contains('scarlet-tooltip--visible')).toBe(false);
-
-    jest.useRealTimers();
   });
 
   it('never shows when disabled', async () => {
-    jest.useFakeTimers();
     const page = await newSpecPage({
       components: [ScarletTooltip],
       html: `<scarlet-tooltip content="Dica" delay="0" disabled>Trigger</scarlet-tooltip>`,
     });
 
     page.root?.dispatchEvent(new Event('mouseover', { bubbles: true }));
-    jest.advanceTimersByTime(0);
+    await wait(20);
     await page.waitForChanges();
 
     const tooltip = page.root?.shadowRoot?.querySelector('.scarlet-tooltip');
     expect(tooltip?.classList.contains('scarlet-tooltip--visible')).toBe(false);
-
-    jest.useRealTimers();
   });
 });
