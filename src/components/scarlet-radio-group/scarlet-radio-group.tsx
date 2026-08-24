@@ -53,7 +53,11 @@ export class ScarletRadioGroup {
     if (!target || !isChildRadio || !event.detail) {
       return;
     }
-    event.stopPropagation();
+    // stopImmediatePropagation (not just stopPropagation): the group
+    // re-emits its own scarletChange right below, so the original child
+    // event must not also reach listeners already attached to this same
+    // host element, or consumers would see scarletChange fire twice.
+    event.stopImmediatePropagation();
     this.value = target.value;
     this.syncChildren();
     this.scarletChange.emit(this.value);
