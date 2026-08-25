@@ -2,6 +2,7 @@
 
 export * from './masks';
 export * from './validators';
+export * from './calendar';
 
 /**
  * Generates a unique ID for components

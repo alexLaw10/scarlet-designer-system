@@ -40,6 +40,7 @@ export type { ScarletDocumentType } from './form-masked/scarlet-input-document/s
 export { ScarletInputCurrency } from './form-masked/scarlet-input-currency/scarlet-input-currency';
 export { ScarletInputPercentage } from './form-masked/scarlet-input-percentage/scarlet-input-percentage';
 export { ScarletInputDate } from './form-masked/scarlet-input-date/scarlet-input-date';
+export { ScarletDatePicker } from './form-masked/scarlet-date-picker/scarlet-date-picker';
 export { ScarletInputCreditCard } from './form-masked/scarlet-input-credit-card/scarlet-input-credit-card';
 export type { CreditCardBrand } from '@/utils/validators';
 export { ScarletInputLicensePlate } from './form-masked/scarlet-input-license-plate/scarlet-input-license-plate';

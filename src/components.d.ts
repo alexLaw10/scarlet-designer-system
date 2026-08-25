@@ -5,44 +5,48 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ScarletAccordionItem } from "./components/scarlet-accordion/scarlet-accordion";
-import { ScarletAlertStatus, ScarletAlertVariant } from "./components/scarlet-alert/scarlet-alert";
-import { Alignment, Color, Direction, JustifyContent, Size, TextAlign, TextColor, Variant, Wrap } from "./types";
-import { ScarletAvatarShape } from "./components/scarlet-avatar/scarlet-avatar";
-import { ScarletBadgeSize, ScarletBadgeVariant } from "./components/scarlet-badge/scarlet-badge";
-import { ScarletCardVariant } from "./components/scarlet-card/scarlet-card";
-import { ScarletContainerMaxWidth } from "./components/scarlet-container/scarlet-container";
-import { ScarletDividerOrientation } from "./components/scarlet-divider/scarlet-divider";
-import { ScarletHeadingLevel, ScarletHeadingVariant } from "./components/scarlet-heading/scarlet-heading";
-import { ScarletIconName } from "./components/scarlet-icon/icons";
-import { ScarletInputType } from "./components/scarlet-input/scarlet-input";
-import { ScarletModalSize } from "./components/scarlet-modal/scarlet-modal";
-import { ScarletSelectOption } from "./components/scarlet-select/scarlet-select";
-import { ScarletTabItem } from "./components/scarlet-tabs/scarlet-tabs";
-import { ScarletTextAs, ScarletTextVariant, ScarletTextWeight } from "./components/scarlet-text/scarlet-text";
-import { ScarletTextareaResize } from "./components/scarlet-textarea/scarlet-textarea";
-import { ScarletAlertStatus as ScarletAlertStatus1 } from "./components/scarlet-alert/scarlet-alert";
-import { ScarletToastPosition } from "./components/scarlet-toast/scarlet-toast";
-import { ScarletTooltipPlacement } from "./components/scarlet-tooltip/scarlet-tooltip";
-export { ScarletAccordionItem } from "./components/scarlet-accordion/scarlet-accordion";
-export { ScarletAlertStatus, ScarletAlertVariant } from "./components/scarlet-alert/scarlet-alert";
-export { Alignment, Color, Direction, JustifyContent, Size, TextAlign, TextColor, Variant, Wrap } from "./types";
-export { ScarletAvatarShape } from "./components/scarlet-avatar/scarlet-avatar";
-export { ScarletBadgeSize, ScarletBadgeVariant } from "./components/scarlet-badge/scarlet-badge";
-export { ScarletCardVariant } from "./components/scarlet-card/scarlet-card";
-export { ScarletContainerMaxWidth } from "./components/scarlet-container/scarlet-container";
-export { ScarletDividerOrientation } from "./components/scarlet-divider/scarlet-divider";
-export { ScarletHeadingLevel, ScarletHeadingVariant } from "./components/scarlet-heading/scarlet-heading";
-export { ScarletIconName } from "./components/scarlet-icon/icons";
-export { ScarletInputType } from "./components/scarlet-input/scarlet-input";
-export { ScarletModalSize } from "./components/scarlet-modal/scarlet-modal";
-export { ScarletSelectOption } from "./components/scarlet-select/scarlet-select";
-export { ScarletTabItem } from "./components/scarlet-tabs/scarlet-tabs";
-export { ScarletTextAs, ScarletTextVariant, ScarletTextWeight } from "./components/scarlet-text/scarlet-text";
-export { ScarletTextareaResize } from "./components/scarlet-textarea/scarlet-textarea";
-export { ScarletAlertStatus as ScarletAlertStatus1 } from "./components/scarlet-alert/scarlet-alert";
-export { ScarletToastPosition } from "./components/scarlet-toast/scarlet-toast";
-export { ScarletTooltipPlacement } from "./components/scarlet-tooltip/scarlet-tooltip";
+import { ScarletAccordionItem } from "./components/navigation/scarlet-accordion/scarlet-accordion";
+import { ScarletAlertStatus, ScarletAlertVariant } from "./components/feedback/scarlet-alert/scarlet-alert";
+import { Alignment, Color, Direction, JustifyContent, Size, TextAlign, TextColor, Variant, Wrap } from "./types/index";
+import { ScarletAvatarShape } from "./components/data-display/scarlet-avatar/scarlet-avatar";
+import { ScarletBadgeSize, ScarletBadgeVariant } from "./components/feedback/scarlet-badge/scarlet-badge";
+import { ScarletCardVariant } from "./components/data-display/scarlet-card/scarlet-card";
+import { ScarletContainerMaxWidth } from "./components/layout/scarlet-container/scarlet-container";
+import { ScarletDividerOrientation } from "./components/data-display/scarlet-divider/scarlet-divider";
+import { ScarletHeadingLevel, ScarletHeadingVariant } from "./components/foundation/scarlet-heading/scarlet-heading";
+import { ScarletIconName } from "./components/foundation/scarlet-icon/icons";
+import { ScarletInputType } from "./components/form/scarlet-input/scarlet-input";
+import { CreditCardBrand } from "./utils/validators";
+import { ScarletDocumentType } from "./components/form-masked/scarlet-input-document/scarlet-input-document";
+import { ScarletLicensePlateFormat } from "./components/form-masked/scarlet-input-license-plate/scarlet-input-license-plate";
+import { ScarletModalSize } from "./components/feedback/scarlet-modal/scarlet-modal";
+import { ScarletSelectOption } from "./components/form/scarlet-select/scarlet-select";
+import { ScarletTabItem } from "./components/navigation/scarlet-tabs/scarlet-tabs";
+import { ScarletTextAs, ScarletTextVariant, ScarletTextWeight } from "./components/foundation/scarlet-text/scarlet-text";
+import { ScarletTextareaResize } from "./components/form/scarlet-textarea/scarlet-textarea";
+import { ScarletToastPosition } from "./components/feedback/scarlet-toast/scarlet-toast";
+import { ScarletTooltipPlacement } from "./components/feedback/scarlet-tooltip/scarlet-tooltip";
+export { ScarletAccordionItem } from "./components/navigation/scarlet-accordion/scarlet-accordion";
+export { ScarletAlertStatus, ScarletAlertVariant } from "./components/feedback/scarlet-alert/scarlet-alert";
+export { Alignment, Color, Direction, JustifyContent, Size, TextAlign, TextColor, Variant, Wrap } from "./types/index";
+export { ScarletAvatarShape } from "./components/data-display/scarlet-avatar/scarlet-avatar";
+export { ScarletBadgeSize, ScarletBadgeVariant } from "./components/feedback/scarlet-badge/scarlet-badge";
+export { ScarletCardVariant } from "./components/data-display/scarlet-card/scarlet-card";
+export { ScarletContainerMaxWidth } from "./components/layout/scarlet-container/scarlet-container";
+export { ScarletDividerOrientation } from "./components/data-display/scarlet-divider/scarlet-divider";
+export { ScarletHeadingLevel, ScarletHeadingVariant } from "./components/foundation/scarlet-heading/scarlet-heading";
+export { ScarletIconName } from "./components/foundation/scarlet-icon/icons";
+export { ScarletInputType } from "./components/form/scarlet-input/scarlet-input";
+export { CreditCardBrand } from "./utils/validators";
+export { ScarletDocumentType } from "./components/form-masked/scarlet-input-document/scarlet-input-document";
+export { ScarletLicensePlateFormat } from "./components/form-masked/scarlet-input-license-plate/scarlet-input-license-plate";
+export { ScarletModalSize } from "./components/feedback/scarlet-modal/scarlet-modal";
+export { ScarletSelectOption } from "./components/form/scarlet-select/scarlet-select";
+export { ScarletTabItem } from "./components/navigation/scarlet-tabs/scarlet-tabs";
+export { ScarletTextAs, ScarletTextVariant, ScarletTextWeight } from "./components/foundation/scarlet-text/scarlet-text";
+export { ScarletTextareaResize } from "./components/form/scarlet-textarea/scarlet-textarea";
+export { ScarletToastPosition } from "./components/feedback/scarlet-toast/scarlet-toast";
+export { ScarletTooltipPlacement } from "./components/feedback/scarlet-tooltip/scarlet-tooltip";
 export namespace Components {
     /**
      * A set of collapsible sections. Panel content is projected via a named
@@ -437,6 +441,548 @@ export namespace Components {
         "value": string;
     }
     /**
+     * A Brazilian postal code (CEP) input — formats as `01310-100`. This
+     * component only formats the value; looking up the matching address (e.g.
+     * via ViaCEP) is the consuming app's responsibility — listen for
+     * `scarletChange` and call your own API with `getRawValue()`.
+     */
+    interface ScarletInputCep {
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled": false;
+        /**
+          * Error message rendered below the input. Implies the invalid state.
+         */
+        "errorMessage"?: string;
+        /**
+          * The raw 8 digits behind the formatted value (e.g. `01310100`).
+         */
+        "getRawValue": () => Promise<string>;
+        /**
+          * Helper text rendered below the input. Hidden while `errorMessage` is set.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid": false;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default '00000-000'
+         */
+        "placeholder": "00000-000";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required": false;
+        /**
+          * Focuses the internal input element.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size": Size;
+        /**
+          * Current formatted value, e.g. `01310-100`.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * A credit card number input — formats in groups of 4 (or Amex's 4-6-5 /
+     * Diners' 4-6-4 grouping once that brand is detected from the card's
+     * BIN/IIN prefix), with a Luhn checksum validation on blur.
+     */
+    interface ScarletInputCreditCard {
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled": false;
+        /**
+          * Error message rendered below the input. Takes priority over automatic Luhn validation errors.
+         */
+        "errorMessage"?: string;
+        /**
+          * The detected card network (`'visa'`, `'mastercard'`, ...), or `undefined` if not yet recognizable.
+         */
+        "getBrand": () => Promise<CreditCardBrand | undefined>;
+        /**
+          * The raw digits behind the formatted value.
+         */
+        "getRawValue": () => Promise<string>;
+        /**
+          * Helper text rendered below the input. Hidden while an error is shown.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid": false;
+        /**
+          * Whether the current value passes the Luhn checksum.
+         */
+        "isValid": () => Promise<boolean>;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default '0000 0000 0000 0000'
+         */
+        "placeholder": "0000 0000 0000 0000";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required": false;
+        /**
+          * Focuses the internal input element.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size": Size;
+        /**
+          * Validates the number against the Luhn checksum on blur once it's complete, showing a default "Número de cartão inválido" message when it fails — unless `errorMessage` is already set, which always wins.
+          * @default true
+         */
+        "validate": true;
+        /**
+          * Current formatted value.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * A monetary input that formats digits as currency growing from the right
+     * (like a card machine) — typing "1234" produces "R$ 12,34". Unlike the
+     * other masked inputs, `scarletInput`/`scarletChange` emit the plain
+     * **numeric** amount (e.g. `12.34`), not the formatted string — that's
+     * almost always what you actually want from a money field. Read the
+     * formatted text itself via `value`.
+     */
+    interface ScarletInputCurrency {
+        /**
+          * Currency symbol shown before the amount.
+          * @default 'R$'
+         */
+        "currencySymbol": "R$";
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled": false;
+        /**
+          * Error message rendered below the input. Implies the invalid state.
+         */
+        "errorMessage"?: string;
+        /**
+          * The current amount as a plain number (same value `scarletInput`/`scarletChange` emit).
+         */
+        "getNumericValue": () => Promise<number>;
+        /**
+          * Helper text rendered below the input. Hidden while `errorMessage` is set.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid": false;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default 'R$ 0,00'
+         */
+        "placeholder": "R$ 0,00";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required": false;
+        /**
+          * Focuses the internal input element.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size": Size;
+        /**
+          * Current formatted value, e.g. `R$ 1.234,56`.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * A `DD/MM/AAAA` date input. Unlike a plain positional mask, `validate`
+     * checks it's a *real* calendar date (rejects `31/02/2026`, honors leap
+     * years) on blur, not just that 8 digits were typed.
+     */
+    interface ScarletInputDate {
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled": false;
+        /**
+          * Error message rendered below the input. Takes priority over automatic calendar validation errors.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the input. Hidden while an error is shown.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid": false;
+        /**
+          * Whether the current value is a complete, real calendar date.
+         */
+        "isValid": () => Promise<boolean>;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default 'DD/MM/AAAA'
+         */
+        "placeholder": "DD/MM/AAAA";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required": false;
+        /**
+          * Focuses the internal input element.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size": Size;
+        /**
+          * The value as a native `Date`, or `undefined` if it isn't a complete valid date.
+         */
+        "toDate": () => Promise<Date | undefined>;
+        /**
+          * Validates the value is a real calendar date on blur once it's complete (8 digits), showing a default "Data inválida" message when it isn't — unless `errorMessage` is already set, which always wins.
+          * @default true
+         */
+        "validate": true;
+        /**
+          * Current formatted value, e.g. `31/12/2026`.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * A single "CPF/CNPJ" field that auto-detects and formats whichever
+     * document type is being typed (11 digits → CPF `123.456.789-01`, 12+ →
+     * CNPJ `12.345.678/0001-90`) — the common pattern for a field that accepts
+     * either an individual or a company.
+     */
+    interface ScarletInputDocument {
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled": false;
+        /**
+          * Error message rendered below the input. Takes priority over automatic check-digit validation errors.
+         */
+        "errorMessage"?: string;
+        /**
+          * `'cpf'` or `'cnpj'` based on the current digit count, or `undefined` if empty.
+         */
+        "getDocumentType": () => Promise<ScarletDocumentType | undefined>;
+        /**
+          * The raw digits behind the formatted value.
+         */
+        "getRawValue": () => Promise<string>;
+        /**
+          * Helper text rendered below the input. Hidden while an error is shown.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid": false;
+        /**
+          * Whether the current value is a complete, check-digit-valid CPF or CNPJ.
+         */
+        "isValid": () => Promise<boolean>;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default 'CPF ou CNPJ'
+         */
+        "placeholder": "CPF ou CNPJ";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required": false;
+        /**
+          * Focuses the internal input element.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size": Size;
+        /**
+          * Validates the CPF/CNPJ check digits on blur once the value is complete (11 or 14 digits), showing a default "CPF/CNPJ inválido" message when they don't check out — unless `errorMessage` is already set, which always wins.
+          * @default true
+         */
+        "validate": true;
+        /**
+          * Current formatted value.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * A Brazilian vehicle plate input — formats as the old `ABC-1234` pattern
+     * or the newer Mercosul `ABC1D23` pattern, detected automatically from
+     * whether a letter or digit lands in the 5th character.
+     */
+    interface ScarletInputLicensePlate {
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled": false;
+        /**
+          * Error message rendered below the input. Implies the invalid state.
+         */
+        "errorMessage"?: string;
+        /**
+          * Whether the current value looks like a complete old-format or Mercosul plate.
+         */
+        "getFormat": () => Promise<ScarletLicensePlateFormat | undefined>;
+        /**
+          * The raw alphanumeric characters behind the formatted value (no dash).
+         */
+        "getRawValue": () => Promise<string>;
+        /**
+          * Helper text rendered below the input. Hidden while `errorMessage` is set.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid": false;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default 'ABC-1234'
+         */
+        "placeholder": "ABC-1234";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required": false;
+        /**
+          * Focuses the internal input element.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size": Size;
+        /**
+          * Current formatted value, e.g. `ABC-1234` or `ABC1D23`.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * A percentage input that formats digits growing from the right, like
+     * `scarlet-input-currency` — typing "1234" produces "12,34%". Emits the
+     * plain numeric percentage (e.g. `12.34`) via `scarletInput`/`scarletChange`.
+     */
+    interface ScarletInputPercentage {
+        /**
+          * How many digits are kept after the decimal comma.
+          * @default 2
+         */
+        "decimals": 2;
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled": false;
+        /**
+          * Error message rendered below the input. Implies the invalid state.
+         */
+        "errorMessage"?: string;
+        /**
+          * The current percentage as a plain number (same value `scarletInput`/`scarletChange` emit).
+         */
+        "getNumericValue": () => Promise<number>;
+        /**
+          * Helper text rendered below the input. Hidden while `errorMessage` is set.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid": false;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default '0,00%'
+         */
+        "placeholder": "0,00%";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required": false;
+        /**
+          * Focuses the internal input element.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size": Size;
+        /**
+          * Current formatted value, e.g. `12,34%`.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
+     * A Brazilian phone number input — formats as `(11) 91234-5678` (mobile,
+     * 11 digits) or `(11) 1234-5678` (landline, 10 digits), switching
+     * automatically as the user types.
+     */
+    interface ScarletInputPhone {
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled": false;
+        /**
+          * Error message rendered below the input. Implies the invalid state.
+         */
+        "errorMessage"?: string;
+        /**
+          * The raw digits behind the formatted value (e.g. `11912345678`) — what you'd actually submit to an API.
+         */
+        "getRawValue": () => Promise<string>;
+        /**
+          * Helper text rendered below the input. Hidden while `errorMessage` is set.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid": false;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default '(11) 91234-5678'
+         */
+        "placeholder": "(11) 91234-5678";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required": false;
+        /**
+          * Focuses the internal input element.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size": Size;
+        /**
+          * Current formatted value, e.g. `(11) 91234-5678`.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
      * A modal dialog built on the native `<dialog>` element, which provides
      * focus trapping, top-layer stacking and Escape handling for free.
      */
@@ -814,7 +1360,7 @@ export namespace Components {
           * Semantic status of the toast.
           * @default 'info'
          */
-        "status": ScarletAlertStatus1;
+        "status": ScarletAlertStatus;
     }
     /**
      * A text hint shown next to its trigger on hover/focus. Positioning is
@@ -866,6 +1412,38 @@ export interface ScarletCheckboxCustomEvent<T> extends CustomEvent<T> {
 export interface ScarletInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLScarletInputElement;
+}
+export interface ScarletInputCepCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLScarletInputCepElement;
+}
+export interface ScarletInputCreditCardCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLScarletInputCreditCardElement;
+}
+export interface ScarletInputCurrencyCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLScarletInputCurrencyElement;
+}
+export interface ScarletInputDateCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLScarletInputDateElement;
+}
+export interface ScarletInputDocumentCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLScarletInputDocumentElement;
+}
+export interface ScarletInputLicensePlateCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLScarletInputLicensePlateElement;
+}
+export interface ScarletInputPercentageCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLScarletInputPercentageElement;
+}
+export interface ScarletInputPhoneCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLScarletInputPhoneElement;
 }
 export interface ScarletModalCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -1107,6 +1685,216 @@ declare global {
         prototype: HTMLScarletInputElement;
         new (): HTMLScarletInputElement;
     };
+    interface HTMLScarletInputCepElementEventMap {
+        "scarletInput": string;
+        "scarletChange": string;
+        "scarletComplete": string;
+        "scarletFocus": FocusEvent;
+        "scarletBlur": FocusEvent;
+    }
+    /**
+     * A Brazilian postal code (CEP) input — formats as `01310-100`. This
+     * component only formats the value; looking up the matching address (e.g.
+     * via ViaCEP) is the consuming app's responsibility — listen for
+     * `scarletChange` and call your own API with `getRawValue()`.
+     */
+    interface HTMLScarletInputCepElement extends Components.ScarletInputCep, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLScarletInputCepElementEventMap>(type: K, listener: (this: HTMLScarletInputCepElement, ev: ScarletInputCepCustomEvent<HTMLScarletInputCepElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLScarletInputCepElementEventMap>(type: K, listener: (this: HTMLScarletInputCepElement, ev: ScarletInputCepCustomEvent<HTMLScarletInputCepElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLScarletInputCepElement: {
+        prototype: HTMLScarletInputCepElement;
+        new (): HTMLScarletInputCepElement;
+    };
+    interface HTMLScarletInputCreditCardElementEventMap {
+        "scarletInput": string;
+        "scarletChange": string;
+        "scarletFocus": FocusEvent;
+        "scarletBlur": FocusEvent;
+        "scarletValidityChange": boolean;
+        "scarletBrandChange": CreditCardBrand | undefined;
+    }
+    /**
+     * A credit card number input — formats in groups of 4 (or Amex's 4-6-5 /
+     * Diners' 4-6-4 grouping once that brand is detected from the card's
+     * BIN/IIN prefix), with a Luhn checksum validation on blur.
+     */
+    interface HTMLScarletInputCreditCardElement extends Components.ScarletInputCreditCard, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLScarletInputCreditCardElementEventMap>(type: K, listener: (this: HTMLScarletInputCreditCardElement, ev: ScarletInputCreditCardCustomEvent<HTMLScarletInputCreditCardElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLScarletInputCreditCardElementEventMap>(type: K, listener: (this: HTMLScarletInputCreditCardElement, ev: ScarletInputCreditCardCustomEvent<HTMLScarletInputCreditCardElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLScarletInputCreditCardElement: {
+        prototype: HTMLScarletInputCreditCardElement;
+        new (): HTMLScarletInputCreditCardElement;
+    };
+    interface HTMLScarletInputCurrencyElementEventMap {
+        "scarletInput": number;
+        "scarletChange": number;
+        "scarletFocus": FocusEvent;
+        "scarletBlur": FocusEvent;
+    }
+    /**
+     * A monetary input that formats digits as currency growing from the right
+     * (like a card machine) — typing "1234" produces "R$ 12,34". Unlike the
+     * other masked inputs, `scarletInput`/`scarletChange` emit the plain
+     * **numeric** amount (e.g. `12.34`), not the formatted string — that's
+     * almost always what you actually want from a money field. Read the
+     * formatted text itself via `value`.
+     */
+    interface HTMLScarletInputCurrencyElement extends Components.ScarletInputCurrency, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLScarletInputCurrencyElementEventMap>(type: K, listener: (this: HTMLScarletInputCurrencyElement, ev: ScarletInputCurrencyCustomEvent<HTMLScarletInputCurrencyElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLScarletInputCurrencyElementEventMap>(type: K, listener: (this: HTMLScarletInputCurrencyElement, ev: ScarletInputCurrencyCustomEvent<HTMLScarletInputCurrencyElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLScarletInputCurrencyElement: {
+        prototype: HTMLScarletInputCurrencyElement;
+        new (): HTMLScarletInputCurrencyElement;
+    };
+    interface HTMLScarletInputDateElementEventMap {
+        "scarletInput": string;
+        "scarletChange": string;
+        "scarletFocus": FocusEvent;
+        "scarletBlur": FocusEvent;
+        "scarletValidityChange": boolean;
+    }
+    /**
+     * A `DD/MM/AAAA` date input. Unlike a plain positional mask, `validate`
+     * checks it's a *real* calendar date (rejects `31/02/2026`, honors leap
+     * years) on blur, not just that 8 digits were typed.
+     */
+    interface HTMLScarletInputDateElement extends Components.ScarletInputDate, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLScarletInputDateElementEventMap>(type: K, listener: (this: HTMLScarletInputDateElement, ev: ScarletInputDateCustomEvent<HTMLScarletInputDateElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLScarletInputDateElementEventMap>(type: K, listener: (this: HTMLScarletInputDateElement, ev: ScarletInputDateCustomEvent<HTMLScarletInputDateElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLScarletInputDateElement: {
+        prototype: HTMLScarletInputDateElement;
+        new (): HTMLScarletInputDateElement;
+    };
+    interface HTMLScarletInputDocumentElementEventMap {
+        "scarletInput": string;
+        "scarletChange": string;
+        "scarletFocus": FocusEvent;
+        "scarletBlur": FocusEvent;
+        "scarletValidityChange": boolean;
+    }
+    /**
+     * A single "CPF/CNPJ" field that auto-detects and formats whichever
+     * document type is being typed (11 digits → CPF `123.456.789-01`, 12+ →
+     * CNPJ `12.345.678/0001-90`) — the common pattern for a field that accepts
+     * either an individual or a company.
+     */
+    interface HTMLScarletInputDocumentElement extends Components.ScarletInputDocument, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLScarletInputDocumentElementEventMap>(type: K, listener: (this: HTMLScarletInputDocumentElement, ev: ScarletInputDocumentCustomEvent<HTMLScarletInputDocumentElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLScarletInputDocumentElementEventMap>(type: K, listener: (this: HTMLScarletInputDocumentElement, ev: ScarletInputDocumentCustomEvent<HTMLScarletInputDocumentElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLScarletInputDocumentElement: {
+        prototype: HTMLScarletInputDocumentElement;
+        new (): HTMLScarletInputDocumentElement;
+    };
+    interface HTMLScarletInputLicensePlateElementEventMap {
+        "scarletInput": string;
+        "scarletChange": string;
+        "scarletFocus": FocusEvent;
+        "scarletBlur": FocusEvent;
+    }
+    /**
+     * A Brazilian vehicle plate input — formats as the old `ABC-1234` pattern
+     * or the newer Mercosul `ABC1D23` pattern, detected automatically from
+     * whether a letter or digit lands in the 5th character.
+     */
+    interface HTMLScarletInputLicensePlateElement extends Components.ScarletInputLicensePlate, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLScarletInputLicensePlateElementEventMap>(type: K, listener: (this: HTMLScarletInputLicensePlateElement, ev: ScarletInputLicensePlateCustomEvent<HTMLScarletInputLicensePlateElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLScarletInputLicensePlateElementEventMap>(type: K, listener: (this: HTMLScarletInputLicensePlateElement, ev: ScarletInputLicensePlateCustomEvent<HTMLScarletInputLicensePlateElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLScarletInputLicensePlateElement: {
+        prototype: HTMLScarletInputLicensePlateElement;
+        new (): HTMLScarletInputLicensePlateElement;
+    };
+    interface HTMLScarletInputPercentageElementEventMap {
+        "scarletInput": number;
+        "scarletChange": number;
+        "scarletFocus": FocusEvent;
+        "scarletBlur": FocusEvent;
+    }
+    /**
+     * A percentage input that formats digits growing from the right, like
+     * `scarlet-input-currency` — typing "1234" produces "12,34%". Emits the
+     * plain numeric percentage (e.g. `12.34`) via `scarletInput`/`scarletChange`.
+     */
+    interface HTMLScarletInputPercentageElement extends Components.ScarletInputPercentage, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLScarletInputPercentageElementEventMap>(type: K, listener: (this: HTMLScarletInputPercentageElement, ev: ScarletInputPercentageCustomEvent<HTMLScarletInputPercentageElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLScarletInputPercentageElementEventMap>(type: K, listener: (this: HTMLScarletInputPercentageElement, ev: ScarletInputPercentageCustomEvent<HTMLScarletInputPercentageElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLScarletInputPercentageElement: {
+        prototype: HTMLScarletInputPercentageElement;
+        new (): HTMLScarletInputPercentageElement;
+    };
+    interface HTMLScarletInputPhoneElementEventMap {
+        "scarletInput": string;
+        "scarletChange": string;
+        "scarletFocus": FocusEvent;
+        "scarletBlur": FocusEvent;
+    }
+    /**
+     * A Brazilian phone number input — formats as `(11) 91234-5678` (mobile,
+     * 11 digits) or `(11) 1234-5678` (landline, 10 digits), switching
+     * automatically as the user types.
+     */
+    interface HTMLScarletInputPhoneElement extends Components.ScarletInputPhone, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLScarletInputPhoneElementEventMap>(type: K, listener: (this: HTMLScarletInputPhoneElement, ev: ScarletInputPhoneCustomEvent<HTMLScarletInputPhoneElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLScarletInputPhoneElementEventMap>(type: K, listener: (this: HTMLScarletInputPhoneElement, ev: ScarletInputPhoneCustomEvent<HTMLScarletInputPhoneElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLScarletInputPhoneElement: {
+        prototype: HTMLScarletInputPhoneElement;
+        new (): HTMLScarletInputPhoneElement;
+    };
     interface HTMLScarletModalElementEventMap {
         "scarletShow": void;
         "scarletClose": void;
@@ -1342,6 +2130,14 @@ declare global {
         "scarlet-heading": HTMLScarletHeadingElement;
         "scarlet-icon": HTMLScarletIconElement;
         "scarlet-input": HTMLScarletInputElement;
+        "scarlet-input-cep": HTMLScarletInputCepElement;
+        "scarlet-input-credit-card": HTMLScarletInputCreditCardElement;
+        "scarlet-input-currency": HTMLScarletInputCurrencyElement;
+        "scarlet-input-date": HTMLScarletInputDateElement;
+        "scarlet-input-document": HTMLScarletInputDocumentElement;
+        "scarlet-input-license-plate": HTMLScarletInputLicensePlateElement;
+        "scarlet-input-percentage": HTMLScarletInputPercentageElement;
+        "scarlet-input-phone": HTMLScarletInputPhoneElement;
         "scarlet-modal": HTMLScarletModalElement;
         "scarlet-radio": HTMLScarletRadioElement;
         "scarlet-radio-group": HTMLScarletRadioGroupElement;
@@ -1781,6 +2577,608 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     /**
+     * A Brazilian postal code (CEP) input — formats as `01310-100`. This
+     * component only formats the value; looking up the matching address (e.g.
+     * via ViaCEP) is the consuming app's responsibility — listen for
+     * `scarletChange` and call your own API with `getRawValue()`.
+     */
+    interface ScarletInputCep {
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled"?: false;
+        /**
+          * Error message rendered below the input. Implies the invalid state.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the input. Hidden while `errorMessage` is set.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid"?: false;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Emitted when the input loses focus.
+         */
+        "onScarletBlur"?: (event: ScarletInputCepCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted when the input loses focus after its value has changed. Also emitted as soon as the 8th digit is typed (`scarletComplete`) — the more useful hook for triggering an address lookup without waiting for blur.
+         */
+        "onScarletChange"?: (event: ScarletInputCepCustomEvent<string>) => void;
+        /**
+          * Emitted once the value reaches 8 digits (a complete CEP), on every keystroke that keeps it complete.
+         */
+        "onScarletComplete"?: (event: ScarletInputCepCustomEvent<string>) => void;
+        /**
+          * Emitted when the input gains focus.
+         */
+        "onScarletFocus"?: (event: ScarletInputCepCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted on every keystroke with the current formatted value.
+         */
+        "onScarletInput"?: (event: ScarletInputCepCustomEvent<string>) => void;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default '00000-000'
+         */
+        "placeholder"?: "00000-000";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required"?: false;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size"?: Size;
+        /**
+          * Current formatted value, e.g. `01310-100`.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * A credit card number input — formats in groups of 4 (or Amex's 4-6-5 /
+     * Diners' 4-6-4 grouping once that brand is detected from the card's
+     * BIN/IIN prefix), with a Luhn checksum validation on blur.
+     */
+    interface ScarletInputCreditCard {
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled"?: false;
+        /**
+          * Error message rendered below the input. Takes priority over automatic Luhn validation errors.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the input. Hidden while an error is shown.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid"?: false;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Emitted when the input loses focus.
+         */
+        "onScarletBlur"?: (event: ScarletInputCreditCardCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted whenever the detected card brand changes (including to `undefined`).
+         */
+        "onScarletBrandChange"?: (event: ScarletInputCreditCardCustomEvent<CreditCardBrand | undefined>) => void;
+        /**
+          * Emitted when the input loses focus after its value has changed.
+         */
+        "onScarletChange"?: (event: ScarletInputCreditCardCustomEvent<string>) => void;
+        /**
+          * Emitted when the input gains focus.
+         */
+        "onScarletFocus"?: (event: ScarletInputCreditCardCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted on every keystroke with the current formatted value.
+         */
+        "onScarletInput"?: (event: ScarletInputCreditCardCustomEvent<string>) => void;
+        /**
+          * Emitted after a `validate`-triggered check, with the resulting validity.
+         */
+        "onScarletValidityChange"?: (event: ScarletInputCreditCardCustomEvent<boolean>) => void;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default '0000 0000 0000 0000'
+         */
+        "placeholder"?: "0000 0000 0000 0000";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required"?: false;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size"?: Size;
+        /**
+          * Validates the number against the Luhn checksum on blur once it's complete, showing a default "Número de cartão inválido" message when it fails — unless `errorMessage` is already set, which always wins.
+          * @default true
+         */
+        "validate"?: true;
+        /**
+          * Current formatted value.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * A monetary input that formats digits as currency growing from the right
+     * (like a card machine) — typing "1234" produces "R$ 12,34". Unlike the
+     * other masked inputs, `scarletInput`/`scarletChange` emit the plain
+     * **numeric** amount (e.g. `12.34`), not the formatted string — that's
+     * almost always what you actually want from a money field. Read the
+     * formatted text itself via `value`.
+     */
+    interface ScarletInputCurrency {
+        /**
+          * Currency symbol shown before the amount.
+          * @default 'R$'
+         */
+        "currencySymbol"?: "R$";
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled"?: false;
+        /**
+          * Error message rendered below the input. Implies the invalid state.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the input. Hidden while `errorMessage` is set.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid"?: false;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Emitted when the input loses focus.
+         */
+        "onScarletBlur"?: (event: ScarletInputCurrencyCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted when the input loses focus after its value has changed, with the current numeric amount.
+         */
+        "onScarletChange"?: (event: ScarletInputCurrencyCustomEvent<number>) => void;
+        /**
+          * Emitted when the input gains focus.
+         */
+        "onScarletFocus"?: (event: ScarletInputCurrencyCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted on every keystroke with the current numeric amount (e.g. `12.34`).
+         */
+        "onScarletInput"?: (event: ScarletInputCurrencyCustomEvent<number>) => void;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default 'R$ 0,00'
+         */
+        "placeholder"?: "R$ 0,00";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required"?: false;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size"?: Size;
+        /**
+          * Current formatted value, e.g. `R$ 1.234,56`.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * A `DD/MM/AAAA` date input. Unlike a plain positional mask, `validate`
+     * checks it's a *real* calendar date (rejects `31/02/2026`, honors leap
+     * years) on blur, not just that 8 digits were typed.
+     */
+    interface ScarletInputDate {
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled"?: false;
+        /**
+          * Error message rendered below the input. Takes priority over automatic calendar validation errors.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the input. Hidden while an error is shown.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid"?: false;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Emitted when the input loses focus.
+         */
+        "onScarletBlur"?: (event: ScarletInputDateCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted when the input loses focus after its value has changed.
+         */
+        "onScarletChange"?: (event: ScarletInputDateCustomEvent<string>) => void;
+        /**
+          * Emitted when the input gains focus.
+         */
+        "onScarletFocus"?: (event: ScarletInputDateCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted on every keystroke with the current formatted value.
+         */
+        "onScarletInput"?: (event: ScarletInputDateCustomEvent<string>) => void;
+        /**
+          * Emitted after a `validate`-triggered check, with the resulting validity.
+         */
+        "onScarletValidityChange"?: (event: ScarletInputDateCustomEvent<boolean>) => void;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default 'DD/MM/AAAA'
+         */
+        "placeholder"?: "DD/MM/AAAA";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required"?: false;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size"?: Size;
+        /**
+          * Validates the value is a real calendar date on blur once it's complete (8 digits), showing a default "Data inválida" message when it isn't — unless `errorMessage` is already set, which always wins.
+          * @default true
+         */
+        "validate"?: true;
+        /**
+          * Current formatted value, e.g. `31/12/2026`.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * A single "CPF/CNPJ" field that auto-detects and formats whichever
+     * document type is being typed (11 digits → CPF `123.456.789-01`, 12+ →
+     * CNPJ `12.345.678/0001-90`) — the common pattern for a field that accepts
+     * either an individual or a company.
+     */
+    interface ScarletInputDocument {
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled"?: false;
+        /**
+          * Error message rendered below the input. Takes priority over automatic check-digit validation errors.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the input. Hidden while an error is shown.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid"?: false;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Emitted when the input loses focus.
+         */
+        "onScarletBlur"?: (event: ScarletInputDocumentCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted when the input loses focus after its value has changed.
+         */
+        "onScarletChange"?: (event: ScarletInputDocumentCustomEvent<string>) => void;
+        /**
+          * Emitted when the input gains focus.
+         */
+        "onScarletFocus"?: (event: ScarletInputDocumentCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted on every keystroke with the current formatted value.
+         */
+        "onScarletInput"?: (event: ScarletInputDocumentCustomEvent<string>) => void;
+        /**
+          * Emitted after a `validate`-triggered check, with the resulting validity.
+         */
+        "onScarletValidityChange"?: (event: ScarletInputDocumentCustomEvent<boolean>) => void;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default 'CPF ou CNPJ'
+         */
+        "placeholder"?: "CPF ou CNPJ";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required"?: false;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size"?: Size;
+        /**
+          * Validates the CPF/CNPJ check digits on blur once the value is complete (11 or 14 digits), showing a default "CPF/CNPJ inválido" message when they don't check out — unless `errorMessage` is already set, which always wins.
+          * @default true
+         */
+        "validate"?: true;
+        /**
+          * Current formatted value.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * A Brazilian vehicle plate input — formats as the old `ABC-1234` pattern
+     * or the newer Mercosul `ABC1D23` pattern, detected automatically from
+     * whether a letter or digit lands in the 5th character.
+     */
+    interface ScarletInputLicensePlate {
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled"?: false;
+        /**
+          * Error message rendered below the input. Implies the invalid state.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the input. Hidden while `errorMessage` is set.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid"?: false;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Emitted when the input loses focus.
+         */
+        "onScarletBlur"?: (event: ScarletInputLicensePlateCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted when the input loses focus after its value has changed.
+         */
+        "onScarletChange"?: (event: ScarletInputLicensePlateCustomEvent<string>) => void;
+        /**
+          * Emitted when the input gains focus.
+         */
+        "onScarletFocus"?: (event: ScarletInputLicensePlateCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted on every keystroke with the current formatted value.
+         */
+        "onScarletInput"?: (event: ScarletInputLicensePlateCustomEvent<string>) => void;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default 'ABC-1234'
+         */
+        "placeholder"?: "ABC-1234";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required"?: false;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size"?: Size;
+        /**
+          * Current formatted value, e.g. `ABC-1234` or `ABC1D23`.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * A percentage input that formats digits growing from the right, like
+     * `scarlet-input-currency` — typing "1234" produces "12,34%". Emits the
+     * plain numeric percentage (e.g. `12.34`) via `scarletInput`/`scarletChange`.
+     */
+    interface ScarletInputPercentage {
+        /**
+          * How many digits are kept after the decimal comma.
+          * @default 2
+         */
+        "decimals"?: 2;
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled"?: false;
+        /**
+          * Error message rendered below the input. Implies the invalid state.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the input. Hidden while `errorMessage` is set.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid"?: false;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Emitted when the input loses focus.
+         */
+        "onScarletBlur"?: (event: ScarletInputPercentageCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted when the input loses focus after its value has changed, with the current numeric percentage.
+         */
+        "onScarletChange"?: (event: ScarletInputPercentageCustomEvent<number>) => void;
+        /**
+          * Emitted when the input gains focus.
+         */
+        "onScarletFocus"?: (event: ScarletInputPercentageCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted on every keystroke with the current numeric percentage (e.g. `12.34`).
+         */
+        "onScarletInput"?: (event: ScarletInputPercentageCustomEvent<number>) => void;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default '0,00%'
+         */
+        "placeholder"?: "0,00%";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required"?: false;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size"?: Size;
+        /**
+          * Current formatted value, e.g. `12,34%`.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
+     * A Brazilian phone number input — formats as `(11) 91234-5678` (mobile,
+     * 11 digits) or `(11) 1234-5678` (landline, 10 digits), switching
+     * automatically as the user types.
+     */
+    interface ScarletInputPhone {
+        /**
+          * Disables the input.
+          * @default false
+         */
+        "disabled"?: false;
+        /**
+          * Error message rendered below the input. Implies the invalid state.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the input. Hidden while `errorMessage` is set.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the input as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid"?: false;
+        /**
+          * Visible label rendered above the input.
+         */
+        "label"?: string;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Emitted when the input loses focus.
+         */
+        "onScarletBlur"?: (event: ScarletInputPhoneCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted when the input loses focus after its value has changed.
+         */
+        "onScarletChange"?: (event: ScarletInputPhoneCustomEvent<string>) => void;
+        /**
+          * Emitted when the input gains focus.
+         */
+        "onScarletFocus"?: (event: ScarletInputPhoneCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted on every keystroke with the current formatted value.
+         */
+        "onScarletInput"?: (event: ScarletInputPhoneCustomEvent<string>) => void;
+        /**
+          * Placeholder text shown when the input is empty.
+          * @default '(11) 91234-5678'
+         */
+        "placeholder"?: "(11) 91234-5678";
+        /**
+          * Marks the input as required in a parent form.
+          * @default false
+         */
+        "required"?: false;
+        /**
+          * Size of the input.
+          * @default 'md'
+         */
+        "size"?: Size;
+        /**
+          * Current formatted value, e.g. `(11) 91234-5678`.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
      * A modal dialog built on the native `<dialog>` element, which provides
      * focus trapping, top-layer stacking and Escape handling for free.
      */
@@ -2199,7 +3597,7 @@ declare namespace LocalJSX {
           * Semantic status of the toast.
           * @default 'info'
          */
-        "status"?: ScarletAlertStatus1;
+        "status"?: ScarletAlertStatus;
     }
     /**
      * A text hint shown next to its trigger on hover/focus. Positioning is
@@ -2328,6 +3726,107 @@ declare namespace LocalJSX {
         "size": Size;
         "autocomplete": string;
     }
+    interface ScarletInputCepAttributes {
+        "name": string;
+        "value": string;
+        "placeholder": "00000-000";
+        "label": string;
+        "helperText": string;
+        "errorMessage": string;
+        "invalid": false;
+        "disabled": false;
+        "required": false;
+        "size": Size;
+    }
+    interface ScarletInputCreditCardAttributes {
+        "name": string;
+        "value": string;
+        "placeholder": "0000 0000 0000 0000";
+        "label": string;
+        "helperText": string;
+        "errorMessage": string;
+        "invalid": false;
+        "disabled": false;
+        "required": false;
+        "size": Size;
+        "validate": true;
+    }
+    interface ScarletInputCurrencyAttributes {
+        "name": string;
+        "value": string;
+        "currencySymbol": "R$";
+        "placeholder": "R$ 0,00";
+        "label": string;
+        "helperText": string;
+        "errorMessage": string;
+        "invalid": false;
+        "disabled": false;
+        "required": false;
+        "size": Size;
+    }
+    interface ScarletInputDateAttributes {
+        "name": string;
+        "value": string;
+        "placeholder": "DD/MM/AAAA";
+        "label": string;
+        "helperText": string;
+        "errorMessage": string;
+        "invalid": false;
+        "disabled": false;
+        "required": false;
+        "size": Size;
+        "validate": true;
+    }
+    interface ScarletInputDocumentAttributes {
+        "name": string;
+        "value": string;
+        "placeholder": "CPF ou CNPJ";
+        "label": string;
+        "helperText": string;
+        "errorMessage": string;
+        "invalid": false;
+        "disabled": false;
+        "required": false;
+        "size": Size;
+        "validate": true;
+    }
+    interface ScarletInputLicensePlateAttributes {
+        "name": string;
+        "value": string;
+        "placeholder": "ABC-1234";
+        "label": string;
+        "helperText": string;
+        "errorMessage": string;
+        "invalid": false;
+        "disabled": false;
+        "required": false;
+        "size": Size;
+    }
+    interface ScarletInputPercentageAttributes {
+        "name": string;
+        "value": string;
+        "decimals": 2;
+        "placeholder": "0,00%";
+        "label": string;
+        "helperText": string;
+        "errorMessage": string;
+        "invalid": false;
+        "disabled": false;
+        "required": false;
+        "size": Size;
+    }
+    interface ScarletInputPhoneAttributes {
+        "name": string;
+        "value": string;
+        "placeholder": "(11) 91234-5678";
+        "label": string;
+        "helperText": string;
+        "errorMessage": string;
+        "invalid": false;
+        "disabled": false;
+        "required": false;
+        "size": Size;
+    }
     interface ScarletModalAttributes {
         "open": boolean;
         "size": ScarletModalSize;
@@ -2433,6 +3932,14 @@ declare namespace LocalJSX {
         "scarlet-heading": Omit<ScarletHeading, keyof ScarletHeadingAttributes> & { [K in keyof ScarletHeading & keyof ScarletHeadingAttributes]?: ScarletHeading[K] } & { [K in keyof ScarletHeading & keyof ScarletHeadingAttributes as `attr:${K}`]?: ScarletHeadingAttributes[K] } & { [K in keyof ScarletHeading & keyof ScarletHeadingAttributes as `prop:${K}`]?: ScarletHeading[K] };
         "scarlet-icon": Omit<ScarletIcon, keyof ScarletIconAttributes> & { [K in keyof ScarletIcon & keyof ScarletIconAttributes]?: ScarletIcon[K] } & { [K in keyof ScarletIcon & keyof ScarletIconAttributes as `attr:${K}`]?: ScarletIconAttributes[K] } & { [K in keyof ScarletIcon & keyof ScarletIconAttributes as `prop:${K}`]?: ScarletIcon[K] };
         "scarlet-input": Omit<ScarletInput, keyof ScarletInputAttributes> & { [K in keyof ScarletInput & keyof ScarletInputAttributes]?: ScarletInput[K] } & { [K in keyof ScarletInput & keyof ScarletInputAttributes as `attr:${K}`]?: ScarletInputAttributes[K] } & { [K in keyof ScarletInput & keyof ScarletInputAttributes as `prop:${K}`]?: ScarletInput[K] };
+        "scarlet-input-cep": Omit<ScarletInputCep, keyof ScarletInputCepAttributes> & { [K in keyof ScarletInputCep & keyof ScarletInputCepAttributes]?: ScarletInputCep[K] } & { [K in keyof ScarletInputCep & keyof ScarletInputCepAttributes as `attr:${K}`]?: ScarletInputCepAttributes[K] } & { [K in keyof ScarletInputCep & keyof ScarletInputCepAttributes as `prop:${K}`]?: ScarletInputCep[K] };
+        "scarlet-input-credit-card": Omit<ScarletInputCreditCard, keyof ScarletInputCreditCardAttributes> & { [K in keyof ScarletInputCreditCard & keyof ScarletInputCreditCardAttributes]?: ScarletInputCreditCard[K] } & { [K in keyof ScarletInputCreditCard & keyof ScarletInputCreditCardAttributes as `attr:${K}`]?: ScarletInputCreditCardAttributes[K] } & { [K in keyof ScarletInputCreditCard & keyof ScarletInputCreditCardAttributes as `prop:${K}`]?: ScarletInputCreditCard[K] };
+        "scarlet-input-currency": Omit<ScarletInputCurrency, keyof ScarletInputCurrencyAttributes> & { [K in keyof ScarletInputCurrency & keyof ScarletInputCurrencyAttributes]?: ScarletInputCurrency[K] } & { [K in keyof ScarletInputCurrency & keyof ScarletInputCurrencyAttributes as `attr:${K}`]?: ScarletInputCurrencyAttributes[K] } & { [K in keyof ScarletInputCurrency & keyof ScarletInputCurrencyAttributes as `prop:${K}`]?: ScarletInputCurrency[K] };
+        "scarlet-input-date": Omit<ScarletInputDate, keyof ScarletInputDateAttributes> & { [K in keyof ScarletInputDate & keyof ScarletInputDateAttributes]?: ScarletInputDate[K] } & { [K in keyof ScarletInputDate & keyof ScarletInputDateAttributes as `attr:${K}`]?: ScarletInputDateAttributes[K] } & { [K in keyof ScarletInputDate & keyof ScarletInputDateAttributes as `prop:${K}`]?: ScarletInputDate[K] };
+        "scarlet-input-document": Omit<ScarletInputDocument, keyof ScarletInputDocumentAttributes> & { [K in keyof ScarletInputDocument & keyof ScarletInputDocumentAttributes]?: ScarletInputDocument[K] } & { [K in keyof ScarletInputDocument & keyof ScarletInputDocumentAttributes as `attr:${K}`]?: ScarletInputDocumentAttributes[K] } & { [K in keyof ScarletInputDocument & keyof ScarletInputDocumentAttributes as `prop:${K}`]?: ScarletInputDocument[K] };
+        "scarlet-input-license-plate": Omit<ScarletInputLicensePlate, keyof ScarletInputLicensePlateAttributes> & { [K in keyof ScarletInputLicensePlate & keyof ScarletInputLicensePlateAttributes]?: ScarletInputLicensePlate[K] } & { [K in keyof ScarletInputLicensePlate & keyof ScarletInputLicensePlateAttributes as `attr:${K}`]?: ScarletInputLicensePlateAttributes[K] } & { [K in keyof ScarletInputLicensePlate & keyof ScarletInputLicensePlateAttributes as `prop:${K}`]?: ScarletInputLicensePlate[K] };
+        "scarlet-input-percentage": Omit<ScarletInputPercentage, keyof ScarletInputPercentageAttributes> & { [K in keyof ScarletInputPercentage & keyof ScarletInputPercentageAttributes]?: ScarletInputPercentage[K] } & { [K in keyof ScarletInputPercentage & keyof ScarletInputPercentageAttributes as `attr:${K}`]?: ScarletInputPercentageAttributes[K] } & { [K in keyof ScarletInputPercentage & keyof ScarletInputPercentageAttributes as `prop:${K}`]?: ScarletInputPercentage[K] };
+        "scarlet-input-phone": Omit<ScarletInputPhone, keyof ScarletInputPhoneAttributes> & { [K in keyof ScarletInputPhone & keyof ScarletInputPhoneAttributes]?: ScarletInputPhone[K] } & { [K in keyof ScarletInputPhone & keyof ScarletInputPhoneAttributes as `attr:${K}`]?: ScarletInputPhoneAttributes[K] } & { [K in keyof ScarletInputPhone & keyof ScarletInputPhoneAttributes as `prop:${K}`]?: ScarletInputPhone[K] };
         "scarlet-modal": Omit<ScarletModal, keyof ScarletModalAttributes> & { [K in keyof ScarletModal & keyof ScarletModalAttributes]?: ScarletModal[K] } & { [K in keyof ScarletModal & keyof ScarletModalAttributes as `attr:${K}`]?: ScarletModalAttributes[K] } & { [K in keyof ScarletModal & keyof ScarletModalAttributes as `prop:${K}`]?: ScarletModal[K] };
         "scarlet-radio": Omit<ScarletRadio, keyof ScarletRadioAttributes> & { [K in keyof ScarletRadio & keyof ScarletRadioAttributes]?: ScarletRadio[K] } & { [K in keyof ScarletRadio & keyof ScarletRadioAttributes as `attr:${K}`]?: ScarletRadioAttributes[K] } & { [K in keyof ScarletRadio & keyof ScarletRadioAttributes as `prop:${K}`]?: ScarletRadio[K] };
         "scarlet-radio-group": Omit<ScarletRadioGroup, keyof ScarletRadioGroupAttributes> & { [K in keyof ScarletRadioGroup & keyof ScarletRadioGroupAttributes]?: ScarletRadioGroup[K] } & { [K in keyof ScarletRadioGroup & keyof ScarletRadioGroupAttributes as `attr:${K}`]?: ScarletRadioGroupAttributes[K] } & { [K in keyof ScarletRadioGroup & keyof ScarletRadioGroupAttributes as `prop:${K}`]?: ScarletRadioGroup[K] };
@@ -2514,6 +4021,59 @@ declare module "@stencil/core" {
              * A labeled text input with helper/error text and built-in accessibility wiring.
              */
             "scarlet-input": LocalJSX.IntrinsicElements["scarlet-input"] & JSXBase.HTMLAttributes<HTMLScarletInputElement>;
+            /**
+             * A Brazilian postal code (CEP) input — formats as `01310-100`. This
+             * component only formats the value; looking up the matching address (e.g.
+             * via ViaCEP) is the consuming app's responsibility — listen for
+             * `scarletChange` and call your own API with `getRawValue()`.
+             */
+            "scarlet-input-cep": LocalJSX.IntrinsicElements["scarlet-input-cep"] & JSXBase.HTMLAttributes<HTMLScarletInputCepElement>;
+            /**
+             * A credit card number input — formats in groups of 4 (or Amex's 4-6-5 /
+             * Diners' 4-6-4 grouping once that brand is detected from the card's
+             * BIN/IIN prefix), with a Luhn checksum validation on blur.
+             */
+            "scarlet-input-credit-card": LocalJSX.IntrinsicElements["scarlet-input-credit-card"] & JSXBase.HTMLAttributes<HTMLScarletInputCreditCardElement>;
+            /**
+             * A monetary input that formats digits as currency growing from the right
+             * (like a card machine) — typing "1234" produces "R$ 12,34". Unlike the
+             * other masked inputs, `scarletInput`/`scarletChange` emit the plain
+             * **numeric** amount (e.g. `12.34`), not the formatted string — that's
+             * almost always what you actually want from a money field. Read the
+             * formatted text itself via `value`.
+             */
+            "scarlet-input-currency": LocalJSX.IntrinsicElements["scarlet-input-currency"] & JSXBase.HTMLAttributes<HTMLScarletInputCurrencyElement>;
+            /**
+             * A `DD/MM/AAAA` date input. Unlike a plain positional mask, `validate`
+             * checks it's a *real* calendar date (rejects `31/02/2026`, honors leap
+             * years) on blur, not just that 8 digits were typed.
+             */
+            "scarlet-input-date": LocalJSX.IntrinsicElements["scarlet-input-date"] & JSXBase.HTMLAttributes<HTMLScarletInputDateElement>;
+            /**
+             * A single "CPF/CNPJ" field that auto-detects and formats whichever
+             * document type is being typed (11 digits → CPF `123.456.789-01`, 12+ →
+             * CNPJ `12.345.678/0001-90`) — the common pattern for a field that accepts
+             * either an individual or a company.
+             */
+            "scarlet-input-document": LocalJSX.IntrinsicElements["scarlet-input-document"] & JSXBase.HTMLAttributes<HTMLScarletInputDocumentElement>;
+            /**
+             * A Brazilian vehicle plate input — formats as the old `ABC-1234` pattern
+             * or the newer Mercosul `ABC1D23` pattern, detected automatically from
+             * whether a letter or digit lands in the 5th character.
+             */
+            "scarlet-input-license-plate": LocalJSX.IntrinsicElements["scarlet-input-license-plate"] & JSXBase.HTMLAttributes<HTMLScarletInputLicensePlateElement>;
+            /**
+             * A percentage input that formats digits growing from the right, like
+             * `scarlet-input-currency` — typing "1234" produces "12,34%". Emits the
+             * plain numeric percentage (e.g. `12.34`) via `scarletInput`/`scarletChange`.
+             */
+            "scarlet-input-percentage": LocalJSX.IntrinsicElements["scarlet-input-percentage"] & JSXBase.HTMLAttributes<HTMLScarletInputPercentageElement>;
+            /**
+             * A Brazilian phone number input — formats as `(11) 91234-5678` (mobile,
+             * 11 digits) or `(11) 1234-5678` (landline, 10 digits), switching
+             * automatically as the user types.
+             */
+            "scarlet-input-phone": LocalJSX.IntrinsicElements["scarlet-input-phone"] & JSXBase.HTMLAttributes<HTMLScarletInputPhoneElement>;
             /**
              * A modal dialog built on the native `<dialog>` element, which provides
              * focus trapping, top-layer stacking and Escape handling for free.
