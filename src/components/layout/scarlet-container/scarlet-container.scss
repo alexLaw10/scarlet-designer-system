@@ -1,26 +1,28 @@
+@import '../../../tokens/breakpoints';
+
 :host {
   display: block;
   width: 100%;
 }
 
 :host(.scarlet-container-host--sm) {
-  max-width: 640px;
+  max-width: $scarlet-breakpoint-sm;
 }
 
 :host(.scarlet-container-host--md) {
-  max-width: 768px;
+  max-width: $scarlet-breakpoint-md;
 }
 
 :host(.scarlet-container-host--lg) {
-  max-width: 1024px;
+  max-width: $scarlet-breakpoint-lg;
 }
 
 :host(.scarlet-container-host--xl) {
-  max-width: 1280px;
+  max-width: $scarlet-breakpoint-xl;
 }
 
 :host(.scarlet-container-host--2xl) {
-  max-width: 1536px;
+  max-width: $scarlet-breakpoint-2xl;
 }
 
 :host(.scarlet-container-host--full) {

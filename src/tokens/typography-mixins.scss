@@ -12,29 +12,38 @@
 //     @include scarlet-text-heading-lg;
 //   }
 
+// The four largest display sizes use clamp() instead of the fixed
+// --scarlet-font-size-* tokens every other mixin below uses: at their fixed
+// size (up to 60px for 2xl) they're prone to overflowing or wrapping badly
+// on a small phone viewport. Each clamp's upper bound is the exact value
+// the fixed token held before, so nothing changes at a typical desktop
+// viewport (~900px+) — only viewports narrower than that scale the size
+// down smoothly, bottoming out at the lower bound instead of shrinking
+// forever. Every other text style below is small enough already that this
+// isn't needed.
 @mixin scarlet-text-display-2xl {
-  font-size: var(--scarlet-font-size-6xl);
+  font-size: clamp(2.25rem, 1.5rem + 4vw, var(--scarlet-font-size-6xl));
   font-weight: var(--scarlet-font-weight-bold);
   line-height: var(--scarlet-line-height-none);
   letter-spacing: var(--scarlet-letter-spacing-tight);
 }
 
 @mixin scarlet-text-display-xl {
-  font-size: var(--scarlet-font-size-5xl);
+  font-size: clamp(2rem, 1.4rem + 3vw, var(--scarlet-font-size-5xl));
   font-weight: var(--scarlet-font-weight-bold);
   line-height: var(--scarlet-line-height-none);
   letter-spacing: var(--scarlet-letter-spacing-tight);
 }
 
 @mixin scarlet-text-display-lg {
-  font-size: var(--scarlet-font-size-4xl);
+  font-size: clamp(1.75rem, 1.4rem + 2vw, var(--scarlet-font-size-4xl));
   font-weight: var(--scarlet-font-weight-bold);
   line-height: var(--scarlet-line-height-tight);
   letter-spacing: var(--scarlet-letter-spacing-tight);
 }
 
 @mixin scarlet-text-display-md {
-  font-size: var(--scarlet-font-size-3xl);
+  font-size: clamp(1.5rem, 1.25rem + 1.25vw, var(--scarlet-font-size-3xl));
   font-weight: var(--scarlet-font-weight-bold);
   line-height: var(--scarlet-line-height-tight);
   letter-spacing: var(--scarlet-letter-spacing-tight);

@@ -2,13 +2,13 @@ import { newSpecPage } from '@stencil/core/testing';
 import { ScarletGrid } from './scarlet-grid';
 
 describe('scarlet-grid', () => {
-  it('sets grid-template-columns from the columns prop, defaulting to 12', async () => {
+  it('sets --scarlet-grid-columns from the columns prop, defaulting to 12', async () => {
     const page = await newSpecPage({
       components: [ScarletGrid],
       html: `<scarlet-grid></scarlet-grid>`,
     });
 
-    expect(page.root?.style.gridTemplateColumns).toBe('repeat(12, minmax(0, 1fr))');
+    expect(page.root?.style.getPropertyValue('--scarlet-grid-columns')).toBe('12');
   });
 
   it('applies a custom column count', async () => {
@@ -17,7 +17,20 @@ describe('scarlet-grid', () => {
       html: `<scarlet-grid columns="4"></scarlet-grid>`,
     });
 
-    expect(page.root?.style.gridTemplateColumns).toBe('repeat(4, minmax(0, 1fr))');
+    expect(page.root?.style.getPropertyValue('--scarlet-grid-columns')).toBe('4');
+  });
+
+  it('only sets the breakpoint column custom properties that were actually passed', async () => {
+    const page = await newSpecPage({
+      components: [ScarletGrid],
+      html: `<scarlet-grid columns="1" columns-md="3"></scarlet-grid>`,
+    });
+
+    expect(page.root?.style.getPropertyValue('--scarlet-grid-columns')).toBe('1');
+    expect(page.root?.style.getPropertyValue('--scarlet-grid-columns-md')).toBe('3');
+    expect(page.root?.style.getPropertyValue('--scarlet-grid-columns-sm')).toBe('');
+    expect(page.root?.style.getPropertyValue('--scarlet-grid-columns-lg')).toBe('');
+    expect(page.root?.style.getPropertyValue('--scarlet-grid-columns-xl')).toBe('');
   });
 
   it('uses the same gap for rows and columns by default', async () => {

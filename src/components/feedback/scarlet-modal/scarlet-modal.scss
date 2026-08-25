@@ -1,4 +1,5 @@
 @import '../../../tokens/typography-mixins';
+@import '../../../tokens/breakpoints';
 
 .scarlet-modal {
   padding: 0;
@@ -8,6 +9,15 @@
   box-shadow: var(--scarlet-shadow-2xl);
   max-height: calc(100vh - var(--scarlet-space-12));
   width: 100%;
+
+  // Below `sm`, every size (including the dialog's native auto-centering
+  // margin) would otherwise let the box touch both edges of the viewport —
+  // pull it in by a fixed gutter instead. `--full` already computes to
+  // about the same width on its own via its own max-width, so this is
+  // harmless overlap there, not a special case to exclude.
+  @media (max-width: $scarlet-breakpoint-sm - 1px) {
+    width: calc(100% - var(--scarlet-space-8));
+  }
 
   &::backdrop {
     background-color: rgba(15, 23, 42, 0.6);

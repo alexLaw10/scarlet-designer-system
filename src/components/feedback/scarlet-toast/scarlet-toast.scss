@@ -8,7 +8,11 @@ $scarlet-toast-statuses: success, warning, error, info;
   display: flex;
   align-items: flex-start;
   gap: var(--scarlet-space-3);
-  max-width: 360px;
+  // min() instead of a flat 360px: only `right`/`left` is set below (never
+  // both), so nothing else constrains this box's width — on a viewport
+  // narrower than 360px + its gutters, a plain fixed max-width would push
+  // the far edge straight off-screen instead of shrinking to fit.
+  max-width: min(360px, calc(100vw - var(--scarlet-space-8)));
   padding: var(--scarlet-space-4);
   border-radius: var(--scarlet-border-radius-lg);
   background-color: var(--scarlet-color-neutral-900);

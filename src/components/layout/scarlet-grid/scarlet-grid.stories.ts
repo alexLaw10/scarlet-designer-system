@@ -42,3 +42,16 @@ export const WithSpanningItems: Story = {
     </scarlet-grid>
   `,
 };
+
+export const Responsive: Story = {
+  name: 'Responsivo (columns por breakpoint)',
+  render: () => html`
+    <p style="margin: 0 0 12px; font-size: 14px; color: var(--scarlet-color-text-secondary, #64748b);">
+      1 coluna abaixo de 640px, 2 a partir de 640px (<code>sm</code>), 4 a partir de 768px (<code>md</code>). Troque o
+      viewport na barra de ferramentas do Storybook (ícone de tablet/celular) pra ver mudar.
+    </p>
+    <scarlet-grid columns="1" columns-sm="2" columns-md="4" gap="md">
+      ${[1, 2, 3, 4, 5, 6, 7, 8].map((n) => cell(`Item ${n}`))}
+    </scarlet-grid>
+  `,
+};

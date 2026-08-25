@@ -27,10 +27,16 @@ import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/util
  * change month, Shift+PageUp/PageDown change year), Enter/Space picks the
  * focused day, Escape closes and returns focus to the toggle button.
  *
- * Known limitation: the popover closes on Escape, on picking a day, or on
- * clicking outside it — not on Tab-ing past its last focusable element. A
- * keyboard user who tabs out instead of pressing Escape will move focus
- * past the component with the panel still visually open.
+ * Known limitations:
+ * - The popover closes on Escape, on picking a day, or on clicking outside
+ *   it — not on Tab-ing past its last focusable element. A keyboard user who
+ *   tabs out instead of pressing Escape will move focus past the component
+ *   with the panel still visually open.
+ * - Like `scarlet-tooltip`, positioning is plain CSS anchored to the host —
+ *   it never flips or shifts to stay in the viewport. It's shrunk to never
+ *   exceed the viewport's own width, so it can't run off the right edge of
+ *   the *screen*, but placing the field near that edge can still overflow
+ *   past its own container.
  */
 @Component({
   tag: 'scarlet-date-picker',

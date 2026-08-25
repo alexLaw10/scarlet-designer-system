@@ -51,3 +51,17 @@ export const Column: Story = {
 export const SpaceBetween: Story = {
   args: { justify: 'between' },
 };
+
+export const Responsive: Story = {
+  name: 'Responsivo (direction por breakpoint)',
+  render: () => html`
+    <p style="margin: 0 0 12px; font-size: 14px; color: var(--scarlet-color-text-secondary, #64748b);">
+      Empilhado (<code>column</code>) abaixo de 768px, em linha (<code>row</code>) a partir de 768px (<code>md</code>) —
+      o padrão clássico de uma barra de ações ou navegação que vira lista no celular. Troque o viewport na barra de
+      ferramentas do Storybook pra ver mudar.
+    </p>
+    <div style="border: 1px dashed var(--scarlet-color-border-primary, #cbd5e1); padding: 12px;">
+      <scarlet-stack direction="column" direction-md="row" gap="md">${box('Item 1')} ${box('Item 2')} ${box('Item 3')}</scarlet-stack>
+    </div>
+  `,
+};
