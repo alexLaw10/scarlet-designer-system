@@ -53,8 +53,11 @@ describe('scarlet-breadcrumb', () => {
     page.rootInstance.items = [{ label: 'Início', href: '/' }, { label: 'Atual' }];
     await page.waitForChanges();
 
-    const navigateSpy = jest.fn((event: CustomEvent) => event.preventDefault());
-    page.root?.addEventListener('scarletNavigate', navigateSpy as EventListener);
+    // Typed as the real EventListener signature (event: Event), matching
+    // addEventListener's own expectation — CustomEvent-specific access
+    // (.detail) happens below, cast at the read site instead.
+    const navigateSpy = jest.fn((event: Event) => event.preventDefault());
+    page.root?.addEventListener('scarletNavigate', navigateSpy);
 
     const link = page.root!.shadowRoot!.querySelector('a.scarlet-breadcrumb__link') as HTMLAnchorElement;
     const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true });
@@ -62,7 +65,7 @@ describe('scarlet-breadcrumb', () => {
     link.dispatchEvent(clickEvent);
 
     expect(navigateSpy).toHaveBeenCalledTimes(1);
-    expect(navigateSpy.mock.calls[0][0].detail).toEqual({ label: 'Início', href: '/' });
+    expect((navigateSpy.mock.calls[0][0] as CustomEvent).detail).toEqual({ label: 'Início', href: '/' });
     expect(preventDefaultSpy).toHaveBeenCalled();
   });
 });

@@ -3,6 +3,12 @@ import type { Color, Size, Variant } from '@/types';
 
 /**
  * A clickable action element with solid, outline, ghost and link variants.
+ * An icon (e.g. `<scarlet-icon>`) goes in the `start`/`end` slot alongside
+ * the default slot's text — `<scarlet-button><scarlet-icon slot="start"
+ * name="check" />Salvar</scarlet-button>`. For an icon with no visible text
+ * at all, add `iconOnly` (which turns the button square instead of its
+ * usual text-driven width) and `ariaLabel` (required then — nothing else
+ * gives the button an accessible name).
  *
  * @slot - Default slot for the button label.
  * @slot start - Content placed before the label (e.g. an icon).
@@ -34,6 +40,9 @@ export class ScarletButton {
 
   /** Stretches the button to fill the width of its container. */
   @Prop() readonly fullWidth = false;
+
+  /** Makes the button square (width matches its height) instead of sized to its text — for a button whose only content is an icon. Set `ariaLabel` alongside it. */
+  @Prop() readonly iconOnly = false;
 
   /** Accessible label. Required when the button has no visible text (icon-only buttons). */
   @Prop() readonly ariaLabel?: string;
@@ -67,6 +76,7 @@ export class ScarletButton {
             [`scarlet-button--${this.color}`]: true,
             [`scarlet-button--${this.size}`]: true,
             'scarlet-button--loading': this.loading,
+            'scarlet-button--icon-only': this.iconOnly,
           }}
           type={this.type}
           disabled={isDisabled}

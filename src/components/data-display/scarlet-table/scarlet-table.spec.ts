@@ -1,5 +1,5 @@
 import { newSpecPage } from '@stencil/core/testing';
-import { ScarletTable } from './scarlet-table';
+import { ScarletTable, type ScarletTableRow, type ScarletTableColumn } from './scarlet-table';
 
 const columns = [
   { key: 'name', label: 'Nome', sortable: true },
@@ -12,7 +12,20 @@ const rows = [
   { id: 3, name: 'Bruno', age: 40 },
 ];
 
-async function setup(overrides: Partial<ScarletTable> = {}) {
+// A plain, widened shape instead of `Partial<ScarletTable>`: Stencil's
+// `@Prop() readonly loading = false;` (no explicit `: boolean`) infers the
+// literal type `false`, not `boolean`, so `Partial<ScarletTable>` would make
+// `loading` only ever accept `false` again — never the `true` these tests
+// actually need to pass.
+interface SetupOverrides {
+  rows?: ScarletTableRow[];
+  loading?: boolean;
+  selectable?: boolean;
+  clickableRows?: boolean;
+  formatCell?: (row: ScarletTableRow, column: ScarletTableColumn) => string;
+}
+
+async function setup(overrides: SetupOverrides = {}) {
   const page = await newSpecPage({
     components: [ScarletTable],
     html: `<scarlet-table></scarlet-table>`,

@@ -100,3 +100,39 @@ export const AllSizes: Story = {
     </div>
   `,
 };
+
+export const WithIcon: Story = {
+  name: 'Com ícone (início e fim)',
+  render: () => html`
+    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+      <scarlet-button variant="solid" color="primary">
+        <scarlet-icon slot="start" name="check"></scarlet-icon>
+        Salvar
+      </scarlet-button>
+      <scarlet-button variant="outline" color="primary">
+        Próximo
+        <scarlet-icon slot="end" name="arrow-right"></scarlet-icon>
+      </scarlet-button>
+    </div>
+  `,
+};
+
+export const IconOnly: Story = {
+  name: 'Somente ícone',
+  render: () => html`
+    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+      <scarlet-button variant="ghost" color="neutral" size="xs" icon-only aria-label="Fechar">
+        <scarlet-icon name="x"></scarlet-icon>
+      </scarlet-button>
+      <scarlet-button variant="ghost" color="neutral" size="sm" icon-only aria-label="Editar">
+        <scarlet-icon name="pencil"></scarlet-icon>
+      </scarlet-button>
+      <scarlet-button variant="solid" color="primary" size="md" icon-only aria-label="Adicionar">
+        <scarlet-icon name="plus"></scarlet-icon>
+      </scarlet-button>
+      <scarlet-button variant="outline" color="error" size="lg" icon-only aria-label="Excluir">
+        <scarlet-icon name="trash"></scarlet-icon>
+      </scarlet-button>
+    </div>
+  `,
+};

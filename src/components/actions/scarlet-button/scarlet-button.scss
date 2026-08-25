@@ -70,6 +70,35 @@ $scarlet-button-colors: primary, secondary, success, warning, error, info, neutr
     font-size: var(--scarlet-font-size-xl);
   }
 
+  // Overrides each size's horizontal padding with a fixed width matching
+  // that same size's own height, so the button ends up square instead of
+  // sized to (empty) text — the icon itself is already sized right via
+  // scarlet-icon's default 1em, which already tracks each size's font-size.
+  &--icon-only.scarlet-button--xs {
+    width: var(--scarlet-space-6);
+    padding: 0;
+  }
+
+  &--icon-only.scarlet-button--sm {
+    width: var(--scarlet-space-8);
+    padding: 0;
+  }
+
+  &--icon-only.scarlet-button--md {
+    width: var(--scarlet-space-10);
+    padding: 0;
+  }
+
+  &--icon-only.scarlet-button--lg {
+    width: var(--scarlet-space-12);
+    padding: 0;
+  }
+
+  &--icon-only.scarlet-button--xl {
+    width: var(--scarlet-space-14);
+    padding: 0;
+  }
+
   @each $color in $scarlet-button-colors {
     &--solid.scarlet-button--#{$color} {
       background-color: var(--scarlet-color-#{$color}-500);

@@ -69,14 +69,25 @@
         '</g></g></svg>';
       document.body.appendChild(splash);
 
+      // Keeps the splash on screen for at least MIN_VISIBLE_MS regardless of
+      // how fast Storybook actually mounts — without this, the observer
+      // below can fire almost immediately on a fast machine/warm cache, and
+      // the logo barely flashes before disappearing.
+      var MIN_VISIBLE_MS = 2000;
+      var startedAt = Date.now();
       var hidden = false;
+
       function hide() {
         if (hidden) return;
         hidden = true;
-        splash.classList.add('scarllet-splash--hidden');
+        var elapsed = Date.now() - startedAt;
+        var remaining = Math.max(0, MIN_VISIBLE_MS - elapsed);
         setTimeout(function () {
-          splash.remove();
-        }, 500);
+          splash.classList.add('scarllet-splash--hidden');
+          setTimeout(function () {
+            splash.remove();
+          }, 500);
+        }, remaining);
       }
 
       var observer = new MutationObserver(function () {
@@ -92,7 +103,7 @@
       // Safety net: never leave the splash on screen indefinitely even if
       // the observer's assumption above stops holding in some future
       // Storybook version.
-      setTimeout(hide, 6000);
+      setTimeout(hide, 8000);
     }
 
     if (document.readyState === 'loading') {

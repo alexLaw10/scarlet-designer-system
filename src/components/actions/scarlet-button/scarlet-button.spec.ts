@@ -92,4 +92,22 @@ describe('scarlet-button', () => {
     expect(button.classList.contains('scarlet-button--error')).toBe(true);
     expect(button.classList.contains('scarlet-button--lg')).toBe(true);
   });
+
+  it('applies the icon-only modifier class, and renders the start/end icon slots regardless', async () => {
+    const page = await newSpecPage({
+      components: [ScarletButton],
+      html: `
+        <scarlet-button icon-only aria-label="Fechar">
+          <scarlet-icon slot="start" name="x"></scarlet-icon>
+        </scarlet-button>
+      `,
+    });
+
+    const button = page.root?.shadowRoot?.querySelector('button') as HTMLButtonElement;
+    expect(button.classList.contains('scarlet-button--icon-only')).toBe(true);
+    expect(button.getAttribute('aria-label')).toBe('Fechar');
+
+    const slot = page.root?.shadowRoot?.querySelector('slot[name="start"]');
+    expect(slot).not.toBeNull();
+  });
 });
