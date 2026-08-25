@@ -146,8 +146,8 @@ export class ScarletPopover {
             class={{ 'scarlet-popover__content': true, [`scarlet-popover__content--${this.placement}`]: true }}
             role="dialog"
             aria-label={this.ariaLabel}
-            onMouseenter={this.triggerMode === 'hover' ? this.handleTriggerEnter : undefined}
-            onMouseleave={this.triggerMode === 'hover' ? this.handleTriggerLeave : undefined}
+            onMouseEnter={this.triggerMode === 'hover' ? this.handleTriggerEnter : undefined}
+            onMouseLeave={this.triggerMode === 'hover' ? this.handleTriggerLeave : undefined}
           >
             <slot />
           </div>

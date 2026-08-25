@@ -15,22 +15,30 @@ import { ScarletCardVariant } from "./components/data-display/scarlet-card/scarl
 import { ScarletChipVariant } from "./components/data-display/scarlet-chip/scarlet-chip";
 import { ScarletComboboxOption } from "./components/form/scarlet-combobox/scarlet-combobox";
 import { ScarletContainerMaxWidth } from "./components/layout/scarlet-container/scarlet-container";
+import { ScarletDateRangeChange } from "./components/form-masked/scarlet-date-range-picker/scarlet-date-range-picker";
 import { ScarletDividerOrientation } from "./components/data-display/scarlet-divider/scarlet-divider";
 import { ScarletDrawerPlacement, ScarletDrawerSize } from "./components/feedback/scarlet-drawer/scarlet-drawer";
-import { ScarletHeadingLevel, ScarletHeadingVariant } from "./components/foundation/scarlet-heading/scarlet-heading";
 import { ScarletIconName } from "./components/foundation/scarlet-icon/icons";
+import { ScarletHeadingLevel, ScarletHeadingVariant } from "./components/foundation/scarlet-heading/scarlet-heading";
+import { ScarletIconName as ScarletIconName1 } from "./components/foundation/scarlet-icon/icons";
 import { ScarletInputType } from "./components/form/scarlet-input/scarlet-input";
 import { CreditCardBrand } from "./utils/validators";
 import { ScarletDocumentType } from "./components/form-masked/scarlet-input-document/scarlet-input-document";
 import { ScarletLicensePlateFormat } from "./components/form-masked/scarlet-input-license-plate/scarlet-input-license-plate";
+import { ScarletLinkUnderline } from "./components/foundation/scarlet-link/scarlet-link";
 import { ScarletMenuItem } from "./components/navigation/scarlet-menu/scarlet-menu";
 import { ScarletModalSize } from "./components/feedback/scarlet-modal/scarlet-modal";
+import { ScarletPopoverPlacement, ScarletPopoverTriggerMode } from "./components/feedback/scarlet-popover/scarlet-popover";
+import { ScarletProgressSize } from "./components/feedback/scarlet-progress/scarlet-progress";
 import { ScarletSelectOption } from "./components/form/scarlet-select/scarlet-select";
 import { ScarletSkeletonVariant } from "./components/feedback/scarlet-skeleton/scarlet-skeleton";
+import { ScarletSpinnerSize, ScarletSpinnerVariant } from "./components/feedback/scarlet-spinner/scarlet-spinner";
+import { ScarletStatTrend } from "./components/data-display/scarlet-stat/scarlet-stat";
 import { ScarletTableColumn, ScarletTableRow, ScarletTableSortChange } from "./components/data-display/scarlet-table/scarlet-table";
 import { ScarletTabItem } from "./components/navigation/scarlet-tabs/scarlet-tabs";
 import { ScarletTextAs, ScarletTextVariant, ScarletTextWeight } from "./components/foundation/scarlet-text/scarlet-text";
 import { ScarletTextareaResize } from "./components/form/scarlet-textarea/scarlet-textarea";
+import { ScarletTimelineItem } from "./components/data-display/scarlet-timeline/scarlet-timeline";
 import { ScarletToastPosition } from "./components/feedback/scarlet-toast/scarlet-toast";
 import { ScarletTooltipPlacement } from "./components/feedback/scarlet-tooltip/scarlet-tooltip";
 export { ScarletAccordionItem } from "./components/navigation/scarlet-accordion/scarlet-accordion";
@@ -43,22 +51,30 @@ export { ScarletCardVariant } from "./components/data-display/scarlet-card/scarl
 export { ScarletChipVariant } from "./components/data-display/scarlet-chip/scarlet-chip";
 export { ScarletComboboxOption } from "./components/form/scarlet-combobox/scarlet-combobox";
 export { ScarletContainerMaxWidth } from "./components/layout/scarlet-container/scarlet-container";
+export { ScarletDateRangeChange } from "./components/form-masked/scarlet-date-range-picker/scarlet-date-range-picker";
 export { ScarletDividerOrientation } from "./components/data-display/scarlet-divider/scarlet-divider";
 export { ScarletDrawerPlacement, ScarletDrawerSize } from "./components/feedback/scarlet-drawer/scarlet-drawer";
-export { ScarletHeadingLevel, ScarletHeadingVariant } from "./components/foundation/scarlet-heading/scarlet-heading";
 export { ScarletIconName } from "./components/foundation/scarlet-icon/icons";
+export { ScarletHeadingLevel, ScarletHeadingVariant } from "./components/foundation/scarlet-heading/scarlet-heading";
+export { ScarletIconName as ScarletIconName1 } from "./components/foundation/scarlet-icon/icons";
 export { ScarletInputType } from "./components/form/scarlet-input/scarlet-input";
 export { CreditCardBrand } from "./utils/validators";
 export { ScarletDocumentType } from "./components/form-masked/scarlet-input-document/scarlet-input-document";
 export { ScarletLicensePlateFormat } from "./components/form-masked/scarlet-input-license-plate/scarlet-input-license-plate";
+export { ScarletLinkUnderline } from "./components/foundation/scarlet-link/scarlet-link";
 export { ScarletMenuItem } from "./components/navigation/scarlet-menu/scarlet-menu";
 export { ScarletModalSize } from "./components/feedback/scarlet-modal/scarlet-modal";
+export { ScarletPopoverPlacement, ScarletPopoverTriggerMode } from "./components/feedback/scarlet-popover/scarlet-popover";
+export { ScarletProgressSize } from "./components/feedback/scarlet-progress/scarlet-progress";
 export { ScarletSelectOption } from "./components/form/scarlet-select/scarlet-select";
 export { ScarletSkeletonVariant } from "./components/feedback/scarlet-skeleton/scarlet-skeleton";
+export { ScarletSpinnerSize, ScarletSpinnerVariant } from "./components/feedback/scarlet-spinner/scarlet-spinner";
+export { ScarletStatTrend } from "./components/data-display/scarlet-stat/scarlet-stat";
 export { ScarletTableColumn, ScarletTableRow, ScarletTableSortChange } from "./components/data-display/scarlet-table/scarlet-table";
 export { ScarletTabItem } from "./components/navigation/scarlet-tabs/scarlet-tabs";
 export { ScarletTextAs, ScarletTextVariant, ScarletTextWeight } from "./components/foundation/scarlet-text/scarlet-text";
 export { ScarletTextareaResize } from "./components/form/scarlet-textarea/scarlet-textarea";
+export { ScarletTimelineItem } from "./components/data-display/scarlet-timeline/scarlet-timeline";
 export { ScarletToastPosition } from "./components/feedback/scarlet-toast/scarlet-toast";
 export { ScarletTooltipPlacement } from "./components/feedback/scarlet-tooltip/scarlet-tooltip";
 export namespace Components {
@@ -564,6 +580,91 @@ export namespace Components {
         "value": string;
     }
     /**
+     * Two `DD/MM/AAAA` fields (start/end) sharing one calendar popover for
+     * picking both ends of a range — built the same way `scarlet-date-picker`
+     * is (same masking/validation per field, same popover mechanics), doubled.
+     * See that component's own doc comment for the shared known limitations
+     * (no Tab-out auto-close, no viewport flip).
+     * Picking works the classic two-click way: the first day clicked becomes
+     * the start (clearing any previous end); the second becomes the end and
+     * closes the popover — unless it's *before* the start, in which case it
+     * becomes the new start instead and the popover stays open for the end.
+     */
+    interface ScarletDateRangePicker {
+        /**
+          * Disables both fields and the calendar toggle.
+          * @default false
+         */
+        "disabled": false;
+        /**
+          * Placeholder for the end field.
+          * @default 'Data final'
+         */
+        "endPlaceholder": "Data final";
+        /**
+          * End of the range, as `DD/MM/AAAA`.
+          * @default ''
+         */
+        "endValue": string;
+        /**
+          * Error message rendered below the fields.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the fields. Hidden while an error is shown.
+         */
+        "helperText"?: string;
+        /**
+          * Closes the calendar popover.
+         */
+        "hide": () => Promise<void>;
+        /**
+          * Marks the fields as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid": false;
+        /**
+          * Visible label rendered above both fields.
+         */
+        "label"?: string;
+        /**
+          * Latest selectable date, as `DD/MM/AAAA`.
+         */
+        "max"?: string;
+        /**
+          * Earliest selectable date, as `DD/MM/AAAA`.
+         */
+        "min"?: string;
+        /**
+          * Marks the fields as required in a parent form.
+          * @default false
+         */
+        "required": false;
+        /**
+          * Focuses the start field.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Opens the calendar popover.
+         */
+        "show": () => Promise<void>;
+        /**
+          * Size of the fields.
+          * @default 'md'
+         */
+        "size": Size;
+        /**
+          * Placeholder for the start field.
+          * @default 'Data inicial'
+         */
+        "startPlaceholder": "Data inicial";
+        /**
+          * Start of the range, as `DD/MM/AAAA`.
+          * @default ''
+         */
+        "startValue": string;
+    }
+    /**
      * A visual separator between sections of content, with an optional centered label.
      */
     interface ScarletDivider {
@@ -625,6 +726,26 @@ export namespace Components {
           * @default 'md'
          */
         "size": ScarletDrawerSize;
+    }
+    /**
+     * A placeholder for a list, search result, or section with nothing to
+     * show — an icon, a heading, an optional description, and an optional
+     * action (e.g. "Limpar filtros" or "Criar o primeiro item").
+     */
+    interface ScarletEmptyState {
+        /**
+          * Supporting text below the heading.
+         */
+        "description"?: string;
+        /**
+          * Main heading.
+          * @default 'Nenhum resultado encontrado.'
+         */
+        "heading": "Nenhum resultado encontrado.";
+        /**
+          * Icon shown above the heading. Ignored if the `icon` slot has content.
+         */
+        "icon"?: ScarletIconName;
     }
     /**
      * A drag-and-drop file picker, backed by a real (visually hidden) native
@@ -773,7 +894,7 @@ export namespace Components {
         /**
           * Name of the built-in icon to render.
          */
-        "name"?: ScarletIconName;
+        "name"?: ScarletIconName1;
         /**
           * Size of the icon, as any valid CSS length. Defaults to `1em`, so it scales with the surrounding font size.
          */
@@ -1390,6 +1511,42 @@ export namespace Components {
         "value": string;
     }
     /**
+     * A styled inline text link — for a link inside a sentence/paragraph.
+     * `scarlet-button variant="link"` is the button-semantics equivalent (an
+     * action styled like a link); this is the reverse, a real `<a>` styled like
+     * one. `target="_blank"` automatically gets `rel="noopener noreferrer"`
+     * (unless `rel` is set explicitly) and a small external-link icon.
+     */
+    interface ScarletLink {
+        /**
+          * Semantic color of the link.
+          * @default 'primary'
+         */
+        "color": Color;
+        /**
+          * Renders as inert text — no `href`, `aria-disabled`.
+          * @default false
+         */
+        "disabled": false;
+        /**
+          * Native `href`. Omitting it (and setting `disabled`) renders inert text styled like a link.
+         */
+        "href"?: string;
+        /**
+          * Native `rel`. Defaults to `noopener noreferrer` when `target="_blank"`.
+         */
+        "rel"?: string;
+        /**
+          * Native `target`, e.g. `_blank`.
+         */
+        "target"?: string;
+        /**
+          * When the underline shows.
+          * @default 'hover'
+         */
+        "underline": ScarletLinkUnderline;
+    }
+    /**
      * A dropdown menu of actions opened from an arbitrary trigger element (the
      * `trigger` slot — typically an icon button like "⋮"), following the
      * WAI-ARIA menu button pattern: the trigger gets `aria-haspopup="menu"`/
@@ -1462,6 +1619,72 @@ export namespace Components {
         "size": ScarletModalSize;
     }
     /**
+     * A numeric input with decrement/increment buttons — for a quantity field,
+     * not a general-purpose text field that happens to hold numbers (that's
+     * `scarlet-input type="number"`). Stays within `min`/`max` on every path:
+     * the buttons, typing, and blur all clamp.
+     */
+    interface ScarletNumberInput {
+        /**
+          * Disables the field and both buttons.
+          * @default false
+         */
+        "disabled": false;
+        /**
+          * Error message rendered below the field. Implies the invalid state.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the field. Hidden while an error is shown.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the field as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid": false;
+        /**
+          * Visible label rendered above the field.
+         */
+        "label"?: string;
+        /**
+          * Upper bound. Omit for no maximum.
+         */
+        "max"?: number;
+        /**
+          * Lower bound. Omit for no minimum.
+         */
+        "min"?: number;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Marks the field as required in a parent form.
+          * @default false
+         */
+        "required": false;
+        /**
+          * Focuses the internal input element.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Size of the field.
+          * @default 'md'
+         */
+        "size": Size;
+        /**
+          * Amount each +/- click changes the value by.
+          * @default 1
+         */
+        "step": 1;
+        /**
+          * Current value.
+          * @default 0
+         */
+        "value": number;
+    }
+    /**
      * Page number navigation, following the WAI-ARIA pattern of a `<nav>`
      * landmark wrapping a list of buttons — the current page is a real button
      * (not a link, since this component doesn't own routing) marked
@@ -1490,6 +1713,75 @@ export namespace Components {
           * @default 1
          */
         "totalPages": 1;
+    }
+    /**
+     * A generic overlay anchored to a trigger element (the `trigger` slot),
+     * with arbitrary content in the default slot — the shared primitive
+     * `scarlet-menu`/`scarlet-date-picker`/`scarlet-combobox` each built their
+     * own narrower version of for their specific popovers. Use this one
+     * directly for anything that doesn't need a menu list or a calendar grid:
+     * a rich tooltip, a filter panel, a confirmation prompt.
+     * `trigger="click"` (the default) toggles on click, closes on Escape or a
+     * click outside, and sets `aria-haspopup`/`aria-expanded` on whatever's
+     * slotted as the trigger. `trigger="hover"` opens/closes on mouse enter/
+     * leave instead, with no click/Escape handling — matching how a hover
+     * tooltip behaves, not a dialog.
+     * Known limitation: like `scarlet-tooltip`/`scarlet-menu`, positioning is
+     * plain CSS anchored to the trigger — it doesn't flip or reposition to stay
+     * in the viewport.
+     */
+    interface ScarletPopover {
+        /**
+          * Accessible label for the popover content region.
+         */
+        "ariaLabel"?: string;
+        /**
+          * Which side of the trigger the popover opens on.
+          * @default 'bottom'
+         */
+        "placement": ScarletPopoverPlacement;
+        /**
+          * What interaction opens/closes the popover.
+          * @default 'click'
+         */
+        "triggerMode": ScarletPopoverTriggerMode;
+    }
+    /**
+     * A determinate progress bar (0–100%) — for a file upload, a multi-step
+     * form, anything with a real, known completion percentage. For an
+     * indeterminate "something's happening" state, use `scarlet-spinner`.
+     */
+    interface ScarletProgress {
+        /**
+          * Accessible label for the `progressbar` role.
+          * @default 'Progresso'
+         */
+        "ariaLabel": "Progresso";
+        /**
+          * Semantic color of the filled portion.
+          * @default 'primary'
+         */
+        "color": Color;
+        /**
+          * Value that represents 100%.
+          * @default 100
+         */
+        "max": 100;
+        /**
+          * Shows the percentage as text next to the track.
+          * @default false
+         */
+        "showLabel": false;
+        /**
+          * Height of the track.
+          * @default 'md'
+         */
+        "size": ScarletProgressSize;
+        /**
+          * Current value.
+          * @default 0
+         */
+        "value": 0;
     }
     /**
      * A single radio option. Use inside a `<scarlet-radio-group>` for mutually
@@ -1642,6 +1934,30 @@ export namespace Components {
         "width"?: string;
     }
     /**
+     * A loading indicator — `variant="circle"` for the generic spinner (the
+     * same shape `scarlet-button`'s own `loading` state uses), `variant="logo"`
+     * for the Scarlet mark itself pulsing, e.g. for a full-page loading state.
+     * `role="status"` with `label` as its accessible name, so assistive tech
+     * announces the loading state without needing separate visible text.
+     */
+    interface ScarletSpinner {
+        /**
+          * Accessible label, announced by assistive tech via `role="status"`.
+          * @default 'Carregando'
+         */
+        "label": "Carregando";
+        /**
+          * Size of the indicator.
+          * @default 'md'
+         */
+        "size": ScarletSpinnerSize;
+        /**
+          * Which loading indicator to show.
+          * @default 'circle'
+         */
+        "variant": ScarletSpinnerVariant;
+    }
+    /**
      * A flexbox layout primitive for stacking or rowing children with
      * consistent, token-based spacing.
      * `direction` can change per breakpoint via `directionSm`/`directionMd`/
@@ -1693,6 +2009,31 @@ export namespace Components {
           * @default 'nowrap'
          */
         "wrap": Wrap;
+    }
+    /**
+     * A single labeled metric — a number/value, its label, and an optional
+     * change indicator (e.g. "+12%" with an up/down arrow) for a dashboard.
+     */
+    interface ScarletStat {
+        /**
+          * Change text, e.g. "+12% vs. mês anterior". Omit to hide the whole change row.
+         */
+        "change"?: string;
+        /**
+          * Label above the value, e.g. "Receita total".
+          * @default ''
+         */
+        "label": "";
+        /**
+          * Direction the change indicates — colors and arrows the change text accordingly.
+          * @default 'neutral'
+         */
+        "trend": ScarletStatTrend;
+        /**
+          * The metric itself, e.g. "R$ 42.900".
+          * @default ''
+         */
+        "value": "";
     }
     /**
      * A toggle switch for binary on/off settings.
@@ -1924,6 +2265,17 @@ export namespace Components {
         "value": string;
     }
     /**
+     * A vertical sequence of events — an order's status history, an activity
+     * feed, a step-by-step audit trail.
+     */
+    interface ScarletTimeline {
+        /**
+          * The events, in order from first to last.
+          * @default []
+         */
+        "items": ScarletTimelineItem[];
+    }
+    /**
      * A self-dismissing status message, fixed to a corner of the viewport.
      * For multiple simultaneous toasts, render several instances inside a
      * consumer-owned stacking container (this component does not manage a queue).
@@ -1954,6 +2306,23 @@ export namespace Components {
           * @default 'info'
          */
         "status": ScarletAlertStatus;
+    }
+    /**
+     * A horizontal bar for grouping related actions (buttons, a search field,
+     * an icon menu) — `role="toolbar"` with token-based gap, distinct from
+     * `scarlet-stack` in intent (actions, not arbitrary layout) even though
+     * the underlying flex mechanics are similar.
+     */
+    interface ScarletToolbar {
+        /**
+          * Accessible label for the `toolbar` role — required whenever there's more than one toolbar on the page.
+         */
+        "ariaLabel"?: string;
+        /**
+          * Main-axis distribution of items.
+          * @default 'start'
+         */
+        "justify": JustifyContent;
     }
     /**
      * A text hint shown next to its trigger on hover/focus. Positioning is
@@ -2022,6 +2391,10 @@ export interface ScarletDatePickerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLScarletDatePickerElement;
 }
+export interface ScarletDateRangePickerCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLScarletDateRangePickerElement;
+}
 export interface ScarletDrawerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLScarletDrawerElement;
@@ -2074,9 +2447,17 @@ export interface ScarletModalCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLScarletModalElement;
 }
+export interface ScarletNumberInputCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLScarletNumberInputElement;
+}
 export interface ScarletPaginationCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLScarletPaginationElement;
+}
+export interface ScarletPopoverCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLScarletPopoverElement;
 }
 export interface ScarletRadioCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -2408,6 +2789,36 @@ declare global {
         prototype: HTMLScarletDatePickerElement;
         new (): HTMLScarletDatePickerElement;
     };
+    interface HTMLScarletDateRangePickerElementEventMap {
+        "scarletChange": ScarletDateRangeChange;
+        "scarletShow": void;
+        "scarletHide": void;
+    }
+    /**
+     * Two `DD/MM/AAAA` fields (start/end) sharing one calendar popover for
+     * picking both ends of a range — built the same way `scarlet-date-picker`
+     * is (same masking/validation per field, same popover mechanics), doubled.
+     * See that component's own doc comment for the shared known limitations
+     * (no Tab-out auto-close, no viewport flip).
+     * Picking works the classic two-click way: the first day clicked becomes
+     * the start (clearing any previous end); the second becomes the end and
+     * closes the popover — unless it's *before* the start, in which case it
+     * becomes the new start instead and the popover stays open for the end.
+     */
+    interface HTMLScarletDateRangePickerElement extends Components.ScarletDateRangePicker, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLScarletDateRangePickerElementEventMap>(type: K, listener: (this: HTMLScarletDateRangePickerElement, ev: ScarletDateRangePickerCustomEvent<HTMLScarletDateRangePickerElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLScarletDateRangePickerElementEventMap>(type: K, listener: (this: HTMLScarletDateRangePickerElement, ev: ScarletDateRangePickerCustomEvent<HTMLScarletDateRangePickerElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLScarletDateRangePickerElement: {
+        prototype: HTMLScarletDateRangePickerElement;
+        new (): HTMLScarletDateRangePickerElement;
+    };
     /**
      * A visual separator between sections of content, with an optional centered label.
      */
@@ -2444,6 +2855,17 @@ declare global {
     var HTMLScarletDrawerElement: {
         prototype: HTMLScarletDrawerElement;
         new (): HTMLScarletDrawerElement;
+    };
+    /**
+     * A placeholder for a list, search result, or section with nothing to
+     * show — an icon, a heading, an optional description, and an optional
+     * action (e.g. "Limpar filtros" or "Criar o primeiro item").
+     */
+    interface HTMLScarletEmptyStateElement extends Components.ScarletEmptyState, HTMLStencilElement {
+    }
+    var HTMLScarletEmptyStateElement: {
+        prototype: HTMLScarletEmptyStateElement;
+        new (): HTMLScarletEmptyStateElement;
     };
     interface HTMLScarletFileUploadElementEventMap {
         "scarletChange": File[];
@@ -2748,6 +3170,19 @@ declare global {
         prototype: HTMLScarletInputPhoneElement;
         new (): HTMLScarletInputPhoneElement;
     };
+    /**
+     * A styled inline text link — for a link inside a sentence/paragraph.
+     * `scarlet-button variant="link"` is the button-semantics equivalent (an
+     * action styled like a link); this is the reverse, a real `<a>` styled like
+     * one. `target="_blank"` automatically gets `rel="noopener noreferrer"`
+     * (unless `rel` is set explicitly) and a small external-link icon.
+     */
+    interface HTMLScarletLinkElement extends Components.ScarletLink, HTMLStencilElement {
+    }
+    var HTMLScarletLinkElement: {
+        prototype: HTMLScarletLinkElement;
+        new (): HTMLScarletLinkElement;
+    };
     interface HTMLScarletMenuElementEventMap {
         "scarletSelect": ScarletMenuItem;
         "scarletShow": void;
@@ -2806,6 +3241,30 @@ declare global {
         prototype: HTMLScarletModalElement;
         new (): HTMLScarletModalElement;
     };
+    interface HTMLScarletNumberInputElementEventMap {
+        "scarletInput": number;
+        "scarletChange": number;
+    }
+    /**
+     * A numeric input with decrement/increment buttons — for a quantity field,
+     * not a general-purpose text field that happens to hold numbers (that's
+     * `scarlet-input type="number"`). Stays within `min`/`max` on every path:
+     * the buttons, typing, and blur all clamp.
+     */
+    interface HTMLScarletNumberInputElement extends Components.ScarletNumberInput, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLScarletNumberInputElementEventMap>(type: K, listener: (this: HTMLScarletNumberInputElement, ev: ScarletNumberInputCustomEvent<HTMLScarletNumberInputElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLScarletNumberInputElementEventMap>(type: K, listener: (this: HTMLScarletNumberInputElement, ev: ScarletNumberInputCustomEvent<HTMLScarletNumberInputElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLScarletNumberInputElement: {
+        prototype: HTMLScarletNumberInputElement;
+        new (): HTMLScarletNumberInputElement;
+    };
     interface HTMLScarletPaginationElementEventMap {
         "scarletChange": number;
     }
@@ -2830,6 +3289,51 @@ declare global {
     var HTMLScarletPaginationElement: {
         prototype: HTMLScarletPaginationElement;
         new (): HTMLScarletPaginationElement;
+    };
+    interface HTMLScarletPopoverElementEventMap {
+        "scarletShow": void;
+        "scarletHide": void;
+    }
+    /**
+     * A generic overlay anchored to a trigger element (the `trigger` slot),
+     * with arbitrary content in the default slot — the shared primitive
+     * `scarlet-menu`/`scarlet-date-picker`/`scarlet-combobox` each built their
+     * own narrower version of for their specific popovers. Use this one
+     * directly for anything that doesn't need a menu list or a calendar grid:
+     * a rich tooltip, a filter panel, a confirmation prompt.
+     * `trigger="click"` (the default) toggles on click, closes on Escape or a
+     * click outside, and sets `aria-haspopup`/`aria-expanded` on whatever's
+     * slotted as the trigger. `trigger="hover"` opens/closes on mouse enter/
+     * leave instead, with no click/Escape handling — matching how a hover
+     * tooltip behaves, not a dialog.
+     * Known limitation: like `scarlet-tooltip`/`scarlet-menu`, positioning is
+     * plain CSS anchored to the trigger — it doesn't flip or reposition to stay
+     * in the viewport.
+     */
+    interface HTMLScarletPopoverElement extends Components.ScarletPopover, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLScarletPopoverElementEventMap>(type: K, listener: (this: HTMLScarletPopoverElement, ev: ScarletPopoverCustomEvent<HTMLScarletPopoverElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLScarletPopoverElementEventMap>(type: K, listener: (this: HTMLScarletPopoverElement, ev: ScarletPopoverCustomEvent<HTMLScarletPopoverElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLScarletPopoverElement: {
+        prototype: HTMLScarletPopoverElement;
+        new (): HTMLScarletPopoverElement;
+    };
+    /**
+     * A determinate progress bar (0–100%) — for a file upload, a multi-step
+     * form, anything with a real, known completion percentage. For an
+     * indeterminate "something's happening" state, use `scarlet-spinner`.
+     */
+    interface HTMLScarletProgressElement extends Components.ScarletProgress, HTMLStencilElement {
+    }
+    var HTMLScarletProgressElement: {
+        prototype: HTMLScarletProgressElement;
+        new (): HTMLScarletProgressElement;
     };
     interface HTMLScarletRadioElementEventMap {
         "scarletChange": boolean;
@@ -2913,6 +3417,19 @@ declare global {
         new (): HTMLScarletSkeletonElement;
     };
     /**
+     * A loading indicator — `variant="circle"` for the generic spinner (the
+     * same shape `scarlet-button`'s own `loading` state uses), `variant="logo"`
+     * for the Scarlet mark itself pulsing, e.g. for a full-page loading state.
+     * `role="status"` with `label` as its accessible name, so assistive tech
+     * announces the loading state without needing separate visible text.
+     */
+    interface HTMLScarletSpinnerElement extends Components.ScarletSpinner, HTMLStencilElement {
+    }
+    var HTMLScarletSpinnerElement: {
+        prototype: HTMLScarletSpinnerElement;
+        new (): HTMLScarletSpinnerElement;
+    };
+    /**
      * A flexbox layout primitive for stacking or rowing children with
      * consistent, token-based spacing.
      * `direction` can change per breakpoint via `directionSm`/`directionMd`/
@@ -2927,6 +3444,16 @@ declare global {
     var HTMLScarletStackElement: {
         prototype: HTMLScarletStackElement;
         new (): HTMLScarletStackElement;
+    };
+    /**
+     * A single labeled metric — a number/value, its label, and an optional
+     * change indicator (e.g. "+12%" with an up/down arrow) for a dashboard.
+     */
+    interface HTMLScarletStatElement extends Components.ScarletStat, HTMLStencilElement {
+    }
+    var HTMLScarletStatElement: {
+        prototype: HTMLScarletStatElement;
+        new (): HTMLScarletStatElement;
     };
     interface HTMLScarletSwitchElementEventMap {
         "scarletChange": boolean;
@@ -3040,6 +3567,16 @@ declare global {
         prototype: HTMLScarletTextareaElement;
         new (): HTMLScarletTextareaElement;
     };
+    /**
+     * A vertical sequence of events — an order's status history, an activity
+     * feed, a step-by-step audit trail.
+     */
+    interface HTMLScarletTimelineElement extends Components.ScarletTimeline, HTMLStencilElement {
+    }
+    var HTMLScarletTimelineElement: {
+        prototype: HTMLScarletTimelineElement;
+        new (): HTMLScarletTimelineElement;
+    };
     interface HTMLScarletToastElementEventMap {
         "scarletDismiss": void;
     }
@@ -3061,6 +3598,18 @@ declare global {
     var HTMLScarletToastElement: {
         prototype: HTMLScarletToastElement;
         new (): HTMLScarletToastElement;
+    };
+    /**
+     * A horizontal bar for grouping related actions (buttons, a search field,
+     * an icon menu) — `role="toolbar"` with token-based gap, distinct from
+     * `scarlet-stack` in intent (actions, not arbitrary layout) even though
+     * the underlying flex mechanics are similar.
+     */
+    interface HTMLScarletToolbarElement extends Components.ScarletToolbar, HTMLStencilElement {
+    }
+    var HTMLScarletToolbarElement: {
+        prototype: HTMLScarletToolbarElement;
+        new (): HTMLScarletToolbarElement;
     };
     interface HTMLScarletTooltipElementEventMap {
         "scarletShow": void;
@@ -3100,8 +3649,10 @@ declare global {
         "scarlet-combobox": HTMLScarletComboboxElement;
         "scarlet-container": HTMLScarletContainerElement;
         "scarlet-date-picker": HTMLScarletDatePickerElement;
+        "scarlet-date-range-picker": HTMLScarletDateRangePickerElement;
         "scarlet-divider": HTMLScarletDividerElement;
         "scarlet-drawer": HTMLScarletDrawerElement;
+        "scarlet-empty-state": HTMLScarletEmptyStateElement;
         "scarlet-file-upload": HTMLScarletFileUploadElement;
         "scarlet-grid": HTMLScarletGridElement;
         "scarlet-grid-item": HTMLScarletGridItemElement;
@@ -3116,20 +3667,28 @@ declare global {
         "scarlet-input-license-plate": HTMLScarletInputLicensePlateElement;
         "scarlet-input-percentage": HTMLScarletInputPercentageElement;
         "scarlet-input-phone": HTMLScarletInputPhoneElement;
+        "scarlet-link": HTMLScarletLinkElement;
         "scarlet-menu": HTMLScarletMenuElement;
         "scarlet-modal": HTMLScarletModalElement;
+        "scarlet-number-input": HTMLScarletNumberInputElement;
         "scarlet-pagination": HTMLScarletPaginationElement;
+        "scarlet-popover": HTMLScarletPopoverElement;
+        "scarlet-progress": HTMLScarletProgressElement;
         "scarlet-radio": HTMLScarletRadioElement;
         "scarlet-radio-group": HTMLScarletRadioGroupElement;
         "scarlet-select": HTMLScarletSelectElement;
         "scarlet-skeleton": HTMLScarletSkeletonElement;
+        "scarlet-spinner": HTMLScarletSpinnerElement;
         "scarlet-stack": HTMLScarletStackElement;
+        "scarlet-stat": HTMLScarletStatElement;
         "scarlet-switch": HTMLScarletSwitchElement;
         "scarlet-table": HTMLScarletTableElement;
         "scarlet-tabs": HTMLScarletTabsElement;
         "scarlet-text": HTMLScarletTextElement;
         "scarlet-textarea": HTMLScarletTextareaElement;
+        "scarlet-timeline": HTMLScarletTimelineElement;
         "scarlet-toast": HTMLScarletToastElement;
+        "scarlet-toolbar": HTMLScarletToolbarElement;
         "scarlet-tooltip": HTMLScarletTooltipElement;
     }
 }
@@ -3692,6 +4251,91 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     /**
+     * Two `DD/MM/AAAA` fields (start/end) sharing one calendar popover for
+     * picking both ends of a range — built the same way `scarlet-date-picker`
+     * is (same masking/validation per field, same popover mechanics), doubled.
+     * See that component's own doc comment for the shared known limitations
+     * (no Tab-out auto-close, no viewport flip).
+     * Picking works the classic two-click way: the first day clicked becomes
+     * the start (clearing any previous end); the second becomes the end and
+     * closes the popover — unless it's *before* the start, in which case it
+     * becomes the new start instead and the popover stays open for the end.
+     */
+    interface ScarletDateRangePicker {
+        /**
+          * Disables both fields and the calendar toggle.
+          * @default false
+         */
+        "disabled"?: false;
+        /**
+          * Placeholder for the end field.
+          * @default 'Data final'
+         */
+        "endPlaceholder"?: "Data final";
+        /**
+          * End of the range, as `DD/MM/AAAA`.
+          * @default ''
+         */
+        "endValue"?: string;
+        /**
+          * Error message rendered below the fields.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the fields. Hidden while an error is shown.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the fields as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid"?: false;
+        /**
+          * Visible label rendered above both fields.
+         */
+        "label"?: string;
+        /**
+          * Latest selectable date, as `DD/MM/AAAA`.
+         */
+        "max"?: string;
+        /**
+          * Earliest selectable date, as `DD/MM/AAAA`.
+         */
+        "min"?: string;
+        /**
+          * Emitted whenever either bound changes — a keystroke, a day pick, or a blur-triggered mask correction.
+         */
+        "onScarletChange"?: (event: ScarletDateRangePickerCustomEvent<ScarletDateRangeChange>) => void;
+        /**
+          * Emitted after the popover closes.
+         */
+        "onScarletHide"?: (event: ScarletDateRangePickerCustomEvent<void>) => void;
+        /**
+          * Emitted after the popover opens.
+         */
+        "onScarletShow"?: (event: ScarletDateRangePickerCustomEvent<void>) => void;
+        /**
+          * Marks the fields as required in a parent form.
+          * @default false
+         */
+        "required"?: false;
+        /**
+          * Size of the fields.
+          * @default 'md'
+         */
+        "size"?: Size;
+        /**
+          * Placeholder for the start field.
+          * @default 'Data inicial'
+         */
+        "startPlaceholder"?: "Data inicial";
+        /**
+          * Start of the range, as `DD/MM/AAAA`.
+          * @default ''
+         */
+        "startValue"?: string;
+    }
+    /**
      * A visual separator between sections of content, with an optional centered label.
      */
     interface ScarletDivider {
@@ -3753,6 +4397,26 @@ declare namespace LocalJSX {
           * @default 'md'
          */
         "size"?: ScarletDrawerSize;
+    }
+    /**
+     * A placeholder for a list, search result, or section with nothing to
+     * show — an icon, a heading, an optional description, and an optional
+     * action (e.g. "Limpar filtros" or "Criar o primeiro item").
+     */
+    interface ScarletEmptyState {
+        /**
+          * Supporting text below the heading.
+         */
+        "description"?: string;
+        /**
+          * Main heading.
+          * @default 'Nenhum resultado encontrado.'
+         */
+        "heading"?: "Nenhum resultado encontrado.";
+        /**
+          * Icon shown above the heading. Ignored if the `icon` slot has content.
+         */
+        "icon"?: ScarletIconName;
     }
     /**
      * A drag-and-drop file picker, backed by a real (visually hidden) native
@@ -3901,7 +4565,7 @@ declare namespace LocalJSX {
         /**
           * Name of the built-in icon to render.
          */
-        "name"?: ScarletIconName;
+        "name"?: ScarletIconName1;
         /**
           * Size of the icon, as any valid CSS length. Defaults to `1em`, so it scales with the surrounding font size.
          */
@@ -4590,6 +5254,42 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     /**
+     * A styled inline text link — for a link inside a sentence/paragraph.
+     * `scarlet-button variant="link"` is the button-semantics equivalent (an
+     * action styled like a link); this is the reverse, a real `<a>` styled like
+     * one. `target="_blank"` automatically gets `rel="noopener noreferrer"`
+     * (unless `rel` is set explicitly) and a small external-link icon.
+     */
+    interface ScarletLink {
+        /**
+          * Semantic color of the link.
+          * @default 'primary'
+         */
+        "color"?: Color;
+        /**
+          * Renders as inert text — no `href`, `aria-disabled`.
+          * @default false
+         */
+        "disabled"?: false;
+        /**
+          * Native `href`. Omitting it (and setting `disabled`) renders inert text styled like a link.
+         */
+        "href"?: string;
+        /**
+          * Native `rel`. Defaults to `noopener noreferrer` when `target="_blank"`.
+         */
+        "rel"?: string;
+        /**
+          * Native `target`, e.g. `_blank`.
+         */
+        "target"?: string;
+        /**
+          * When the underline shows.
+          * @default 'hover'
+         */
+        "underline"?: ScarletLinkUnderline;
+    }
+    /**
      * A dropdown menu of actions opened from an arbitrary trigger element (the
      * `trigger` slot — typically an icon button like "⋮"), following the
      * WAI-ARIA menu button pattern: the trigger gets `aria-haspopup="menu"`/
@@ -4674,6 +5374,76 @@ declare namespace LocalJSX {
         "size"?: ScarletModalSize;
     }
     /**
+     * A numeric input with decrement/increment buttons — for a quantity field,
+     * not a general-purpose text field that happens to hold numbers (that's
+     * `scarlet-input type="number"`). Stays within `min`/`max` on every path:
+     * the buttons, typing, and blur all clamp.
+     */
+    interface ScarletNumberInput {
+        /**
+          * Disables the field and both buttons.
+          * @default false
+         */
+        "disabled"?: false;
+        /**
+          * Error message rendered below the field. Implies the invalid state.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the field. Hidden while an error is shown.
+         */
+        "helperText"?: string;
+        /**
+          * Marks the field as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid"?: false;
+        /**
+          * Visible label rendered above the field.
+         */
+        "label"?: string;
+        /**
+          * Upper bound. Omit for no maximum.
+         */
+        "max"?: number;
+        /**
+          * Lower bound. Omit for no minimum.
+         */
+        "min"?: number;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Emitted when the value is committed — a +/- click, or the field losing focus — always clamped to `min`/`max`.
+         */
+        "onScarletChange"?: (event: ScarletNumberInputCustomEvent<number>) => void;
+        /**
+          * Emitted on every keystroke, with the raw (not yet clamped) numeric value.
+         */
+        "onScarletInput"?: (event: ScarletNumberInputCustomEvent<number>) => void;
+        /**
+          * Marks the field as required in a parent form.
+          * @default false
+         */
+        "required"?: false;
+        /**
+          * Size of the field.
+          * @default 'md'
+         */
+        "size"?: Size;
+        /**
+          * Amount each +/- click changes the value by.
+          * @default 1
+         */
+        "step"?: 1;
+        /**
+          * Current value.
+          * @default 0
+         */
+        "value"?: number;
+    }
+    /**
      * Page number navigation, following the WAI-ARIA pattern of a `<nav>`
      * landmark wrapping a list of buttons — the current page is a real button
      * (not a link, since this component doesn't own routing) marked
@@ -4706,6 +5476,83 @@ declare namespace LocalJSX {
           * @default 1
          */
         "totalPages"?: 1;
+    }
+    /**
+     * A generic overlay anchored to a trigger element (the `trigger` slot),
+     * with arbitrary content in the default slot — the shared primitive
+     * `scarlet-menu`/`scarlet-date-picker`/`scarlet-combobox` each built their
+     * own narrower version of for their specific popovers. Use this one
+     * directly for anything that doesn't need a menu list or a calendar grid:
+     * a rich tooltip, a filter panel, a confirmation prompt.
+     * `trigger="click"` (the default) toggles on click, closes on Escape or a
+     * click outside, and sets `aria-haspopup`/`aria-expanded` on whatever's
+     * slotted as the trigger. `trigger="hover"` opens/closes on mouse enter/
+     * leave instead, with no click/Escape handling — matching how a hover
+     * tooltip behaves, not a dialog.
+     * Known limitation: like `scarlet-tooltip`/`scarlet-menu`, positioning is
+     * plain CSS anchored to the trigger — it doesn't flip or reposition to stay
+     * in the viewport.
+     */
+    interface ScarletPopover {
+        /**
+          * Accessible label for the popover content region.
+         */
+        "ariaLabel"?: string;
+        /**
+          * Emitted after the popover closes.
+         */
+        "onScarletHide"?: (event: ScarletPopoverCustomEvent<void>) => void;
+        /**
+          * Emitted after the popover opens.
+         */
+        "onScarletShow"?: (event: ScarletPopoverCustomEvent<void>) => void;
+        /**
+          * Which side of the trigger the popover opens on.
+          * @default 'bottom'
+         */
+        "placement"?: ScarletPopoverPlacement;
+        /**
+          * What interaction opens/closes the popover.
+          * @default 'click'
+         */
+        "triggerMode"?: ScarletPopoverTriggerMode;
+    }
+    /**
+     * A determinate progress bar (0–100%) — for a file upload, a multi-step
+     * form, anything with a real, known completion percentage. For an
+     * indeterminate "something's happening" state, use `scarlet-spinner`.
+     */
+    interface ScarletProgress {
+        /**
+          * Accessible label for the `progressbar` role.
+          * @default 'Progresso'
+         */
+        "ariaLabel"?: "Progresso";
+        /**
+          * Semantic color of the filled portion.
+          * @default 'primary'
+         */
+        "color"?: Color;
+        /**
+          * Value that represents 100%.
+          * @default 100
+         */
+        "max"?: 100;
+        /**
+          * Shows the percentage as text next to the track.
+          * @default false
+         */
+        "showLabel"?: false;
+        /**
+          * Height of the track.
+          * @default 'md'
+         */
+        "size"?: ScarletProgressSize;
+        /**
+          * Current value.
+          * @default 0
+         */
+        "value"?: 0;
     }
     /**
      * A single radio option. Use inside a `<scarlet-radio-group>` for mutually
@@ -4875,6 +5722,30 @@ declare namespace LocalJSX {
         "width"?: string;
     }
     /**
+     * A loading indicator — `variant="circle"` for the generic spinner (the
+     * same shape `scarlet-button`'s own `loading` state uses), `variant="logo"`
+     * for the Scarlet mark itself pulsing, e.g. for a full-page loading state.
+     * `role="status"` with `label` as its accessible name, so assistive tech
+     * announces the loading state without needing separate visible text.
+     */
+    interface ScarletSpinner {
+        /**
+          * Accessible label, announced by assistive tech via `role="status"`.
+          * @default 'Carregando'
+         */
+        "label"?: "Carregando";
+        /**
+          * Size of the indicator.
+          * @default 'md'
+         */
+        "size"?: ScarletSpinnerSize;
+        /**
+          * Which loading indicator to show.
+          * @default 'circle'
+         */
+        "variant"?: ScarletSpinnerVariant;
+    }
+    /**
      * A flexbox layout primitive for stacking or rowing children with
      * consistent, token-based spacing.
      * `direction` can change per breakpoint via `directionSm`/`directionMd`/
@@ -4926,6 +5797,31 @@ declare namespace LocalJSX {
           * @default 'nowrap'
          */
         "wrap"?: Wrap;
+    }
+    /**
+     * A single labeled metric — a number/value, its label, and an optional
+     * change indicator (e.g. "+12%" with an up/down arrow) for a dashboard.
+     */
+    interface ScarletStat {
+        /**
+          * Change text, e.g. "+12% vs. mês anterior". Omit to hide the whole change row.
+         */
+        "change"?: string;
+        /**
+          * Label above the value, e.g. "Receita total".
+          * @default ''
+         */
+        "label"?: "";
+        /**
+          * Direction the change indicates — colors and arrows the change text accordingly.
+          * @default 'neutral'
+         */
+        "trend"?: ScarletStatTrend;
+        /**
+          * The metric itself, e.g. "R$ 42.900".
+          * @default ''
+         */
+        "value"?: "";
     }
     /**
      * A toggle switch for binary on/off settings.
@@ -5189,6 +6085,17 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     /**
+     * A vertical sequence of events — an order's status history, an activity
+     * feed, a step-by-step audit trail.
+     */
+    interface ScarletTimeline {
+        /**
+          * The events, in order from first to last.
+          * @default []
+         */
+        "items"?: ScarletTimelineItem[];
+    }
+    /**
      * A self-dismissing status message, fixed to a corner of the viewport.
      * For multiple simultaneous toasts, render several instances inside a
      * consumer-owned stacking container (this component does not manage a queue).
@@ -5223,6 +6130,23 @@ declare namespace LocalJSX {
           * @default 'info'
          */
         "status"?: ScarletAlertStatus;
+    }
+    /**
+     * A horizontal bar for grouping related actions (buttons, a search field,
+     * an icon menu) — `role="toolbar"` with token-based gap, distinct from
+     * `scarlet-stack` in intent (actions, not arbitrary layout) even though
+     * the underlying flex mechanics are similar.
+     */
+    interface ScarletToolbar {
+        /**
+          * Accessible label for the `toolbar` role — required whenever there's more than one toolbar on the page.
+         */
+        "ariaLabel"?: string;
+        /**
+          * Main-axis distribution of items.
+          * @default 'start'
+         */
+        "justify"?: JustifyContent;
     }
     /**
      * A text hint shown next to its trigger on hover/focus. Positioning is
@@ -5358,6 +6282,21 @@ declare namespace LocalJSX {
         "min": string;
         "max": string;
     }
+    interface ScarletDateRangePickerAttributes {
+        "startValue": string;
+        "endValue": string;
+        "startPlaceholder": "Data inicial";
+        "endPlaceholder": "Data final";
+        "label": string;
+        "helperText": string;
+        "errorMessage": string;
+        "invalid": false;
+        "disabled": false;
+        "required": false;
+        "size": Size;
+        "min": string;
+        "max": string;
+    }
     interface ScarletDividerAttributes {
         "orientation": ScarletDividerOrientation;
         "label": string;
@@ -5369,6 +6308,11 @@ declare namespace LocalJSX {
         "ariaLabel": string;
         "dismissOnBackdropClick": true;
         "dismissOnEsc": true;
+    }
+    interface ScarletEmptyStateAttributes {
+        "icon": ScarletIconName;
+        "heading": "Nenhum resultado encontrado.";
+        "description": string;
     }
     interface ScarletFileUploadAttributes {
         "accept": string;
@@ -5521,6 +6465,14 @@ declare namespace LocalJSX {
         "required": false;
         "size": Size;
     }
+    interface ScarletLinkAttributes {
+        "href": string;
+        "target": string;
+        "rel": string;
+        "underline": ScarletLinkUnderline;
+        "color": Color;
+        "disabled": false;
+    }
     interface ScarletMenuAttributes {
         "ariaLabel": "Menu";
         "placement": 'start' | 'end';
@@ -5532,11 +6484,38 @@ declare namespace LocalJSX {
         "dismissOnBackdropClick": true;
         "dismissOnEsc": true;
     }
+    interface ScarletNumberInputAttributes {
+        "value": number;
+        "min": number;
+        "max": number;
+        "step": 1;
+        "name": string;
+        "label": string;
+        "helperText": string;
+        "errorMessage": string;
+        "invalid": false;
+        "disabled": false;
+        "required": false;
+        "size": Size;
+    }
     interface ScarletPaginationAttributes {
         "totalPages": 1;
         "page": number;
         "siblingCount": 1;
         "ariaLabel": "Paginação";
+    }
+    interface ScarletPopoverAttributes {
+        "placement": ScarletPopoverPlacement;
+        "triggerMode": ScarletPopoverTriggerMode;
+        "ariaLabel": string;
+    }
+    interface ScarletProgressAttributes {
+        "value": 0;
+        "max": 100;
+        "color": Color;
+        "size": ScarletProgressSize;
+        "showLabel": false;
+        "ariaLabel": "Progresso";
     }
     interface ScarletRadioAttributes {
         "value": string;
@@ -5571,6 +6550,11 @@ declare namespace LocalJSX {
         "height": string;
         "lines": 1;
     }
+    interface ScarletSpinnerAttributes {
+        "variant": ScarletSpinnerVariant;
+        "size": ScarletSpinnerSize;
+        "label": "Carregando";
+    }
     interface ScarletStackAttributes {
         "direction": Direction;
         "directionSm": Direction;
@@ -5581,6 +6565,12 @@ declare namespace LocalJSX {
         "align": Alignment;
         "justify": JustifyContent;
         "wrap": Wrap;
+    }
+    interface ScarletStatAttributes {
+        "label": "";
+        "value": "";
+        "change": string;
+        "trend": ScarletStatTrend;
     }
     interface ScarletSwitchAttributes {
         "checked": boolean;
@@ -5633,6 +6623,10 @@ declare namespace LocalJSX {
         "dismissible": true;
         "position": ScarletToastPosition;
     }
+    interface ScarletToolbarAttributes {
+        "ariaLabel": string;
+        "justify": JustifyContent;
+    }
     interface ScarletTooltipAttributes {
         "content": string;
         "placement": ScarletTooltipPlacement;
@@ -5655,8 +6649,10 @@ declare namespace LocalJSX {
         "scarlet-combobox": Omit<ScarletCombobox, keyof ScarletComboboxAttributes> & { [K in keyof ScarletCombobox & keyof ScarletComboboxAttributes]?: ScarletCombobox[K] } & { [K in keyof ScarletCombobox & keyof ScarletComboboxAttributes as `attr:${K}`]?: ScarletComboboxAttributes[K] } & { [K in keyof ScarletCombobox & keyof ScarletComboboxAttributes as `prop:${K}`]?: ScarletCombobox[K] };
         "scarlet-container": Omit<ScarletContainer, keyof ScarletContainerAttributes> & { [K in keyof ScarletContainer & keyof ScarletContainerAttributes]?: ScarletContainer[K] } & { [K in keyof ScarletContainer & keyof ScarletContainerAttributes as `attr:${K}`]?: ScarletContainerAttributes[K] } & { [K in keyof ScarletContainer & keyof ScarletContainerAttributes as `prop:${K}`]?: ScarletContainer[K] };
         "scarlet-date-picker": Omit<ScarletDatePicker, keyof ScarletDatePickerAttributes> & { [K in keyof ScarletDatePicker & keyof ScarletDatePickerAttributes]?: ScarletDatePicker[K] } & { [K in keyof ScarletDatePicker & keyof ScarletDatePickerAttributes as `attr:${K}`]?: ScarletDatePickerAttributes[K] } & { [K in keyof ScarletDatePicker & keyof ScarletDatePickerAttributes as `prop:${K}`]?: ScarletDatePicker[K] };
+        "scarlet-date-range-picker": Omit<ScarletDateRangePicker, keyof ScarletDateRangePickerAttributes> & { [K in keyof ScarletDateRangePicker & keyof ScarletDateRangePickerAttributes]?: ScarletDateRangePicker[K] } & { [K in keyof ScarletDateRangePicker & keyof ScarletDateRangePickerAttributes as `attr:${K}`]?: ScarletDateRangePickerAttributes[K] } & { [K in keyof ScarletDateRangePicker & keyof ScarletDateRangePickerAttributes as `prop:${K}`]?: ScarletDateRangePicker[K] };
         "scarlet-divider": Omit<ScarletDivider, keyof ScarletDividerAttributes> & { [K in keyof ScarletDivider & keyof ScarletDividerAttributes]?: ScarletDivider[K] } & { [K in keyof ScarletDivider & keyof ScarletDividerAttributes as `attr:${K}`]?: ScarletDividerAttributes[K] } & { [K in keyof ScarletDivider & keyof ScarletDividerAttributes as `prop:${K}`]?: ScarletDivider[K] };
         "scarlet-drawer": Omit<ScarletDrawer, keyof ScarletDrawerAttributes> & { [K in keyof ScarletDrawer & keyof ScarletDrawerAttributes]?: ScarletDrawer[K] } & { [K in keyof ScarletDrawer & keyof ScarletDrawerAttributes as `attr:${K}`]?: ScarletDrawerAttributes[K] } & { [K in keyof ScarletDrawer & keyof ScarletDrawerAttributes as `prop:${K}`]?: ScarletDrawer[K] };
+        "scarlet-empty-state": Omit<ScarletEmptyState, keyof ScarletEmptyStateAttributes> & { [K in keyof ScarletEmptyState & keyof ScarletEmptyStateAttributes]?: ScarletEmptyState[K] } & { [K in keyof ScarletEmptyState & keyof ScarletEmptyStateAttributes as `attr:${K}`]?: ScarletEmptyStateAttributes[K] } & { [K in keyof ScarletEmptyState & keyof ScarletEmptyStateAttributes as `prop:${K}`]?: ScarletEmptyState[K] };
         "scarlet-file-upload": Omit<ScarletFileUpload, keyof ScarletFileUploadAttributes> & { [K in keyof ScarletFileUpload & keyof ScarletFileUploadAttributes]?: ScarletFileUpload[K] } & { [K in keyof ScarletFileUpload & keyof ScarletFileUploadAttributes as `attr:${K}`]?: ScarletFileUploadAttributes[K] } & { [K in keyof ScarletFileUpload & keyof ScarletFileUploadAttributes as `prop:${K}`]?: ScarletFileUpload[K] };
         "scarlet-grid": Omit<ScarletGrid, keyof ScarletGridAttributes> & { [K in keyof ScarletGrid & keyof ScarletGridAttributes]?: ScarletGrid[K] } & { [K in keyof ScarletGrid & keyof ScarletGridAttributes as `attr:${K}`]?: ScarletGridAttributes[K] } & { [K in keyof ScarletGrid & keyof ScarletGridAttributes as `prop:${K}`]?: ScarletGrid[K] };
         "scarlet-grid-item": Omit<ScarletGridItem, keyof ScarletGridItemAttributes> & { [K in keyof ScarletGridItem & keyof ScarletGridItemAttributes]?: ScarletGridItem[K] } & { [K in keyof ScarletGridItem & keyof ScarletGridItemAttributes as `attr:${K}`]?: ScarletGridItemAttributes[K] } & { [K in keyof ScarletGridItem & keyof ScarletGridItemAttributes as `prop:${K}`]?: ScarletGridItem[K] };
@@ -5671,20 +6667,28 @@ declare namespace LocalJSX {
         "scarlet-input-license-plate": Omit<ScarletInputLicensePlate, keyof ScarletInputLicensePlateAttributes> & { [K in keyof ScarletInputLicensePlate & keyof ScarletInputLicensePlateAttributes]?: ScarletInputLicensePlate[K] } & { [K in keyof ScarletInputLicensePlate & keyof ScarletInputLicensePlateAttributes as `attr:${K}`]?: ScarletInputLicensePlateAttributes[K] } & { [K in keyof ScarletInputLicensePlate & keyof ScarletInputLicensePlateAttributes as `prop:${K}`]?: ScarletInputLicensePlate[K] };
         "scarlet-input-percentage": Omit<ScarletInputPercentage, keyof ScarletInputPercentageAttributes> & { [K in keyof ScarletInputPercentage & keyof ScarletInputPercentageAttributes]?: ScarletInputPercentage[K] } & { [K in keyof ScarletInputPercentage & keyof ScarletInputPercentageAttributes as `attr:${K}`]?: ScarletInputPercentageAttributes[K] } & { [K in keyof ScarletInputPercentage & keyof ScarletInputPercentageAttributes as `prop:${K}`]?: ScarletInputPercentage[K] };
         "scarlet-input-phone": Omit<ScarletInputPhone, keyof ScarletInputPhoneAttributes> & { [K in keyof ScarletInputPhone & keyof ScarletInputPhoneAttributes]?: ScarletInputPhone[K] } & { [K in keyof ScarletInputPhone & keyof ScarletInputPhoneAttributes as `attr:${K}`]?: ScarletInputPhoneAttributes[K] } & { [K in keyof ScarletInputPhone & keyof ScarletInputPhoneAttributes as `prop:${K}`]?: ScarletInputPhone[K] };
+        "scarlet-link": Omit<ScarletLink, keyof ScarletLinkAttributes> & { [K in keyof ScarletLink & keyof ScarletLinkAttributes]?: ScarletLink[K] } & { [K in keyof ScarletLink & keyof ScarletLinkAttributes as `attr:${K}`]?: ScarletLinkAttributes[K] } & { [K in keyof ScarletLink & keyof ScarletLinkAttributes as `prop:${K}`]?: ScarletLink[K] };
         "scarlet-menu": Omit<ScarletMenu, keyof ScarletMenuAttributes> & { [K in keyof ScarletMenu & keyof ScarletMenuAttributes]?: ScarletMenu[K] } & { [K in keyof ScarletMenu & keyof ScarletMenuAttributes as `attr:${K}`]?: ScarletMenuAttributes[K] } & { [K in keyof ScarletMenu & keyof ScarletMenuAttributes as `prop:${K}`]?: ScarletMenu[K] };
         "scarlet-modal": Omit<ScarletModal, keyof ScarletModalAttributes> & { [K in keyof ScarletModal & keyof ScarletModalAttributes]?: ScarletModal[K] } & { [K in keyof ScarletModal & keyof ScarletModalAttributes as `attr:${K}`]?: ScarletModalAttributes[K] } & { [K in keyof ScarletModal & keyof ScarletModalAttributes as `prop:${K}`]?: ScarletModal[K] };
+        "scarlet-number-input": Omit<ScarletNumberInput, keyof ScarletNumberInputAttributes> & { [K in keyof ScarletNumberInput & keyof ScarletNumberInputAttributes]?: ScarletNumberInput[K] } & { [K in keyof ScarletNumberInput & keyof ScarletNumberInputAttributes as `attr:${K}`]?: ScarletNumberInputAttributes[K] } & { [K in keyof ScarletNumberInput & keyof ScarletNumberInputAttributes as `prop:${K}`]?: ScarletNumberInput[K] };
         "scarlet-pagination": Omit<ScarletPagination, keyof ScarletPaginationAttributes> & { [K in keyof ScarletPagination & keyof ScarletPaginationAttributes]?: ScarletPagination[K] } & { [K in keyof ScarletPagination & keyof ScarletPaginationAttributes as `attr:${K}`]?: ScarletPaginationAttributes[K] } & { [K in keyof ScarletPagination & keyof ScarletPaginationAttributes as `prop:${K}`]?: ScarletPagination[K] };
+        "scarlet-popover": Omit<ScarletPopover, keyof ScarletPopoverAttributes> & { [K in keyof ScarletPopover & keyof ScarletPopoverAttributes]?: ScarletPopover[K] } & { [K in keyof ScarletPopover & keyof ScarletPopoverAttributes as `attr:${K}`]?: ScarletPopoverAttributes[K] } & { [K in keyof ScarletPopover & keyof ScarletPopoverAttributes as `prop:${K}`]?: ScarletPopover[K] };
+        "scarlet-progress": Omit<ScarletProgress, keyof ScarletProgressAttributes> & { [K in keyof ScarletProgress & keyof ScarletProgressAttributes]?: ScarletProgress[K] } & { [K in keyof ScarletProgress & keyof ScarletProgressAttributes as `attr:${K}`]?: ScarletProgressAttributes[K] } & { [K in keyof ScarletProgress & keyof ScarletProgressAttributes as `prop:${K}`]?: ScarletProgress[K] };
         "scarlet-radio": Omit<ScarletRadio, keyof ScarletRadioAttributes> & { [K in keyof ScarletRadio & keyof ScarletRadioAttributes]?: ScarletRadio[K] } & { [K in keyof ScarletRadio & keyof ScarletRadioAttributes as `attr:${K}`]?: ScarletRadioAttributes[K] } & { [K in keyof ScarletRadio & keyof ScarletRadioAttributes as `prop:${K}`]?: ScarletRadio[K] };
         "scarlet-radio-group": Omit<ScarletRadioGroup, keyof ScarletRadioGroupAttributes> & { [K in keyof ScarletRadioGroup & keyof ScarletRadioGroupAttributes]?: ScarletRadioGroup[K] } & { [K in keyof ScarletRadioGroup & keyof ScarletRadioGroupAttributes as `attr:${K}`]?: ScarletRadioGroupAttributes[K] } & { [K in keyof ScarletRadioGroup & keyof ScarletRadioGroupAttributes as `prop:${K}`]?: ScarletRadioGroup[K] };
         "scarlet-select": Omit<ScarletSelect, keyof ScarletSelectAttributes> & { [K in keyof ScarletSelect & keyof ScarletSelectAttributes]?: ScarletSelect[K] } & { [K in keyof ScarletSelect & keyof ScarletSelectAttributes as `attr:${K}`]?: ScarletSelectAttributes[K] } & { [K in keyof ScarletSelect & keyof ScarletSelectAttributes as `prop:${K}`]?: ScarletSelect[K] };
         "scarlet-skeleton": Omit<ScarletSkeleton, keyof ScarletSkeletonAttributes> & { [K in keyof ScarletSkeleton & keyof ScarletSkeletonAttributes]?: ScarletSkeleton[K] } & { [K in keyof ScarletSkeleton & keyof ScarletSkeletonAttributes as `attr:${K}`]?: ScarletSkeletonAttributes[K] } & { [K in keyof ScarletSkeleton & keyof ScarletSkeletonAttributes as `prop:${K}`]?: ScarletSkeleton[K] };
+        "scarlet-spinner": Omit<ScarletSpinner, keyof ScarletSpinnerAttributes> & { [K in keyof ScarletSpinner & keyof ScarletSpinnerAttributes]?: ScarletSpinner[K] } & { [K in keyof ScarletSpinner & keyof ScarletSpinnerAttributes as `attr:${K}`]?: ScarletSpinnerAttributes[K] } & { [K in keyof ScarletSpinner & keyof ScarletSpinnerAttributes as `prop:${K}`]?: ScarletSpinner[K] };
         "scarlet-stack": Omit<ScarletStack, keyof ScarletStackAttributes> & { [K in keyof ScarletStack & keyof ScarletStackAttributes]?: ScarletStack[K] } & { [K in keyof ScarletStack & keyof ScarletStackAttributes as `attr:${K}`]?: ScarletStackAttributes[K] } & { [K in keyof ScarletStack & keyof ScarletStackAttributes as `prop:${K}`]?: ScarletStack[K] };
+        "scarlet-stat": Omit<ScarletStat, keyof ScarletStatAttributes> & { [K in keyof ScarletStat & keyof ScarletStatAttributes]?: ScarletStat[K] } & { [K in keyof ScarletStat & keyof ScarletStatAttributes as `attr:${K}`]?: ScarletStatAttributes[K] } & { [K in keyof ScarletStat & keyof ScarletStatAttributes as `prop:${K}`]?: ScarletStat[K] };
         "scarlet-switch": Omit<ScarletSwitch, keyof ScarletSwitchAttributes> & { [K in keyof ScarletSwitch & keyof ScarletSwitchAttributes]?: ScarletSwitch[K] } & { [K in keyof ScarletSwitch & keyof ScarletSwitchAttributes as `attr:${K}`]?: ScarletSwitchAttributes[K] } & { [K in keyof ScarletSwitch & keyof ScarletSwitchAttributes as `prop:${K}`]?: ScarletSwitch[K] };
         "scarlet-table": Omit<ScarletTable, keyof ScarletTableAttributes> & { [K in keyof ScarletTable & keyof ScarletTableAttributes]?: ScarletTable[K] } & { [K in keyof ScarletTable & keyof ScarletTableAttributes as `attr:${K}`]?: ScarletTableAttributes[K] } & { [K in keyof ScarletTable & keyof ScarletTableAttributes as `prop:${K}`]?: ScarletTable[K] };
         "scarlet-tabs": Omit<ScarletTabs, keyof ScarletTabsAttributes> & { [K in keyof ScarletTabs & keyof ScarletTabsAttributes]?: ScarletTabs[K] } & { [K in keyof ScarletTabs & keyof ScarletTabsAttributes as `attr:${K}`]?: ScarletTabsAttributes[K] } & { [K in keyof ScarletTabs & keyof ScarletTabsAttributes as `prop:${K}`]?: ScarletTabs[K] };
         "scarlet-text": Omit<ScarletText, keyof ScarletTextAttributes> & { [K in keyof ScarletText & keyof ScarletTextAttributes]?: ScarletText[K] } & { [K in keyof ScarletText & keyof ScarletTextAttributes as `attr:${K}`]?: ScarletTextAttributes[K] } & { [K in keyof ScarletText & keyof ScarletTextAttributes as `prop:${K}`]?: ScarletText[K] };
         "scarlet-textarea": Omit<ScarletTextarea, keyof ScarletTextareaAttributes> & { [K in keyof ScarletTextarea & keyof ScarletTextareaAttributes]?: ScarletTextarea[K] } & { [K in keyof ScarletTextarea & keyof ScarletTextareaAttributes as `attr:${K}`]?: ScarletTextareaAttributes[K] } & { [K in keyof ScarletTextarea & keyof ScarletTextareaAttributes as `prop:${K}`]?: ScarletTextarea[K] };
+        "scarlet-timeline": ScarletTimeline;
         "scarlet-toast": Omit<ScarletToast, keyof ScarletToastAttributes> & { [K in keyof ScarletToast & keyof ScarletToastAttributes]?: ScarletToast[K] } & { [K in keyof ScarletToast & keyof ScarletToastAttributes as `attr:${K}`]?: ScarletToastAttributes[K] } & { [K in keyof ScarletToast & keyof ScarletToastAttributes as `prop:${K}`]?: ScarletToast[K] };
+        "scarlet-toolbar": Omit<ScarletToolbar, keyof ScarletToolbarAttributes> & { [K in keyof ScarletToolbar & keyof ScarletToolbarAttributes]?: ScarletToolbar[K] } & { [K in keyof ScarletToolbar & keyof ScarletToolbarAttributes as `attr:${K}`]?: ScarletToolbarAttributes[K] } & { [K in keyof ScarletToolbar & keyof ScarletToolbarAttributes as `prop:${K}`]?: ScarletToolbar[K] };
         "scarlet-tooltip": Omit<ScarletTooltip, keyof ScarletTooltipAttributes> & { [K in keyof ScarletTooltip & keyof ScarletTooltipAttributes]?: ScarletTooltip[K] } & { [K in keyof ScarletTooltip & keyof ScarletTooltipAttributes as `attr:${K}`]?: ScarletTooltipAttributes[K] } & { [K in keyof ScarletTooltip & keyof ScarletTooltipAttributes as `prop:${K}`]?: ScarletTooltip[K] };
     }
 }
@@ -5796,6 +6800,18 @@ declare module "@stencil/core" {
              */
             "scarlet-date-picker": LocalJSX.IntrinsicElements["scarlet-date-picker"] & JSXBase.HTMLAttributes<HTMLScarletDatePickerElement>;
             /**
+             * Two `DD/MM/AAAA` fields (start/end) sharing one calendar popover for
+             * picking both ends of a range — built the same way `scarlet-date-picker`
+             * is (same masking/validation per field, same popover mechanics), doubled.
+             * See that component's own doc comment for the shared known limitations
+             * (no Tab-out auto-close, no viewport flip).
+             * Picking works the classic two-click way: the first day clicked becomes
+             * the start (clearing any previous end); the second becomes the end and
+             * closes the popover — unless it's *before* the start, in which case it
+             * becomes the new start instead and the popover stays open for the end.
+             */
+            "scarlet-date-range-picker": LocalJSX.IntrinsicElements["scarlet-date-range-picker"] & JSXBase.HTMLAttributes<HTMLScarletDateRangePickerElement>;
+            /**
              * A visual separator between sections of content, with an optional centered label.
              */
             "scarlet-divider": LocalJSX.IntrinsicElements["scarlet-divider"] & JSXBase.HTMLAttributes<HTMLScarletDividerElement>;
@@ -5810,6 +6826,12 @@ declare module "@stencil/core" {
              * `left`/`right`, height for `top`/`bottom`.
              */
             "scarlet-drawer": LocalJSX.IntrinsicElements["scarlet-drawer"] & JSXBase.HTMLAttributes<HTMLScarletDrawerElement>;
+            /**
+             * A placeholder for a list, search result, or section with nothing to
+             * show — an icon, a heading, an optional description, and an optional
+             * action (e.g. "Limpar filtros" or "Criar o primeiro item").
+             */
+            "scarlet-empty-state": LocalJSX.IntrinsicElements["scarlet-empty-state"] & JSXBase.HTMLAttributes<HTMLScarletEmptyStateElement>;
             /**
              * A drag-and-drop file picker, backed by a real (visually hidden) native
              * `<input type="file">` — so it's a real form control and works with no JS
@@ -5902,6 +6924,14 @@ declare module "@stencil/core" {
              */
             "scarlet-input-phone": LocalJSX.IntrinsicElements["scarlet-input-phone"] & JSXBase.HTMLAttributes<HTMLScarletInputPhoneElement>;
             /**
+             * A styled inline text link — for a link inside a sentence/paragraph.
+             * `scarlet-button variant="link"` is the button-semantics equivalent (an
+             * action styled like a link); this is the reverse, a real `<a>` styled like
+             * one. `target="_blank"` automatically gets `rel="noopener noreferrer"`
+             * (unless `rel` is set explicitly) and a small external-link icon.
+             */
+            "scarlet-link": LocalJSX.IntrinsicElements["scarlet-link"] & JSXBase.HTMLAttributes<HTMLScarletLinkElement>;
+            /**
              * A dropdown menu of actions opened from an arbitrary trigger element (the
              * `trigger` slot — typically an icon button like "⋮"), following the
              * WAI-ARIA menu button pattern: the trigger gets `aria-haspopup="menu"`/
@@ -5925,6 +6955,13 @@ declare module "@stencil/core" {
              */
             "scarlet-modal": LocalJSX.IntrinsicElements["scarlet-modal"] & JSXBase.HTMLAttributes<HTMLScarletModalElement>;
             /**
+             * A numeric input with decrement/increment buttons — for a quantity field,
+             * not a general-purpose text field that happens to hold numbers (that's
+             * `scarlet-input type="number"`). Stays within `min`/`max` on every path:
+             * the buttons, typing, and blur all clamp.
+             */
+            "scarlet-number-input": LocalJSX.IntrinsicElements["scarlet-number-input"] & JSXBase.HTMLAttributes<HTMLScarletNumberInputElement>;
+            /**
              * Page number navigation, following the WAI-ARIA pattern of a `<nav>`
              * landmark wrapping a list of buttons — the current page is a real button
              * (not a link, since this component doesn't own routing) marked
@@ -5933,6 +6970,29 @@ declare module "@stencil/core" {
              * and `siblingCount` pages on each side of the current one visible.
              */
             "scarlet-pagination": LocalJSX.IntrinsicElements["scarlet-pagination"] & JSXBase.HTMLAttributes<HTMLScarletPaginationElement>;
+            /**
+             * A generic overlay anchored to a trigger element (the `trigger` slot),
+             * with arbitrary content in the default slot — the shared primitive
+             * `scarlet-menu`/`scarlet-date-picker`/`scarlet-combobox` each built their
+             * own narrower version of for their specific popovers. Use this one
+             * directly for anything that doesn't need a menu list or a calendar grid:
+             * a rich tooltip, a filter panel, a confirmation prompt.
+             * `trigger="click"` (the default) toggles on click, closes on Escape or a
+             * click outside, and sets `aria-haspopup`/`aria-expanded` on whatever's
+             * slotted as the trigger. `trigger="hover"` opens/closes on mouse enter/
+             * leave instead, with no click/Escape handling — matching how a hover
+             * tooltip behaves, not a dialog.
+             * Known limitation: like `scarlet-tooltip`/`scarlet-menu`, positioning is
+             * plain CSS anchored to the trigger — it doesn't flip or reposition to stay
+             * in the viewport.
+             */
+            "scarlet-popover": LocalJSX.IntrinsicElements["scarlet-popover"] & JSXBase.HTMLAttributes<HTMLScarletPopoverElement>;
+            /**
+             * A determinate progress bar (0–100%) — for a file upload, a multi-step
+             * form, anything with a real, known completion percentage. For an
+             * indeterminate "something's happening" state, use `scarlet-spinner`.
+             */
+            "scarlet-progress": LocalJSX.IntrinsicElements["scarlet-progress"] & JSXBase.HTMLAttributes<HTMLScarletProgressElement>;
             /**
              * A single radio option. Use inside a `<scarlet-radio-group>` for mutually
              * exclusive selection — standalone, it behaves like an isolated toggle.
@@ -5959,6 +7019,14 @@ declare module "@stencil/core" {
              */
             "scarlet-skeleton": LocalJSX.IntrinsicElements["scarlet-skeleton"] & JSXBase.HTMLAttributes<HTMLScarletSkeletonElement>;
             /**
+             * A loading indicator — `variant="circle"` for the generic spinner (the
+             * same shape `scarlet-button`'s own `loading` state uses), `variant="logo"`
+             * for the Scarlet mark itself pulsing, e.g. for a full-page loading state.
+             * `role="status"` with `label` as its accessible name, so assistive tech
+             * announces the loading state without needing separate visible text.
+             */
+            "scarlet-spinner": LocalJSX.IntrinsicElements["scarlet-spinner"] & JSXBase.HTMLAttributes<HTMLScarletSpinnerElement>;
+            /**
              * A flexbox layout primitive for stacking or rowing children with
              * consistent, token-based spacing.
              * `direction` can change per breakpoint via `directionSm`/`directionMd`/
@@ -5969,6 +7037,11 @@ declare module "@stencil/core" {
              * to `direction` itself.
              */
             "scarlet-stack": LocalJSX.IntrinsicElements["scarlet-stack"] & JSXBase.HTMLAttributes<HTMLScarletStackElement>;
+            /**
+             * A single labeled metric — a number/value, its label, and an optional
+             * change indicator (e.g. "+12%" with an up/down arrow) for a dashboard.
+             */
+            "scarlet-stat": LocalJSX.IntrinsicElements["scarlet-stat"] & JSXBase.HTMLAttributes<HTMLScarletStatElement>;
             /**
              * A toggle switch for binary on/off settings.
              */
@@ -6008,11 +7081,23 @@ declare module "@stencil/core" {
              */
             "scarlet-textarea": LocalJSX.IntrinsicElements["scarlet-textarea"] & JSXBase.HTMLAttributes<HTMLScarletTextareaElement>;
             /**
+             * A vertical sequence of events — an order's status history, an activity
+             * feed, a step-by-step audit trail.
+             */
+            "scarlet-timeline": LocalJSX.IntrinsicElements["scarlet-timeline"] & JSXBase.HTMLAttributes<HTMLScarletTimelineElement>;
+            /**
              * A self-dismissing status message, fixed to a corner of the viewport.
              * For multiple simultaneous toasts, render several instances inside a
              * consumer-owned stacking container (this component does not manage a queue).
              */
             "scarlet-toast": LocalJSX.IntrinsicElements["scarlet-toast"] & JSXBase.HTMLAttributes<HTMLScarletToastElement>;
+            /**
+             * A horizontal bar for grouping related actions (buttons, a search field,
+             * an icon menu) — `role="toolbar"` with token-based gap, distinct from
+             * `scarlet-stack` in intent (actions, not arbitrary layout) even though
+             * the underlying flex mechanics are similar.
+             */
+            "scarlet-toolbar": LocalJSX.IntrinsicElements["scarlet-toolbar"] & JSXBase.HTMLAttributes<HTMLScarletToolbarElement>;
             /**
              * A text hint shown next to its trigger on hover/focus. Positioning is
              * plain CSS anchored to the host — it does not flip to stay in the
