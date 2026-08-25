@@ -32,6 +32,19 @@ export { ScarletSwitch } from './scarlet-switch/scarlet-switch';
 export { ScarletRadio } from './scarlet-radio/scarlet-radio';
 export { ScarletRadioGroup } from './scarlet-radio-group/scarlet-radio-group';
 
+// Masked/specialized inputs (pt-BR)
+export { ScarletInputPhone } from './scarlet-input-phone/scarlet-input-phone';
+export { ScarletInputCep } from './scarlet-input-cep/scarlet-input-cep';
+export { ScarletInputDocument } from './scarlet-input-document/scarlet-input-document';
+export type { ScarletDocumentType } from './scarlet-input-document/scarlet-input-document';
+export { ScarletInputCurrency } from './scarlet-input-currency/scarlet-input-currency';
+export { ScarletInputPercentage } from './scarlet-input-percentage/scarlet-input-percentage';
+export { ScarletInputDate } from './scarlet-input-date/scarlet-input-date';
+export { ScarletInputCreditCard } from './scarlet-input-credit-card/scarlet-input-credit-card';
+export type { CreditCardBrand } from './scarlet-input-credit-card/scarlet-input-credit-card';
+export { ScarletInputLicensePlate } from './scarlet-input-license-plate/scarlet-input-license-plate';
+export type { ScarletLicensePlateFormat } from './scarlet-input-license-plate/scarlet-input-license-plate';
+
 // Feedback / overlays
 export { ScarletAlert } from './scarlet-alert/scarlet-alert';
 export type { ScarletAlertStatus, ScarletAlertVariant } from './scarlet-alert/scarlet-alert';

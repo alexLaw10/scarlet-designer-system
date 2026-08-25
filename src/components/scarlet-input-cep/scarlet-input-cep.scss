@@ -1,0 +1,49 @@
+@import '../../tokens/field-mixins';
+
+:host {
+  display: block;
+}
+
+.scarlet-input-cep__label {
+  @include scarlet-field-label;
+}
+
+.scarlet-input-cep__required {
+  @include scarlet-field-required;
+}
+
+.scarlet-input-cep {
+  @include scarlet-field-input;
+}
+
+.scarlet-input-cep--invalid {
+  @include scarlet-field-invalid;
+}
+
+.scarlet-input-cep--xs {
+  @include scarlet-field-size(xs);
+}
+
+.scarlet-input-cep--sm {
+  @include scarlet-field-size(sm);
+}
+
+.scarlet-input-cep--md {
+  @include scarlet-field-size(md);
+}
+
+.scarlet-input-cep--lg {
+  @include scarlet-field-size(lg);
+}
+
+.scarlet-input-cep--xl {
+  @include scarlet-field-size(xl);
+}
+
+.scarlet-input-cep__message {
+  @include scarlet-field-message;
+}
+
+.scarlet-input-cep__message--error {
+  @include scarlet-field-message-error;
+}
