@@ -37,6 +37,17 @@ export class ScarletCheckbox {
   /** Emitted when the checked state changes via user interaction. */
   @Event() scarletChange!: EventEmitter<boolean>;
 
+  /**
+   * Same payload as `scarletChange`, always bubbling — for a parent
+   * `<scarlet-checkbox-group>` to listen to internally instead of the public
+   * `scarletChange`. Mirrors `scarlet-radio`'s `scarletRadioChange`: a
+   * consumer's own `scarletChange` listener on the *group* would otherwise
+   * also catch this bubbling child event (boolean detail) in addition to
+   * the group's own re-emission (string[] detail), firing twice with the
+   * wrong detail on the first hit.
+   */
+  @Event() scarletCheckboxChange!: EventEmitter<boolean>;
+
   componentDidRender(): void {
     if (this.inputEl) {
       this.inputEl.indeterminate = this.indeterminate;
@@ -47,6 +58,7 @@ export class ScarletCheckbox {
     const target = event.target as HTMLInputElement;
     this.checked = target.checked;
     this.scarletChange.emit(this.checked);
+    this.scarletCheckboxChange.emit(this.checked);
   };
 
   render() {

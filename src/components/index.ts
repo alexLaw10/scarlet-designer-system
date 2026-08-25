@@ -28,6 +28,7 @@ export type { ScarletTextareaResize } from './form/scarlet-textarea/scarlet-text
 export { ScarletSelect } from './form/scarlet-select/scarlet-select';
 export type { ScarletSelectOption } from './form/scarlet-select/scarlet-select';
 export { ScarletCheckbox } from './form/scarlet-checkbox/scarlet-checkbox';
+export { ScarletCheckboxGroup } from './form/scarlet-checkbox-group/scarlet-checkbox-group';
 export { ScarletSwitch } from './form/scarlet-switch/scarlet-switch';
 export { ScarletRadio } from './form/scarlet-radio/scarlet-radio';
 export { ScarletRadioGroup } from './form/scarlet-radio-group/scarlet-radio-group';
@@ -61,12 +62,18 @@ export type { ScarletModalSize } from './feedback/scarlet-modal/scarlet-modal';
 // Navigation
 export { ScarletTabs } from './navigation/scarlet-tabs/scarlet-tabs';
 export type { ScarletTabItem } from './navigation/scarlet-tabs/scarlet-tabs';
+export { ScarletBreadcrumb } from './navigation/scarlet-breadcrumb/scarlet-breadcrumb';
+export type { ScarletBreadcrumbItem } from './navigation/scarlet-breadcrumb/scarlet-breadcrumb';
+export { ScarletMenu } from './navigation/scarlet-menu/scarlet-menu';
+export type { ScarletMenuItem } from './navigation/scarlet-menu/scarlet-menu';
 export { ScarletAccordion } from './navigation/scarlet-accordion/scarlet-accordion';
 export type { ScarletAccordionItem } from './navigation/scarlet-accordion/scarlet-accordion';
 
 // Data display
 export { ScarletCard } from './data-display/scarlet-card/scarlet-card';
 export type { ScarletCardVariant } from './data-display/scarlet-card/scarlet-card';
+export { ScarletTable } from './data-display/scarlet-table/scarlet-table';
+export type { ScarletTableColumn, ScarletTableRow, ScarletTableSortDirection, ScarletTableSortChange } from './data-display/scarlet-table/scarlet-table';
 export { ScarletAvatar } from './data-display/scarlet-avatar/scarlet-avatar';
 export type { ScarletAvatarShape } from './data-display/scarlet-avatar/scarlet-avatar';
 export { ScarletDivider } from './data-display/scarlet-divider/scarlet-divider';

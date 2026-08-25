@@ -1,0 +1,94 @@
+@import '../../../tokens/typography-mixins';
+
+:host {
+  display: block;
+}
+
+.scarlet-table {
+  &__scroll {
+    overflow-x: auto;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  &__head {
+    border-bottom: var(--scarlet-border-width-2) solid var(--scarlet-color-border-primary);
+  }
+
+  &__cell {
+    @include scarlet-text-body-sm;
+    padding: var(--scarlet-space-3) var(--scarlet-space-4);
+    color: var(--scarlet-color-text-primary);
+    text-align: left;
+    white-space: nowrap;
+
+    &--head {
+      color: var(--scarlet-color-text-secondary);
+      font-weight: var(--scarlet-font-weight-semibold);
+    }
+
+    &--center {
+      text-align: center;
+    }
+
+    &--right {
+      text-align: right;
+    }
+
+    &--checkbox {
+      width: var(--scarlet-space-10);
+      padding-right: 0;
+    }
+  }
+
+  &__sort {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--scarlet-space-1);
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-weight: inherit;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--scarlet-shadow-focus);
+      border-radius: var(--scarlet-border-radius-sm);
+    }
+  }
+
+  &__sort-icon {
+    &--inactive {
+      opacity: 0.35;
+    }
+  }
+
+  &__row {
+    border-bottom: var(--scarlet-border-width-1) solid var(--scarlet-color-border-secondary);
+
+    &:hover {
+      background-color: var(--scarlet-color-background-secondary);
+    }
+
+    &--selected {
+      background-color: var(--scarlet-color-primary-50);
+    }
+
+    &--clickable {
+      cursor: pointer;
+    }
+  }
+
+  &__empty {
+    @include scarlet-text-body-sm;
+    padding: var(--scarlet-space-8) var(--scarlet-space-4);
+    color: var(--scarlet-color-text-tertiary);
+    text-align: center;
+  }
+}
