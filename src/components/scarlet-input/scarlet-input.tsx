@@ -1,6 +1,7 @@
 import { Component, Prop, Event, type EventEmitter, h, Host, Method } from '@stencil/core';
 import type { Size } from '../../types';
 import { generateId } from '../../utils';
+import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '../../utils/form-field';
 
 export type ScarletInputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'url' | 'search';
 
@@ -96,24 +97,17 @@ export class ScarletInput {
 
   render() {
     const isInvalid = this.invalid || Boolean(this.errorMessage);
-    const describedBy =
-      [this.errorMessage ? this.errorId : null, !this.errorMessage && this.helperText ? this.helperId : null]
-        .filter(Boolean)
-        .join(' ') || undefined;
+    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
 
     return (
       <Host class="scarlet-input-host">
-        {this.label ? (
-          <label class="scarlet-input__label" htmlFor={this.inputId}>
-            {this.label}
-            {this.required ? (
-              <span class="scarlet-input__required" aria-hidden="true">
-                {' '}
-                *
-              </span>
-            ) : null}
-          </label>
-        ) : null}
+        {renderFieldLabel({
+          htmlFor: this.inputId,
+          label: this.label,
+          required: this.required,
+          labelClass: 'scarlet-input__label',
+          requiredClass: 'scarlet-input__required',
+        })}
         <input
           ref={(el) => (this.inputEl = el)}
           id={this.inputId}
@@ -137,15 +131,13 @@ export class ScarletInput {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
-        {this.errorMessage ? (
-          <p class="scarlet-input__message scarlet-input__message--error" id={this.errorId} role="alert">
-            {this.errorMessage}
-          </p>
-        ) : this.helperText ? (
-          <p class="scarlet-input__message scarlet-input__message--helper" id={this.helperId}>
-            {this.helperText}
-          </p>
-        ) : null}
+        {renderFieldMessage({
+          errorMessage: this.errorMessage,
+          helperText: this.helperText,
+          ids: { helperId: this.helperId, errorId: this.errorId },
+          errorClass: 'scarlet-input__message scarlet-input__message--error',
+          helperClass: 'scarlet-input__message scarlet-input__message--helper',
+        })}
       </Host>
     );
   }

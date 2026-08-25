@@ -1,19 +1,15 @@
-@import '../../tokens/typography-mixins';
+@import '../../tokens/field-mixins';
 
 :host {
   display: block;
 }
 
 .scarlet-select__label {
-  @include scarlet-text-body-sm;
-  display: block;
-  margin-bottom: var(--scarlet-space-1-5);
-  color: var(--scarlet-color-text-secondary);
-  font-weight: var(--scarlet-font-weight-medium);
+  @include scarlet-field-label;
 }
 
 .scarlet-select__required {
-  color: var(--scarlet-color-error-500);
+  @include scarlet-field-required;
 }
 
 .scarlet-select__wrapper {
@@ -21,36 +17,10 @@
 }
 
 .scarlet-select {
-  @include scarlet-text-body-md;
-  box-sizing: border-box;
-  width: 100%;
+  @include scarlet-field-input;
   appearance: none;
-  border: var(--scarlet-border-width-1) solid var(--scarlet-color-border-primary);
-  border-radius: var(--scarlet-border-radius-input);
-  background-color: var(--scarlet-color-background-primary);
-  color: var(--scarlet-color-text-primary);
-  font-family: var(--scarlet-font-family-primary);
   cursor: pointer;
   padding-right: var(--scarlet-space-8);
-  transition:
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
-
-  &:hover:not(:disabled) {
-    border-color: var(--scarlet-color-neutral-400);
-  }
-
-  &:focus-visible {
-    outline: none;
-    border-color: var(--scarlet-color-border-focus);
-    box-shadow: var(--scarlet-shadow-focus);
-  }
-
-  &:disabled {
-    background-color: var(--scarlet-color-background-disabled);
-    color: var(--scarlet-color-text-disabled);
-    cursor: not-allowed;
-  }
 }
 
 .scarlet-select--placeholder {
@@ -58,12 +28,7 @@
 }
 
 .scarlet-select--invalid {
-  border-color: var(--scarlet-color-border-error);
-
-  &:focus-visible {
-    border-color: var(--scarlet-color-border-error);
-    box-shadow: var(--scarlet-shadow-focus-error);
-  }
+  @include scarlet-field-invalid;
 }
 
 .scarlet-select--xs {
@@ -108,11 +73,9 @@
 }
 
 .scarlet-select__message {
-  @include scarlet-text-caption;
-  margin: var(--scarlet-space-1-5) 0 0;
-  color: var(--scarlet-color-text-tertiary);
+  @include scarlet-field-message;
 }
 
 .scarlet-select__message--error {
-  color: var(--scarlet-color-error-600);
+  @include scarlet-field-message-error;
 }

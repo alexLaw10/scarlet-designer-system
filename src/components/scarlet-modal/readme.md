@@ -12,13 +12,13 @@ focus trapping, top-layer stacking and Escape handling for free.
 
 ## Properties
 
-| Property                 | Attribute                   | Description                                                                  | Type                                     | Default     |
-| ------------------------ | --------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------- | ----------- |
-| `ariaLabel`              | `aria-label`                | Accessible label for the dialog, used when there is no visible header slot.  | `string \| undefined`                    | `undefined` |
-| `dismissOnBackdropClick` | `dismiss-on-backdrop-click` | Closes the modal when the backdrop (area outside the dialog box) is clicked. | `boolean`                                | `true`      |
-| `dismissOnEsc`           | `dismiss-on-esc`            | Closes the modal when Escape is pressed.                                     | `boolean`                                | `true`      |
-| `open`                   | `open`                      | Whether the modal is open.                                                   | `boolean`                                | `false`     |
-| `size`                   | `size`                      | Size of the modal.                                                           | `"full" \| "lg" \| "md" \| "sm" \| "xl"` | `'md'`      |
+| Property                 | Attribute                   | Description                                                                                                                                                                                                                                | Type                                     | Default     |
+| ------------------------ | --------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------- | ----------- |
+| `ariaLabel`              | `aria-label`                | Accessible label for the dialog. When omitted, the `header` slot's content is used instead (via `aria-labelledby`) — set this explicitly only when the modal has no visible header, or the header text alone isn't a good accessible name. | `string \| undefined`                    | `undefined` |
+| `dismissOnBackdropClick` | `dismiss-on-backdrop-click` | Closes the modal when the backdrop (area outside the dialog box) is clicked.                                                                                                                                                               | `boolean`                                | `true`      |
+| `dismissOnEsc`           | `dismiss-on-esc`            | Closes the modal when Escape is pressed.                                                                                                                                                                                                   | `boolean`                                | `true`      |
+| `open`                   | `open`                      | Whether the modal is open.                                                                                                                                                                                                                 | `boolean`                                | `false`     |
+| `size`                   | `size`                      | Size of the modal.                                                                                                                                                                                                                         | `"full" \| "lg" \| "md" \| "sm" \| "xl"` | `'md'`      |
 
 
 ## Events

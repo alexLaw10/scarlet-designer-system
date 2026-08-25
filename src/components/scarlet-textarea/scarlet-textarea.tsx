@@ -1,6 +1,7 @@
 import { Component, Prop, Event, type EventEmitter, h, Host, Method } from '@stencil/core';
 import type { Size } from '../../types';
 import { generateId } from '../../utils';
+import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '../../utils/form-field';
 
 export type ScarletTextareaResize = 'none' | 'vertical' | 'horizontal' | 'both';
 
@@ -99,24 +100,17 @@ export class ScarletTextarea {
 
   render() {
     const isInvalid = this.invalid || Boolean(this.errorMessage);
-    const describedBy =
-      [this.errorMessage ? this.errorId : null, !this.errorMessage && this.helperText ? this.helperId : null]
-        .filter(Boolean)
-        .join(' ') || undefined;
+    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
 
     return (
       <Host class="scarlet-textarea-host">
-        {this.label ? (
-          <label class="scarlet-textarea__label" htmlFor={this.textareaId}>
-            {this.label}
-            {this.required ? (
-              <span class="scarlet-textarea__required" aria-hidden="true">
-                {' '}
-                *
-              </span>
-            ) : null}
-          </label>
-        ) : null}
+        {renderFieldLabel({
+          htmlFor: this.textareaId,
+          label: this.label,
+          required: this.required,
+          labelClass: 'scarlet-textarea__label',
+          requiredClass: 'scarlet-textarea__required',
+        })}
         <textarea
           ref={(el) => (this.textareaEl = el)}
           id={this.textareaId}
@@ -141,15 +135,13 @@ export class ScarletTextarea {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
-        {this.errorMessage ? (
-          <p class="scarlet-textarea__message scarlet-textarea__message--error" id={this.errorId} role="alert">
-            {this.errorMessage}
-          </p>
-        ) : this.helperText ? (
-          <p class="scarlet-textarea__message scarlet-textarea__message--helper" id={this.helperId}>
-            {this.helperText}
-          </p>
-        ) : null}
+        {renderFieldMessage({
+          errorMessage: this.errorMessage,
+          helperText: this.helperText,
+          ids: { helperId: this.helperId, errorId: this.errorId },
+          errorClass: 'scarlet-textarea__message scarlet-textarea__message--error',
+          helperClass: 'scarlet-textarea__message scarlet-textarea__message--helper',
+        })}
       </Host>
     );
   }

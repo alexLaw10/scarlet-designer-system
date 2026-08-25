@@ -442,7 +442,7 @@ export namespace Components {
      */
     interface ScarletModal {
         /**
-          * Accessible label for the dialog, used when there is no visible header slot.
+          * Accessible label for the dialog. When omitted, the `header` slot's content is used instead (via `aria-labelledby`) — set this explicitly only when the modal has no visible header, or the header text alone isn't a good accessible name.
          */
         "ariaLabel"?: string;
         /**
@@ -489,6 +489,11 @@ export namespace Components {
           * @default false
          */
         "disabled": boolean;
+        /**
+          * Whether this radio is a tab stop. A parent `<scarlet-radio-group>` keeps this `true` on exactly one radio at a time (roving tabindex, per the WAI-ARIA radiogroup pattern) so the group has a single Tab stop and arrow keys move both focus and selection — matching how native radio buttons behave. Standalone (no group), this defaults to `true` so a lone radio is reachable by Tab like any other control.
+          * @default true
+         */
+        "focusable": boolean;
         /**
           * Visible label rendered next to the radio.
          */
@@ -1781,7 +1786,7 @@ declare namespace LocalJSX {
      */
     interface ScarletModal {
         /**
-          * Accessible label for the dialog, used when there is no visible header slot.
+          * Accessible label for the dialog. When omitted, the `header` slot's content is used instead (via `aria-labelledby`) — set this explicitly only when the modal has no visible header, or the header text alone isn't a good accessible name.
          */
         "ariaLabel"?: string;
         /**
@@ -1828,6 +1833,11 @@ declare namespace LocalJSX {
           * @default false
          */
         "disabled"?: boolean;
+        /**
+          * Whether this radio is a tab stop. A parent `<scarlet-radio-group>` keeps this `true` on exactly one radio at a time (roving tabindex, per the WAI-ARIA radiogroup pattern) so the group has a single Tab stop and arrow keys move both focus and selection — matching how native radio buttons behave. Standalone (no group), this defaults to `true` so a lone radio is reachable by Tab like any other control.
+          * @default true
+         */
+        "focusable"?: boolean;
         /**
           * Visible label rendered next to the radio.
          */
@@ -2331,6 +2341,7 @@ declare namespace LocalJSX {
         "disabled": boolean;
         "name": string;
         "label": string;
+        "focusable": boolean;
     }
     interface ScarletRadioGroupAttributes {
         "name": string;

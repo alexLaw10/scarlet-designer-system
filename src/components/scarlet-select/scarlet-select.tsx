@@ -1,6 +1,7 @@
 import { Component, Prop, Event, type EventEmitter, h, Host, Method } from '@stencil/core';
 import type { Size } from '../../types';
 import { generateId } from '../../utils';
+import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '../../utils/form-field';
 
 export interface ScarletSelectOption {
   label: string;
@@ -89,24 +90,17 @@ export class ScarletSelect {
 
   render() {
     const isInvalid = this.invalid || Boolean(this.errorMessage);
-    const describedBy =
-      [this.errorMessage ? this.errorId : null, !this.errorMessage && this.helperText ? this.helperId : null]
-        .filter(Boolean)
-        .join(' ') || undefined;
+    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
 
     return (
       <Host class="scarlet-select-host">
-        {this.label ? (
-          <label class="scarlet-select__label" htmlFor={this.selectId}>
-            {this.label}
-            {this.required ? (
-              <span class="scarlet-select__required" aria-hidden="true">
-                {' '}
-                *
-              </span>
-            ) : null}
-          </label>
-        ) : null}
+        {renderFieldLabel({
+          htmlFor: this.selectId,
+          label: this.label,
+          required: this.required,
+          labelClass: 'scarlet-select__label',
+          requiredClass: 'scarlet-select__required',
+        })}
         <div class="scarlet-select__wrapper">
           <select
             ref={(el) => (this.selectEl = el)}
@@ -141,15 +135,13 @@ export class ScarletSelect {
             <polyline points="6,9 12,15 18,9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </div>
-        {this.errorMessage ? (
-          <p class="scarlet-select__message scarlet-select__message--error" id={this.errorId} role="alert">
-            {this.errorMessage}
-          </p>
-        ) : this.helperText ? (
-          <p class="scarlet-select__message scarlet-select__message--helper" id={this.helperId}>
-            {this.helperText}
-          </p>
-        ) : null}
+        {renderFieldMessage({
+          errorMessage: this.errorMessage,
+          helperText: this.helperText,
+          ids: { helperId: this.helperId, errorId: this.errorId },
+          errorClass: 'scarlet-select__message scarlet-select__message--error',
+          helperClass: 'scarlet-select__message scarlet-select__message--helper',
+        })}
       </Host>
     );
   }
