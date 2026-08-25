@@ -1,0 +1,104 @@
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgNDAwIiB3aWR0aD0iNDAwIiBoZWlnaHQ9IjQwMCIgcm9sZT0iaW1nIiBhcmlhLWxhYmVsPSJTY2FybGxldCI+CiAgPHRpdGxlPlNjYXJsbGV0PC90aXRsZT4KICA8ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgyMDAsMjAwKSBzY2FsZSgxLjYpIj4KICAgIDxnPgogICAgICA8cG9seWdvbiBwb2ludHM9IjAsLTExMiA5MCwwIDM2LDAgMCwtNDIiIGZpbGw9IiNlYzMwMTMiPjwvcG9seWdvbj4KICAgICAgPHBvbHlnb24gcG9pbnRzPSI5MCwwIDAsMTEyIDAsNDIgMzYsMCIgZmlsbD0iI2MxMjQwYyI+PC9wb2x5Z29uPgogICAgICA8cG9seWdvbiBwb2ludHM9IjAsMTEyIC05MCwwIC0zNiwwIDAsNDIiIGZpbGw9IiNmZjVhM2MiPjwvcG9seWdvbj4KICAgICAgPHBvbHlnb24gcG9pbnRzPSItOTAsMCAwLC0xMTIgMCwtNDIgLTM2LDAiIGZpbGw9IiM4ZjFhMDciPjwvcG9seWdvbj4KICAgICAgPHBvbHlnb24gcG9pbnRzPSIwLC00MiAzNiwwIDAsNDIgLTM2LDAiIGZpbGw9IiNmM2YyZjIiPjwvcG9seWdvbj4KICAgICAgPHBvbHlnb24gcG9pbnRzPSIwLC0xMTIgOTAsMCAwLDExMiAtOTAsMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjAxZTFkIiBzdHJva2Utd2lkdGg9IjQiPjwvcG9seWdvbj4KICAgIDwvZz48L2c+Cjwvc3ZnPg==" />
+
+<!--
+  Storybook has no first-class "custom splash screen" API — this is a plain
+  overlay injected into <head> (the one place Storybook lets a project add
+  arbitrary markup before its own manager UI boots). The <script> below only
+  touches the DOM after DOMContentLoaded, so it's safe here regardless of
+  where the HTML parser ends up placing a <div>/<script> found inside <head>.
+  It removes itself once Storybook's own UI has mounted (detected generically
+  via a MutationObserver on document.body, not any Storybook-internal
+  selector, so it keeps working across Storybook version upgrades), with a
+  hard timeout as a fallback so it can never get stuck on screen.
+-->
+<style>
+  #scarllet-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ec3013;
+    transition: opacity 0.4s ease;
+  }
+
+  #scarllet-splash svg {
+    width: 180px;
+    height: 180px;
+    animation: scarllet-splash-pulse 1.4s ease-in-out infinite;
+  }
+
+  #scarllet-splash.scarllet-splash--hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @keyframes scarllet-splash-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(0.92);
+      opacity: 0.75;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #scarllet-splash svg {
+      animation: none;
+    }
+  }
+</style>
+<script>
+  (function () {
+    function init() {
+      var splash = document.createElement('div');
+      splash.id = 'scarllet-splash';
+      splash.innerHTML =
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Carregando Scarlet Design System">' +
+        '<g transform="translate(200,200) scale(1.6)"><g>' +
+        '<polygon points="0,-112 90,0 36,0 0,-42" fill="#ffffff"></polygon>' +
+        '<polygon points="90,0 0,112 0,42 36,0" fill="#efece9"></polygon>' +
+        '<polygon points="0,112 -90,0 -36,0 0,42" fill="#d6d2cf"></polygon>' +
+        '<polygon points="-90,0 0,-112 0,-42 -36,0" fill="#b8b2ae"></polygon>' +
+        '<polygon points="0,-42 36,0 0,42 -36,0" fill="#ec3013"></polygon>' +
+        '<polygon points="0,-112 90,0 0,112 -90,0" fill="none" stroke="#ffffff" stroke-width="4"></polygon>' +
+        '</g></g></svg>';
+      document.body.appendChild(splash);
+
+      var hidden = false;
+      function hide() {
+        if (hidden) return;
+        hidden = true;
+        splash.classList.add('scarllet-splash--hidden');
+        setTimeout(function () {
+          splash.remove();
+        }, 500);
+      }
+
+      var observer = new MutationObserver(function () {
+        // Storybook's own root mounts as a sibling of the splash — once
+        // there's more than just our own element under <body>, it's ready.
+        if (document.body.children.length > 1) {
+          hide();
+          observer.disconnect();
+        }
+      });
+      observer.observe(document.body, { childList: true });
+
+      // Safety net: never leave the splash on screen indefinitely even if
+      // the observer's assumption above stops holding in some future
+      // Storybook version.
+      setTimeout(hide, 6000);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>

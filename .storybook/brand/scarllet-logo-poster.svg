@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 400" width="1600" height="400" role="img" aria-label="Scarllet">
+  <title>Scarllet</title>
+  <rect x="0" y="0" width="1600" height="400" fill="#ec3013"></rect>
+  <g transform="translate(168,200) scale(0.86)">
+    <g>
+      <polygon points="0,-112 90,0 36,0 0,-42" fill="#ffffff"></polygon>
+      <polygon points="90,0 0,112 0,42 36,0" fill="#efece9"></polygon>
+      <polygon points="0,112 -90,0 -36,0 0,42" fill="#d6d2cf"></polygon>
+      <polygon points="-90,0 0,-112 0,-42 -36,0" fill="#b8b2ae"></polygon>
+      <polygon points="0,-42 36,0 0,42 -36,0" fill="#ec3013"></polygon>
+      <polygon points="0,-112 90,0 0,112 -90,0" fill="none" stroke="#f3f2f2" stroke-width="4"></polygon>
+    </g></g>
+
+    <text x="300" y="200" font-family="Archivo, 'Archivo', Helvetica, Arial, sans-serif" font-size="196" font-weight="800" letter-spacing="14" fill="#ffffff" dominant-baseline="central">SCARLLET</text>
+</svg>
