@@ -5,7 +5,7 @@ describe('scarlet-link', () => {
   it('renders href on the internal anchor', async () => {
     const page = await newSpecPage({
       components: [ScarletLink],
-      html: `<scarlet-link href="/produtos">Produtos</scarlet-link>`,
+      html: '<scarlet-link href="/produtos">Produtos</scarlet-link>'
     });
 
     const anchor = page.root?.shadowRoot?.querySelector('a');
@@ -15,7 +15,7 @@ describe('scarlet-link', () => {
   it('adds rel="noopener noreferrer" by default when target is _blank', async () => {
     const page = await newSpecPage({
       components: [ScarletLink],
-      html: `<scarlet-link href="https://example.com" target="_blank">Externo</scarlet-link>`,
+      html: '<scarlet-link href="https://example.com" target="_blank">Externo</scarlet-link>'
     });
 
     const anchor = page.root?.shadowRoot?.querySelector('a');
@@ -25,7 +25,7 @@ describe('scarlet-link', () => {
   it('lets an explicit rel override the _blank default', async () => {
     const page = await newSpecPage({
       components: [ScarletLink],
-      html: `<scarlet-link href="https://example.com" target="_blank" rel="me">Externo</scarlet-link>`,
+      html: '<scarlet-link href="https://example.com" target="_blank" rel="me">Externo</scarlet-link>'
     });
 
     const anchor = page.root?.shadowRoot?.querySelector('a');
@@ -35,7 +35,7 @@ describe('scarlet-link', () => {
   it('drops href and marks aria-disabled when disabled', async () => {
     const page = await newSpecPage({
       components: [ScarletLink],
-      html: `<scarlet-link href="/produtos" disabled>Produtos</scarlet-link>`,
+      html: '<scarlet-link href="/produtos" disabled>Produtos</scarlet-link>'
     });
 
     const anchor = page.root?.shadowRoot?.querySelector('a');

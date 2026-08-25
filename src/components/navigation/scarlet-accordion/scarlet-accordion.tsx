@@ -16,7 +16,7 @@ export interface ScarletAccordionItem {
 @Component({
   tag: 'scarlet-accordion',
   styleUrl: 'scarlet-accordion.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletAccordion {
   private readonly idPrefix = generateId('scarlet-accordion');
@@ -44,7 +44,9 @@ export class ScarletAccordion {
     const expanded = this.isExpanded(item.value);
 
     if (this.multiple) {
-      this.expandedValues = expanded ? this.expandedValues.filter((value) => value !== item.value) : [...this.expandedValues, item.value];
+      this.expandedValues = expanded ?
+        this.expandedValues.filter(value => value !== item.value) :
+        [...this.expandedValues, item.value];
     } else {
       this.expandedValues = expanded ? [] : [item.value];
     }
@@ -53,7 +55,9 @@ export class ScarletAccordion {
   }
 
   private handleKeyDown = (event: KeyboardEvent, index: number): void => {
-    const enabledIndexes = this.items.map((item, i) => (item.disabled ? -1 : i)).filter((i) => i !== -1);
+    const enabledIndexes = this.items
+      .map((item, i) => (item.disabled ? -1 : i))
+      .filter(i => i !== -1);
     if (enabledIndexes.length === 0) return;
 
     const currentPosition = enabledIndexes.indexOf(index);
@@ -62,7 +66,8 @@ export class ScarletAccordion {
     if (event.key === 'ArrowDown') {
       targetIndex = enabledIndexes[(currentPosition + 1) % enabledIndexes.length];
     } else if (event.key === 'ArrowUp') {
-      targetIndex = enabledIndexes[(currentPosition - 1 + enabledIndexes.length) % enabledIndexes.length];
+      targetIndex =
+        enabledIndexes[(currentPosition - 1 + enabledIndexes.length) % enabledIndexes.length];
     } else if (event.key === 'Home') {
       targetIndex = enabledIndexes[0];
     } else if (event.key === 'End') {
@@ -71,41 +76,59 @@ export class ScarletAccordion {
 
     if (targetIndex !== null) {
       event.preventDefault();
-      const header = this.el.shadowRoot?.querySelector<HTMLElement>(`[data-index="${targetIndex}"]`);
+      const header = this.el.shadowRoot?.querySelector<HTMLElement>(
+        `[data-index="${targetIndex}"]`
+      );
       header?.focus();
     }
   };
 
   render() {
     return (
-      <Host class="scarlet-accordion-host">
+      <Host class='scarlet-accordion-host'>
         {this.items.map((item, index) => {
           const expanded = this.isExpanded(item.value);
           const headerId = `${this.idPrefix}-header-${item.value}`;
           const panelId = `${this.idPrefix}-panel-${item.value}`;
 
           return (
-            <div key={item.value} class="scarlet-accordion__item">
-              <h3 class="scarlet-accordion__heading">
+            <div key={item.value} class='scarlet-accordion__item'>
+              <h3 class='scarlet-accordion__heading'>
                 <button
-                  type="button"
+                  type='button'
                   data-index={index}
                   id={headerId}
-                  class={{ 'scarlet-accordion__trigger': true, 'scarlet-accordion__trigger--expanded': expanded }}
+                  class={{
+                    'scarlet-accordion__trigger': true,
+                    'scarlet-accordion__trigger--expanded': expanded
+                  }}
                   aria-expanded={expanded ? 'true' : 'false'}
                   aria-controls={panelId}
                   disabled={item.disabled}
                   onClick={() => this.toggle(item)}
-                  onKeyDown={(event) => this.handleKeyDown(event, index)}
+                  onKeyDown={event => this.handleKeyDown(event, index)}
                 >
-                  <svg class="scarlet-accordion__chevron" viewBox="0 0 24 24" aria-hidden="true">
-                    <polyline points="9,6 15,12 9,18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  <svg class='scarlet-accordion__chevron' viewBox='0 0 24 24' aria-hidden='true'>
+                    <polyline
+                      points='9,6 15,12 9,18'
+                      fill='none'
+                      stroke='currentColor'
+                      stroke-width='2'
+                      stroke-linecap='round'
+                      stroke-linejoin='round'
+                    />
                   </svg>
                   <span>{item.title}</span>
                 </button>
               </h3>
-              <div id={panelId} class="scarlet-accordion__panel" role="region" aria-labelledby={headerId} hidden={!expanded}>
-                <div class="scarlet-accordion__panel-inner">
+              <div
+                id={panelId}
+                class='scarlet-accordion__panel'
+                role='region'
+                aria-labelledby={headerId}
+                hidden={!expanded}
+              >
+                <div class='scarlet-accordion__panel-inner'>
                   <slot name={item.value} />
                 </div>
               </div>

@@ -5,7 +5,7 @@ describe('scarlet-container', () => {
   it('defaults to maxWidth lg, with padding and centering on', async () => {
     const page = await newSpecPage({
       components: [ScarletContainer],
-      html: `<scarlet-container></scarlet-container>`,
+      html: '<scarlet-container></scarlet-container>'
     });
 
     expect(page.root?.classList.contains('scarlet-container-host--lg')).toBe(true);
@@ -16,7 +16,7 @@ describe('scarlet-container', () => {
   it('applies a custom maxWidth', async () => {
     const page = await newSpecPage({
       components: [ScarletContainer],
-      html: `<scarlet-container max-width="sm"></scarlet-container>`,
+      html: '<scarlet-container max-width="sm"></scarlet-container>'
     });
 
     expect(page.root?.classList.contains('scarlet-container-host--sm')).toBe(true);
@@ -26,7 +26,7 @@ describe('scarlet-container', () => {
   it('omits padding/center classes when disabled', async () => {
     const page = await newSpecPage({
       components: [ScarletContainer],
-      html: `<scarlet-container padding="false" center="false"></scarlet-container>`,
+      html: '<scarlet-container padding="false" center="false"></scarlet-container>'
     });
 
     expect(page.root?.classList.contains('scarlet-container-host--padding')).toBe(false);

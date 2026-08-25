@@ -43,7 +43,7 @@ export type ScarletTableRow = Record<string, unknown>;
 @Component({
   tag: 'scarlet-table',
   styleUrl: 'scarlet-table.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletTable {
   private selectAllEl?: HTMLInputElement;
@@ -110,14 +110,16 @@ export class ScarletTable {
       if (valueA == null && valueB == null) return 0;
       if (valueA == null) return -1 * factor;
       if (valueB == null) return 1 * factor;
-      if (typeof valueA === 'number' && typeof valueB === 'number') return (valueA - valueB) * factor;
+      if (typeof valueA === 'number' && typeof valueB === 'number')
+        return (valueA - valueB) * factor;
       return String(valueA).localeCompare(String(valueB), 'pt-BR', { numeric: true }) * factor;
     });
   }
 
   private handleSort(column: ScarletTableColumn): void {
     if (!column.sortable) return;
-    const direction: ScarletTableSortDirection = this.sortKey === column.key && this.sortDirection === 'asc' ? 'desc' : 'asc';
+    const direction: ScarletTableSortDirection =
+      this.sortKey === column.key && this.sortDirection === 'asc' ? 'desc' : 'asc';
     this.sortKey = column.key;
     this.sortDirection = direction;
     this.scarletSort.emit({ key: column.key, direction });
@@ -133,23 +135,29 @@ export class ScarletTable {
   }
 
   private someSelected(): boolean {
-    return this.rows.some((row) => this.isRowSelected(row)) && !this.allSelected();
+    return this.rows.some(row => this.isRowSelected(row)) && !this.allSelected();
   }
 
   private allSelected(): boolean {
-    return this.rows.length > 0 && this.rows.every((row) => this.isRowSelected(row));
+    return this.rows.length > 0 && this.rows.every(row => this.isRowSelected(row));
   }
 
   private toggleRow(row: ScarletTableRow): void {
     const key = this.rowKeyValue(row);
     if (key === undefined) return;
-    const next = this.isRowSelected(row) ? this.selectedRowKeys.filter((k) => k !== key) : [...this.selectedRowKeys, key];
+    const next = this.isRowSelected(row) ?
+      this.selectedRowKeys.filter(k => k !== key) :
+      [...this.selectedRowKeys, key];
     this.selectedRowKeys = next;
     this.scarletSelectionChange.emit(next);
   }
 
   private toggleAll(): void {
-    const next = this.allSelected() ? [] : this.rows.map((row) => this.rowKeyValue(row)).filter((key): key is string | number => key !== undefined);
+    const next = this.allSelected() ?
+      [] :
+      this.rows
+        .map(row => this.rowKeyValue(row))
+        .filter((key): key is string | number => key !== undefined);
     this.selectedRowKeys = next;
     this.scarletSelectionChange.emit(next);
   }
@@ -165,43 +173,62 @@ export class ScarletTable {
     const columnCount = this.columns.length + (this.selectable ? 1 : 0);
 
     return (
-      <Host class="scarlet-table-host">
-        <div class="scarlet-table__scroll">
-          <table class="scarlet-table__table" aria-label={this.ariaLabel}>
-            <thead class="scarlet-table__head">
+      <Host class='scarlet-table-host'>
+        <div class='scarlet-table__scroll'>
+          <table class='scarlet-table__table' aria-label={this.ariaLabel}>
+            <thead class='scarlet-table__head'>
               <tr>
                 {this.selectable ? (
-                  <th class="scarlet-table__cell scarlet-table__cell--checkbox" scope="col">
+                  <th class='scarlet-table__cell scarlet-table__cell--checkbox' scope='col'>
                     <input
-                      ref={(el) => (this.selectAllEl = el)}
-                      type="checkbox"
+                      ref={el => (this.selectAllEl = el)}
+                      type='checkbox'
                       checked={this.allSelected()}
                       disabled={this.rows.length === 0}
-                      aria-label="Selecionar todas as linhas"
+                      aria-label='Selecionar todas as linhas'
                       onChange={() => this.toggleAll()}
                     />
                   </th>
                 ) : null}
-                {this.columns.map((column) => {
+                {this.columns.map(column => {
                   const isSorted = this.sortKey === column.key;
                   return (
                     <th
                       class={{
                         'scarlet-table__cell': true,
                         'scarlet-table__cell--head': true,
-                        [`scarlet-table__cell--${column.align ?? 'left'}`]: true,
+                        [`scarlet-table__cell--${column.align ?? 'left'}`]: true
                       }}
-                      scope="col"
+                      scope='col'
                       style={column.width ? { width: column.width } : undefined}
-                      aria-sort={isSorted ? (this.sortDirection === 'asc' ? 'ascending' : 'descending') : column.sortable ? 'none' : undefined}
+                      aria-sort={
+                        isSorted ?
+                          this.sortDirection === 'asc' ?
+                            'ascending' :
+                            'descending' :
+                          column.sortable ?
+                            'none' :
+                            undefined
+                      }
                     >
                       {column.sortable ? (
-                        <button type="button" class="scarlet-table__sort" onClick={() => this.handleSort(column)}>
+                        <button
+                          type='button'
+                          class='scarlet-table__sort'
+                          onClick={() => this.handleSort(column)}
+                        >
                           {column.label}
                           <scarlet-icon
-                            name={isSorted && this.sortDirection === 'desc' ? 'chevron-down' : 'chevron-up'}
-                            size="0.9em"
-                            class={{ 'scarlet-table__sort-icon': true, 'scarlet-table__sort-icon--inactive': !isSorted }}
+                            name={
+                              isSorted && this.sortDirection === 'desc' ?
+                                'chevron-down' :
+                                'chevron-up'
+                            }
+                            size='0.9em'
+                            class={{
+                              'scarlet-table__sort-icon': true,
+                              'scarlet-table__sort-icon--inactive': !isSorted
+                            }}
                           />
                         </button>
                       ) : (
@@ -212,16 +239,16 @@ export class ScarletTable {
                 })}
               </tr>
             </thead>
-            <tbody class="scarlet-table__body">
+            <tbody class='scarlet-table__body'>
               {this.loading ? (
                 <tr>
-                  <td class="scarlet-table__empty" colSpan={columnCount}>
+                  <td class='scarlet-table__empty' colSpan={columnCount}>
                     {this.loadingMessage}
                   </td>
                 </tr>
               ) : rows.length === 0 ? (
                 <tr>
-                  <td class="scarlet-table__empty" colSpan={columnCount}>
+                  <td class='scarlet-table__empty' colSpan={columnCount}>
                     {this.emptyMessage}
                   </td>
                 </tr>
@@ -231,22 +258,30 @@ export class ScarletTable {
                     class={{
                       'scarlet-table__row': true,
                       'scarlet-table__row--selected': this.selectable && this.isRowSelected(row),
-                      'scarlet-table__row--clickable': this.clickableRows,
+                      'scarlet-table__row--clickable': this.clickableRows
                     }}
                     onClick={this.clickableRows ? () => this.scarletRowClick.emit(row) : undefined}
                   >
                     {this.selectable ? (
-                      <td class="scarlet-table__cell scarlet-table__cell--checkbox" onClick={(event) => event.stopPropagation()}>
+                      <td
+                        class='scarlet-table__cell scarlet-table__cell--checkbox'
+                        onClick={event => event.stopPropagation()}
+                      >
                         <input
-                          type="checkbox"
+                          type='checkbox'
                           checked={this.isRowSelected(row)}
                           aria-label={`Selecionar linha ${rowIndex + 1}`}
                           onChange={() => this.toggleRow(row)}
                         />
                       </td>
                     ) : null}
-                    {this.columns.map((column) => (
-                      <td class={{ 'scarlet-table__cell': true, [`scarlet-table__cell--${column.align ?? 'left'}`]: true }}>
+                    {this.columns.map(column => (
+                      <td
+                        class={{
+                          'scarlet-table__cell': true,
+                          [`scarlet-table__cell--${column.align ?? 'left'}`]: true
+                        }}
+                      >
                         {this.cellContent(row, column)}
                       </td>
                     ))}

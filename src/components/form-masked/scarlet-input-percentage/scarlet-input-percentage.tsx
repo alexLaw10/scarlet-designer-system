@@ -12,7 +12,7 @@ import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/util
 @Component({
   tag: 'scarlet-input-percentage',
   styleUrl: 'scarlet-input-percentage.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletInputPercentage {
   private inputEl?: HTMLInputElement;
@@ -97,27 +97,30 @@ export class ScarletInputPercentage {
 
   render() {
     const isInvalid = this.invalid || Boolean(this.errorMessage);
-    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
+    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, {
+      helperId: this.helperId,
+      errorId: this.errorId
+    });
 
     return (
-      <Host class="scarlet-input-percentage-host">
+      <Host class='scarlet-input-percentage-host'>
         {renderFieldLabel({
           htmlFor: this.inputId,
           label: this.label,
           required: this.required,
           labelClass: 'scarlet-input-percentage__label',
-          requiredClass: 'scarlet-input-percentage__required',
+          requiredClass: 'scarlet-input-percentage__required'
         })}
         <input
-          ref={(el) => (this.inputEl = el)}
+          ref={el => (this.inputEl = el)}
           id={this.inputId}
           class={{
             'scarlet-input-percentage': true,
             [`scarlet-input-percentage--${this.size}`]: true,
-            'scarlet-input-percentage--invalid': isInvalid,
+            'scarlet-input-percentage--invalid': isInvalid
           }}
-          type="text"
-          inputMode="decimal"
+          type='text'
+          inputMode='decimal'
           name={this.name}
           value={this.value}
           placeholder={this.placeholder}
@@ -135,7 +138,7 @@ export class ScarletInputPercentage {
           helperText: this.helperText,
           ids: { helperId: this.helperId, errorId: this.errorId },
           errorClass: 'scarlet-input-percentage__message scarlet-input-percentage__message--error',
-          helperClass: 'scarlet-input-percentage__message scarlet-input-percentage__message--helper',
+          helperClass: 'scarlet-input-percentage__message scarlet-input-percentage__message--helper'
         })}
       </Host>
     );

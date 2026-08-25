@@ -79,7 +79,8 @@ export function isValidCreditCardLuhn(rawValue: string): boolean {
   return sum % 10 === 0;
 }
 
-export type CreditCardBrand = 'visa' | 'mastercard' | 'amex' | 'diners' | 'discover' | 'elo' | 'hipercard';
+export type CreditCardBrand =
+  'visa' | 'mastercard' | 'amex' | 'diners' | 'discover' | 'elo' | 'hipercard';
 
 /** Detects the card network from its IIN/BIN prefix. Returns `undefined` until enough digits are typed. */
 export function detectCardBrand(rawValue: string): CreditCardBrand | undefined {

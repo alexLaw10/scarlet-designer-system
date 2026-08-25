@@ -12,13 +12,15 @@ describe('scarlet-checkbox-group', () => {
           <scarlet-checkbox value="b"></scarlet-checkbox>
           <scarlet-checkbox value="c"></scarlet-checkbox>
         </scarlet-checkbox-group>
-      `,
+      `
     });
     page.rootInstance.value = ['a', 'c'];
     await page.waitForChanges();
 
     const checkboxes = Array.from(page.root!.querySelectorAll('scarlet-checkbox'));
-    const checkedValues = checkboxes.filter((checkbox: any) => checkbox.checked).map((checkbox: any) => checkbox.value);
+    const checkedValues = checkboxes
+      .filter((checkbox: any) => checkbox.checked)
+      .map((checkbox: any) => checkbox.value);
 
     expect(checkedValues).toEqual(['a', 'c']);
   });
@@ -31,7 +33,7 @@ describe('scarlet-checkbox-group', () => {
           <scarlet-checkbox value="a"></scarlet-checkbox>
           <scarlet-checkbox value="b"></scarlet-checkbox>
         </scarlet-checkbox-group>
-      `,
+      `
     });
     page.rootInstance.value = ['a'];
     await page.waitForChanges();
@@ -40,7 +42,9 @@ describe('scarlet-checkbox-group', () => {
     await page.waitForChanges();
 
     const checkboxes = Array.from(page.root!.querySelectorAll('scarlet-checkbox'));
-    const checkedValues = checkboxes.filter((checkbox: any) => checkbox.checked).map((checkbox: any) => checkbox.value);
+    const checkedValues = checkboxes
+      .filter((checkbox: any) => checkbox.checked)
+      .map((checkbox: any) => checkbox.value);
 
     expect(checkedValues).toEqual(['b']);
   });
@@ -53,7 +57,7 @@ describe('scarlet-checkbox-group', () => {
           <scarlet-checkbox value="a"></scarlet-checkbox>
           <scarlet-checkbox value="b"></scarlet-checkbox>
         </scarlet-checkbox-group>
-      `,
+      `
     });
     page.rootInstance.value = ['a'];
     await page.waitForChanges();
@@ -62,7 +66,7 @@ describe('scarlet-checkbox-group', () => {
     page.root?.addEventListener('scarletChange', changeSpy);
 
     const checkboxes = Array.from(page.root!.querySelectorAll('scarlet-checkbox')) as any[];
-    const checkboxB = checkboxes.find((checkbox) => checkbox.value === 'b');
+    const checkboxB = checkboxes.find(checkbox => checkbox.value === 'b');
     const input = checkboxB.shadowRoot.querySelector('input');
     input.checked = true;
     input.dispatchEvent(new Event('change'));
@@ -81,13 +85,13 @@ describe('scarlet-checkbox-group', () => {
           <scarlet-checkbox value="a"></scarlet-checkbox>
           <scarlet-checkbox value="b"></scarlet-checkbox>
         </scarlet-checkbox-group>
-      `,
+      `
     });
     page.rootInstance.value = ['a', 'b'];
     await page.waitForChanges();
 
     const checkboxes = Array.from(page.root!.querySelectorAll('scarlet-checkbox')) as any[];
-    const checkboxA = checkboxes.find((checkbox) => checkbox.value === 'a');
+    const checkboxA = checkboxes.find(checkbox => checkbox.value === 'a');
     const input = checkboxA.shadowRoot.querySelector('input');
     input.checked = false;
     input.dispatchEvent(new Event('change'));
@@ -104,12 +108,12 @@ describe('scarlet-checkbox-group', () => {
           <scarlet-checkbox value="a"></scarlet-checkbox>
           <scarlet-checkbox value="b"></scarlet-checkbox>
         </scarlet-checkbox-group>
-      `,
+      `
     });
     await page.waitForChanges();
 
     const checkboxes = Array.from(page.root!.querySelectorAll('scarlet-checkbox')) as any[];
-    checkboxes.forEach((checkbox) => {
+    checkboxes.forEach(checkbox => {
       expect(checkbox.name).toBe('ingredientes');
       expect(checkbox.disabled).toBe(true);
     });

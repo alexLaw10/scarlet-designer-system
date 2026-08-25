@@ -10,7 +10,7 @@ import { generateId } from '@/utils';
 @Component({
   tag: 'scarlet-file-upload',
   styleUrl: 'scarlet-file-upload.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletFileUpload {
   private inputEl?: HTMLInputElement;
@@ -58,7 +58,7 @@ export class ScarletFileUpload {
 
   private acceptFiles(incoming: File[]): void {
     if (this.maxSizeBytes !== undefined) {
-      const tooLarge = incoming.find((file) => file.size > this.maxSizeBytes!);
+      const tooLarge = incoming.find(file => file.size > this.maxSizeBytes!);
       if (tooLarge) {
         this.autoError = `"${tooLarge.name}" excede o tamanho máximo permitido (${this.formatSize(this.maxSizeBytes)}).`;
         return;
@@ -98,7 +98,7 @@ export class ScarletFileUpload {
   };
 
   private removeFile(file: File): void {
-    this.files = this.files.filter((existing) => existing !== file);
+    this.files = this.files.filter(existing => existing !== file);
     this.scarletChange.emit(this.files);
   }
 
@@ -113,9 +113,9 @@ export class ScarletFileUpload {
     const describedBy = effectiveError ? this.errorId : this.helperText ? this.helperId : undefined;
 
     return (
-      <Host class="scarlet-file-upload-host">
+      <Host class='scarlet-file-upload-host'>
         {this.label ? (
-          <label class="scarlet-file-upload__label" htmlFor={this.inputId}>
+          <label class='scarlet-file-upload__label' htmlFor={this.inputId}>
             {this.label}
           </label>
         ) : null}
@@ -124,17 +124,17 @@ export class ScarletFileUpload {
             'scarlet-file-upload__dropzone': true,
             'scarlet-file-upload__dropzone--dragover': this.dragOver,
             'scarlet-file-upload__dropzone--disabled': this.disabled,
-            'scarlet-file-upload__dropzone--invalid': Boolean(effectiveError),
+            'scarlet-file-upload__dropzone--invalid': Boolean(effectiveError)
           }}
           onDrop={this.handleDrop}
           onDragOver={this.handleDragOver}
           onDragLeave={this.handleDragLeave}
         >
           <input
-            ref={(el) => (this.inputEl = el)}
+            ref={el => (this.inputEl = el)}
             id={this.inputId}
-            class="scarlet-file-upload__input"
-            type="file"
+            class='scarlet-file-upload__input'
+            type='file'
             accept={this.accept}
             multiple={this.multiple}
             disabled={this.disabled}
@@ -142,36 +142,41 @@ export class ScarletFileUpload {
             aria-describedby={describedBy}
             onChange={this.handleInputChange}
           />
-          <scarlet-icon name="upload" size="1.5em" class="scarlet-file-upload__icon" />
-          <span class="scarlet-file-upload__hint">
-            Arraste um arquivo aqui ou <span class="scarlet-file-upload__browse">clique para selecionar</span>
+          <scarlet-icon name='upload' size='1.5em' class='scarlet-file-upload__icon' />
+          <span class='scarlet-file-upload__hint'>
+            Arraste um arquivo aqui ou{' '}
+            <span class='scarlet-file-upload__browse'>clique para selecionar</span>
           </span>
         </div>
         {this.files.length > 0 ? (
-          <ul class="scarlet-file-upload__list">
-            {this.files.map((file) => (
-              <li class="scarlet-file-upload__item">
-                <scarlet-icon name="file" size="1em" class="scarlet-file-upload__file-icon" />
-                <span class="scarlet-file-upload__name">{file.name}</span>
-                <span class="scarlet-file-upload__size">{this.formatSize(file.size)}</span>
+          <ul class='scarlet-file-upload__list'>
+            {this.files.map(file => (
+              <li class='scarlet-file-upload__item'>
+                <scarlet-icon name='file' size='1em' class='scarlet-file-upload__file-icon' />
+                <span class='scarlet-file-upload__name'>{file.name}</span>
+                <span class='scarlet-file-upload__size'>{this.formatSize(file.size)}</span>
                 <button
-                  type="button"
-                  class="scarlet-file-upload__remove"
+                  type='button'
+                  class='scarlet-file-upload__remove'
                   aria-label={`Remover ${file.name}`}
                   onClick={() => this.removeFile(file)}
                 >
-                  <scarlet-icon name="x" size="0.85em" />
+                  <scarlet-icon name='x' size='0.85em' />
                 </button>
               </li>
             ))}
           </ul>
         ) : null}
         {effectiveError ? (
-          <p class="scarlet-file-upload__message scarlet-file-upload__message--error" id={this.errorId} role="alert">
+          <p
+            class='scarlet-file-upload__message scarlet-file-upload__message--error'
+            id={this.errorId}
+            role='alert'
+          >
             {effectiveError}
           </p>
         ) : this.helperText ? (
-          <p class="scarlet-file-upload__message" id={this.helperId}>
+          <p class='scarlet-file-upload__message' id={this.helperId}>
             {this.helperText}
           </p>
         ) : null}

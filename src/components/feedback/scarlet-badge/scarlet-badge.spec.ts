@@ -5,7 +5,7 @@ describe('scarlet-badge', () => {
   it('renders solid/primary/sm by default with its slotted content', async () => {
     const page = await newSpecPage({
       components: [ScarletBadge],
-      html: `<scarlet-badge>Novo</scarlet-badge>`,
+      html: '<scarlet-badge>Novo</scarlet-badge>'
     });
 
     expect(page.root?.classList.contains('scarlet-badge-host--solid')).toBe(true);
@@ -17,7 +17,7 @@ describe('scarlet-badge', () => {
   it('omits the slot and adds the dot modifier when dot=true', async () => {
     const page = await newSpecPage({
       components: [ScarletBadge],
-      html: `<scarlet-badge dot>Novo</scarlet-badge>`,
+      html: '<scarlet-badge dot>Novo</scarlet-badge>'
     });
 
     expect(page.root?.classList.contains('scarlet-badge-host--dot')).toBe(true);
@@ -27,7 +27,7 @@ describe('scarlet-badge', () => {
   it('applies the requested variant and color classes', async () => {
     const page = await newSpecPage({
       components: [ScarletBadge],
-      html: `<scarlet-badge variant="outline" color="error"></scarlet-badge>`,
+      html: '<scarlet-badge variant="outline" color="error"></scarlet-badge>'
     });
 
     expect(page.root?.classList.contains('scarlet-badge-host--outline')).toBe(true);

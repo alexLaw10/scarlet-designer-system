@@ -1,4 +1,15 @@
-import { Component, Prop, State, Event, type EventEmitter, h, Host, Method, Listen, Element } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  State,
+  Event,
+  type EventEmitter,
+  h,
+  Host,
+  Method,
+  Listen,
+  Element
+} from '@stencil/core';
 import type { Size } from '@/types';
 import { generateId } from '@/utils';
 import { maskDate, onlyDigits } from '@/utils/masks';
@@ -12,7 +23,7 @@ import {
   isDateInRange,
   addMonths,
   daysInMonth,
-  getMonthGrid,
+  getMonthGrid
 } from '@/utils/calendar';
 import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/utils/form-field';
 
@@ -36,7 +47,7 @@ export interface ScarletDateRangeChange {
 @Component({
   tag: 'scarlet-date-range-picker',
   styleUrl: 'scarlet-date-range-picker.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletDateRangePicker {
   private startInputEl?: HTMLInputElement;
@@ -254,7 +265,11 @@ export class ScarletDateRangePicker {
     this.viewYear = next.getFullYear();
     this.viewMonth = next.getMonth();
     const currentDay = this.focusedDate?.getDate() ?? 1;
-    this.focusedDate = new Date(next.getFullYear(), next.getMonth(), Math.min(currentDay, daysInMonth(next.getFullYear(), next.getMonth())));
+    this.focusedDate = new Date(
+      next.getFullYear(),
+      next.getMonth(),
+      Math.min(currentDay, daysInMonth(next.getFullYear(), next.getMonth()))
+    );
   }
 
   private goToPrevMonth = (): void => this.shiftView(-1);
@@ -299,9 +314,13 @@ export class ScarletDateRangePicker {
 
   render() {
     const effectiveError =
-      this.errorMessage ?? (this.startAutoInvalid || this.endAutoInvalid ? 'Data inválida.' : undefined);
+      this.errorMessage ??
+      (this.startAutoInvalid || this.endAutoInvalid ? 'Data inválida.' : undefined);
     const isInvalid = this.invalid || Boolean(effectiveError);
-    const describedBy = computeDescribedBy(effectiveError, this.helperText, { helperId: this.helperId, errorId: this.errorId });
+    const describedBy = computeDescribedBy(effectiveError, this.helperText, {
+      helperId: this.helperId,
+      errorId: this.errorId
+    });
 
     const { min: minDate, max: maxDate } = this.getMinMax();
     const start = parseDateBR(this.startValue);
@@ -311,25 +330,25 @@ export class ScarletDateRangePicker {
     const rangeEnd = end ?? this.focusedDate;
 
     return (
-      <Host class="scarlet-date-range-picker-host">
+      <Host class='scarlet-date-range-picker-host'>
         {renderFieldLabel({
           htmlFor: this.startInputId,
           label: this.label,
           required: this.required,
           labelClass: 'scarlet-date-range-picker__label',
-          requiredClass: 'scarlet-date-range-picker__required',
+          requiredClass: 'scarlet-date-range-picker__required'
         })}
-        <div class="scarlet-date-range-picker__field">
+        <div class='scarlet-date-range-picker__field'>
           <input
-            ref={(el) => (this.startInputEl = el)}
+            ref={el => (this.startInputEl = el)}
             id={this.startInputId}
             class={{
               'scarlet-date-range-picker__input': true,
               [`scarlet-date-range-picker__input--${this.size}`]: true,
-              'scarlet-date-range-picker__input--invalid': isInvalid,
+              'scarlet-date-range-picker__input--invalid': isInvalid
             }}
-            type="text"
-            inputMode="numeric"
+            type='text'
+            inputMode='numeric'
             value={this.startValue}
             placeholder={this.startPlaceholder}
             disabled={this.disabled}
@@ -340,19 +359,19 @@ export class ScarletDateRangePicker {
             onBlur={this.handleStartBlur}
             onKeyDown={this.handleFieldKeyDown}
           />
-          <span class="scarlet-date-range-picker__separator" aria-hidden="true">
+          <span class='scarlet-date-range-picker__separator' aria-hidden='true'>
             –
           </span>
           <input
-            ref={(el) => (this.endInputEl = el)}
+            ref={el => (this.endInputEl = el)}
             id={this.endInputId}
             class={{
               'scarlet-date-range-picker__input': true,
               [`scarlet-date-range-picker__input--${this.size}`]: true,
-              'scarlet-date-range-picker__input--invalid': isInvalid,
+              'scarlet-date-range-picker__input--invalid': isInvalid
             }}
-            type="text"
-            inputMode="numeric"
+            type='text'
+            inputMode='numeric'
             value={this.endValue}
             placeholder={this.endPlaceholder}
             disabled={this.disabled}
@@ -363,64 +382,96 @@ export class ScarletDateRangePicker {
             onKeyDown={this.handleFieldKeyDown}
           />
           <button
-            type="button"
-            ref={(el) => (this.toggleBtnEl = el)}
-            class="scarlet-date-range-picker__toggle"
+            type='button'
+            ref={el => (this.toggleBtnEl = el)}
+            class='scarlet-date-range-picker__toggle'
             aria-label={this.open ? 'Fechar calendário' : 'Abrir calendário'}
-            aria-haspopup="dialog"
+            aria-haspopup='dialog'
             aria-expanded={this.open ? 'true' : 'false'}
             disabled={this.disabled}
             onClick={this.handleToggleClick}
           >
-            <scarlet-icon name="calendar" size="1.1em" />
+            <scarlet-icon name='calendar' size='1.1em' />
           </button>
           {this.open ? (
-            <div class="scarlet-date-range-picker__panel" role="dialog" aria-label="Escolher intervalo de datas">
-              <div class="scarlet-date-range-picker__panel-header">
-                <button type="button" class="scarlet-date-range-picker__nav" aria-label="Mês anterior" onClick={this.goToPrevMonth}>
-                  <scarlet-icon name="chevron-left" size="1.1em" />
+            <div
+              class='scarlet-date-range-picker__panel'
+              role='dialog'
+              aria-label='Escolher intervalo de datas'
+            >
+              <div class='scarlet-date-range-picker__panel-header'>
+                <button
+                  type='button'
+                  class='scarlet-date-range-picker__nav'
+                  aria-label='Mês anterior'
+                  onClick={this.goToPrevMonth}
+                >
+                  <scarlet-icon name='chevron-left' size='1.1em' />
                 </button>
-                <span class="scarlet-date-range-picker__panel-title" id={this.titleId} aria-live="polite">
+                <span
+                  class='scarlet-date-range-picker__panel-title'
+                  id={this.titleId}
+                  aria-live='polite'
+                >
                   {MONTH_LABELS_PT_BR[this.viewMonth]} {this.viewYear}
                 </span>
-                <button type="button" class="scarlet-date-range-picker__nav" aria-label="Próximo mês" onClick={this.goToNextMonth}>
-                  <scarlet-icon name="chevron-right" size="1.1em" />
+                <button
+                  type='button'
+                  class='scarlet-date-range-picker__nav'
+                  aria-label='Próximo mês'
+                  onClick={this.goToNextMonth}
+                >
+                  <scarlet-icon name='chevron-right' size='1.1em' />
                 </button>
               </div>
-              <p class="scarlet-date-range-picker__hint">{this.pickingEnd ? 'Escolha a data final' : 'Escolha a data inicial'}</p>
-              <div class="scarlet-date-range-picker__grid" role="grid" aria-labelledby={this.titleId} onKeyDown={this.handleGridKeyDown}>
-                <div class="scarlet-date-range-picker__weekdays" role="row">
-                  {WEEKDAY_LABELS_PT_BR.map((weekday) => (
-                    <span class="scarlet-date-range-picker__weekday" role="columnheader" aria-hidden="true">
+              <p class='scarlet-date-range-picker__hint'>
+                {this.pickingEnd ? 'Escolha a data final' : 'Escolha a data inicial'}
+              </p>
+              <div
+                class='scarlet-date-range-picker__grid'
+                role='grid'
+                aria-labelledby={this.titleId}
+                onKeyDown={this.handleGridKeyDown}
+              >
+                <div class='scarlet-date-range-picker__weekdays' role='row'>
+                  {WEEKDAY_LABELS_PT_BR.map(weekday => (
+                    <span
+                      class='scarlet-date-range-picker__weekday'
+                      role='columnheader'
+                      aria-hidden='true'
+                    >
                       {weekday}
                     </span>
                   ))}
                 </div>
-                {weeks.map((week) => (
-                  <div class="scarlet-date-range-picker__week" role="row">
-                    {week.map((day) => {
+                {weeks.map(week => (
+                  <div class='scarlet-date-range-picker__week' role='row'>
+                    {week.map(day => {
                       const dayDisabled = !isDateInRange(day.date, minDate, maxDate);
                       const isStart = isSameDate(day.date, start);
                       const isEnd = isSameDate(day.date, end);
-                      const inRange = Boolean(start) && Boolean(rangeEnd) && isDateInRange(day.date, start, rangeEnd);
+                      const inRange =
+                        Boolean(start) &&
+                        Boolean(rangeEnd) &&
+                        isDateInRange(day.date, start, rangeEnd);
                       const isFocused = isSameDate(day.date, this.focusedDate);
                       const isToday = isSameDate(day.date, today);
                       return (
-                        <div class="scarlet-date-range-picker__cell" role="gridcell">
+                        <div class='scarlet-date-range-picker__cell' role='gridcell'>
                           <button
-                            type="button"
+                            type='button'
                             class={{
                               'scarlet-date-range-picker__day': true,
                               'scarlet-date-range-picker__day--outside': !day.inCurrentMonth,
                               'scarlet-date-range-picker__day--today': isToday,
                               'scarlet-date-range-picker__day--in-range': inRange,
-                              'scarlet-date-range-picker__day--bound': isStart || isEnd,
+                              'scarlet-date-range-picker__day--bound': isStart || isEnd
                             }}
                             tabIndex={isFocused ? 0 : -1}
                             aria-selected={isStart || isEnd ? 'true' : 'false'}
                             aria-current={isToday ? 'date' : undefined}
                             aria-disabled={dayDisabled ? 'true' : undefined}
-                            ref={(el) => {
+                            ref={el => {
                               if (isFocused) this.focusedCellEl = el;
                             }}
                             onClick={() => this.selectDate(day.date)}
@@ -440,8 +491,10 @@ export class ScarletDateRangePicker {
           errorMessage: effectiveError,
           helperText: this.helperText,
           ids: { helperId: this.helperId, errorId: this.errorId },
-          errorClass: 'scarlet-date-range-picker__message scarlet-date-range-picker__message--error',
-          helperClass: 'scarlet-date-range-picker__message scarlet-date-range-picker__message--helper',
+          errorClass:
+            'scarlet-date-range-picker__message scarlet-date-range-picker__message--error',
+          helperClass:
+            'scarlet-date-range-picker__message scarlet-date-range-picker__message--helper'
         })}
       </Host>
     );

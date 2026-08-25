@@ -9,7 +9,7 @@ export type ScarletStatTrend = 'up' | 'down' | 'neutral';
 @Component({
   tag: 'scarlet-stat',
   styleUrl: 'scarlet-stat.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletStat {
   /** Label above the value, e.g. "Receita total". */
@@ -26,13 +26,15 @@ export class ScarletStat {
 
   render() {
     return (
-      <Host class="scarlet-stat-host">
-        <p class="scarlet-stat__label">{this.label}</p>
-        <p class="scarlet-stat__value">{this.value}</p>
+      <Host class='scarlet-stat-host'>
+        <p class='scarlet-stat__label'>{this.label}</p>
+        <p class='scarlet-stat__value'>{this.value}</p>
         {this.change ? (
-          <p class={{ 'scarlet-stat__change': true, [`scarlet-stat__change--${this.trend}`]: true }}>
+          <p
+            class={{ 'scarlet-stat__change': true, [`scarlet-stat__change--${this.trend}`]: true }}
+          >
             {this.trend !== 'neutral' ? (
-              <scarlet-icon name={this.trend === 'up' ? 'arrow-up' : 'arrow-down'} size="0.85em" />
+              <scarlet-icon name={this.trend === 'up' ? 'arrow-up' : 'arrow-down'} size='0.85em' />
             ) : null}
             {this.change}
           </p>

@@ -19,7 +19,7 @@ describe('scarlet-modal', () => {
   it('calls showModal() and emits scarletShow when open becomes true', async () => {
     const page = await newSpecPage({
       components: [ScarletModal],
-      html: `<scarlet-modal></scarlet-modal>`,
+      html: '<scarlet-modal></scarlet-modal>'
     });
     const dialog = stubDialog(page);
 
@@ -40,7 +40,7 @@ describe('scarlet-modal', () => {
   it('opens via the show() method by setting open=true', async () => {
     const page = await newSpecPage({
       components: [ScarletModal],
-      html: `<scarlet-modal></scarlet-modal>`,
+      html: '<scarlet-modal></scarlet-modal>'
     });
     const dialog = stubDialog(page);
 
@@ -54,7 +54,7 @@ describe('scarlet-modal', () => {
   it('closes via the hide() method, emitting a cancelable scarletClose', async () => {
     const page = await newSpecPage({
       components: [ScarletModal],
-      html: `<scarlet-modal></scarlet-modal>`,
+      html: '<scarlet-modal></scarlet-modal>'
     });
     const dialog = stubDialog(page);
     Object.defineProperty(dialog, 'open', { value: true, configurable: true });
@@ -75,14 +75,14 @@ describe('scarlet-modal', () => {
   it('stays open when a scarletClose listener calls preventDefault()', async () => {
     const page = await newSpecPage({
       components: [ScarletModal],
-      html: `<scarlet-modal></scarlet-modal>`,
+      html: '<scarlet-modal></scarlet-modal>'
     });
     const dialog = stubDialog(page);
     Object.defineProperty(dialog, 'open', { value: true, configurable: true });
     page.rootInstance.open = true;
     await page.waitForChanges();
 
-    page.root?.addEventListener('scarletClose', (event) => event.preventDefault());
+    page.root?.addEventListener('scarletClose', event => event.preventDefault());
 
     await page.rootInstance.hide();
     await page.waitForChanges();
@@ -94,7 +94,7 @@ describe('scarlet-modal', () => {
   it('prevents the native cancel default and requests close when dismissOnEsc is true', async () => {
     const page = await newSpecPage({
       components: [ScarletModal],
-      html: `<scarlet-modal></scarlet-modal>`,
+      html: '<scarlet-modal></scarlet-modal>'
     });
     const dialog = stubDialog(page);
     Object.defineProperty(dialog, 'open', { value: true, configurable: true });
@@ -112,7 +112,7 @@ describe('scarlet-modal', () => {
   it('does not close on cancel when dismissOnEsc is false', async () => {
     const page = await newSpecPage({
       components: [ScarletModal],
-      html: `<scarlet-modal dismiss-on-esc="false"></scarlet-modal>`,
+      html: '<scarlet-modal dismiss-on-esc="false"></scarlet-modal>'
     });
     const dialog = stubDialog(page);
     Object.defineProperty(dialog, 'open', { value: true, configurable: true });
@@ -128,7 +128,7 @@ describe('scarlet-modal', () => {
   it('closes on backdrop click but not on clicks inside the dialog box', async () => {
     const page = await newSpecPage({
       components: [ScarletModal],
-      html: `<scarlet-modal></scarlet-modal>`,
+      html: '<scarlet-modal></scarlet-modal>'
     });
     const dialog = stubDialog(page);
     Object.defineProperty(dialog, 'open', { value: true, configurable: true });
@@ -148,18 +148,22 @@ describe('scarlet-modal', () => {
   it('labels the dialog via the header slot by default, and via aria-label when provided', async () => {
     const withHeader = await newSpecPage({
       components: [ScarletModal],
-      html: `<scarlet-modal><span slot="header">Confirmar</span></scarlet-modal>`,
+      html: '<scarlet-modal><span slot="header">Confirmar</span></scarlet-modal>'
     });
     const headerDialog = withHeader.root?.shadowRoot?.querySelector('dialog') as HTMLDialogElement;
-    const headerSpan = withHeader.root?.shadowRoot?.querySelector('.scarlet-modal__header > span') as HTMLElement;
+    const headerSpan = withHeader.root?.shadowRoot?.querySelector(
+      '.scarlet-modal__header > span'
+    ) as HTMLElement;
     expect(headerDialog.getAttribute('aria-labelledby')).toBe(headerSpan.id);
     expect(headerDialog.hasAttribute('aria-label')).toBe(false);
 
     const withAriaLabel = await newSpecPage({
       components: [ScarletModal],
-      html: `<scarlet-modal aria-label="Confirmar exclusão"><span slot="header">Ignorado</span></scarlet-modal>`,
+      html: '<scarlet-modal aria-label="Confirmar exclusão"><span slot="header">Ignorado</span></scarlet-modal>'
     });
-    const labeledDialog = withAriaLabel.root?.shadowRoot?.querySelector('dialog') as HTMLDialogElement;
+    const labeledDialog = withAriaLabel.root?.shadowRoot?.querySelector(
+      'dialog'
+    ) as HTMLDialogElement;
     expect(labeledDialog.getAttribute('aria-label')).toBe('Confirmar exclusão');
     expect(labeledDialog.hasAttribute('aria-labelledby')).toBe(false);
   });
@@ -167,21 +171,42 @@ describe('scarlet-modal', () => {
   it('restores focus to the previously focused element when closed', async () => {
     const page = await newSpecPage({
       components: [ScarletModal],
-      html: `<scarlet-modal></scarlet-modal>`,
+      html: '<scarlet-modal></scarlet-modal>'
     });
     stubDialog(page);
 
+    // mock-doc's `.focus()` only dispatches a `focus` event — it never
+    // updates `document.activeElement` (there's no tracking of it at all),
+    // so we stub a live `activeElement` here and route it through the
+    // trigger's own `.focus()`, the same way `stubDialog` above stands in
+    // for native <dialog> behavior mock-doc doesn't implement either.
     const trigger = page.doc.createElement('button');
     page.body.appendChild(trigger);
+    let currentActiveElement: Element | undefined;
+    Object.defineProperty(page.doc, 'activeElement', {
+      get: () => currentActiveElement ?? null,
+      configurable: true
+    });
+    const focusSpy = jest.fn(() => {
+      currentActiveElement = trigger;
+    });
+    trigger.focus = focusSpy;
+
     trigger.focus();
     expect(page.doc.activeElement).toBe(trigger);
 
     page.rootInstance.open = true;
     await page.waitForChanges();
 
+    // Simulate the dialog stealing focus away from the trigger, the way a
+    // real `showModal()` would.
+    currentActiveElement = undefined;
+    focusSpy.mockClear();
+
     await page.rootInstance.hide();
     await page.waitForChanges();
 
+    expect(focusSpy).toHaveBeenCalledTimes(1);
     expect(page.doc.activeElement).toBe(trigger);
   });
 });

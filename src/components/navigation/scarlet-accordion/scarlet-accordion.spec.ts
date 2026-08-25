@@ -4,26 +4,26 @@ import { ScarletAccordion } from './scarlet-accordion';
 const items = [
   { value: 'a', title: 'A' },
   { value: 'b', title: 'B' },
-  { value: 'c', title: 'C', disabled: true },
+  { value: 'c', title: 'C', disabled: true }
 ];
 
 describe('scarlet-accordion', () => {
   it('renders all sections collapsed by default', async () => {
     const page = await newSpecPage({
       components: [ScarletAccordion],
-      html: `<scarlet-accordion></scarlet-accordion>`,
+      html: '<scarlet-accordion></scarlet-accordion>'
     });
     page.rootInstance.items = items;
     await page.waitForChanges();
 
     const panels = page.root?.shadowRoot?.querySelectorAll('.scarlet-accordion__panel');
-    panels?.forEach((panel) => expect((panel as HTMLElement).hidden).toBe(true));
+    panels?.forEach(panel => expect((panel as HTMLElement).hidden).toBe(true));
   });
 
   it('expands a section on click and emits scarletChange', async () => {
     const page = await newSpecPage({
       components: [ScarletAccordion],
-      html: `<scarlet-accordion></scarlet-accordion>`,
+      html: '<scarlet-accordion></scarlet-accordion>'
     });
     page.rootInstance.items = items;
     await page.waitForChanges();
@@ -43,7 +43,7 @@ describe('scarlet-accordion', () => {
   it('collapses other sections when a new one opens, unless multiple is set', async () => {
     const page = await newSpecPage({
       components: [ScarletAccordion],
-      html: `<scarlet-accordion></scarlet-accordion>`,
+      html: '<scarlet-accordion></scarlet-accordion>'
     });
     page.rootInstance.items = items;
     page.rootInstance.expandedValues = ['a'];
@@ -59,7 +59,7 @@ describe('scarlet-accordion', () => {
   it('keeps multiple sections open when multiple is set', async () => {
     const page = await newSpecPage({
       components: [ScarletAccordion],
-      html: `<scarlet-accordion multiple></scarlet-accordion>`,
+      html: '<scarlet-accordion multiple></scarlet-accordion>'
     });
     page.rootInstance.items = items;
     page.rootInstance.expandedValues = ['a'];
@@ -75,7 +75,7 @@ describe('scarlet-accordion', () => {
   it('toggles a section closed when clicked again', async () => {
     const page = await newSpecPage({
       components: [ScarletAccordion],
-      html: `<scarlet-accordion></scarlet-accordion>`,
+      html: '<scarlet-accordion></scarlet-accordion>'
     });
     page.rootInstance.items = items;
     page.rootInstance.expandedValues = ['a'];
@@ -91,7 +91,7 @@ describe('scarlet-accordion', () => {
   it('ignores clicks on a disabled section', async () => {
     const page = await newSpecPage({
       components: [ScarletAccordion],
-      html: `<scarlet-accordion></scarlet-accordion>`,
+      html: '<scarlet-accordion></scarlet-accordion>'
     });
     page.rootInstance.items = items;
     await page.waitForChanges();

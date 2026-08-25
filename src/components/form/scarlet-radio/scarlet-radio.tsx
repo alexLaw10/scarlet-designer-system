@@ -8,7 +8,7 @@ import { generateId } from '@/utils';
 @Component({
   tag: 'scarlet-radio',
   styleUrl: 'scarlet-radio.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletRadio {
   private readonly inputId = generateId('scarlet-radio');
@@ -66,12 +66,15 @@ export class ScarletRadio {
 
   render() {
     return (
-      <Host class="scarlet-radio-host">
-        <label class={{ 'scarlet-radio': true, 'scarlet-radio--disabled': this.disabled }} htmlFor={this.inputId}>
+      <Host class='scarlet-radio-host'>
+        <label
+          class={{ 'scarlet-radio': true, 'scarlet-radio--disabled': this.disabled }}
+          htmlFor={this.inputId}
+        >
           <input
             id={this.inputId}
-            class="scarlet-radio__input"
-            type="radio"
+            class='scarlet-radio__input'
+            type='radio'
             checked={this.checked}
             disabled={this.disabled}
             name={this.name}
@@ -79,8 +82,8 @@ export class ScarletRadio {
             tabIndex={this.focusable ? 0 : -1}
             onChange={this.handleChange}
           />
-          <span class="scarlet-radio__dot" aria-hidden="true" />
-          {this.label ? <span class="scarlet-radio__label">{this.label}</span> : null}
+          <span class='scarlet-radio__dot' aria-hidden='true' />
+          {this.label ? <span class='scarlet-radio__label'>{this.label}</span> : null}
         </label>
       </Host>
     );

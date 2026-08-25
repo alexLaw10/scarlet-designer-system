@@ -5,7 +5,7 @@ describe('scarlet-checkbox', () => {
   it('renders unchecked by default with a label wired via for/id', async () => {
     const page = await newSpecPage({
       components: [ScarletCheckbox],
-      html: `<scarlet-checkbox label="Aceito"></scarlet-checkbox>`,
+      html: '<scarlet-checkbox label="Aceito"></scarlet-checkbox>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -19,7 +19,7 @@ describe('scarlet-checkbox', () => {
   it('toggles checked and emits scarletChange on interaction', async () => {
     const page = await newSpecPage({
       components: [ScarletCheckbox],
-      html: `<scarlet-checkbox></scarlet-checkbox>`,
+      html: '<scarlet-checkbox></scarlet-checkbox>'
     });
 
     const changeSpy = jest.fn();
@@ -38,7 +38,7 @@ describe('scarlet-checkbox', () => {
   it('applies the indeterminate DOM property from the prop', async () => {
     const page = await newSpecPage({
       components: [ScarletCheckbox],
-      html: `<scarlet-checkbox indeterminate></scarlet-checkbox>`,
+      html: '<scarlet-checkbox indeterminate></scarlet-checkbox>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -48,7 +48,7 @@ describe('scarlet-checkbox', () => {
   it('disables the native input when disabled', async () => {
     const page = await newSpecPage({
       components: [ScarletCheckbox],
-      html: `<scarlet-checkbox disabled></scarlet-checkbox>`,
+      html: '<scarlet-checkbox disabled></scarlet-checkbox>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;

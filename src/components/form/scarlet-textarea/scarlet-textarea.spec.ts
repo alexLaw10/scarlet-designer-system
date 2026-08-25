@@ -5,7 +5,7 @@ describe('scarlet-textarea', () => {
   it('renders a label wired to the textarea via id/for', async () => {
     const page = await newSpecPage({
       components: [ScarletTextarea],
-      html: `<scarlet-textarea label="Comentário"></scarlet-textarea>`,
+      html: '<scarlet-textarea label="Comentário"></scarlet-textarea>'
     });
 
     const label = page.root?.shadowRoot?.querySelector('label') as HTMLLabelElement;
@@ -20,7 +20,7 @@ describe('scarlet-textarea', () => {
   it('emits scarletInput on keystrokes and updates value', async () => {
     const page = await newSpecPage({
       components: [ScarletTextarea],
-      html: `<scarlet-textarea></scarlet-textarea>`,
+      html: '<scarlet-textarea></scarlet-textarea>'
     });
 
     const inputSpy = jest.fn();
@@ -39,7 +39,7 @@ describe('scarlet-textarea', () => {
   it('sets aria-invalid and renders the error message when errorMessage is provided', async () => {
     const page = await newSpecPage({
       components: [ScarletTextarea],
-      html: `<scarlet-textarea error-message="Campo obrigatório"></scarlet-textarea>`,
+      html: '<scarlet-textarea error-message="Campo obrigatório"></scarlet-textarea>'
     });
 
     const textarea = page.root?.shadowRoot?.querySelector('textarea') as HTMLTextAreaElement;
@@ -52,7 +52,7 @@ describe('scarlet-textarea', () => {
   it('applies the requested resize modifier', async () => {
     const page = await newSpecPage({
       components: [ScarletTextarea],
-      html: `<scarlet-textarea resize="none"></scarlet-textarea>`,
+      html: '<scarlet-textarea resize="none"></scarlet-textarea>'
     });
 
     const textarea = page.root?.shadowRoot?.querySelector('textarea') as HTMLTextAreaElement;
@@ -62,7 +62,7 @@ describe('scarlet-textarea', () => {
   it('focuses the internal textarea via setFocus()', async () => {
     const page = await newSpecPage({
       components: [ScarletTextarea],
-      html: `<scarlet-textarea></scarlet-textarea>`,
+      html: '<scarlet-textarea></scarlet-textarea>'
     });
 
     const textarea = page.root?.shadowRoot?.querySelector('textarea') as HTMLTextAreaElement;

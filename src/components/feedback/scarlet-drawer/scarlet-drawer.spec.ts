@@ -21,7 +21,7 @@ describe('scarlet-drawer', () => {
   it('calls showModal() and emits scarletShow when open becomes true', async () => {
     const page = await newSpecPage({
       components: [ScarletDrawer],
-      html: `<scarlet-drawer></scarlet-drawer>`,
+      html: '<scarlet-drawer></scarlet-drawer>'
     });
     const dialog = stubDialog(page);
     const showSpy = jest.fn();
@@ -37,7 +37,7 @@ describe('scarlet-drawer', () => {
   it('opens via the show() method and closes via hide(), emitting a cancelable scarletClose', async () => {
     const page = await newSpecPage({
       components: [ScarletDrawer],
-      html: `<scarlet-drawer></scarlet-drawer>`,
+      html: '<scarlet-drawer></scarlet-drawer>'
     });
     const dialog = stubDialog(page);
 
@@ -59,14 +59,14 @@ describe('scarlet-drawer', () => {
   it('stays open when a scarletClose listener calls preventDefault()', async () => {
     const page = await newSpecPage({
       components: [ScarletDrawer],
-      html: `<scarlet-drawer></scarlet-drawer>`,
+      html: '<scarlet-drawer></scarlet-drawer>'
     });
     const dialog = stubDialog(page);
     Object.defineProperty(dialog, 'open', { value: true, configurable: true });
     page.rootInstance.open = true;
     await page.waitForChanges();
 
-    page.root?.addEventListener('scarletClose', (event) => event.preventDefault());
+    page.root?.addEventListener('scarletClose', event => event.preventDefault());
 
     await page.rootInstance.hide();
     await page.waitForChanges();
@@ -78,7 +78,7 @@ describe('scarlet-drawer', () => {
   it('prevents the native cancel default and requests close when dismissOnEsc is true', async () => {
     const page = await newSpecPage({
       components: [ScarletDrawer],
-      html: `<scarlet-drawer></scarlet-drawer>`,
+      html: '<scarlet-drawer></scarlet-drawer>'
     });
     const dialog = stubDialog(page);
     Object.defineProperty(dialog, 'open', { value: true, configurable: true });
@@ -96,7 +96,7 @@ describe('scarlet-drawer', () => {
   it('closes on backdrop click but not on clicks inside the panel', async () => {
     const page = await newSpecPage({
       components: [ScarletDrawer],
-      html: `<scarlet-drawer></scarlet-drawer>`,
+      html: '<scarlet-drawer></scarlet-drawer>'
     });
     const dialog = stubDialog(page);
     Object.defineProperty(dialog, 'open', { value: true, configurable: true });
@@ -116,24 +116,28 @@ describe('scarlet-drawer', () => {
   it('labels the dialog via the header slot by default, and via aria-label when provided', async () => {
     const withHeader = await newSpecPage({
       components: [ScarletDrawer],
-      html: `<scarlet-drawer><span slot="header">Filtros</span></scarlet-drawer>`,
+      html: '<scarlet-drawer><span slot="header">Filtros</span></scarlet-drawer>'
     });
     const headerDialog = withHeader.root?.shadowRoot?.querySelector('dialog') as HTMLDialogElement;
-    const headerSpan = withHeader.root?.shadowRoot?.querySelector('.scarlet-drawer__header > span') as HTMLElement;
+    const headerSpan = withHeader.root?.shadowRoot?.querySelector(
+      '.scarlet-drawer__header > span'
+    ) as HTMLElement;
     expect(headerDialog.getAttribute('aria-labelledby')).toBe(headerSpan.id);
 
     const withAriaLabel = await newSpecPage({
       components: [ScarletDrawer],
-      html: `<scarlet-drawer aria-label="Filtros de busca"></scarlet-drawer>`,
+      html: '<scarlet-drawer aria-label="Filtros de busca"></scarlet-drawer>'
     });
-    const labeledDialog = withAriaLabel.root?.shadowRoot?.querySelector('dialog') as HTMLDialogElement;
+    const labeledDialog = withAriaLabel.root?.shadowRoot?.querySelector(
+      'dialog'
+    ) as HTMLDialogElement;
     expect(labeledDialog.getAttribute('aria-label')).toBe('Filtros de busca');
   });
 
   it('defaults to the right placement and applies the placement/size classes', async () => {
     const page = await newSpecPage({
       components: [ScarletDrawer],
-      html: `<scarlet-drawer placement="left" size="lg"></scarlet-drawer>`,
+      html: '<scarlet-drawer placement="left" size="lg"></scarlet-drawer>'
     });
 
     const dialog = page.root?.shadowRoot?.querySelector('dialog') as HTMLDialogElement;
@@ -144,21 +148,42 @@ describe('scarlet-drawer', () => {
   it('restores focus to the previously focused element when closed', async () => {
     const page = await newSpecPage({
       components: [ScarletDrawer],
-      html: `<scarlet-drawer></scarlet-drawer>`,
+      html: '<scarlet-drawer></scarlet-drawer>'
     });
     stubDialog(page);
 
+    // mock-doc's `.focus()` only dispatches a `focus` event — it never
+    // updates `document.activeElement` (there's no tracking of it at all),
+    // so we stub a live `activeElement` here and route it through the
+    // trigger's own `.focus()`, the same way `stubDialog` above stands in
+    // for native <dialog> behavior mock-doc doesn't implement either.
     const trigger = page.doc.createElement('button');
     page.body.appendChild(trigger);
+    let currentActiveElement: Element | undefined;
+    Object.defineProperty(page.doc, 'activeElement', {
+      get: () => currentActiveElement ?? null,
+      configurable: true
+    });
+    const focusSpy = jest.fn(() => {
+      currentActiveElement = trigger;
+    });
+    trigger.focus = focusSpy;
+
     trigger.focus();
     expect(page.doc.activeElement).toBe(trigger);
 
     page.rootInstance.open = true;
     await page.waitForChanges();
 
+    // Simulate the drawer stealing focus away from the trigger, the way a
+    // real `showModal()` would.
+    currentActiveElement = undefined;
+    focusSpy.mockClear();
+
     await page.rootInstance.hide();
     await page.waitForChanges();
 
+    expect(focusSpy).toHaveBeenCalledTimes(1);
     expect(page.doc.activeElement).toBe(trigger);
   });
 });

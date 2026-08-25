@@ -13,7 +13,7 @@ type ScarletPaginationItem = number | 'ellipsis';
 @Component({
   tag: 'scarlet-pagination',
   styleUrl: 'scarlet-pagination.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletPagination {
   /** Total number of pages. */
@@ -68,30 +68,33 @@ export class ScarletPagination {
     const items = this.getItems();
 
     return (
-      <Host class="scarlet-pagination-host">
+      <Host class='scarlet-pagination-host'>
         <nav aria-label={this.ariaLabel}>
-          <ul class="scarlet-pagination__list">
+          <ul class='scarlet-pagination__list'>
             <li>
               <button
-                type="button"
-                class="scarlet-pagination__nav"
+                type='button'
+                class='scarlet-pagination__nav'
                 disabled={this.page === 1}
-                aria-label="Página anterior"
+                aria-label='Página anterior'
                 onClick={() => this.goTo(this.page - 1)}
               >
-                <scarlet-icon name="chevron-left" size="1em" />
+                <scarlet-icon name='chevron-left' size='1em' />
               </button>
             </li>
-            {items.map((item) =>
+            {items.map(item =>
               item === 'ellipsis' ? (
-                <li class="scarlet-pagination__ellipsis" aria-hidden="true">
+                <li class='scarlet-pagination__ellipsis' aria-hidden='true'>
                   …
                 </li>
               ) : (
                 <li>
                   <button
-                    type="button"
-                    class={{ 'scarlet-pagination__page': true, 'scarlet-pagination__page--current': item === this.page }}
+                    type='button'
+                    class={{
+                      'scarlet-pagination__page': true,
+                      'scarlet-pagination__page--current': item === this.page
+                    }}
                     aria-current={item === this.page ? 'page' : undefined}
                     aria-label={`Página ${item}`}
                     onClick={() => this.goTo(item)}
@@ -99,17 +102,17 @@ export class ScarletPagination {
                     {item}
                   </button>
                 </li>
-              ),
+              )
             )}
             <li>
               <button
-                type="button"
-                class="scarlet-pagination__nav"
+                type='button'
+                class='scarlet-pagination__nav'
                 disabled={this.page === this.totalPages}
-                aria-label="Próxima página"
+                aria-label='Próxima página'
                 onClick={() => this.goTo(this.page + 1)}
               >
-                <scarlet-icon name="chevron-right" size="1em" />
+                <scarlet-icon name='chevron-right' size='1em' />
               </button>
             </li>
           </ul>

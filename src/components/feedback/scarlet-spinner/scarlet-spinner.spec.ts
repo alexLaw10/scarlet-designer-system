@@ -5,7 +5,7 @@ describe('scarlet-spinner', () => {
   it('exposes role="status" with label as the accessible name', async () => {
     const page = await newSpecPage({
       components: [ScarletSpinner],
-      html: `<scarlet-spinner label="Carregando pedidos"></scarlet-spinner>`,
+      html: '<scarlet-spinner label="Carregando pedidos"></scarlet-spinner>'
     });
 
     expect(page.root?.getAttribute('role')).toBe('status');
@@ -15,7 +15,7 @@ describe('scarlet-spinner', () => {
   it('renders the circle span by default', async () => {
     const page = await newSpecPage({
       components: [ScarletSpinner],
-      html: `<scarlet-spinner></scarlet-spinner>`,
+      html: '<scarlet-spinner></scarlet-spinner>'
     });
 
     expect(page.root?.shadowRoot?.querySelector('.scarlet-spinner__circle')).not.toBeNull();
@@ -25,7 +25,7 @@ describe('scarlet-spinner', () => {
   it('renders the logo svg when variant is logo', async () => {
     const page = await newSpecPage({
       components: [ScarletSpinner],
-      html: `<scarlet-spinner variant="logo"></scarlet-spinner>`,
+      html: '<scarlet-spinner variant="logo"></scarlet-spinner>'
     });
 
     expect(page.root?.shadowRoot?.querySelector('.scarlet-spinner__logo')).not.toBeNull();
@@ -35,7 +35,7 @@ describe('scarlet-spinner', () => {
   it('applies the size host class', async () => {
     const page = await newSpecPage({
       components: [ScarletSpinner],
-      html: `<scarlet-spinner size="lg"></scarlet-spinner>`,
+      html: '<scarlet-spinner size="lg"></scarlet-spinner>'
     });
 
     expect(page.root?.classList.contains('scarlet-spinner-host--lg')).toBe(true);

@@ -1,4 +1,14 @@
-import { Component, Prop, State, Event, type EventEmitter, h, Host, Listen, Element } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  State,
+  Event,
+  type EventEmitter,
+  h,
+  Host,
+  Listen,
+  Element
+} from '@stencil/core';
 
 export type ScarletPopoverPlacement = 'top' | 'bottom' | 'left' | 'right';
 export type ScarletPopoverTriggerMode = 'click' | 'hover';
@@ -27,7 +37,7 @@ export type ScarletPopoverTriggerMode = 'click' | 'hover';
 @Component({
   tag: 'scarlet-popover',
   styleUrl: 'scarlet-popover.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletPopover {
   private triggerSlotEl?: HTMLSlotElement;
@@ -139,12 +149,15 @@ export class ScarletPopover {
 
   render() {
     return (
-      <Host class="scarlet-popover-host">
-        <slot name="trigger" ref={this.handleTriggerRef} />
+      <Host class='scarlet-popover-host'>
+        <slot name='trigger' ref={this.handleTriggerRef} />
         {this.open ? (
           <div
-            class={{ 'scarlet-popover__content': true, [`scarlet-popover__content--${this.placement}`]: true }}
-            role="dialog"
+            class={{
+              'scarlet-popover__content': true,
+              [`scarlet-popover__content--${this.placement}`]: true
+            }}
+            role='dialog'
             aria-label={this.ariaLabel}
             onMouseEnter={this.triggerMode === 'hover' ? this.handleTriggerEnter : undefined}
             onMouseLeave={this.triggerMode === 'hover' ? this.handleTriggerLeave : undefined}

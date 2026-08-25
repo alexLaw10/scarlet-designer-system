@@ -15,7 +15,7 @@ export type ScarletLinkUnderline = 'always' | 'hover' | 'none';
 @Component({
   tag: 'scarlet-link',
   styleUrl: 'scarlet-link.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletLink {
   /** Native `href`. Omitting it (and setting `disabled`) renders inert text styled like a link. */
@@ -41,13 +41,13 @@ export class ScarletLink {
     const rel = this.rel ?? (isExternal ? 'noopener noreferrer' : undefined);
 
     return (
-      <Host class="scarlet-link-host">
+      <Host class='scarlet-link-host'>
         <a
           class={{
             'scarlet-link': true,
             [`scarlet-link--${this.color}`]: true,
             [`scarlet-link--underline-${this.underline}`]: true,
-            'scarlet-link--disabled': this.disabled,
+            'scarlet-link--disabled': this.disabled
           }}
           href={this.disabled ? undefined : this.href}
           target={this.target}
@@ -55,7 +55,9 @@ export class ScarletLink {
           aria-disabled={this.disabled ? 'true' : undefined}
         >
           <slot />
-          {isExternal ? <scarlet-icon name="external-link" size="0.85em" class="scarlet-link__icon" /> : null}
+          {isExternal ? (
+            <scarlet-icon name='external-link' size='0.85em' class='scarlet-link__icon' />
+          ) : null}
         </a>
       </Host>
     );

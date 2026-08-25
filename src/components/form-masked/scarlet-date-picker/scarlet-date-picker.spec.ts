@@ -5,7 +5,7 @@ describe('scarlet-date-picker', () => {
   it('formats digits as DD/MM/AAAA while typing', async () => {
     const page = await newSpecPage({
       components: [ScarletDatePicker],
-      html: `<scarlet-date-picker></scarlet-date-picker>`,
+      html: '<scarlet-date-picker></scarlet-date-picker>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -19,7 +19,7 @@ describe('scarlet-date-picker', () => {
   it('shows "Data inválida." on blur for a value that is 8 digits but not a real date', async () => {
     const page = await newSpecPage({
       components: [ScarletDatePicker],
-      html: `<scarlet-date-picker value="31/02/2026"></scarlet-date-picker>`,
+      html: '<scarlet-date-picker value="31/02/2026"></scarlet-date-picker>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -33,7 +33,7 @@ describe('scarlet-date-picker', () => {
   it('toDate()/isValid() reflect the current value', async () => {
     const page = await newSpecPage({
       components: [ScarletDatePicker],
-      html: `<scarlet-date-picker value="25/12/2026"></scarlet-date-picker>`,
+      html: '<scarlet-date-picker value="25/12/2026"></scarlet-date-picker>'
     });
 
     await expect(page.rootInstance.isValid()).resolves.toBe(true);
@@ -46,7 +46,7 @@ describe('scarlet-date-picker', () => {
   it('show()/hide() toggle the calendar panel in the DOM', async () => {
     const page = await newSpecPage({
       components: [ScarletDatePicker],
-      html: `<scarlet-date-picker></scarlet-date-picker>`,
+      html: '<scarlet-date-picker></scarlet-date-picker>'
     });
 
     expect(page.root?.shadowRoot?.querySelector('.scarlet-date-picker__panel')).toBeNull();
@@ -63,7 +63,7 @@ describe('scarlet-date-picker', () => {
   it('opens showing the month of the current value, with that day selected', async () => {
     const page = await newSpecPage({
       components: [ScarletDatePicker],
-      html: `<scarlet-date-picker value="25/12/2026"></scarlet-date-picker>`,
+      html: '<scarlet-date-picker value="25/12/2026"></scarlet-date-picker>'
     });
 
     await page.rootInstance.show();
@@ -79,7 +79,7 @@ describe('scarlet-date-picker', () => {
   it('clicking a day selects it, emits scarletChange, and closes the panel', async () => {
     const page = await newSpecPage({
       components: [ScarletDatePicker],
-      html: `<scarlet-date-picker value="10/06/2026"></scarlet-date-picker>`,
+      html: '<scarlet-date-picker value="10/06/2026"></scarlet-date-picker>'
     });
 
     const changeSpy = jest.fn();
@@ -88,8 +88,14 @@ describe('scarlet-date-picker', () => {
     await page.rootInstance.show();
     await page.waitForChanges();
 
-    const days = Array.from(page.root!.shadowRoot!.querySelectorAll('.scarlet-date-picker__day')) as HTMLButtonElement[];
-    const day15 = days.find((btn) => btn.textContent?.trim() === '15' && !btn.classList.contains('scarlet-date-picker__day--outside'));
+    const days = Array.from(
+      page.root!.shadowRoot!.querySelectorAll('.scarlet-date-picker__day')
+    ) as HTMLButtonElement[];
+    const day15 = days.find(
+      btn =>
+        btn.textContent?.trim() === '15' &&
+        !btn.classList.contains('scarlet-date-picker__day--outside')
+    );
     day15?.click();
     await page.waitForChanges();
 
@@ -102,17 +108,29 @@ describe('scarlet-date-picker', () => {
   it('ignores a click on a day outside min/max instead of selecting it', async () => {
     const page = await newSpecPage({
       components: [ScarletDatePicker],
-      html: `<scarlet-date-picker value="10/06/2026" min="05/06/2026" max="20/06/2026"></scarlet-date-picker>`,
+      html: '<scarlet-date-picker value="10/06/2026" min="05/06/2026" max="20/06/2026"></scarlet-date-picker>'
     });
 
     await page.rootInstance.show();
     await page.waitForChanges();
 
-    const days = Array.from(page.root!.shadowRoot!.querySelectorAll('.scarlet-date-picker__day')) as HTMLButtonElement[];
-    const day25 = days.find((btn) => btn.textContent?.trim() === '25' && !btn.classList.contains('scarlet-date-picker__day--outside'));
+    const days = Array.from(
+      page.root!.shadowRoot!.querySelectorAll('.scarlet-date-picker__day')
+    ) as HTMLButtonElement[];
+    const day25 = days.find(
+      btn =>
+        btn.textContent?.trim() === '25' &&
+        !btn.classList.contains('scarlet-date-picker__day--outside')
+    );
     expect(day25?.getAttribute('aria-disabled')).toBe('true');
 
-    day25?.click();
+    // Dispatched non-bubbling: the day button's own onClick still fires
+    // (Stencil attaches it directly, not via delegation), but this avoids
+    // mock-doc's `composedPath()`, which doesn't cross the shadow-root ->
+    // host boundary — a real click here would otherwise also trip the
+    // document-level "click outside" listener and close the panel for the
+    // wrong reason, masking whether the day-click guard itself works.
+    day25?.dispatchEvent(new MouseEvent('click', { bubbles: false, cancelable: true }));
     await page.waitForChanges();
 
     expect(page.rootInstance.value).toBe('10/06/2026');
@@ -122,14 +140,16 @@ describe('scarlet-date-picker', () => {
   it('closes on Escape', async () => {
     const page = await newSpecPage({
       components: [ScarletDatePicker],
-      html: `<scarlet-date-picker></scarlet-date-picker>`,
+      html: '<scarlet-date-picker></scarlet-date-picker>'
     });
 
     await page.rootInstance.show();
     await page.waitForChanges();
     expect(page.root?.shadowRoot?.querySelector('.scarlet-date-picker__panel')).not.toBeNull();
 
-    page.root?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, composed: true }));
+    page.root?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, composed: true })
+    );
     await page.waitForChanges();
 
     expect(page.root?.shadowRoot?.querySelector('.scarlet-date-picker__panel')).toBeNull();

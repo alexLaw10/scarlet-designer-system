@@ -4,7 +4,7 @@ import { ScarletMenu } from './scarlet-menu';
 const items = [
   { value: 'edit', label: 'Editar' },
   { value: 'archive', label: 'Arquivar', disabled: true },
-  { value: 'delete', label: 'Excluir', danger: true },
+  { value: 'delete', label: 'Excluir', danger: true }
 ];
 
 async function setup() {
@@ -14,7 +14,7 @@ async function setup() {
       <scarlet-menu>
         <button slot="trigger">Abrir</button>
       </scarlet-menu>
-    `,
+    `
   });
   page.rootInstance.items = items;
   await page.waitForChanges();
@@ -52,7 +52,7 @@ describe('scarlet-menu', () => {
     await page.waitForChanges();
 
     const editItem = Array.from(page.root!.shadowRoot!.querySelectorAll('[role="menuitem"]')).find(
-      (el) => el.textContent?.trim() === 'Editar',
+      el => el.textContent?.trim() === 'Editar'
     ) as HTMLButtonElement;
     editItem.click();
     await page.waitForChanges();
@@ -69,7 +69,9 @@ describe('scarlet-menu', () => {
     await page.waitForChanges();
     expect(page.root?.shadowRoot?.querySelector('[role="menu"]')).not.toBeNull();
 
-    page.root?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, composed: true }));
+    page.root?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, composed: true })
+    );
     await page.waitForChanges();
 
     expect(page.root?.shadowRoot?.querySelector('[role="menu"]')).toBeNull();
@@ -94,14 +96,20 @@ describe('scarlet-menu', () => {
     trigger.click();
     await page.waitForChanges();
 
-    const menuItems = Array.from(page.root!.shadowRoot!.querySelectorAll('[role="menuitem"]')) as HTMLButtonElement[];
-    expect(menuItems.map((el) => el.tabIndex)).toEqual([0, -1, -1]);
+    const menuItems = Array.from(
+      page.root!.shadowRoot!.querySelectorAll('[role="menuitem"]')
+    ) as HTMLButtonElement[];
+    expect(menuItems.map(el => el.tabIndex)).toEqual([0, -1, -1]);
 
-    page.root?.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, composed: true }));
+    page.root?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true, composed: true })
+    );
     await page.waitForChanges();
 
     // "Arquivar" (index 1) is disabled, so ArrowDown from "Editar" skips it and lands on "Excluir".
-    const updated = Array.from(page.root!.shadowRoot!.querySelectorAll('[role="menuitem"]')) as HTMLButtonElement[];
-    expect(updated.map((el) => el.tabIndex)).toEqual([-1, -1, 0]);
+    const updated = Array.from(
+      page.root!.shadowRoot!.querySelectorAll('[role="menuitem"]')
+    ) as HTMLButtonElement[];
+    expect(updated.map(el => el.tabIndex)).toEqual([-1, -1, 0]);
   });
 });

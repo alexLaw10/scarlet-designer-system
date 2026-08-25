@@ -11,7 +11,7 @@ export type ScarletProgressSize = 'sm' | 'md' | 'lg';
 @Component({
   tag: 'scarlet-progress',
   styleUrl: 'scarlet-progress.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletProgress {
   /** Current value. */
@@ -37,20 +37,30 @@ export class ScarletProgress {
 
     return (
       <Host
-        class="scarlet-progress-host"
-        role="progressbar"
+        class='scarlet-progress-host'
+        role='progressbar'
         aria-valuenow={this.value}
-        aria-valuemin="0"
+        aria-valuemin='0'
         aria-valuemax={this.max}
         aria-label={this.ariaLabel}
       >
-        <div class={{ 'scarlet-progress__track': true, [`scarlet-progress__track--${this.size}`]: true }}>
+        <div
+          class={{
+            'scarlet-progress__track': true,
+            [`scarlet-progress__track--${this.size}`]: true
+          }}
+        >
           <div
-            class={{ 'scarlet-progress__fill': true, [`scarlet-progress__fill--${this.color}`]: true }}
+            class={{
+              'scarlet-progress__fill': true,
+              [`scarlet-progress__fill--${this.color}`]: true
+            }}
             style={{ width: `${percent}%` }}
           />
         </div>
-        {this.showLabel ? <span class="scarlet-progress__label">{Math.round(percent)}%</span> : null}
+        {this.showLabel ? (
+          <span class='scarlet-progress__label'>{Math.round(percent)}%</span>
+        ) : null}
       </Host>
     );
   }

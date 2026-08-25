@@ -13,7 +13,7 @@ export type ScarletCardVariant = 'elevated' | 'outlined' | 'flat';
 @Component({
   tag: 'scarlet-card',
   styleUrl: 'scarlet-card.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletCard {
   /** Visual style of the card. */
@@ -48,25 +48,25 @@ export class ScarletCard {
         class={{
           'scarlet-card-host': true,
           [`scarlet-card-host--${this.variant}`]: true,
-          'scarlet-card-host--interactive': this.interactive,
+          'scarlet-card-host--interactive': this.interactive
         }}
         role={this.interactive ? 'button' : undefined}
         tabindex={this.interactive ? 0 : undefined}
         onClick={this.handleClick}
       >
-        <div class="scarlet-card__header">
-          <slot name="header" />
+        <div class='scarlet-card__header'>
+          <slot name='header' />
         </div>
         <div
           class={{
             'scarlet-card__body': true,
-            [`scarlet-card__body--${this.padding}`]: true,
+            [`scarlet-card__body--${this.padding}`]: true
           }}
         >
           <slot />
         </div>
-        <div class="scarlet-card__footer">
-          <slot name="footer" />
+        <div class='scarlet-card__footer'>
+          <slot name='footer' />
         </div>
       </Host>
     );

@@ -5,7 +5,7 @@ describe('scarlet-input-percentage', () => {
   it('formats digits as a decimal percentage growing from the right', async () => {
     const page = await newSpecPage({
       components: [ScarletInputPercentage],
-      html: `<scarlet-input-percentage></scarlet-input-percentage>`,
+      html: '<scarlet-input-percentage></scarlet-input-percentage>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -19,7 +19,7 @@ describe('scarlet-input-percentage', () => {
   it('emits the numeric percentage on scarletInput', async () => {
     const page = await newSpecPage({
       components: [ScarletInputPercentage],
-      html: `<scarlet-input-percentage></scarlet-input-percentage>`,
+      html: '<scarlet-input-percentage></scarlet-input-percentage>'
     });
 
     const inputSpy = jest.fn();
@@ -36,7 +36,7 @@ describe('scarlet-input-percentage', () => {
   it('exposes the numeric value via getNumericValue()', async () => {
     const page = await newSpecPage({
       components: [ScarletInputPercentage],
-      html: `<scarlet-input-percentage value="12,34%"></scarlet-input-percentage>`,
+      html: '<scarlet-input-percentage value="12,34%"></scarlet-input-percentage>'
     });
 
     await expect(page.rootInstance.getNumericValue()).resolves.toBe(12.34);

@@ -1,4 +1,14 @@
-import { Component, Prop, Watch, Event, type EventEmitter, h, Host, Method } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  Watch,
+  Event,
+  type EventEmitter,
+  h,
+  Host,
+  Method,
+  Element
+} from '@stencil/core';
 import { generateId } from '@/utils';
 
 export type ScarletDrawerPlacement = 'left' | 'right' | 'top' | 'bottom';
@@ -22,9 +32,11 @@ export type ScarletDrawerSize = 'sm' | 'md' | 'lg';
 @Component({
   tag: 'scarlet-drawer',
   styleUrl: 'scarlet-drawer.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletDrawer {
+  @Element() el!: HTMLElement;
+
   private dialogEl?: HTMLDialogElement;
   private readonly headerId = generateId('scarlet-drawer-header');
   /** Element focused right before the drawer opened, restored to on close per WCAG 2.4.3. */
@@ -93,7 +105,7 @@ export class ScarletDrawer {
   // silently no-op. Walk into .shadowRoot.activeElement to find the real
   // focused element before capturing it.
   private getDeepActiveElement(): HTMLElement | undefined {
-    let active = document.activeElement as HTMLElement | null;
+    let active = this.el.ownerDocument?.activeElement as HTMLElement | null;
     while (active?.shadowRoot?.activeElement) {
       active = active.shadowRoot.activeElement as HTMLElement;
     }
@@ -143,36 +155,48 @@ export class ScarletDrawer {
 
   render() {
     return (
-      <Host class="scarlet-drawer-host">
+      <Host class='scarlet-drawer-host'>
         <dialog
-          ref={(el) => (this.dialogEl = el)}
+          ref={el => (this.dialogEl = el)}
           class={{
             'scarlet-drawer': true,
             [`scarlet-drawer--${this.placement}`]: true,
-            [`scarlet-drawer--${this.size}`]: true,
+            [`scarlet-drawer--${this.size}`]: true
           }}
           aria-label={this.ariaLabel}
           aria-labelledby={this.ariaLabel ? undefined : this.headerId}
           onCancel={this.handleCancel}
           onClick={this.handleDialogClick}
         >
-          <div class="scarlet-drawer__box">
-            <div class="scarlet-drawer__header">
+          <div class='scarlet-drawer__box'>
+            <div class='scarlet-drawer__header'>
               <span id={this.headerId}>
-                <slot name="header" />
+                <slot name='header' />
               </span>
-              <button type="button" class="scarlet-drawer__close" part="close" aria-label="Fechar" onClick={this.requestClose}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <line x1="6" y1="6" x2="18" y2="18" stroke-linecap="round" />
-                  <line x1="18" y1="6" x2="6" y2="18" stroke-linecap="round" />
+              <button
+                type='button'
+                class='scarlet-drawer__close'
+                part='close'
+                aria-label='Fechar'
+                onClick={this.requestClose}
+              >
+                <svg
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  stroke-width='2'
+                  aria-hidden='true'
+                >
+                  <line x1='6' y1='6' x2='18' y2='18' stroke-linecap='round' />
+                  <line x1='18' y1='6' x2='6' y2='18' stroke-linecap='round' />
                 </svg>
               </button>
             </div>
-            <div class="scarlet-drawer__body">
+            <div class='scarlet-drawer__body'>
               <slot />
             </div>
-            <div class="scarlet-drawer__footer">
-              <slot name="footer" />
+            <div class='scarlet-drawer__footer'>
+              <slot name='footer' />
             </div>
           </div>
         </dialog>

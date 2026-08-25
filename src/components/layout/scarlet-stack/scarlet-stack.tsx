@@ -17,7 +17,7 @@ import type { Alignment, Direction, JustifyContent, Size, Wrap } from '@/types';
 @Component({
   tag: 'scarlet-stack',
   styleUrl: 'scarlet-stack.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletStack {
   /** Flex direction below the `sm` breakpoint (or at every size, if no responsive override is set). */
@@ -49,7 +49,7 @@ export class ScarletStack {
 
   render() {
     const style: { [key: string]: string } = {
-      '--scarlet-stack-direction': this.direction,
+      '--scarlet-stack-direction': this.direction
     };
     if (this.directionSm) style['--scarlet-stack-direction-sm'] = this.directionSm;
     if (this.directionMd) style['--scarlet-stack-direction-md'] = this.directionMd;
@@ -63,7 +63,7 @@ export class ScarletStack {
           [`scarlet-stack-host--gap-${this.gap}`]: true,
           [`scarlet-stack-host--align-${this.align}`]: true,
           [`scarlet-stack-host--justify-${this.justify}`]: true,
-          [`scarlet-stack-host--wrap-${this.wrap}`]: true,
+          [`scarlet-stack-host--wrap-${this.wrap}`]: true
         }}
         style={style}
       >

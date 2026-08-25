@@ -6,13 +6,13 @@ import { ScarletToast } from './scarlet-toast';
 // waitForChanges(), and mixing that with Jest's fake timers reliably hangs
 // the test until the suite timeout — and, worse, leaks into later tests if
 // the hang happens before jest.useRealTimers() is reached.
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 describe('scarlet-toast', () => {
   it('renders open by default with role="status"', async () => {
     const page = await newSpecPage({
       components: [ScarletToast],
-      html: `<scarlet-toast duration="0">Mensagem</scarlet-toast>`,
+      html: '<scarlet-toast duration="0">Mensagem</scarlet-toast>'
     });
 
     expect(page.root?.getAttribute('role')).toBe('status');
@@ -22,7 +22,7 @@ describe('scarlet-toast', () => {
   it('auto-dismisses after the given duration and emits scarletDismiss', async () => {
     const page = await newSpecPage({
       components: [ScarletToast],
-      html: `<scarlet-toast duration="30">Mensagem</scarlet-toast>`,
+      html: '<scarlet-toast duration="30">Mensagem</scarlet-toast>'
     });
 
     const dismissSpy = jest.fn();
@@ -38,7 +38,7 @@ describe('scarlet-toast', () => {
   it('does not auto-dismiss when duration is 0', async () => {
     const page = await newSpecPage({
       components: [ScarletToast],
-      html: `<scarlet-toast duration="0">Mensagem</scarlet-toast>`,
+      html: '<scarlet-toast duration="0">Mensagem</scarlet-toast>'
     });
 
     await wait(60);
@@ -50,12 +50,14 @@ describe('scarlet-toast', () => {
   it('dismisses via the close button and stays open when the event is prevented', async () => {
     const page = await newSpecPage({
       components: [ScarletToast],
-      html: `<scarlet-toast duration="0">Mensagem</scarlet-toast>`,
+      html: '<scarlet-toast duration="0">Mensagem</scarlet-toast>'
     });
 
-    page.root?.addEventListener('scarletDismiss', (event) => event.preventDefault());
+    page.root?.addEventListener('scarletDismiss', event => event.preventDefault());
 
-    const button = page.root?.shadowRoot?.querySelector('.scarlet-toast__dismiss') as HTMLButtonElement;
+    const button = page.root?.shadowRoot?.querySelector(
+      '.scarlet-toast__dismiss'
+    ) as HTMLButtonElement;
     button.click();
     await page.waitForChanges();
 

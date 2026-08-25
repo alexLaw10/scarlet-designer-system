@@ -12,7 +12,7 @@ export type ScarletBadgeSize = 'xs' | 'sm' | 'md';
 @Component({
   tag: 'scarlet-badge',
   styleUrl: 'scarlet-badge.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletBadge {
   /** Semantic color of the badge. */
@@ -35,7 +35,7 @@ export class ScarletBadge {
           [`scarlet-badge-host--${this.variant}`]: true,
           [`scarlet-badge-host--${this.color}`]: true,
           [`scarlet-badge-host--${this.size}`]: true,
-          'scarlet-badge-host--dot': this.dot,
+          'scarlet-badge-host--dot': this.dot
         }}
       >
         {this.dot ? null : <slot />}

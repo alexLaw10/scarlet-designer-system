@@ -5,11 +5,11 @@ describe('scarlet-select', () => {
   it('renders one <option> per entry in options', async () => {
     const page = await newSpecPage({
       components: [ScarletSelect],
-      html: `<scarlet-select></scarlet-select>`,
+      html: '<scarlet-select></scarlet-select>'
     });
     page.rootInstance.options = [
       { label: 'São Paulo', value: 'sp' },
-      { label: 'Rio de Janeiro', value: 'rj' },
+      { label: 'Rio de Janeiro', value: 'rj' }
     ];
     await page.waitForChanges();
 
@@ -21,10 +21,12 @@ describe('scarlet-select', () => {
   it('renders a disabled placeholder option when provided', async () => {
     const page = await newSpecPage({
       components: [ScarletSelect],
-      html: `<scarlet-select placeholder="Selecione"></scarlet-select>`,
+      html: '<scarlet-select placeholder="Selecione"></scarlet-select>'
     });
 
-    const placeholderOption = page.root?.shadowRoot?.querySelector('option[value=""]') as HTMLOptionElement;
+    const placeholderOption = page.root?.shadowRoot?.querySelector(
+      'option[value=""]'
+    ) as HTMLOptionElement;
     expect(placeholderOption).not.toBeNull();
     // mock-doc doesn't reflect .disabled/.selected as IDL properties on <option>.
     expect(placeholderOption.hasAttribute('disabled')).toBe(true);
@@ -34,11 +36,11 @@ describe('scarlet-select', () => {
   it('emits scarletChange with the new value on selection', async () => {
     const page = await newSpecPage({
       components: [ScarletSelect],
-      html: `<scarlet-select></scarlet-select>`,
+      html: '<scarlet-select></scarlet-select>'
     });
     page.rootInstance.options = [
       { label: 'São Paulo', value: 'sp' },
-      { label: 'Rio de Janeiro', value: 'rj' },
+      { label: 'Rio de Janeiro', value: 'rj' }
     ];
     await page.waitForChanges();
 
@@ -58,7 +60,7 @@ describe('scarlet-select', () => {
   it('sets aria-invalid when errorMessage is provided', async () => {
     const page = await newSpecPage({
       components: [ScarletSelect],
-      html: `<scarlet-select error-message="Campo obrigatório"></scarlet-select>`,
+      html: '<scarlet-select error-message="Campo obrigatório"></scarlet-select>'
     });
 
     const select = page.root?.shadowRoot?.querySelector('select') as HTMLSelectElement;
@@ -68,7 +70,7 @@ describe('scarlet-select', () => {
   it('focuses the internal select via setFocus()', async () => {
     const page = await newSpecPage({
       components: [ScarletSelect],
-      html: `<scarlet-select></scarlet-select>`,
+      html: '<scarlet-select></scarlet-select>'
     });
 
     const select = page.root?.shadowRoot?.querySelector('select') as HTMLSelectElement;

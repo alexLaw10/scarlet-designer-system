@@ -5,7 +5,7 @@ describe('scarlet-heading', () => {
   it('renders an h2 with the heading-xl variant by default', async () => {
     const page = await newSpecPage({
       components: [ScarletHeading],
-      html: `<scarlet-heading>Título</scarlet-heading>`,
+      html: '<scarlet-heading>Título</scarlet-heading>'
     });
 
     const tag = page.root?.shadowRoot?.firstElementChild;
@@ -17,7 +17,7 @@ describe('scarlet-heading', () => {
     for (let level = 1; level <= 6; level++) {
       const page = await newSpecPage({
         components: [ScarletHeading],
-        html: `<scarlet-heading level="${level}">Título</scarlet-heading>`,
+        html: `<scarlet-heading level="${level}">Título</scarlet-heading>`
       });
       const tag = page.root?.shadowRoot?.firstElementChild;
       expect(tag?.tagName).toBe(`H${level}`);
@@ -27,7 +27,7 @@ describe('scarlet-heading', () => {
   it('lets an explicit variant override the level-based default', async () => {
     const page = await newSpecPage({
       components: [ScarletHeading],
-      html: `<scarlet-heading level="1" variant="heading-sm">Título</scarlet-heading>`,
+      html: '<scarlet-heading level="1" variant="heading-sm">Título</scarlet-heading>'
     });
 
     const tag = page.root?.shadowRoot?.firstElementChild;
@@ -39,7 +39,7 @@ describe('scarlet-heading', () => {
   it('applies color and align classes', async () => {
     const page = await newSpecPage({
       components: [ScarletHeading],
-      html: `<scarlet-heading color="secondary" align="center">Título</scarlet-heading>`,
+      html: '<scarlet-heading color="secondary" align="center">Título</scarlet-heading>'
     });
 
     const tag = page.root?.shadowRoot?.firstElementChild;

@@ -5,7 +5,7 @@ describe('scarlet-input-currency', () => {
   it('formats digits growing from the right, with thousands separators', async () => {
     const page = await newSpecPage({
       components: [ScarletInputCurrency],
-      html: `<scarlet-input-currency></scarlet-input-currency>`,
+      html: '<scarlet-input-currency></scarlet-input-currency>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -19,7 +19,7 @@ describe('scarlet-input-currency', () => {
   it('emits the numeric amount, not the formatted string, on scarletInput', async () => {
     const page = await newSpecPage({
       components: [ScarletInputCurrency],
-      html: `<scarlet-input-currency></scarlet-input-currency>`,
+      html: '<scarlet-input-currency></scarlet-input-currency>'
     });
 
     const inputSpy = jest.fn();
@@ -36,7 +36,7 @@ describe('scarlet-input-currency', () => {
   it('exposes the numeric amount via getNumericValue()', async () => {
     const page = await newSpecPage({
       components: [ScarletInputCurrency],
-      html: `<scarlet-input-currency value="R$ 1.234,56"></scarlet-input-currency>`,
+      html: '<scarlet-input-currency value="R$ 1.234,56"></scarlet-input-currency>'
     });
 
     await expect(page.rootInstance.getNumericValue()).resolves.toBe(1234.56);
@@ -45,7 +45,7 @@ describe('scarlet-input-currency', () => {
   it('uses a custom currency symbol', async () => {
     const page = await newSpecPage({
       components: [ScarletInputCurrency],
-      html: `<scarlet-input-currency currency-symbol="US$"></scarlet-input-currency>`,
+      html: '<scarlet-input-currency currency-symbol="US$"></scarlet-input-currency>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;

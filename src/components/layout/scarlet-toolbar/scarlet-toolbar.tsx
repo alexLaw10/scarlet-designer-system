@@ -12,7 +12,7 @@ import type { JustifyContent } from '@/types';
 @Component({
   tag: 'scarlet-toolbar',
   styleUrl: 'scarlet-toolbar.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletToolbar {
   /** Accessible label for the `toolbar` role — required whenever there's more than one toolbar on the page. */
@@ -24,8 +24,11 @@ export class ScarletToolbar {
   render() {
     return (
       <Host
-        class={{ 'scarlet-toolbar-host': true, [`scarlet-toolbar-host--justify-${this.justify}`]: true }}
-        role="toolbar"
+        class={{
+          'scarlet-toolbar-host': true,
+          [`scarlet-toolbar-host--justify-${this.justify}`]: true
+        }}
+        role='toolbar'
         aria-label={this.ariaLabel}
       >
         <slot />

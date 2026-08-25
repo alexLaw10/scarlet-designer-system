@@ -1,4 +1,14 @@
-import { Component, Prop, Watch, Event, type EventEmitter, h, Host, Method } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  Watch,
+  Event,
+  type EventEmitter,
+  h,
+  Host,
+  Method,
+  Element
+} from '@stencil/core';
 import { generateId } from '@/utils';
 
 export type ScarletModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
@@ -14,9 +24,11 @@ export type ScarletModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
 @Component({
   tag: 'scarlet-modal',
   styleUrl: 'scarlet-modal.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletModal {
+  @Element() el!: HTMLElement;
+
   private dialogEl?: HTMLDialogElement;
   private readonly headerId = generateId('scarlet-modal-header');
   /** Element focused right before the modal opened, restored to on close per WCAG 2.4.3. */
@@ -84,7 +96,7 @@ export class ScarletModal {
   // silently no-op. Walk into .shadowRoot.activeElement to find the real
   // focused element before capturing it.
   private getDeepActiveElement(): HTMLElement | undefined {
-    let active = document.activeElement as HTMLElement | null;
+    let active = this.el.ownerDocument?.activeElement as HTMLElement | null;
     while (active?.shadowRoot?.activeElement) {
       active = active.shadowRoot.activeElement as HTMLElement;
     }
@@ -134,32 +146,44 @@ export class ScarletModal {
 
   render() {
     return (
-      <Host class="scarlet-modal-host">
+      <Host class='scarlet-modal-host'>
         <dialog
-          ref={(el) => (this.dialogEl = el)}
+          ref={el => (this.dialogEl = el)}
           class={{ 'scarlet-modal': true, [`scarlet-modal--${this.size}`]: true }}
           aria-label={this.ariaLabel}
           aria-labelledby={this.ariaLabel ? undefined : this.headerId}
           onCancel={this.handleCancel}
           onClick={this.handleDialogClick}
         >
-          <div class="scarlet-modal__box">
-            <div class="scarlet-modal__header">
+          <div class='scarlet-modal__box'>
+            <div class='scarlet-modal__header'>
               <span id={this.headerId}>
-                <slot name="header" />
+                <slot name='header' />
               </span>
-              <button type="button" class="scarlet-modal__close" part="close" aria-label="Fechar" onClick={this.requestClose}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <line x1="6" y1="6" x2="18" y2="18" stroke-linecap="round" />
-                  <line x1="18" y1="6" x2="6" y2="18" stroke-linecap="round" />
+              <button
+                type='button'
+                class='scarlet-modal__close'
+                part='close'
+                aria-label='Fechar'
+                onClick={this.requestClose}
+              >
+                <svg
+                  viewBox='0 0 24 24'
+                  fill='none'
+                  stroke='currentColor'
+                  stroke-width='2'
+                  aria-hidden='true'
+                >
+                  <line x1='6' y1='6' x2='18' y2='18' stroke-linecap='round' />
+                  <line x1='18' y1='6' x2='6' y2='18' stroke-linecap='round' />
                 </svg>
               </button>
             </div>
-            <div class="scarlet-modal__body">
+            <div class='scarlet-modal__body'>
               <slot />
             </div>
-            <div class="scarlet-modal__footer">
-              <slot name="footer" />
+            <div class='scarlet-modal__footer'>
+              <slot name='footer' />
             </div>
           </div>
         </dialog>

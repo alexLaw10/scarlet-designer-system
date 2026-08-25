@@ -20,7 +20,7 @@ const defaultVariantByLevel: Record<ScarletHeadingLevel, ScarletHeadingVariant> 
   3: 'heading-lg',
   4: 'heading-md',
   5: 'heading-sm',
-  6: 'heading-sm',
+  6: 'heading-sm'
 };
 
 /**
@@ -31,7 +31,7 @@ const defaultVariantByLevel: Record<ScarletHeadingLevel, ScarletHeadingVariant> 
 @Component({
   tag: 'scarlet-heading',
   styleUrl: 'scarlet-heading.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletHeading {
   /** Semantic heading level — which HTML tag (`h1`–`h6`) is rendered. */
@@ -51,13 +51,13 @@ export class ScarletHeading {
     const variant = this.variant ?? defaultVariantByLevel[this.level];
 
     return (
-      <Host class="scarlet-heading-host">
+      <Host class='scarlet-heading-host'>
         <Tag
           class={{
             'scarlet-heading': true,
             [`scarlet-heading--${variant}`]: true,
             [`scarlet-heading--color-${this.color}`]: true,
-            [`scarlet-heading--align-${this.align}`]: true,
+            [`scarlet-heading--align-${this.align}`]: true
           }}
         >
           <slot />

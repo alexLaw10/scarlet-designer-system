@@ -13,7 +13,7 @@ export type ScarletChipVariant = 'solid' | 'outline' | 'soft';
 @Component({
   tag: 'scarlet-chip',
   styleUrl: 'scarlet-chip.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletChip {
   /** Semantic color of the chip. */
@@ -44,15 +44,21 @@ export class ScarletChip {
           'scarlet-chip-host': true,
           [`scarlet-chip-host--${this.variant}`]: true,
           [`scarlet-chip-host--${this.color}`]: true,
-          'scarlet-chip-host--disabled': this.disabled,
+          'scarlet-chip-host--disabled': this.disabled
         }}
       >
-        <span class="scarlet-chip__label">
+        <span class='scarlet-chip__label'>
           <slot />
         </span>
         {this.removable ? (
-          <button type="button" class="scarlet-chip__remove" disabled={this.disabled} aria-label="Remover" onClick={this.handleRemove}>
-            <scarlet-icon name="x" size="0.85em" />
+          <button
+            type='button'
+            class='scarlet-chip__remove'
+            disabled={this.disabled}
+            aria-label='Remover'
+            onClick={this.handleRemove}
+          >
+            <scarlet-icon name='x' size='0.85em' />
           </button>
         ) : null}
       </Host>

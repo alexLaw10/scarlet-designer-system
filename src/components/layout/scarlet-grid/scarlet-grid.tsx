@@ -6,7 +6,7 @@ const gapTokens: Record<Size, string> = {
   sm: 'var(--scarlet-space-2)',
   md: 'var(--scarlet-space-4)',
   lg: 'var(--scarlet-space-6)',
-  xl: 'var(--scarlet-space-8)',
+  xl: 'var(--scarlet-space-8)'
 };
 
 /**
@@ -25,7 +25,7 @@ const gapTokens: Record<Size, string> = {
 @Component({
   tag: 'scarlet-grid',
   styleUrl: 'scarlet-grid.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletGrid {
   /** Number of equal-width columns below the `sm` breakpoint (or at every size, if no responsive override is set). */
@@ -59,7 +59,7 @@ export class ScarletGrid {
     const style: { [key: string]: string } = {
       '--scarlet-grid-columns': String(this.columns),
       rowGap: gapTokens[this.rowGap ?? this.gap],
-      columnGap: gapTokens[this.columnGap ?? this.gap],
+      columnGap: gapTokens[this.columnGap ?? this.gap]
     };
     if (this.columnsSm !== undefined) style['--scarlet-grid-columns-sm'] = String(this.columnsSm);
     if (this.columnsMd !== undefined) style['--scarlet-grid-columns-md'] = String(this.columnsMd);
@@ -70,7 +70,7 @@ export class ScarletGrid {
       <Host
         class={{
           'scarlet-grid-host': true,
-          [`scarlet-grid-host--align-${this.align}`]: true,
+          [`scarlet-grid-host--align-${this.align}`]: true
         }}
         style={style}
       >

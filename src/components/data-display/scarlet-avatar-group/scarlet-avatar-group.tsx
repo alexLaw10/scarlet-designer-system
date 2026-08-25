@@ -12,7 +12,7 @@ import type { Size } from '@/types';
 @Component({
   tag: 'scarlet-avatar-group',
   styleUrl: 'scarlet-avatar-group.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletAvatarGroup {
   private slotEl?: HTMLSlotElement;
@@ -69,12 +69,18 @@ export class ScarletAvatarGroup {
   };
 
   render() {
-    const overflow = this.max !== undefined && this.avatarCount > this.max ? this.avatarCount - this.max : 0;
+    const overflow =
+      this.max !== undefined && this.avatarCount > this.max ? this.avatarCount - this.max : 0;
 
     return (
-      <Host class={{ 'scarlet-avatar-group-host': true, [`scarlet-avatar-group-host--${this.size}`]: true }}>
+      <Host
+        class={{
+          'scarlet-avatar-group-host': true,
+          [`scarlet-avatar-group-host--${this.size}`]: true
+        }}
+      >
         <slot ref={this.handleSlotRef} />
-        {overflow > 0 ? <span class="scarlet-avatar-group__overflow">+{overflow}</span> : null}
+        {overflow > 0 ? <span class='scarlet-avatar-group__overflow'>+{overflow}</span> : null}
       </Host>
     );
   }

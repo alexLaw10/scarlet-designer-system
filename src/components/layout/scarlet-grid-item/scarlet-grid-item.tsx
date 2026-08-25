@@ -8,7 +8,7 @@ import { Component, Prop, h, Host } from '@stencil/core';
 @Component({
   tag: 'scarlet-grid-item',
   styleUrl: 'scarlet-grid-item.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletGridItem {
   /** Number of columns this item spans. */
@@ -20,10 +20,10 @@ export class ScarletGridItem {
   render() {
     return (
       <Host
-        class="scarlet-grid-item-host"
+        class='scarlet-grid-item-host'
         style={{
           gridColumn: `span ${this.colSpan} / span ${this.colSpan}`,
-          gridRow: `span ${this.rowSpan} / span ${this.rowSpan}`,
+          gridRow: `span ${this.rowSpan} / span ${this.rowSpan}`
         }}
       >
         <slot />

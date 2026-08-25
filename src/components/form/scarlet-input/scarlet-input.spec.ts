@@ -5,7 +5,7 @@ describe('scarlet-input', () => {
   it('renders a label wired to the input via id/for', async () => {
     const page = await newSpecPage({
       components: [ScarletInput],
-      html: `<scarlet-input label="Nome"></scarlet-input>`,
+      html: '<scarlet-input label="Nome"></scarlet-input>'
     });
 
     const label = page.root?.shadowRoot?.querySelector('label') as HTMLLabelElement;
@@ -18,7 +18,7 @@ describe('scarlet-input', () => {
   it('emits scarletInput on keystrokes and updates value', async () => {
     const page = await newSpecPage({
       components: [ScarletInput],
-      html: `<scarlet-input></scarlet-input>`,
+      html: '<scarlet-input></scarlet-input>'
     });
 
     const inputSpy = jest.fn();
@@ -37,7 +37,7 @@ describe('scarlet-input', () => {
   it('emits scarletChange on native change', async () => {
     const page = await newSpecPage({
       components: [ScarletInput],
-      html: `<scarlet-input></scarlet-input>`,
+      html: '<scarlet-input></scarlet-input>'
     });
 
     const changeSpy = jest.fn();
@@ -55,7 +55,7 @@ describe('scarlet-input', () => {
   it('sets aria-invalid and renders the error message when errorMessage is provided', async () => {
     const page = await newSpecPage({
       components: [ScarletInput],
-      html: `<scarlet-input error-message="Campo obrigatório"></scarlet-input>`,
+      html: '<scarlet-input error-message="Campo obrigatório"></scarlet-input>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -69,7 +69,7 @@ describe('scarlet-input', () => {
   it('prefers the error message over helper text when both are set', async () => {
     const page = await newSpecPage({
       components: [ScarletInput],
-      html: `<scarlet-input helper-text="ajuda" error-message="erro"></scarlet-input>`,
+      html: '<scarlet-input helper-text="ajuda" error-message="erro"></scarlet-input>'
     });
 
     const helper = page.root?.shadowRoot?.querySelector('.scarlet-input__message--helper');
@@ -82,7 +82,7 @@ describe('scarlet-input', () => {
   it('focuses the internal input via setFocus()', async () => {
     const page = await newSpecPage({
       components: [ScarletInput],
-      html: `<scarlet-input></scarlet-input>`,
+      html: '<scarlet-input></scarlet-input>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;

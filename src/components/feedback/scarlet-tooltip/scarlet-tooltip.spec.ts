@@ -6,13 +6,13 @@ import { ScarletTooltip } from './scarlet-tooltip';
 // waitForChanges(), and mixing that with Jest's fake timers reliably hangs
 // the test until the suite timeout — and, worse, leaks into later tests if
 // the hang happens before jest.useRealTimers() is reached.
-const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 
 describe('scarlet-tooltip', () => {
   it('is hidden by default', async () => {
     const page = await newSpecPage({
       components: [ScarletTooltip],
-      html: `<scarlet-tooltip content="Dica">Trigger</scarlet-tooltip>`,
+      html: '<scarlet-tooltip content="Dica">Trigger</scarlet-tooltip>'
     });
 
     const tooltip = page.root?.shadowRoot?.querySelector('.scarlet-tooltip');
@@ -23,7 +23,7 @@ describe('scarlet-tooltip', () => {
   it('shows after the delay on mouseover and emits scarletShow', async () => {
     const page = await newSpecPage({
       components: [ScarletTooltip],
-      html: `<scarlet-tooltip content="Dica" delay="20">Trigger</scarlet-tooltip>`,
+      html: '<scarlet-tooltip content="Dica" delay="20">Trigger</scarlet-tooltip>'
     });
 
     const showSpy = jest.fn();
@@ -42,7 +42,7 @@ describe('scarlet-tooltip', () => {
   it('hides on mouseout and emits scarletHide', async () => {
     const page = await newSpecPage({
       components: [ScarletTooltip],
-      html: `<scarlet-tooltip content="Dica" delay="0">Trigger</scarlet-tooltip>`,
+      html: '<scarlet-tooltip content="Dica" delay="0">Trigger</scarlet-tooltip>'
     });
 
     page.root?.dispatchEvent(new Event('mouseover', { bubbles: true }));
@@ -63,7 +63,7 @@ describe('scarlet-tooltip', () => {
   it('never shows when disabled', async () => {
     const page = await newSpecPage({
       components: [ScarletTooltip],
-      html: `<scarlet-tooltip content="Dica" delay="0" disabled>Trigger</scarlet-tooltip>`,
+      html: '<scarlet-tooltip content="Dica" delay="0" disabled>Trigger</scarlet-tooltip>'
     });
 
     page.root?.dispatchEvent(new Event('mouseover', { bubbles: true }));

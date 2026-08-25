@@ -5,7 +5,7 @@ describe('scarlet-switch', () => {
   it('renders off by default with role="switch"', async () => {
     const page = await newSpecPage({
       components: [ScarletSwitch],
-      html: `<scarlet-switch></scarlet-switch>`,
+      html: '<scarlet-switch></scarlet-switch>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -16,7 +16,7 @@ describe('scarlet-switch', () => {
   it('toggles checked and emits scarletChange', async () => {
     const page = await newSpecPage({
       components: [ScarletSwitch],
-      html: `<scarlet-switch></scarlet-switch>`,
+      html: '<scarlet-switch></scarlet-switch>'
     });
 
     const changeSpy = jest.fn();
@@ -35,7 +35,7 @@ describe('scarlet-switch', () => {
   it('disables the native input when disabled', async () => {
     const page = await newSpecPage({
       components: [ScarletSwitch],
-      html: `<scarlet-switch disabled></scarlet-switch>`,
+      html: '<scarlet-switch disabled></scarlet-switch>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;

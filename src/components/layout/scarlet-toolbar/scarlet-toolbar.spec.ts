@@ -5,7 +5,7 @@ describe('scarlet-toolbar', () => {
   it('exposes role="toolbar" with the given aria-label', async () => {
     const page = await newSpecPage({
       components: [ScarletToolbar],
-      html: `<scarlet-toolbar aria-label="Ações"></scarlet-toolbar>`,
+      html: '<scarlet-toolbar aria-label="Ações"></scarlet-toolbar>'
     });
 
     expect(page.root?.getAttribute('role')).toBe('toolbar');
@@ -15,7 +15,7 @@ describe('scarlet-toolbar', () => {
   it('defaults to justify-start', async () => {
     const page = await newSpecPage({
       components: [ScarletToolbar],
-      html: `<scarlet-toolbar></scarlet-toolbar>`,
+      html: '<scarlet-toolbar></scarlet-toolbar>'
     });
 
     expect(page.root?.classList.contains('scarlet-toolbar-host--justify-start')).toBe(true);
@@ -24,7 +24,7 @@ describe('scarlet-toolbar', () => {
   it('reflects a custom justify value', async () => {
     const page = await newSpecPage({
       components: [ScarletToolbar],
-      html: `<scarlet-toolbar justify="between"></scarlet-toolbar>`,
+      html: '<scarlet-toolbar justify="between"></scarlet-toolbar>'
     });
 
     expect(page.root?.classList.contains('scarlet-toolbar-host--justify-between')).toBe(true);

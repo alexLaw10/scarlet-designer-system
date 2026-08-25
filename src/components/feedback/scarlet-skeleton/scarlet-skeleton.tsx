@@ -11,7 +11,7 @@ export type ScarletSkeletonVariant = 'text' | 'circle' | 'rect';
 @Component({
   tag: 'scarlet-skeleton',
   styleUrl: 'scarlet-skeleton.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletSkeleton {
   /** Shape of the placeholder. */
@@ -27,13 +27,17 @@ export class ScarletSkeleton {
   @Prop() readonly lines = 1;
 
   render() {
-    const style = this.width || this.height ? { width: this.width, height: this.height } : undefined;
+    const style =
+      this.width || this.height ? { width: this.width, height: this.height } : undefined;
     const count = this.variant === 'text' ? Math.max(1, this.lines) : 1;
 
     return (
-      <Host class="scarlet-skeleton-host" aria-hidden="true">
+      <Host class='scarlet-skeleton-host' aria-hidden='true'>
         {Array.from({ length: count }).map(() => (
-          <span class={{ 'scarlet-skeleton': true, [`scarlet-skeleton--${this.variant}`]: true }} style={style} />
+          <span
+            class={{ 'scarlet-skeleton': true, [`scarlet-skeleton--${this.variant}`]: true }}
+            style={style}
+          />
         ))}
       </Host>
     );

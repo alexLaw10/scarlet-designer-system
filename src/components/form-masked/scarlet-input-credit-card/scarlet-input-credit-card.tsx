@@ -13,7 +13,7 @@ import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/util
 @Component({
   tag: 'scarlet-input-credit-card',
   styleUrl: 'scarlet-input-credit-card.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletInputCreditCard {
   private inputEl?: HTMLInputElement;
@@ -107,7 +107,10 @@ export class ScarletInputCreditCard {
     const target = event.target as HTMLInputElement;
     const previousBrand = detectCardBrand(this.value);
     const brand = detectCardBrand(target.value);
-    this.value = maskCreditCard(target.value, brand === 'amex' ? 'amex' : brand === 'diners' ? 'diners' : undefined);
+    this.value = maskCreditCard(
+      target.value,
+      brand === 'amex' ? 'amex' : brand === 'diners' ? 'diners' : undefined
+    );
     this.autoInvalid = false;
     if (brand !== previousBrand) {
       this.scarletBrandChange.emit(brand);
@@ -135,32 +138,36 @@ export class ScarletInputCreditCard {
   };
 
   render() {
-    const effectiveErrorMessage = this.errorMessage ?? (this.autoInvalid ? 'Número de cartão inválido.' : undefined);
+    const effectiveErrorMessage =
+      this.errorMessage ?? (this.autoInvalid ? 'Número de cartão inválido.' : undefined);
     const isInvalid = this.invalid || Boolean(effectiveErrorMessage);
-    const describedBy = computeDescribedBy(effectiveErrorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
+    const describedBy = computeDescribedBy(effectiveErrorMessage, this.helperText, {
+      helperId: this.helperId,
+      errorId: this.errorId
+    });
     const brand = detectCardBrand(this.value);
 
     return (
-      <Host class="scarlet-input-credit-card-host">
+      <Host class='scarlet-input-credit-card-host'>
         {renderFieldLabel({
           htmlFor: this.inputId,
           label: this.label,
           required: this.required,
           labelClass: 'scarlet-input-credit-card__label',
-          requiredClass: 'scarlet-input-credit-card__required',
+          requiredClass: 'scarlet-input-credit-card__required'
         })}
-        <div class="scarlet-input-credit-card__wrapper">
+        <div class='scarlet-input-credit-card__wrapper'>
           <input
-            ref={(el) => (this.inputEl = el)}
+            ref={el => (this.inputEl = el)}
             id={this.inputId}
             class={{
               'scarlet-input-credit-card': true,
               [`scarlet-input-credit-card--${this.size}`]: true,
-              'scarlet-input-credit-card--invalid': isInvalid,
+              'scarlet-input-credit-card--invalid': isInvalid
             }}
-            type="text"
-            inputMode="numeric"
-            autoComplete="cc-number"
+            type='text'
+            inputMode='numeric'
+            autoComplete='cc-number'
             name={this.name}
             value={this.value}
             placeholder={this.placeholder}
@@ -174,7 +181,7 @@ export class ScarletInputCreditCard {
             onBlur={this.handleBlur}
           />
           {brand ? (
-            <span class="scarlet-input-credit-card__brand" aria-hidden="true">
+            <span class='scarlet-input-credit-card__brand' aria-hidden='true'>
               {brand}
             </span>
           ) : null}
@@ -183,8 +190,10 @@ export class ScarletInputCreditCard {
           errorMessage: effectiveErrorMessage,
           helperText: this.helperText,
           ids: { helperId: this.helperId, errorId: this.errorId },
-          errorClass: 'scarlet-input-credit-card__message scarlet-input-credit-card__message--error',
-          helperClass: 'scarlet-input-credit-card__message scarlet-input-credit-card__message--helper',
+          errorClass:
+            'scarlet-input-credit-card__message scarlet-input-credit-card__message--error',
+          helperClass:
+            'scarlet-input-credit-card__message scarlet-input-credit-card__message--helper'
         })}
       </Host>
     );

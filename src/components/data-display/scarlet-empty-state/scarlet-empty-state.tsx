@@ -12,7 +12,7 @@ import type { ScarletIconName } from '@/components/foundation/scarlet-icon/icons
 @Component({
   tag: 'scarlet-empty-state',
   styleUrl: 'scarlet-empty-state.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletEmptyState {
   /** Icon shown above the heading. Ignored if the `icon` slot has content. */
@@ -26,13 +26,17 @@ export class ScarletEmptyState {
 
   render() {
     return (
-      <Host class="scarlet-empty-state-host">
-        <slot name="icon">
-          {this.icon ? <scarlet-icon name={this.icon} size="2.5rem" class="scarlet-empty-state__icon" /> : null}
+      <Host class='scarlet-empty-state-host'>
+        <slot name='icon'>
+          {this.icon ? (
+            <scarlet-icon name={this.icon} size='2.5rem' class='scarlet-empty-state__icon' />
+          ) : null}
         </slot>
-        <p class="scarlet-empty-state__heading">{this.heading}</p>
-        {this.description ? <p class="scarlet-empty-state__description">{this.description}</p> : null}
-        <slot name="action" />
+        <p class='scarlet-empty-state__heading'>{this.heading}</p>
+        {this.description ? (
+          <p class='scarlet-empty-state__description'>{this.description}</p>
+        ) : null}
+        <slot name='action' />
       </Host>
     );
   }

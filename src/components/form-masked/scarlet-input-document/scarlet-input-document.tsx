@@ -16,7 +16,7 @@ export type ScarletDocumentType = 'cpf' | 'cnpj';
 @Component({
   tag: 'scarlet-input-document',
   styleUrl: 'scarlet-input-document.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletInputDocument {
   private inputEl?: HTMLInputElement;
@@ -135,29 +135,33 @@ export class ScarletInputDocument {
   }
 
   render() {
-    const effectiveErrorMessage = this.errorMessage ?? (this.autoInvalid ? this.defaultErrorMessage() : undefined);
+    const effectiveErrorMessage =
+      this.errorMessage ?? (this.autoInvalid ? this.defaultErrorMessage() : undefined);
     const isInvalid = this.invalid || Boolean(effectiveErrorMessage);
-    const describedBy = computeDescribedBy(effectiveErrorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
+    const describedBy = computeDescribedBy(effectiveErrorMessage, this.helperText, {
+      helperId: this.helperId,
+      errorId: this.errorId
+    });
 
     return (
-      <Host class="scarlet-input-document-host">
+      <Host class='scarlet-input-document-host'>
         {renderFieldLabel({
           htmlFor: this.inputId,
           label: this.label,
           required: this.required,
           labelClass: 'scarlet-input-document__label',
-          requiredClass: 'scarlet-input-document__required',
+          requiredClass: 'scarlet-input-document__required'
         })}
         <input
-          ref={(el) => (this.inputEl = el)}
+          ref={el => (this.inputEl = el)}
           id={this.inputId}
           class={{
             'scarlet-input-document': true,
             [`scarlet-input-document--${this.size}`]: true,
-            'scarlet-input-document--invalid': isInvalid,
+            'scarlet-input-document--invalid': isInvalid
           }}
-          type="text"
-          inputMode="numeric"
+          type='text'
+          inputMode='numeric'
           name={this.name}
           value={this.value}
           placeholder={this.placeholder}
@@ -175,7 +179,7 @@ export class ScarletInputDocument {
           helperText: this.helperText,
           ids: { helperId: this.helperId, errorId: this.errorId },
           errorClass: 'scarlet-input-document__message scarlet-input-document__message--error',
-          helperClass: 'scarlet-input-document__message scarlet-input-document__message--helper',
+          helperClass: 'scarlet-input-document__message scarlet-input-document__message--helper'
         })}
       </Host>
     );

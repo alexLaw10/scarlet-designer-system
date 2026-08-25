@@ -1,4 +1,14 @@
-import { Component, Prop, Watch, Event, type EventEmitter, h, Host, Listen, Element } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  Watch,
+  Event,
+  type EventEmitter,
+  h,
+  Host,
+  Listen,
+  Element
+} from '@stencil/core';
 
 interface ScarletRadioElement extends HTMLElement {
   value?: string;
@@ -18,7 +28,7 @@ interface ScarletRadioElement extends HTMLElement {
 @Component({
   tag: 'scarlet-radio-group',
   styleUrl: 'scarlet-radio-group.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletRadioGroup {
   private slotEl?: HTMLSlotElement;
@@ -88,16 +98,19 @@ export class ScarletRadioGroup {
   // boundaries), forcing keyboard users to Tab through every single option.
   @Listen('keydown')
   handleKeyDown(event: KeyboardEvent): void {
-    const radios = this.getRadios().filter((radio) => !radio.disabled);
+    const radios = this.getRadios().filter(radio => !radio.disabled);
     if (radios.length === 0) return;
 
-    const currentIndex = radios.findIndex((radio) => radio.value === this.value);
+    const currentIndex = radios.findIndex(radio => radio.value === this.value);
     let nextIndex: number | null = null;
 
     if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
       nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % radios.length;
     } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
-      nextIndex = currentIndex === -1 ? radios.length - 1 : (currentIndex - 1 + radios.length) % radios.length;
+      nextIndex =
+        currentIndex === -1 ?
+          radios.length - 1 :
+          (currentIndex - 1 + radios.length) % radios.length;
     } else if (event.key === 'Home') {
       nextIndex = 0;
     } else if (event.key === 'End') {
@@ -115,15 +128,17 @@ export class ScarletRadioGroup {
   }
 
   private getRadios(): ScarletRadioElement[] {
-    return Array.from(this.el.querySelectorAll('scarlet-radio')) as unknown as ScarletRadioElement[];
+    return Array.from(
+      this.el.querySelectorAll('scarlet-radio')
+    ) as unknown as ScarletRadioElement[];
   }
 
   private syncChildren = (): void => {
     const radios = this.getRadios();
-    const checkedRadio = radios.find((radio) => radio.value === this.value);
-    const focusTarget = checkedRadio ?? radios.find((radio) => !radio.disabled) ?? radios[0];
+    const checkedRadio = radios.find(radio => radio.value === this.value);
+    const focusTarget = checkedRadio ?? radios.find(radio => !radio.disabled) ?? radios[0];
 
-    radios.forEach((radio) => {
+    radios.forEach(radio => {
       radio.checked = radio.value === this.value;
       radio.focusable = radio === focusTarget;
       if (this.name) {
@@ -149,7 +164,7 @@ export class ScarletRadioGroup {
     return (
       <Host
         class={{ 'scarlet-radio-group': true, 'scarlet-radio-group--horizontal': this.horizontal }}
-        role="radiogroup"
+        role='radiogroup'
         aria-label={this.ariaLabel}
       >
         <slot ref={this.handleSlotRef} />

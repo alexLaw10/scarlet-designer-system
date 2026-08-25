@@ -5,7 +5,7 @@ describe('scarlet-stack', () => {
   it('defaults to column direction, md gap, stretch align, start justify, nowrap', async () => {
     const page = await newSpecPage({
       components: [ScarletStack],
-      html: `<scarlet-stack></scarlet-stack>`,
+      html: '<scarlet-stack></scarlet-stack>'
     });
 
     expect(page.root?.style.getPropertyValue('--scarlet-stack-direction')).toBe('column');
@@ -18,7 +18,7 @@ describe('scarlet-stack', () => {
   it('applies every overridden prop', async () => {
     const page = await newSpecPage({
       components: [ScarletStack],
-      html: `<scarlet-stack direction="row" gap="xl" align="center" justify="between" wrap="wrap"></scarlet-stack>`,
+      html: '<scarlet-stack direction="row" gap="xl" align="center" justify="between" wrap="wrap"></scarlet-stack>'
     });
 
     expect(page.root?.style.getPropertyValue('--scarlet-stack-direction')).toBe('row');
@@ -31,7 +31,7 @@ describe('scarlet-stack', () => {
   it('only sets the breakpoint direction custom properties that were actually passed', async () => {
     const page = await newSpecPage({
       components: [ScarletStack],
-      html: `<scarlet-stack direction="column" direction-md="row"></scarlet-stack>`,
+      html: '<scarlet-stack direction="column" direction-md="row"></scarlet-stack>'
     });
 
     expect(page.root?.style.getPropertyValue('--scarlet-stack-direction')).toBe('column');

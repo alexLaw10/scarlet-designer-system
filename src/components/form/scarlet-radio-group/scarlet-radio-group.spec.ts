@@ -12,12 +12,14 @@ describe('scarlet-radio-group', () => {
           <scarlet-radio value="b"></scarlet-radio>
           <scarlet-radio value="c"></scarlet-radio>
         </scarlet-radio-group>
-      `,
+      `
     });
     await page.waitForChanges();
 
     const radios = Array.from(page.root!.querySelectorAll('scarlet-radio'));
-    const checkedValues = radios.filter((radio: any) => radio.checked).map((radio: any) => radio.value);
+    const checkedValues = radios
+      .filter((radio: any) => radio.checked)
+      .map((radio: any) => radio.value);
 
     expect(checkedValues).toEqual(['b']);
   });
@@ -30,7 +32,7 @@ describe('scarlet-radio-group', () => {
           <scarlet-radio value="a"></scarlet-radio>
           <scarlet-radio value="b"></scarlet-radio>
         </scarlet-radio-group>
-      `,
+      `
     });
     await page.waitForChanges();
 
@@ -38,7 +40,9 @@ describe('scarlet-radio-group', () => {
     await page.waitForChanges();
 
     const radios = Array.from(page.root!.querySelectorAll('scarlet-radio'));
-    const checkedValues = radios.filter((radio: any) => radio.checked).map((radio: any) => radio.value);
+    const checkedValues = radios
+      .filter((radio: any) => radio.checked)
+      .map((radio: any) => radio.value);
 
     expect(checkedValues).toEqual(['b']);
   });
@@ -51,7 +55,7 @@ describe('scarlet-radio-group', () => {
           <scarlet-radio value="a"></scarlet-radio>
           <scarlet-radio value="b"></scarlet-radio>
         </scarlet-radio-group>
-      `,
+      `
     });
     await page.waitForChanges();
 
@@ -59,7 +63,7 @@ describe('scarlet-radio-group', () => {
     page.root?.addEventListener('scarletChange', changeSpy);
 
     const radios = Array.from(page.root!.querySelectorAll('scarlet-radio')) as any[];
-    const radioB = radios.find((radio) => radio.value === 'b');
+    const radioB = radios.find(radio => radio.value === 'b');
     const input = radioB.shadowRoot.querySelector('input');
     input.checked = true;
     // Dispatched directly on the input scarlet-radio's own onChange is
@@ -73,7 +77,7 @@ describe('scarlet-radio-group', () => {
     expect(changeSpy.mock.calls[0][0].detail).toBe('b');
     expect(page.rootInstance.value).toBe('b');
 
-    const radioA = radios.find((radio) => radio.value === 'a');
+    const radioA = radios.find(radio => radio.value === 'a');
     expect(radioA.checked).toBe(false);
     expect(radioB.checked).toBe(true);
   });
@@ -87,12 +91,12 @@ describe('scarlet-radio-group', () => {
           <scarlet-radio value="b"></scarlet-radio>
           <scarlet-radio value="c"></scarlet-radio>
         </scarlet-radio-group>
-      `,
+      `
     });
     await page.waitForChanges();
 
     const radios = Array.from(page.root!.querySelectorAll('scarlet-radio')) as any[];
-    expect(radios.map((radio) => radio.focusable)).toEqual([false, true, false]);
+    expect(radios.map(radio => radio.focusable)).toEqual([false, true, false]);
   });
 
   it('falls back the tab stop to the first enabled radio when none is checked', async () => {
@@ -103,12 +107,12 @@ describe('scarlet-radio-group', () => {
           <scarlet-radio value="a"></scarlet-radio>
           <scarlet-radio value="b"></scarlet-radio>
         </scarlet-radio-group>
-      `,
+      `
     });
     await page.waitForChanges();
 
     const radios = Array.from(page.root!.querySelectorAll('scarlet-radio')) as any[];
-    expect(radios.map((radio) => radio.focusable)).toEqual([true, false]);
+    expect(radios.map(radio => radio.focusable)).toEqual([true, false]);
   });
 
   it('moves selection and the tab stop with ArrowRight/ArrowLeft, wrapping around', async () => {
@@ -120,30 +124,36 @@ describe('scarlet-radio-group', () => {
           <scarlet-radio value="b"></scarlet-radio>
           <scarlet-radio value="c"></scarlet-radio>
         </scarlet-radio-group>
-      `,
+      `
     });
     await page.waitForChanges();
 
     const changeSpy = jest.fn();
     page.root?.addEventListener('scarletChange', changeSpy);
 
-    page.root?.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }));
+    page.root?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true })
+    );
     await page.waitForChanges();
     expect(page.rootInstance.value).toBe('b');
 
-    page.root?.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true, cancelable: true }));
+    page.root?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true, cancelable: true })
+    );
     await page.waitForChanges();
     expect(page.rootInstance.value).toBe('a');
 
     // Wraps from the first option back to the last on ArrowLeft.
-    page.root?.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true, cancelable: true }));
+    page.root?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true, cancelable: true })
+    );
     await page.waitForChanges();
     expect(page.rootInstance.value).toBe('c');
 
     expect(changeSpy).toHaveBeenCalledTimes(3);
 
     const radios = Array.from(page.root!.querySelectorAll('scarlet-radio')) as any[];
-    expect(radios.map((radio) => radio.focusable)).toEqual([false, false, true]);
+    expect(radios.map(radio => radio.focusable)).toEqual([false, false, true]);
   });
 
   it('skips disabled radios when navigating with arrow keys', async () => {
@@ -155,11 +165,13 @@ describe('scarlet-radio-group', () => {
           <scarlet-radio value="b" disabled></scarlet-radio>
           <scarlet-radio value="c"></scarlet-radio>
         </scarlet-radio-group>
-      `,
+      `
     });
     await page.waitForChanges();
 
-    page.root?.dispatchEvent(new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true }));
+    page.root?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true, cancelable: true })
+    );
     await page.waitForChanges();
 
     expect(page.rootInstance.value).toBe('c');
@@ -173,12 +185,12 @@ describe('scarlet-radio-group', () => {
           <scarlet-radio value="a"></scarlet-radio>
           <scarlet-radio value="b"></scarlet-radio>
         </scarlet-radio-group>
-      `,
+      `
     });
     await page.waitForChanges();
 
     const radios = Array.from(page.root!.querySelectorAll('scarlet-radio')) as any[];
-    radios.forEach((radio) => {
+    radios.forEach(radio => {
       expect(radio.name).toBe('tamanho');
       expect(radio.disabled).toBe(true);
     });

@@ -18,7 +18,7 @@ export interface ScarletTimelineItem {
 @Component({
   tag: 'scarlet-timeline',
   styleUrl: 'scarlet-timeline.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletTimeline {
   /** The events, in order from first to last. */
@@ -26,18 +26,30 @@ export class ScarletTimeline {
 
   render() {
     return (
-      <Host class="scarlet-timeline-host">
-        <ol class="scarlet-timeline__list">
+      <Host class='scarlet-timeline-host'>
+        <ol class='scarlet-timeline__list'>
           {this.items.map((item, index) => (
-            <li class="scarlet-timeline__item">
-              <span class={{ 'scarlet-timeline__marker': true, [`scarlet-timeline__marker--${item.status ?? 'default'}`]: true }} aria-hidden="true" />
-              {index < this.items.length - 1 ? <span class="scarlet-timeline__line" aria-hidden="true" /> : null}
-              <div class="scarlet-timeline__content">
-                <div class="scarlet-timeline__heading">
-                  <p class="scarlet-timeline__title">{item.title}</p>
-                  {item.timestamp ? <time class="scarlet-timeline__timestamp">{item.timestamp}</time> : null}
+            <li class='scarlet-timeline__item'>
+              <span
+                class={{
+                  'scarlet-timeline__marker': true,
+                  [`scarlet-timeline__marker--${item.status ?? 'default'}`]: true
+                }}
+                aria-hidden='true'
+              />
+              {index < this.items.length - 1 ? (
+                <span class='scarlet-timeline__line' aria-hidden='true' />
+              ) : null}
+              <div class='scarlet-timeline__content'>
+                <div class='scarlet-timeline__heading'>
+                  <p class='scarlet-timeline__title'>{item.title}</p>
+                  {item.timestamp ? (
+                    <time class='scarlet-timeline__timestamp'>{item.timestamp}</time>
+                  ) : null}
                 </div>
-                {item.description ? <p class="scarlet-timeline__description">{item.description}</p> : null}
+                {item.description ? (
+                  <p class='scarlet-timeline__description'>{item.description}</p>
+                ) : null}
               </div>
             </li>
           ))}

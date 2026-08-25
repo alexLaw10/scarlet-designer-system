@@ -5,7 +5,7 @@ describe('scarlet-input-cep', () => {
   it('formats digits as XXXXX-XXX', async () => {
     const page = await newSpecPage({
       components: [ScarletInputCep],
-      html: `<scarlet-input-cep></scarlet-input-cep>`,
+      html: '<scarlet-input-cep></scarlet-input-cep>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -19,7 +19,7 @@ describe('scarlet-input-cep', () => {
   it('emits scarletComplete exactly when the 8th digit is typed', async () => {
     const page = await newSpecPage({
       components: [ScarletInputCep],
-      html: `<scarlet-input-cep></scarlet-input-cep>`,
+      html: '<scarlet-input-cep></scarlet-input-cep>'
     });
 
     const completeSpy = jest.fn();
@@ -41,7 +41,7 @@ describe('scarlet-input-cep', () => {
   it('exposes the raw digits via getRawValue()', async () => {
     const page = await newSpecPage({
       components: [ScarletInputCep],
-      html: `<scarlet-input-cep value="01310-100"></scarlet-input-cep>`,
+      html: '<scarlet-input-cep value="01310-100"></scarlet-input-cep>'
     });
 
     await expect(page.rootInstance.getRawValue()).resolves.toBe('01310100');

@@ -5,7 +5,7 @@ describe('scarlet-input-date', () => {
   it('formats digits as DD/MM/AAAA', async () => {
     const page = await newSpecPage({
       components: [ScarletInputDate],
-      html: `<scarlet-input-date></scarlet-input-date>`,
+      html: '<scarlet-input-date></scarlet-input-date>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -19,7 +19,7 @@ describe('scarlet-input-date', () => {
   it('accepts a real leap-year date (29/02) as valid', async () => {
     const page = await newSpecPage({
       components: [ScarletInputDate],
-      html: `<scarlet-input-date value="29/02/2024"></scarlet-input-date>`,
+      html: '<scarlet-input-date value="29/02/2024"></scarlet-input-date>'
     });
 
     await expect(page.rootInstance.isValid()).resolves.toBe(true);
@@ -28,7 +28,7 @@ describe('scarlet-input-date', () => {
   it('rejects 31/02 as invalid, even though it is 8 digits', async () => {
     const page = await newSpecPage({
       components: [ScarletInputDate],
-      html: `<scarlet-input-date value="31/02/2026"></scarlet-input-date>`,
+      html: '<scarlet-input-date value="31/02/2026"></scarlet-input-date>'
     });
 
     await expect(page.rootInstance.isValid()).resolves.toBe(false);
@@ -44,7 +44,7 @@ describe('scarlet-input-date', () => {
   it('toDate() returns the equivalent native Date for a valid value', async () => {
     const page = await newSpecPage({
       components: [ScarletInputDate],
-      html: `<scarlet-input-date value="25/12/2026"></scarlet-input-date>`,
+      html: '<scarlet-input-date value="25/12/2026"></scarlet-input-date>'
     });
 
     const date = await page.rootInstance.toDate();
@@ -56,7 +56,7 @@ describe('scarlet-input-date', () => {
   it('toDate() returns undefined for an invalid value', async () => {
     const page = await newSpecPage({
       components: [ScarletInputDate],
-      html: `<scarlet-input-date value="31/02/2026"></scarlet-input-date>`,
+      html: '<scarlet-input-date value="31/02/2026"></scarlet-input-date>'
     });
 
     await expect(page.rootInstance.toDate()).resolves.toBeUndefined();

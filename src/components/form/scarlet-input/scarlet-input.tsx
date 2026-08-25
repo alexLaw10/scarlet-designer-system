@@ -11,7 +11,7 @@ export type ScarletInputType = 'text' | 'email' | 'password' | 'number' | 'tel' 
 @Component({
   tag: 'scarlet-input',
   styleUrl: 'scarlet-input.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletInput {
   private inputEl?: HTMLInputElement;
@@ -97,24 +97,27 @@ export class ScarletInput {
 
   render() {
     const isInvalid = this.invalid || Boolean(this.errorMessage);
-    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
+    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, {
+      helperId: this.helperId,
+      errorId: this.errorId
+    });
 
     return (
-      <Host class="scarlet-input-host">
+      <Host class='scarlet-input-host'>
         {renderFieldLabel({
           htmlFor: this.inputId,
           label: this.label,
           required: this.required,
           labelClass: 'scarlet-input__label',
-          requiredClass: 'scarlet-input__required',
+          requiredClass: 'scarlet-input__required'
         })}
         <input
-          ref={(el) => (this.inputEl = el)}
+          ref={el => (this.inputEl = el)}
           id={this.inputId}
           class={{
             'scarlet-input': true,
             [`scarlet-input--${this.size}`]: true,
-            'scarlet-input--invalid': isInvalid,
+            'scarlet-input--invalid': isInvalid
           }}
           type={this.type}
           name={this.name}
@@ -136,7 +139,7 @@ export class ScarletInput {
           helperText: this.helperText,
           ids: { helperId: this.helperId, errorId: this.errorId },
           errorClass: 'scarlet-input__message scarlet-input__message--error',
-          helperClass: 'scarlet-input__message scarlet-input__message--helper',
+          helperClass: 'scarlet-input__message scarlet-input__message--helper'
         })}
       </Host>
     );

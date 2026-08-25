@@ -15,7 +15,7 @@ import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/util
 @Component({
   tag: 'scarlet-input-currency',
   styleUrl: 'scarlet-input-currency.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletInputCurrency {
   private inputEl?: HTMLInputElement;
@@ -100,27 +100,30 @@ export class ScarletInputCurrency {
 
   render() {
     const isInvalid = this.invalid || Boolean(this.errorMessage);
-    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
+    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, {
+      helperId: this.helperId,
+      errorId: this.errorId
+    });
 
     return (
-      <Host class="scarlet-input-currency-host">
+      <Host class='scarlet-input-currency-host'>
         {renderFieldLabel({
           htmlFor: this.inputId,
           label: this.label,
           required: this.required,
           labelClass: 'scarlet-input-currency__label',
-          requiredClass: 'scarlet-input-currency__required',
+          requiredClass: 'scarlet-input-currency__required'
         })}
         <input
-          ref={(el) => (this.inputEl = el)}
+          ref={el => (this.inputEl = el)}
           id={this.inputId}
           class={{
             'scarlet-input-currency': true,
             [`scarlet-input-currency--${this.size}`]: true,
-            'scarlet-input-currency--invalid': isInvalid,
+            'scarlet-input-currency--invalid': isInvalid
           }}
-          type="text"
-          inputMode="decimal"
+          type='text'
+          inputMode='decimal'
           name={this.name}
           value={this.value}
           placeholder={this.placeholder}
@@ -138,7 +141,7 @@ export class ScarletInputCurrency {
           helperText: this.helperText,
           ids: { helperId: this.helperId, errorId: this.errorId },
           errorClass: 'scarlet-input-currency__message scarlet-input-currency__message--error',
-          helperClass: 'scarlet-input-currency__message scarlet-input-currency__message--helper',
+          helperClass: 'scarlet-input-currency__message scarlet-input-currency__message--helper'
         })}
       </Host>
     );

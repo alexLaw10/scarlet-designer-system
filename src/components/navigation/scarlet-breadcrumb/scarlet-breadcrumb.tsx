@@ -19,7 +19,7 @@ export interface ScarletBreadcrumbItem {
 @Component({
   tag: 'scarlet-breadcrumb',
   styleUrl: 'scarlet-breadcrumb.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletBreadcrumb {
   /** The trail of items, in order from the root down to the current page. */
@@ -48,24 +48,31 @@ export class ScarletBreadcrumb {
 
   render() {
     return (
-      <Host class="scarlet-breadcrumb-host">
+      <Host class='scarlet-breadcrumb-host'>
         <nav aria-label={this.ariaLabel}>
-          <ol class="scarlet-breadcrumb__list">
+          <ol class='scarlet-breadcrumb__list'>
             {this.items.map((item, index) => {
               const isLast = index === this.items.length - 1;
               return (
-                <li class="scarlet-breadcrumb__item">
+                <li class='scarlet-breadcrumb__item'>
                   {item.href && !isLast ? (
-                    <a class="scarlet-breadcrumb__link" href={item.href} onClick={(event) => this.handleClick(item, event)}>
+                    <a
+                      class='scarlet-breadcrumb__link'
+                      href={item.href}
+                      onClick={event => this.handleClick(item, event)}
+                    >
                       {item.label}
                     </a>
                   ) : (
-                    <span class="scarlet-breadcrumb__current" aria-current={isLast ? 'page' : undefined}>
+                    <span
+                      class='scarlet-breadcrumb__current'
+                      aria-current={isLast ? 'page' : undefined}
+                    >
                       {item.label}
                     </span>
                   )}
                   {!isLast ? (
-                    <span class="scarlet-breadcrumb__separator" aria-hidden="true">
+                    <span class='scarlet-breadcrumb__separator' aria-hidden='true'>
                       {this.separator}
                     </span>
                   ) : null}

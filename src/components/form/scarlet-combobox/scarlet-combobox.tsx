@@ -1,4 +1,16 @@
-import { Component, Prop, State, Watch, Event, type EventEmitter, h, Host, Listen, Element, Method } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  State,
+  Watch,
+  Event,
+  type EventEmitter,
+  h,
+  Host,
+  Listen,
+  Element,
+  Method
+} from '@stencil/core';
 import type { Size } from '@/types';
 import { generateId } from '@/utils';
 import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/utils/form-field';
@@ -24,7 +36,7 @@ export interface ScarletComboboxOption {
 @Component({
   tag: 'scarlet-combobox',
   styleUrl: 'scarlet-combobox.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletCombobox {
   private inputEl?: HTMLInputElement;
@@ -133,7 +145,7 @@ export class ScarletCombobox {
   }
 
   private selectedLabel(): string {
-    return this.options.find((option) => option.value === this.value)?.label ?? '';
+    return this.options.find(option => option.value === this.value)?.label ?? '';
   }
 
   private get filteredOptions(): ScarletComboboxOption[] {
@@ -145,14 +157,14 @@ export class ScarletCombobox {
     if (!query || query === this.selectedLabel().toLowerCase()) {
       return this.options;
     }
-    return this.options.filter((option) => option.label.toLowerCase().includes(query));
+    return this.options.filter(option => option.label.toLowerCase().includes(query));
   }
 
   private openList(): void {
     if (this.open) return;
     this.open = true;
-    const enabledOptions = this.filteredOptions.filter((option) => !option.disabled);
-    const currentlySelected = enabledOptions.find((option) => option.value === this.value);
+    const enabledOptions = this.filteredOptions.filter(option => !option.disabled);
+    const currentlySelected = enabledOptions.find(option => option.value === this.value);
     this.focusedValue = (currentlySelected ?? enabledOptions[0])?.value;
   }
 
@@ -177,7 +189,7 @@ export class ScarletCombobox {
     const target = event.target as HTMLInputElement;
     this.query = target.value;
     if (!this.open) this.open = true;
-    const enabledOptions = this.filteredOptions.filter((option) => !option.disabled);
+    const enabledOptions = this.filteredOptions.filter(option => !option.disabled);
     this.focusedValue = enabledOptions[0]?.value;
     this.scarletInput.emit(this.query);
   };
@@ -205,22 +217,25 @@ export class ScarletCombobox {
 
     if (!this.open) return;
 
-    const enabledOptions = this.filteredOptions.filter((option) => !option.disabled);
+    const enabledOptions = this.filteredOptions.filter(option => !option.disabled);
     if (event.key === 'Enter') {
       event.preventDefault();
-      const match = enabledOptions.find((option) => option.value === this.focusedValue);
+      const match = enabledOptions.find(option => option.value === this.focusedValue);
       if (match) this.selectOption(match);
       return;
     }
 
     if (enabledOptions.length === 0) return;
-    const currentIndex = enabledOptions.findIndex((option) => option.value === this.focusedValue);
+    const currentIndex = enabledOptions.findIndex(option => option.value === this.focusedValue);
     let nextIndex: number | null = null;
 
     if (event.key === 'ArrowDown') {
       nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % enabledOptions.length;
     } else if (event.key === 'ArrowUp') {
-      nextIndex = currentIndex === -1 ? enabledOptions.length - 1 : (currentIndex - 1 + enabledOptions.length) % enabledOptions.length;
+      nextIndex =
+        currentIndex === -1 ?
+          enabledOptions.length - 1 :
+          (currentIndex - 1 + enabledOptions.length) % enabledOptions.length;
     } else if (event.key === 'Home') {
       nextIndex = 0;
     } else if (event.key === 'End') {
@@ -239,33 +254,38 @@ export class ScarletCombobox {
   render() {
     const effectiveErrorMessage = this.errorMessage;
     const isInvalid = this.invalid || Boolean(effectiveErrorMessage);
-    const describedBy = computeDescribedBy(effectiveErrorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
+    const describedBy = computeDescribedBy(effectiveErrorMessage, this.helperText, {
+      helperId: this.helperId,
+      errorId: this.errorId
+    });
     const options = this.filteredOptions;
 
     return (
-      <Host class="scarlet-combobox-host">
+      <Host class='scarlet-combobox-host'>
         {renderFieldLabel({
           htmlFor: this.inputId,
           label: this.label,
           required: this.required,
           labelClass: 'scarlet-combobox__label',
-          requiredClass: 'scarlet-combobox__required',
+          requiredClass: 'scarlet-combobox__required'
         })}
-        <div class="scarlet-combobox__field">
+        <div class='scarlet-combobox__field'>
           <input
-            ref={(el) => (this.inputEl = el)}
+            ref={el => (this.inputEl = el)}
             id={this.inputId}
             class={{
               'scarlet-combobox__input': true,
               [`scarlet-combobox__input--${this.size}`]: true,
-              'scarlet-combobox__input--invalid': isInvalid,
+              'scarlet-combobox__input--invalid': isInvalid
             }}
-            type="text"
-            role="combobox"
+            type='text'
+            role='combobox'
             aria-expanded={this.open ? 'true' : 'false'}
             aria-controls={this.listId}
-            aria-autocomplete="list"
-            aria-activedescendant={this.open && this.focusedValue ? this.optionId(this.focusedValue) : undefined}
+            aria-autocomplete='list'
+            aria-activedescendant={
+              this.open && this.focusedValue ? this.optionId(this.focusedValue) : undefined
+            }
             value={this.query}
             placeholder={this.placeholder}
             disabled={this.disabled}
@@ -278,19 +298,19 @@ export class ScarletCombobox {
             onKeyDown={this.handleKeyDown}
           />
           {this.open ? (
-            <ul class="scarlet-combobox__list" id={this.listId} role="listbox">
+            <ul class='scarlet-combobox__list' id={this.listId} role='listbox'>
               {options.length === 0 ? (
-                <li class="scarlet-combobox__empty">{this.noResultsMessage}</li>
+                <li class='scarlet-combobox__empty'>{this.noResultsMessage}</li>
               ) : (
-                options.map((option) => (
+                options.map(option => (
                   <li
                     id={this.optionId(option.value)}
                     class={{
                       'scarlet-combobox__option': true,
                       'scarlet-combobox__option--focused': option.value === this.focusedValue,
-                      'scarlet-combobox__option--selected': option.value === this.value,
+                      'scarlet-combobox__option--selected': option.value === this.value
                     }}
-                    role="option"
+                    role='option'
                     aria-selected={option.value === this.value ? 'true' : 'false'}
                     aria-disabled={option.disabled ? 'true' : undefined}
                     // mousedown (not click) with preventDefault(): the
@@ -299,7 +319,7 @@ export class ScarletCombobox {
                     // preventing it here keeps the input focused throughout
                     // — the input never blurs, so handleBlur's "revert the
                     // query" path never runs for a real option pick.
-                    onMouseDown={(event) => {
+                    onMouseDown={event => {
                       event.preventDefault();
                       this.selectOption(option);
                     }}
@@ -316,7 +336,7 @@ export class ScarletCombobox {
           helperText: this.helperText,
           ids: { helperId: this.helperId, errorId: this.errorId },
           errorClass: 'scarlet-combobox__message scarlet-combobox__message--error',
-          helperClass: 'scarlet-combobox__message scarlet-combobox__message--helper',
+          helperClass: 'scarlet-combobox__message scarlet-combobox__message--helper'
         })}
       </Host>
     );

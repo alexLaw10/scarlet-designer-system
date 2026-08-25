@@ -5,7 +5,7 @@ describe('scarlet-button', () => {
   it('renders the default (solid/primary/md) variant', async () => {
     const page = await newSpecPage({
       components: [ScarletButton],
-      html: `<scarlet-button>Enviar</scarlet-button>`,
+      html: '<scarlet-button>Enviar</scarlet-button>'
     });
 
     const button = page.root?.shadowRoot?.querySelector('button') as HTMLButtonElement;
@@ -22,7 +22,7 @@ describe('scarlet-button', () => {
   it('disables the native button and blocks scarletClick when disabled', async () => {
     const page = await newSpecPage({
       components: [ScarletButton],
-      html: `<scarlet-button disabled></scarlet-button>`,
+      html: '<scarlet-button disabled></scarlet-button>'
     });
 
     const clickSpy = jest.fn();
@@ -40,7 +40,7 @@ describe('scarlet-button', () => {
   it('marks aria-busy and blocks scarletClick while loading', async () => {
     const page = await newSpecPage({
       components: [ScarletButton],
-      html: `<scarlet-button loading></scarlet-button>`,
+      html: '<scarlet-button loading></scarlet-button>'
     });
 
     const clickSpy = jest.fn();
@@ -59,7 +59,7 @@ describe('scarlet-button', () => {
   it('emits scarletClick when enabled and clicked', async () => {
     const page = await newSpecPage({
       components: [ScarletButton],
-      html: `<scarlet-button></scarlet-button>`,
+      html: '<scarlet-button></scarlet-button>'
     });
 
     const clickSpy = jest.fn();
@@ -75,7 +75,7 @@ describe('scarlet-button', () => {
   it('applies the full-width host modifier', async () => {
     const page = await newSpecPage({
       components: [ScarletButton],
-      html: `<scarlet-button full-width></scarlet-button>`,
+      html: '<scarlet-button full-width></scarlet-button>'
     });
 
     expect(page.root?.classList.contains('scarlet-button-host--full-width')).toBe(true);
@@ -84,7 +84,7 @@ describe('scarlet-button', () => {
   it('reflects variant, color and size props onto the internal button classes', async () => {
     const page = await newSpecPage({
       components: [ScarletButton],
-      html: `<scarlet-button variant="outline" color="error" size="lg"></scarlet-button>`,
+      html: '<scarlet-button variant="outline" color="error" size="lg"></scarlet-button>'
     });
 
     const button = page.root?.shadowRoot?.querySelector('button') as HTMLButtonElement;
@@ -100,7 +100,7 @@ describe('scarlet-button', () => {
         <scarlet-button icon-only aria-label="Fechar">
           <scarlet-icon slot="start" name="x"></scarlet-icon>
         </scarlet-button>
-      `,
+      `
     });
 
     const button = page.root?.shadowRoot?.querySelector('button') as HTMLButtonElement;

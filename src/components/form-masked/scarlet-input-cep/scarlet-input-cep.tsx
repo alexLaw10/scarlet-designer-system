@@ -13,7 +13,7 @@ import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/util
 @Component({
   tag: 'scarlet-input-cep',
   styleUrl: 'scarlet-input-cep.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletInputCep {
   private inputEl?: HTMLInputElement;
@@ -105,28 +105,31 @@ export class ScarletInputCep {
 
   render() {
     const isInvalid = this.invalid || Boolean(this.errorMessage);
-    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
+    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, {
+      helperId: this.helperId,
+      errorId: this.errorId
+    });
 
     return (
-      <Host class="scarlet-input-cep-host">
+      <Host class='scarlet-input-cep-host'>
         {renderFieldLabel({
           htmlFor: this.inputId,
           label: this.label,
           required: this.required,
           labelClass: 'scarlet-input-cep__label',
-          requiredClass: 'scarlet-input-cep__required',
+          requiredClass: 'scarlet-input-cep__required'
         })}
         <input
-          ref={(el) => (this.inputEl = el)}
+          ref={el => (this.inputEl = el)}
           id={this.inputId}
           class={{
             'scarlet-input-cep': true,
             [`scarlet-input-cep--${this.size}`]: true,
-            'scarlet-input-cep--invalid': isInvalid,
+            'scarlet-input-cep--invalid': isInvalid
           }}
-          type="text"
-          inputMode="numeric"
-          autoComplete="postal-code"
+          type='text'
+          inputMode='numeric'
+          autoComplete='postal-code'
           name={this.name}
           value={this.value}
           placeholder={this.placeholder}
@@ -144,7 +147,7 @@ export class ScarletInputCep {
           helperText: this.helperText,
           ids: { helperId: this.helperId, errorId: this.errorId },
           errorClass: 'scarlet-input-cep__message scarlet-input-cep__message--error',
-          helperClass: 'scarlet-input-cep__message scarlet-input-cep__message--helper',
+          helperClass: 'scarlet-input-cep__message scarlet-input-cep__message--helper'
         })}
       </Host>
     );

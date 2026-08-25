@@ -1,4 +1,15 @@
-import { Component, Prop, State, Event, type EventEmitter, h, Host, Method, Listen, Element } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  State,
+  Event,
+  type EventEmitter,
+  h,
+  Host,
+  Method,
+  Listen,
+  Element
+} from '@stencil/core';
 import type { Size } from '@/types';
 import { generateId } from '@/utils';
 import { maskDate, onlyDigits } from '@/utils/masks';
@@ -15,7 +26,7 @@ import {
   startOfWeek,
   endOfWeek,
   daysInMonth,
-  getMonthGrid,
+  getMonthGrid
 } from '@/utils/calendar';
 import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/utils/form-field';
 
@@ -41,7 +52,7 @@ import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/util
 @Component({
   tag: 'scarlet-date-picker',
   styleUrl: 'scarlet-date-picker.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletDatePicker {
   private inputEl?: HTMLInputElement;
@@ -289,7 +300,11 @@ export class ScarletDatePicker {
     this.viewMonth = next.getMonth();
 
     const currentDay = this.focusedDate?.getDate() ?? 1;
-    this.focusedDate = new Date(next.getFullYear(), next.getMonth(), Math.min(currentDay, daysInMonth(next.getFullYear(), next.getMonth())));
+    this.focusedDate = new Date(
+      next.getFullYear(),
+      next.getMonth(),
+      Math.min(currentDay, daysInMonth(next.getFullYear(), next.getMonth()))
+    );
   }
 
   private goToPrevMonth = (): void => this.shiftView(-1);
@@ -343,9 +358,13 @@ export class ScarletDatePicker {
   };
 
   render() {
-    const effectiveErrorMessage = this.errorMessage ?? (this.autoInvalid ? 'Data inválida.' : undefined);
+    const effectiveErrorMessage =
+      this.errorMessage ?? (this.autoInvalid ? 'Data inválida.' : undefined);
     const isInvalid = this.invalid || Boolean(effectiveErrorMessage);
-    const describedBy = computeDescribedBy(effectiveErrorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
+    const describedBy = computeDescribedBy(effectiveErrorMessage, this.helperText, {
+      helperId: this.helperId,
+      errorId: this.errorId
+    });
 
     const { min: minDate, max: maxDate } = this.getMinMax();
     const selectedDate = parseDateBR(this.value);
@@ -353,27 +372,27 @@ export class ScarletDatePicker {
     const weeks = getMonthGrid(this.viewYear, this.viewMonth);
 
     return (
-      <Host class="scarlet-date-picker-host">
+      <Host class='scarlet-date-picker-host'>
         {renderFieldLabel({
           htmlFor: this.inputId,
           label: this.label,
           required: this.required,
           labelClass: 'scarlet-date-picker__label',
-          requiredClass: 'scarlet-date-picker__required',
+          requiredClass: 'scarlet-date-picker__required'
         })}
-        <div class="scarlet-date-picker__field">
+        <div class='scarlet-date-picker__field'>
           <input
-            ref={(el) => (this.inputEl = el)}
+            ref={el => (this.inputEl = el)}
             id={this.inputId}
             class={{
               'scarlet-date-picker__input': true,
               [`scarlet-date-picker__input--${this.size}`]: true,
-              'scarlet-date-picker__input--invalid': isInvalid,
+              'scarlet-date-picker__input--invalid': isInvalid
             }}
-            type="text"
-            inputMode="numeric"
-            role="combobox"
-            aria-haspopup="dialog"
+            type='text'
+            inputMode='numeric'
+            role='combobox'
+            aria-haspopup='dialog'
             aria-expanded={this.open ? 'true' : 'false'}
             aria-controls={this.open ? this.panelId : undefined}
             name={this.name}
@@ -390,60 +409,84 @@ export class ScarletDatePicker {
             onKeyDown={this.handleInputKeyDown}
           />
           <button
-            type="button"
-            ref={(el) => (this.toggleBtnEl = el)}
-            class="scarlet-date-picker__toggle"
+            type='button'
+            ref={el => (this.toggleBtnEl = el)}
+            class='scarlet-date-picker__toggle'
             aria-label={this.open ? 'Fechar calendário' : 'Abrir calendário'}
-            aria-haspopup="dialog"
+            aria-haspopup='dialog'
             aria-expanded={this.open ? 'true' : 'false'}
             disabled={this.disabled}
             onClick={this.handleToggleClick}
           >
-            <scarlet-icon name="calendar" size="1.1em" />
+            <scarlet-icon name='calendar' size='1.1em' />
           </button>
           {this.open ? (
-            <div id={this.panelId} class="scarlet-date-picker__panel" role="dialog" aria-label="Escolher data">
-              <div class="scarlet-date-picker__panel-header">
-                <button type="button" class="scarlet-date-picker__nav" aria-label="Mês anterior" onClick={this.goToPrevMonth}>
-                  <scarlet-icon name="chevron-left" size="1.1em" />
+            <div
+              id={this.panelId}
+              class='scarlet-date-picker__panel'
+              role='dialog'
+              aria-label='Escolher data'
+            >
+              <div class='scarlet-date-picker__panel-header'>
+                <button
+                  type='button'
+                  class='scarlet-date-picker__nav'
+                  aria-label='Mês anterior'
+                  onClick={this.goToPrevMonth}
+                >
+                  <scarlet-icon name='chevron-left' size='1.1em' />
                 </button>
-                <span class="scarlet-date-picker__panel-title" id={this.titleId} aria-live="polite">
+                <span class='scarlet-date-picker__panel-title' id={this.titleId} aria-live='polite'>
                   {MONTH_LABELS_PT_BR[this.viewMonth]} {this.viewYear}
                 </span>
-                <button type="button" class="scarlet-date-picker__nav" aria-label="Próximo mês" onClick={this.goToNextMonth}>
-                  <scarlet-icon name="chevron-right" size="1.1em" />
+                <button
+                  type='button'
+                  class='scarlet-date-picker__nav'
+                  aria-label='Próximo mês'
+                  onClick={this.goToNextMonth}
+                >
+                  <scarlet-icon name='chevron-right' size='1.1em' />
                 </button>
               </div>
-              <div class="scarlet-date-picker__grid" role="grid" aria-labelledby={this.titleId} onKeyDown={this.handleGridKeyDown}>
-                <div class="scarlet-date-picker__weekdays" role="row">
-                  {WEEKDAY_LABELS_PT_BR.map((weekday) => (
-                    <span class="scarlet-date-picker__weekday" role="columnheader" aria-hidden="true">
+              <div
+                class='scarlet-date-picker__grid'
+                role='grid'
+                aria-labelledby={this.titleId}
+                onKeyDown={this.handleGridKeyDown}
+              >
+                <div class='scarlet-date-picker__weekdays' role='row'>
+                  {WEEKDAY_LABELS_PT_BR.map(weekday => (
+                    <span
+                      class='scarlet-date-picker__weekday'
+                      role='columnheader'
+                      aria-hidden='true'
+                    >
                       {weekday}
                     </span>
                   ))}
                 </div>
-                {weeks.map((week) => (
-                  <div class="scarlet-date-picker__week" role="row">
-                    {week.map((day) => {
+                {weeks.map(week => (
+                  <div class='scarlet-date-picker__week' role='row'>
+                    {week.map(day => {
                       const dayDisabled = !isDateInRange(day.date, minDate, maxDate);
                       const isSelected = isSameDate(day.date, selectedDate);
                       const isFocused = isSameDate(day.date, this.focusedDate);
                       const isToday = isSameDate(day.date, today);
                       return (
-                        <div class="scarlet-date-picker__cell" role="gridcell">
+                        <div class='scarlet-date-picker__cell' role='gridcell'>
                           <button
-                            type="button"
+                            type='button'
                             class={{
                               'scarlet-date-picker__day': true,
                               'scarlet-date-picker__day--outside': !day.inCurrentMonth,
                               'scarlet-date-picker__day--selected': isSelected,
-                              'scarlet-date-picker__day--today': isToday,
+                              'scarlet-date-picker__day--today': isToday
                             }}
                             tabIndex={isFocused ? 0 : -1}
                             aria-selected={isSelected ? 'true' : 'false'}
                             aria-current={isToday ? 'date' : undefined}
                             aria-disabled={dayDisabled ? 'true' : undefined}
-                            ref={(el) => {
+                            ref={el => {
                               if (isFocused) this.focusedCellEl = el;
                             }}
                             onClick={() => this.selectDate(day.date)}
@@ -464,7 +507,7 @@ export class ScarletDatePicker {
           helperText: this.helperText,
           ids: { helperId: this.helperId, errorId: this.errorId },
           errorClass: 'scarlet-date-picker__message scarlet-date-picker__message--error',
-          helperClass: 'scarlet-date-picker__message scarlet-date-picker__message--helper',
+          helperClass: 'scarlet-date-picker__message scarlet-date-picker__message--helper'
         })}
       </Host>
     );

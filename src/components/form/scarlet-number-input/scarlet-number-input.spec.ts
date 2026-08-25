@@ -5,9 +5,11 @@ describe('scarlet-number-input', () => {
   it('increments and decrements by step on button click', async () => {
     const page = await newSpecPage({
       components: [ScarletNumberInput],
-      html: `<scarlet-number-input value="5" step="2"></scarlet-number-input>`,
+      html: '<scarlet-number-input value="5" step="2"></scarlet-number-input>'
     });
-    const [decrement, increment] = page.root!.shadowRoot!.querySelectorAll('.scarlet-number-input__button') as NodeListOf<HTMLButtonElement>;
+    const [decrement, increment] = page.root!.shadowRoot!.querySelectorAll(
+      '.scarlet-number-input__button'
+    ) as NodeListOf<HTMLButtonElement>;
 
     increment.click();
     await page.waitForChanges();
@@ -23,9 +25,11 @@ describe('scarlet-number-input', () => {
   it('clamps to min/max and disables the button at each bound', async () => {
     const page = await newSpecPage({
       components: [ScarletNumberInput],
-      html: `<scarlet-number-input value="9" min="0" max="10"></scarlet-number-input>`,
+      html: '<scarlet-number-input value="9" min="0" max="10"></scarlet-number-input>'
     });
-    const [, increment] = page.root!.shadowRoot!.querySelectorAll('.scarlet-number-input__button') as NodeListOf<HTMLButtonElement>;
+    const [, increment] = page.root!.shadowRoot!.querySelectorAll(
+      '.scarlet-number-input__button'
+    ) as NodeListOf<HTMLButtonElement>;
 
     increment.click();
     await page.waitForChanges();
@@ -34,18 +38,22 @@ describe('scarlet-number-input', () => {
     increment.click();
     await page.waitForChanges();
     expect(page.rootInstance.value).toBe(10);
-    expect(increment.disabled).toBe(true);
+    // mock-doc doesn't implement `.disabled` as a real IDL property on
+    // <button> (only on <input>), so assert via the attribute instead.
+    expect(increment.hasAttribute('disabled')).toBe(true);
   });
 
   it('emits scarletChange with the clamped value on button click', async () => {
     const page = await newSpecPage({
       components: [ScarletNumberInput],
-      html: `<scarlet-number-input value="9" max="10"></scarlet-number-input>`,
+      html: '<scarlet-number-input value="9" max="10"></scarlet-number-input>'
     });
     const changeSpy = jest.fn();
     page.root?.addEventListener('scarletChange', changeSpy);
 
-    const [, increment] = page.root!.shadowRoot!.querySelectorAll('.scarlet-number-input__button') as NodeListOf<HTMLButtonElement>;
+    const [, increment] = page.root!.shadowRoot!.querySelectorAll(
+      '.scarlet-number-input__button'
+    ) as NodeListOf<HTMLButtonElement>;
     increment.click();
     await page.waitForChanges();
 
@@ -56,7 +64,7 @@ describe('scarlet-number-input', () => {
   it('clamps an out-of-range typed value on blur', async () => {
     const page = await newSpecPage({
       components: [ScarletNumberInput],
-      html: `<scarlet-number-input value="5" min="0" max="10"></scarlet-number-input>`,
+      html: '<scarlet-number-input value="5" min="0" max="10"></scarlet-number-input>'
     });
     const input = page.root!.shadowRoot!.querySelector('input') as HTMLInputElement;
 
@@ -73,11 +81,15 @@ describe('scarlet-number-input', () => {
   it('disables both buttons and the input when disabled', async () => {
     const page = await newSpecPage({
       components: [ScarletNumberInput],
-      html: `<scarlet-number-input disabled></scarlet-number-input>`,
+      html: '<scarlet-number-input disabled></scarlet-number-input>'
     });
 
-    const buttons = page.root!.shadowRoot!.querySelectorAll('.scarlet-number-input__button') as NodeListOf<HTMLButtonElement>;
-    expect(Array.from(buttons).every((button) => button.disabled)).toBe(true);
+    const buttons = page.root!.shadowRoot!.querySelectorAll(
+      '.scarlet-number-input__button'
+    ) as NodeListOf<HTMLButtonElement>;
+    // mock-doc doesn't implement `.disabled` as a real IDL property on
+    // <button> (only on <input>), so assert via the attribute instead.
+    expect(Array.from(buttons).every(button => button.hasAttribute('disabled'))).toBe(true);
     expect(page.root!.shadowRoot!.querySelector('input')?.hasAttribute('disabled')).toBe(true);
   });
 });

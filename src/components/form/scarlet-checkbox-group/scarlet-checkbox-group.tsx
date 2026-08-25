@@ -1,4 +1,14 @@
-import { Component, Prop, Watch, Event, type EventEmitter, h, Host, Listen, Element } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  Watch,
+  Event,
+  type EventEmitter,
+  h,
+  Host,
+  Listen,
+  Element
+} from '@stencil/core';
 
 interface ScarletCheckboxElement extends HTMLElement {
   value?: string;
@@ -19,7 +29,7 @@ interface ScarletCheckboxElement extends HTMLElement {
 @Component({
   tag: 'scarlet-checkbox-group',
   styleUrl: 'scarlet-checkbox-group.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletCheckboxGroup {
   private slotEl?: HTMLSlotElement;
@@ -67,18 +77,20 @@ export class ScarletCheckboxGroup {
     }
 
     const isChecked = event.detail;
-    const withoutTarget = this.value.filter((v) => v !== target.value);
+    const withoutTarget = this.value.filter(v => v !== target.value);
     this.value = isChecked ? [...withoutTarget, target.value] : withoutTarget;
     this.syncChildren();
     this.scarletChange.emit(this.value);
   }
 
   private getCheckboxes(): ScarletCheckboxElement[] {
-    return Array.from(this.el.querySelectorAll('scarlet-checkbox')) as unknown as ScarletCheckboxElement[];
+    return Array.from(
+      this.el.querySelectorAll('scarlet-checkbox')
+    ) as unknown as ScarletCheckboxElement[];
   }
 
   private syncChildren = (): void => {
-    this.getCheckboxes().forEach((checkbox) => {
+    this.getCheckboxes().forEach(checkbox => {
       checkbox.checked = checkbox.value !== undefined && this.value.includes(checkbox.value);
       if (this.name) {
         checkbox.name = this.name;
@@ -102,8 +114,11 @@ export class ScarletCheckboxGroup {
   render() {
     return (
       <Host
-        class={{ 'scarlet-checkbox-group': true, 'scarlet-checkbox-group--horizontal': this.horizontal }}
-        role="group"
+        class={{
+          'scarlet-checkbox-group': true,
+          'scarlet-checkbox-group--horizontal': this.horizontal
+        }}
+        role='group'
         aria-label={this.ariaLabel}
       >
         <slot ref={this.handleSlotRef} />

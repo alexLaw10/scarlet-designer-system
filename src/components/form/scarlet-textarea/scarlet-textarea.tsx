@@ -11,7 +11,7 @@ export type ScarletTextareaResize = 'none' | 'vertical' | 'horizontal' | 'both';
 @Component({
   tag: 'scarlet-textarea',
   styleUrl: 'scarlet-textarea.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletTextarea {
   private textareaEl?: HTMLTextAreaElement;
@@ -100,25 +100,28 @@ export class ScarletTextarea {
 
   render() {
     const isInvalid = this.invalid || Boolean(this.errorMessage);
-    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
+    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, {
+      helperId: this.helperId,
+      errorId: this.errorId
+    });
 
     return (
-      <Host class="scarlet-textarea-host">
+      <Host class='scarlet-textarea-host'>
         {renderFieldLabel({
           htmlFor: this.textareaId,
           label: this.label,
           required: this.required,
           labelClass: 'scarlet-textarea__label',
-          requiredClass: 'scarlet-textarea__required',
+          requiredClass: 'scarlet-textarea__required'
         })}
         <textarea
-          ref={(el) => (this.textareaEl = el)}
+          ref={el => (this.textareaEl = el)}
           id={this.textareaId}
           class={{
             'scarlet-textarea': true,
             [`scarlet-textarea--${this.size}`]: true,
             [`scarlet-textarea--resize-${this.resize}`]: true,
-            'scarlet-textarea--invalid': isInvalid,
+            'scarlet-textarea--invalid': isInvalid
           }}
           name={this.name}
           rows={this.rows}
@@ -140,7 +143,7 @@ export class ScarletTextarea {
           helperText: this.helperText,
           ids: { helperId: this.helperId, errorId: this.errorId },
           errorClass: 'scarlet-textarea__message scarlet-textarea__message--error',
-          helperClass: 'scarlet-textarea__message scarlet-textarea__message--helper',
+          helperClass: 'scarlet-textarea__message scarlet-textarea__message--helper'
         })}
       </Host>
     );

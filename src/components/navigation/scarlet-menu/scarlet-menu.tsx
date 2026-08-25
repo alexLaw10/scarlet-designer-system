@@ -1,4 +1,14 @@
-import { Component, Prop, State, Event, type EventEmitter, h, Host, Listen, Element } from '@stencil/core';
+import {
+  Component,
+  Prop,
+  State,
+  Event,
+  type EventEmitter,
+  h,
+  Host,
+  Listen,
+  Element
+} from '@stencil/core';
 
 export interface ScarletMenuItem {
   value: string;
@@ -31,7 +41,7 @@ export interface ScarletMenuItem {
 @Component({
   tag: 'scarlet-menu',
   styleUrl: 'scarlet-menu.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletMenu {
   private triggerSlotEl?: HTMLSlotElement;
@@ -108,15 +118,18 @@ export class ScarletMenu {
       return;
     }
 
-    const enabledItems = this.items.filter((item) => !item.disabled);
+    const enabledItems = this.items.filter(item => !item.disabled);
     if (enabledItems.length === 0) return;
-    const currentIndex = enabledItems.findIndex((item) => item.value === this.focusedValue);
+    const currentIndex = enabledItems.findIndex(item => item.value === this.focusedValue);
     let nextIndex: number | null = null;
 
     if (event.key === 'ArrowDown') {
       nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % enabledItems.length;
     } else if (event.key === 'ArrowUp') {
-      nextIndex = currentIndex === -1 ? enabledItems.length - 1 : (currentIndex - 1 + enabledItems.length) % enabledItems.length;
+      nextIndex =
+        currentIndex === -1 ?
+          enabledItems.length - 1 :
+          (currentIndex - 1 + enabledItems.length) % enabledItems.length;
     } else if (event.key === 'Home') {
       nextIndex = 0;
     } else if (event.key === 'End') {
@@ -156,7 +169,7 @@ export class ScarletMenu {
 
   private openMenu(): void {
     if (this.open) return;
-    const enabledItems = this.items.filter((item) => !item.disabled);
+    const enabledItems = this.items.filter(item => !item.disabled);
     this.focusedValue = enabledItems[0]?.value;
     this.open = true;
     this.shouldFocusMenu = true;
@@ -187,28 +200,28 @@ export class ScarletMenu {
 
   render() {
     return (
-      <Host class="scarlet-menu-host">
-        <slot name="trigger" ref={this.handleTriggerRef} />
+      <Host class='scarlet-menu-host'>
+        <slot name='trigger' ref={this.handleTriggerRef} />
         {this.open ? (
           <div
             class={{
               'scarlet-menu__list': true,
-              [`scarlet-menu__list--${this.placement}`]: true,
+              [`scarlet-menu__list--${this.placement}`]: true
             }}
-            role="menu"
+            role='menu'
             aria-label={this.ariaLabel}
           >
-            {this.items.map((item) => (
+            {this.items.map(item => (
               <button
-                type="button"
+                type='button'
                 class={{
                   'scarlet-menu__item': true,
-                  'scarlet-menu__item--danger': Boolean(item.danger),
+                  'scarlet-menu__item--danger': Boolean(item.danger)
                 }}
-                role="menuitem"
+                role='menuitem'
                 tabIndex={item.value === this.focusedValue ? 0 : -1}
                 disabled={item.disabled}
-                ref={(el) => {
+                ref={el => {
                   if (item.value === this.focusedValue) this.focusedItemEl = el;
                 }}
                 onClick={() => this.selectItem(item)}

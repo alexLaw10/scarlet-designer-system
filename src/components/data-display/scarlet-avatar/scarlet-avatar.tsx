@@ -10,7 +10,7 @@ export type ScarletAvatarShape = 'circle' | 'square';
 @Component({
   tag: 'scarlet-avatar',
   styleUrl: 'scarlet-avatar.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletAvatar {
   @State() private imageFailed = false;
@@ -43,9 +43,7 @@ export class ScarletAvatar {
     if (!this.name) return '';
     const parts = this.name.trim().split(/\s+/).filter(Boolean);
     const initials = parts.length > 1 ? [parts[0], parts[parts.length - 1]] : [parts[0]];
-    return initials
-      .map((part) => part.charAt(0).toUpperCase())
-      .join('');
+    return initials.map(part => part.charAt(0).toUpperCase()).join('');
   }
 
   render() {
@@ -57,21 +55,32 @@ export class ScarletAvatar {
         class={{
           'scarlet-avatar-host': true,
           [`scarlet-avatar-host--${this.size}`]: true,
-          [`scarlet-avatar-host--${this.shape}`]: true,
+          [`scarlet-avatar-host--${this.shape}`]: true
         }}
-        role="img"
+        role='img'
         aria-label={this.alt ?? this.name ?? 'Avatar'}
       >
         {showImage ? (
-          <img class="scarlet-avatar__image" src={this.src} alt="" onError={this.handleImageError} />
+          <img
+            class='scarlet-avatar__image'
+            src={this.src}
+            alt=''
+            onError={this.handleImageError}
+          />
         ) : initials ? (
-          <span class="scarlet-avatar__initials" aria-hidden="true">
+          <span class='scarlet-avatar__initials' aria-hidden='true'>
             {initials}
           </span>
         ) : (
-          <svg class="scarlet-avatar__placeholder" viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5" />
-            <path d="M4.5 20c1.5-4 5-6 7.5-6s6 2 7.5 6" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+          <svg class='scarlet-avatar__placeholder' viewBox='0 0 24 24' aria-hidden='true'>
+            <circle cx='12' cy='8' r='3.5' fill='none' stroke='currentColor' stroke-width='1.5' />
+            <path
+              d='M4.5 20c1.5-4 5-6 7.5-6s6 2 7.5 6'
+              fill='none'
+              stroke='currentColor'
+              stroke-width='1.5'
+              stroke-linecap='round'
+            />
           </svg>
         )}
       </Host>

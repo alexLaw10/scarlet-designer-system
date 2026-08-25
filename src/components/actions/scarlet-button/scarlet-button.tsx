@@ -17,7 +17,7 @@ import type { Color, Size, Variant } from '@/types';
 @Component({
   tag: 'scarlet-button',
   styleUrl: 'scarlet-button.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletButton {
   /** Visual style of the button. */
@@ -66,7 +66,7 @@ export class ScarletButton {
       <Host
         class={{
           'scarlet-button-host': true,
-          'scarlet-button-host--full-width': this.fullWidth,
+          'scarlet-button-host--full-width': this.fullWidth
         }}
       >
         <button
@@ -76,7 +76,7 @@ export class ScarletButton {
             [`scarlet-button--${this.color}`]: true,
             [`scarlet-button--${this.size}`]: true,
             'scarlet-button--loading': this.loading,
-            'scarlet-button--icon-only': this.iconOnly,
+            'scarlet-button--icon-only': this.iconOnly
           }}
           type={this.type}
           disabled={isDisabled}
@@ -84,11 +84,13 @@ export class ScarletButton {
           aria-label={this.ariaLabel}
           onClick={this.handleClick}
         >
-          {this.loading ? <span class="scarlet-button__spinner" part="spinner" aria-hidden="true" /> : null}
-          <span class="scarlet-button__content">
-            <slot name="start" />
+          {this.loading ? (
+            <span class='scarlet-button__spinner' part='spinner' aria-hidden='true' />
+          ) : null}
+          <span class='scarlet-button__content'>
+            <slot name='start' />
             <slot />
-            <slot name="end" />
+            <slot name='end' />
           </span>
         </button>
       </Host>

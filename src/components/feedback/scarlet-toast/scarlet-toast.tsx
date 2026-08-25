@@ -1,7 +1,8 @@
 import { Component, Prop, Watch, Event, type EventEmitter, h, Host } from '@stencil/core';
 import type { ScarletAlertStatus } from '@/components/feedback/scarlet-alert/scarlet-alert';
 
-export type ScarletToastPosition = 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center';
+export type ScarletToastPosition =
+  'top-right' | 'top-left' | 'bottom-right' | 'bottom-left' | 'top-center' | 'bottom-center';
 
 /**
  * A self-dismissing status message, fixed to a corner of the viewport.
@@ -14,7 +15,7 @@ export type ScarletToastPosition = 'top-right' | 'top-left' | 'bottom-right' | '
 @Component({
   tag: 'scarlet-toast',
   styleUrl: 'scarlet-toast.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletToast {
   private dismissTimeout?: ReturnType<typeof setTimeout>;
@@ -80,24 +81,36 @@ export class ScarletToast {
         class={{
           'scarlet-toast-host': true,
           [`scarlet-toast-host--${this.status}`]: true,
-          [`scarlet-toast-host--${this.position}`]: true,
+          [`scarlet-toast-host--${this.position}`]: true
         }}
-        role="status"
-        aria-live="polite"
+        role='status'
+        aria-live='polite'
       >
-        <div class="scarlet-toast__content">
-          <div class="scarlet-toast__title">
-            <slot name="title" />
+        <div class='scarlet-toast__content'>
+          <div class='scarlet-toast__title'>
+            <slot name='title' />
           </div>
-          <div class="scarlet-toast__message">
+          <div class='scarlet-toast__message'>
             <slot />
           </div>
         </div>
         {this.dismissible ? (
-          <button type="button" class="scarlet-toast__dismiss" part="dismiss" aria-label="Fechar" onClick={this.dismiss}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <line x1="6" y1="6" x2="18" y2="18" stroke-linecap="round" />
-              <line x1="18" y1="6" x2="6" y2="18" stroke-linecap="round" />
+          <button
+            type='button'
+            class='scarlet-toast__dismiss'
+            part='dismiss'
+            aria-label='Fechar'
+            onClick={this.dismiss}
+          >
+            <svg
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              stroke-width='2'
+              aria-hidden='true'
+            >
+              <line x1='6' y1='6' x2='18' y2='18' stroke-linecap='round' />
+              <line x1='18' y1='6' x2='6' y2='18' stroke-linecap='round' />
             </svg>
           </button>
         ) : null}

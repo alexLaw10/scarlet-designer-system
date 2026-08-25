@@ -11,7 +11,7 @@ export type ScarletContainerMaxWidth = 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full
 @Component({
   tag: 'scarlet-container',
   styleUrl: 'scarlet-container.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletContainer {
   /** Maximum width of the container. */
@@ -30,7 +30,7 @@ export class ScarletContainer {
           'scarlet-container-host': true,
           [`scarlet-container-host--${this.maxWidth}`]: true,
           'scarlet-container-host--padding': this.padding,
-          'scarlet-container-host--center': this.center,
+          'scarlet-container-host--center': this.center
         }}
       >
         <slot />

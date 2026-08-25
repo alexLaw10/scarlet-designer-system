@@ -9,7 +9,7 @@ async function setup(extraAttrs = '') {
         <button slot="trigger">Abrir</button>
         <p>Conteúdo</p>
       </scarlet-popover>
-    `,
+    `
   });
   await page.waitForChanges();
   const trigger = page.root!.querySelector('button')!;
@@ -42,7 +42,9 @@ describe('scarlet-popover', () => {
     trigger.click();
     await page.waitForChanges();
 
-    page.root?.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, composed: true }));
+    page.root?.dispatchEvent(
+      new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, composed: true })
+    );
     await page.waitForChanges();
 
     expect(page.root?.shadowRoot?.querySelector('[role="dialog"]')).toBeNull();

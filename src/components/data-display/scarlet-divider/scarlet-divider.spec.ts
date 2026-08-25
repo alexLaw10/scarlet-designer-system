@@ -5,7 +5,7 @@ describe('scarlet-divider', () => {
   it('renders horizontal by default with role="separator"', async () => {
     const page = await newSpecPage({
       components: [ScarletDivider],
-      html: `<scarlet-divider></scarlet-divider>`,
+      html: '<scarlet-divider></scarlet-divider>'
     });
 
     expect(page.root?.getAttribute('role')).toBe('separator');
@@ -16,7 +16,7 @@ describe('scarlet-divider', () => {
   it('renders no label markup when label is not provided', async () => {
     const page = await newSpecPage({
       components: [ScarletDivider],
-      html: `<scarlet-divider></scarlet-divider>`,
+      html: '<scarlet-divider></scarlet-divider>'
     });
 
     expect(page.root?.shadowRoot?.querySelector('.scarlet-divider__label')).toBeNull();
@@ -25,7 +25,7 @@ describe('scarlet-divider', () => {
   it('renders the label centered between two lines when provided', async () => {
     const page = await newSpecPage({
       components: [ScarletDivider],
-      html: `<scarlet-divider label="ou"></scarlet-divider>`,
+      html: '<scarlet-divider label="ou"></scarlet-divider>'
     });
 
     const label = page.root?.shadowRoot?.querySelector('.scarlet-divider__label');
@@ -38,7 +38,7 @@ describe('scarlet-divider', () => {
   it('ignores the label when orientation is vertical', async () => {
     const page = await newSpecPage({
       components: [ScarletDivider],
-      html: `<scarlet-divider orientation="vertical" label="ou"></scarlet-divider>`,
+      html: '<scarlet-divider orientation="vertical" label="ou"></scarlet-divider>'
     });
 
     expect(page.root?.shadowRoot?.querySelector('.scarlet-divider__label')).toBeNull();

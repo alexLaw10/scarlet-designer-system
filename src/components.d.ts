@@ -3958,11 +3958,11 @@ declare namespace LocalJSX {
          */
         "name"?: string;
         /**
-          * Emitted when the checked state changes via user interaction.
+          * Emitted when the checked state changes via user interaction. Doesn't bubble — mirrors `scarlet-radio`'s `scarletChange`: a parent `<scarlet-checkbox-group>` re-emits its own `scarletChange` (string[] detail) whenever a child's checked state changes, and if this one bubbled too, a consumer listening on the *group* would catch both: this child event (boolean detail) and the group's own re-emission, firing twice with the wrong detail on the first hit.
          */
         "onScarletChange"?: (event: ScarletCheckboxCustomEvent<boolean>) => void;
         /**
-          * Same payload as `scarletChange`, always bubbling — for a parent `<scarlet-checkbox-group>` to listen to internally instead of the public `scarletChange`. Mirrors `scarlet-radio`'s `scarletRadioChange`: a consumer's own `scarletChange` listener on the *group* would otherwise also catch this bubbling child event (boolean detail) in addition to the group's own re-emission (string[] detail), firing twice with the wrong detail on the first hit.
+          * Same payload as `scarletChange`, always bubbling — for a parent `<scarlet-checkbox-group>` to listen to internally instead of the public `scarletChange`.
          */
         "onScarletCheckboxChange"?: (event: ScarletCheckboxCustomEvent<boolean>) => void;
         /**

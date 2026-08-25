@@ -5,7 +5,7 @@ describe('scarlet-input-phone', () => {
   it('formats as a landline while 10 or fewer digits are typed', async () => {
     const page = await newSpecPage({
       components: [ScarletInputPhone],
-      html: `<scarlet-input-phone></scarlet-input-phone>`,
+      html: '<scarlet-input-phone></scarlet-input-phone>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -19,7 +19,7 @@ describe('scarlet-input-phone', () => {
   it('switches to the mobile format once an 11th digit is typed', async () => {
     const page = await newSpecPage({
       components: [ScarletInputPhone],
-      html: `<scarlet-input-phone></scarlet-input-phone>`,
+      html: '<scarlet-input-phone></scarlet-input-phone>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -33,7 +33,7 @@ describe('scarlet-input-phone', () => {
   it('ignores non-digit characters typed/pasted in', async () => {
     const page = await newSpecPage({
       components: [ScarletInputPhone],
-      html: `<scarlet-input-phone></scarlet-input-phone>`,
+      html: '<scarlet-input-phone></scarlet-input-phone>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -47,7 +47,7 @@ describe('scarlet-input-phone', () => {
   it('exposes the raw digits via getRawValue()', async () => {
     const page = await newSpecPage({
       components: [ScarletInputPhone],
-      html: `<scarlet-input-phone value="(11) 91234-5678"></scarlet-input-phone>`,
+      html: '<scarlet-input-phone value="(11) 91234-5678"></scarlet-input-phone>'
     });
 
     await expect(page.rootInstance.getRawValue()).resolves.toBe('11912345678');
@@ -56,7 +56,7 @@ describe('scarlet-input-phone', () => {
   it('emits scarletInput with the formatted value on every keystroke', async () => {
     const page = await newSpecPage({
       components: [ScarletInputPhone],
-      html: `<scarlet-input-phone></scarlet-input-phone>`,
+      html: '<scarlet-input-phone></scarlet-input-phone>'
     });
 
     const inputSpy = jest.fn();

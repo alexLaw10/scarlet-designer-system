@@ -13,7 +13,7 @@ export type ScarletTooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
 @Component({
   tag: 'scarlet-tooltip',
   styleUrl: 'scarlet-tooltip.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletTooltip {
   private readonly tooltipId = generateId('scarlet-tooltip');
@@ -73,15 +73,18 @@ export class ScarletTooltip {
 
   render() {
     return (
-      <Host class="scarlet-tooltip-host" aria-describedby={this.visible ? this.tooltipId : undefined}>
+      <Host
+        class='scarlet-tooltip-host'
+        aria-describedby={this.visible ? this.tooltipId : undefined}
+      >
         <slot />
         <span
           id={this.tooltipId}
-          role="tooltip"
+          role='tooltip'
           class={{
             'scarlet-tooltip': true,
             [`scarlet-tooltip--${this.placement}`]: true,
-            'scarlet-tooltip--visible': this.visible && !this.disabled,
+            'scarlet-tooltip--visible': this.visible && !this.disabled
           }}
         >
           {this.content}

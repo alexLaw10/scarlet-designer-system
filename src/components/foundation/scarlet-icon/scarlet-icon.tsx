@@ -11,7 +11,7 @@ import { scarletIcons, type ScarletIconName } from './icons';
 @Component({
   tag: 'scarlet-icon',
   styleUrl: 'scarlet-icon.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletIcon {
   /** Name of the built-in icon to render. */
@@ -28,7 +28,7 @@ export class ScarletIcon {
 
     return (
       <Host
-        class="scarlet-icon-host"
+        class='scarlet-icon-host'
         style={this.size ? { width: this.size, height: this.size } : undefined}
         role={this.label ? 'img' : undefined}
         aria-label={this.label}
@@ -36,13 +36,13 @@ export class ScarletIcon {
       >
         {renderer ? (
           <svg
-            class="scarlet-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            class='scarlet-icon'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            stroke-width='1.5'
+            stroke-linecap='round'
+            stroke-linejoin='round'
           >
             {renderer()}
           </svg>

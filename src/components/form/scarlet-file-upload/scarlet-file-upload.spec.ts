@@ -10,7 +10,7 @@ describe('scarlet-file-upload', () => {
   it('adds a selected file to the list and emits scarletChange', async () => {
     const page = await newSpecPage({
       components: [ScarletFileUpload],
-      html: `<scarlet-file-upload></scarlet-file-upload>`,
+      html: '<scarlet-file-upload></scarlet-file-upload>'
     });
     const changeSpy = jest.fn();
     page.root?.addEventListener('scarletChange', changeSpy);
@@ -30,7 +30,7 @@ describe('scarlet-file-upload', () => {
   it('replaces the previous file instead of appending when multiple is not set', async () => {
     const page = await newSpecPage({
       components: [ScarletFileUpload],
-      html: `<scarlet-file-upload></scarlet-file-upload>`,
+      html: '<scarlet-file-upload></scarlet-file-upload>'
     });
     const input = page.root!.shadowRoot!.querySelector('input[type="file"]') as HTMLInputElement;
 
@@ -39,14 +39,16 @@ describe('scarlet-file-upload', () => {
     selectFiles(input, [new File(['b'], 'segundo.pdf')]);
     await page.waitForChanges();
 
-    const names = Array.from(page.root!.shadowRoot!.querySelectorAll('.scarlet-file-upload__name')).map((el) => el.textContent?.trim());
+    const names = Array.from(
+      page.root!.shadowRoot!.querySelectorAll('.scarlet-file-upload__name')
+    ).map(el => el.textContent?.trim());
     expect(names).toEqual(['segundo.pdf']);
   });
 
   it('appends files across selections when multiple is set', async () => {
     const page = await newSpecPage({
       components: [ScarletFileUpload],
-      html: `<scarlet-file-upload multiple></scarlet-file-upload>`,
+      html: '<scarlet-file-upload multiple></scarlet-file-upload>'
     });
     const input = page.root!.shadowRoot!.querySelector('input[type="file"]') as HTMLInputElement;
 
@@ -55,14 +57,16 @@ describe('scarlet-file-upload', () => {
     selectFiles(input, [new File(['b'], 'segundo.pdf')]);
     await page.waitForChanges();
 
-    const names = Array.from(page.root!.shadowRoot!.querySelectorAll('.scarlet-file-upload__name')).map((el) => el.textContent?.trim());
+    const names = Array.from(
+      page.root!.shadowRoot!.querySelectorAll('.scarlet-file-upload__name')
+    ).map(el => el.textContent?.trim());
     expect(names).toEqual(['primeiro.pdf', 'segundo.pdf']);
   });
 
   it('rejects a file over maxSizeBytes with an error message, without adding it', async () => {
     const page = await newSpecPage({
       components: [ScarletFileUpload],
-      html: `<scarlet-file-upload max-size-bytes="10"></scarlet-file-upload>`,
+      html: '<scarlet-file-upload max-size-bytes="10"></scarlet-file-upload>'
     });
     const input = page.root!.shadowRoot!.querySelector('input[type="file"]') as HTMLInputElement;
 
@@ -77,7 +81,7 @@ describe('scarlet-file-upload', () => {
   it('removes a file from the list and emits the updated array', async () => {
     const page = await newSpecPage({
       components: [ScarletFileUpload],
-      html: `<scarlet-file-upload multiple></scarlet-file-upload>`,
+      html: '<scarlet-file-upload multiple></scarlet-file-upload>'
     });
     const input = page.root!.shadowRoot!.querySelector('input[type="file"]') as HTMLInputElement;
     selectFiles(input, [new File(['a'], 'um.pdf'), new File(['b'], 'dois.pdf')]);
@@ -86,19 +90,23 @@ describe('scarlet-file-upload', () => {
     const changeSpy = jest.fn();
     page.root?.addEventListener('scarletChange', changeSpy);
 
-    const removeButton = page.root!.shadowRoot!.querySelector('.scarlet-file-upload__remove') as HTMLButtonElement;
+    const removeButton = page.root!.shadowRoot!.querySelector(
+      '.scarlet-file-upload__remove'
+    ) as HTMLButtonElement;
     removeButton.click();
     await page.waitForChanges();
 
     expect(changeSpy.mock.calls[0][0].detail.map((f: File) => f.name)).toEqual(['dois.pdf']);
-    const names = Array.from(page.root!.shadowRoot!.querySelectorAll('.scarlet-file-upload__name')).map((el) => el.textContent?.trim());
+    const names = Array.from(
+      page.root!.shadowRoot!.querySelectorAll('.scarlet-file-upload__name')
+    ).map(el => el.textContent?.trim());
     expect(names).toEqual(['dois.pdf']);
   });
 
   it('clear() resets the file list', async () => {
     const page = await newSpecPage({
       components: [ScarletFileUpload],
-      html: `<scarlet-file-upload></scarlet-file-upload>`,
+      html: '<scarlet-file-upload></scarlet-file-upload>'
     });
     const input = page.root!.shadowRoot!.querySelector('input[type="file"]') as HTMLInputElement;
     selectFiles(input, [new File(['a'], 'um.pdf')]);
@@ -113,9 +121,11 @@ describe('scarlet-file-upload', () => {
   it('toggles the dragover state on dragover/dragleave', async () => {
     const page = await newSpecPage({
       components: [ScarletFileUpload],
-      html: `<scarlet-file-upload></scarlet-file-upload>`,
+      html: '<scarlet-file-upload></scarlet-file-upload>'
     });
-    const dropzone = page.root!.shadowRoot!.querySelector('.scarlet-file-upload__dropzone') as HTMLElement;
+    const dropzone = page.root!.shadowRoot!.querySelector(
+      '.scarlet-file-upload__dropzone'
+    ) as HTMLElement;
 
     dropzone.dispatchEvent(new Event('dragover', { cancelable: true }));
     await page.waitForChanges();

@@ -11,12 +11,12 @@ describe('scarlet-avatar-group', () => {
           <scarlet-avatar name="Ana Souza"></scarlet-avatar>
           <scarlet-avatar name="Bruno Lima"></scarlet-avatar>
         </scarlet-avatar-group>
-      `,
+      `
     });
     await page.waitForChanges();
 
     const avatars = Array.from(page.root!.querySelectorAll('scarlet-avatar')) as any[];
-    expect(avatars.every((avatar) => avatar.size === 'lg')).toBe(true);
+    expect(avatars.every(avatar => avatar.size === 'lg')).toBe(true);
   });
 
   it('shows no overflow indicator when max is unset or not exceeded', async () => {
@@ -27,7 +27,7 @@ describe('scarlet-avatar-group', () => {
           <scarlet-avatar name="Ana Souza"></scarlet-avatar>
           <scarlet-avatar name="Bruno Lima"></scarlet-avatar>
         </scarlet-avatar-group>
-      `,
+      `
     });
     await page.waitForChanges();
 
@@ -44,12 +44,17 @@ describe('scarlet-avatar-group', () => {
           <scarlet-avatar name="Carla Nunes"></scarlet-avatar>
           <scarlet-avatar name="Diego Alves"></scarlet-avatar>
         </scarlet-avatar-group>
-      `,
+      `
     });
     await page.waitForChanges();
 
     const avatars = Array.from(page.root!.querySelectorAll('scarlet-avatar'));
-    expect(avatars.map((avatar) => avatar.hasAttribute('hidden'))).toEqual([false, false, true, true]);
+    expect(avatars.map(avatar => avatar.hasAttribute('hidden'))).toEqual([
+      false,
+      false,
+      true,
+      true
+    ]);
 
     const overflow = page.root!.shadowRoot!.querySelector('.scarlet-avatar-group__overflow');
     expect(overflow?.textContent?.trim()).toBe('+2');

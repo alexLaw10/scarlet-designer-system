@@ -5,7 +5,7 @@ describe('scarlet-avatar', () => {
   it('renders initials from the name when there is no src', async () => {
     const page = await newSpecPage({
       components: [ScarletAvatar],
-      html: `<scarlet-avatar name="Ana Souza"></scarlet-avatar>`,
+      html: '<scarlet-avatar name="Ana Souza"></scarlet-avatar>'
     });
 
     const initials = page.root?.shadowRoot?.querySelector('.scarlet-avatar__initials');
@@ -16,7 +16,7 @@ describe('scarlet-avatar', () => {
   it('uses only the first letter for a single-word name', async () => {
     const page = await newSpecPage({
       components: [ScarletAvatar],
-      html: `<scarlet-avatar name="Ana"></scarlet-avatar>`,
+      html: '<scarlet-avatar name="Ana"></scarlet-avatar>'
     });
 
     const initials = page.root?.shadowRoot?.querySelector('.scarlet-avatar__initials');
@@ -26,7 +26,7 @@ describe('scarlet-avatar', () => {
   it('renders the placeholder icon when there is neither src nor name', async () => {
     const page = await newSpecPage({
       components: [ScarletAvatar],
-      html: `<scarlet-avatar></scarlet-avatar>`,
+      html: '<scarlet-avatar></scarlet-avatar>'
     });
 
     expect(page.root?.shadowRoot?.querySelector('.scarlet-avatar__placeholder')).not.toBeNull();
@@ -35,7 +35,7 @@ describe('scarlet-avatar', () => {
   it('renders an image when src is provided', async () => {
     const page = await newSpecPage({
       components: [ScarletAvatar],
-      html: `<scarlet-avatar src="/ana.jpg" name="Ana Souza"></scarlet-avatar>`,
+      html: '<scarlet-avatar src="/ana.jpg" name="Ana Souza"></scarlet-avatar>'
     });
 
     const img = page.root?.shadowRoot?.querySelector('img') as HTMLImageElement;
@@ -46,7 +46,7 @@ describe('scarlet-avatar', () => {
   it('falls back to initials after the image fails to load', async () => {
     const page = await newSpecPage({
       components: [ScarletAvatar],
-      html: `<scarlet-avatar src="/broken.jpg" name="Ana Souza"></scarlet-avatar>`,
+      html: '<scarlet-avatar src="/broken.jpg" name="Ana Souza"></scarlet-avatar>'
     });
 
     const img = page.root?.shadowRoot?.querySelector('img') as HTMLImageElement;
@@ -54,13 +54,15 @@ describe('scarlet-avatar', () => {
     await page.waitForChanges();
 
     expect(page.root?.shadowRoot?.querySelector('img')).toBeNull();
-    expect(page.root?.shadowRoot?.querySelector('.scarlet-avatar__initials')?.textContent).toBe('AS');
+    expect(page.root?.shadowRoot?.querySelector('.scarlet-avatar__initials')?.textContent).toBe(
+      'AS'
+    );
   });
 
   it('sets aria-label from alt, falling back to name', async () => {
     const page = await newSpecPage({
       components: [ScarletAvatar],
-      html: `<scarlet-avatar name="Ana Souza"></scarlet-avatar>`,
+      html: '<scarlet-avatar name="Ana Souza"></scarlet-avatar>'
     });
 
     expect(page.root?.getAttribute('aria-label')).toBe('Ana Souza');

@@ -14,7 +14,7 @@ export type ScarletLicensePlateFormat = 'old' | 'mercosul';
 @Component({
   tag: 'scarlet-input-license-plate',
   styleUrl: 'scarlet-input-license-plate.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletInputLicensePlate {
   private inputEl?: HTMLInputElement;
@@ -104,27 +104,30 @@ export class ScarletInputLicensePlate {
 
   render() {
     const isInvalid = this.invalid || Boolean(this.errorMessage);
-    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
+    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, {
+      helperId: this.helperId,
+      errorId: this.errorId
+    });
 
     return (
-      <Host class="scarlet-input-license-plate-host">
+      <Host class='scarlet-input-license-plate-host'>
         {renderFieldLabel({
           htmlFor: this.inputId,
           label: this.label,
           required: this.required,
           labelClass: 'scarlet-input-license-plate__label',
-          requiredClass: 'scarlet-input-license-plate__required',
+          requiredClass: 'scarlet-input-license-plate__required'
         })}
         <input
-          ref={(el) => (this.inputEl = el)}
+          ref={el => (this.inputEl = el)}
           id={this.inputId}
           class={{
             'scarlet-input-license-plate': true,
             [`scarlet-input-license-plate--${this.size}`]: true,
-            'scarlet-input-license-plate--invalid': isInvalid,
+            'scarlet-input-license-plate--invalid': isInvalid
           }}
-          type="text"
-          autoCapitalize="characters"
+          type='text'
+          autoCapitalize='characters'
           name={this.name}
           value={this.value}
           placeholder={this.placeholder}
@@ -141,8 +144,10 @@ export class ScarletInputLicensePlate {
           errorMessage: this.errorMessage,
           helperText: this.helperText,
           ids: { helperId: this.helperId, errorId: this.errorId },
-          errorClass: 'scarlet-input-license-plate__message scarlet-input-license-plate__message--error',
-          helperClass: 'scarlet-input-license-plate__message scarlet-input-license-plate__message--helper',
+          errorClass:
+            'scarlet-input-license-plate__message scarlet-input-license-plate__message--error',
+          helperClass:
+            'scarlet-input-license-plate__message scarlet-input-license-plate__message--helper'
         })}
       </Host>
     );

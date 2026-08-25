@@ -33,8 +33,13 @@ line up with surrounding text and other components by default.
 
  - [scarlet-chip](../../data-display/scarlet-chip)
  - [scarlet-date-picker](../../form-masked/scarlet-date-picker)
+ - [scarlet-date-range-picker](../../form-masked/scarlet-date-range-picker)
+ - [scarlet-empty-state](../../data-display/scarlet-empty-state)
  - [scarlet-file-upload](../../form/scarlet-file-upload)
+ - [scarlet-link](../scarlet-link)
+ - [scarlet-number-input](../../form/scarlet-number-input)
  - [scarlet-pagination](../../navigation/scarlet-pagination)
+ - [scarlet-stat](../../data-display/scarlet-stat)
  - [scarlet-table](../../data-display/scarlet-table)
 
 ### Graph
@@ -42,8 +47,13 @@ line up with surrounding text and other components by default.
 graph TD;
   scarlet-chip --> scarlet-icon
   scarlet-date-picker --> scarlet-icon
+  scarlet-date-range-picker --> scarlet-icon
+  scarlet-empty-state --> scarlet-icon
   scarlet-file-upload --> scarlet-icon
+  scarlet-link --> scarlet-icon
+  scarlet-number-input --> scarlet-icon
   scarlet-pagination --> scarlet-icon
+  scarlet-stat --> scarlet-icon
   scarlet-table --> scarlet-icon
   style scarlet-icon fill:#f9f,stroke:#333,stroke-width:4px
 ```

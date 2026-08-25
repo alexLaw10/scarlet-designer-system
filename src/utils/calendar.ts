@@ -22,7 +22,7 @@ export const MONTH_LABELS_PT_BR = [
   'Setembro',
   'Outubro',
   'Novembro',
-  'Dezembro',
+  'Dezembro'
 ];
 
 /** Parses a complete, real `DD/MM/AAAA` value into a `Date` — `undefined` for anything incomplete or invalid. */
@@ -45,14 +45,22 @@ export function formatDateBR(date: Date): string {
 
 /** Same calendar day, ignoring time — also `false` when either side is missing. */
 export function isSameDate(a: Date | undefined, b: Date | undefined): boolean {
-  return Boolean(a) && Boolean(b) && a!.getFullYear() === b!.getFullYear() && a!.getMonth() === b!.getMonth() && a!.getDate() === b!.getDate();
+  return (
+    Boolean(a) &&
+    Boolean(b) &&
+    a!.getFullYear() === b!.getFullYear() &&
+    a!.getMonth() === b!.getMonth() &&
+    a!.getDate() === b!.getDate()
+  );
 }
 
 /** Whether `date` falls within `[min, max]` (inclusive), ignoring time. Either bound may be omitted. */
 export function isDateInRange(date: Date, min: Date | undefined, max: Date | undefined): boolean {
   const day = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
-  if (min && day < new Date(min.getFullYear(), min.getMonth(), min.getDate()).getTime()) return false;
-  if (max && day > new Date(max.getFullYear(), max.getMonth(), max.getDate()).getTime()) return false;
+  if (min && day < new Date(min.getFullYear(), min.getMonth(), min.getDate()).getTime())
+    return false;
+  if (max && day > new Date(max.getFullYear(), max.getMonth(), max.getDate()).getTime())
+    return false;
   return true;
 }
 

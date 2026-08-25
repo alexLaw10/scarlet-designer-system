@@ -6,7 +6,7 @@ describe('scarlet-icon', () => {
   it('renders an svg with the shared stroke conventions for a known name', async () => {
     const page = await newSpecPage({
       components: [ScarletIcon],
-      html: `<scarlet-icon name="check"></scarlet-icon>`,
+      html: '<scarlet-icon name="check"></scarlet-icon>'
     });
 
     const svg = page.root?.shadowRoot?.querySelector('svg');
@@ -18,7 +18,7 @@ describe('scarlet-icon', () => {
   it('is aria-hidden and has no role when no label is given', async () => {
     const page = await newSpecPage({
       components: [ScarletIcon],
-      html: `<scarlet-icon name="check"></scarlet-icon>`,
+      html: '<scarlet-icon name="check"></scarlet-icon>'
     });
 
     expect(page.root?.getAttribute('aria-hidden')).toBe('true');
@@ -28,7 +28,7 @@ describe('scarlet-icon', () => {
   it('exposes role="img" and aria-label when a label is given', async () => {
     const page = await newSpecPage({
       components: [ScarletIcon],
-      html: `<scarlet-icon name="trash" label="Excluir"></scarlet-icon>`,
+      html: '<scarlet-icon name="trash" label="Excluir"></scarlet-icon>'
     });
 
     expect(page.root?.getAttribute('role')).toBe('img');
@@ -39,7 +39,7 @@ describe('scarlet-icon', () => {
   it('falls back to the default slot when name is unrecognized or omitted', async () => {
     const page = await newSpecPage({
       components: [ScarletIcon],
-      html: `<scarlet-icon><svg viewBox="0 0 24 24"><rect width="24" height="24" /></svg></scarlet-icon>`,
+      html: '<scarlet-icon><svg viewBox="0 0 24 24"><rect width="24" height="24" /></svg></scarlet-icon>'
     });
 
     expect(page.root?.shadowRoot?.querySelector('svg.scarlet-icon')).toBeNull();
@@ -50,7 +50,7 @@ describe('scarlet-icon', () => {
     for (const name of scarletIconNames) {
       const page = await newSpecPage({
         components: [ScarletIcon],
-        html: `<scarlet-icon name="${name}"></scarlet-icon>`,
+        html: `<scarlet-icon name="${name}"></scarlet-icon>`
       });
       const svg = page.root?.shadowRoot?.querySelector('svg');
       expect(svg?.children.length ?? 0).toBeGreaterThan(0);
@@ -60,7 +60,7 @@ describe('scarlet-icon', () => {
   it('applies a custom size as inline width/height', async () => {
     const page = await newSpecPage({
       components: [ScarletIcon],
-      html: `<scarlet-icon name="check" size="32px"></scarlet-icon>`,
+      html: '<scarlet-icon name="check" size="32px"></scarlet-icon>'
     });
 
     expect(page.root?.style.width).toBe('32px');

@@ -5,7 +5,7 @@ describe('scarlet-input-license-plate', () => {
   it('formats an old-format plate as ABC-1234', async () => {
     const page = await newSpecPage({
       components: [ScarletInputLicensePlate],
-      html: `<scarlet-input-license-plate></scarlet-input-license-plate>`,
+      html: '<scarlet-input-license-plate></scarlet-input-license-plate>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -19,7 +19,7 @@ describe('scarlet-input-license-plate', () => {
   it('formats a Mercosul-format plate as ABC1D23, with no dash', async () => {
     const page = await newSpecPage({
       components: [ScarletInputLicensePlate],
-      html: `<scarlet-input-license-plate></scarlet-input-license-plate>`,
+      html: '<scarlet-input-license-plate></scarlet-input-license-plate>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -33,13 +33,13 @@ describe('scarlet-input-license-plate', () => {
   it('reports the detected format via getFormat()', async () => {
     const oldFormat = await newSpecPage({
       components: [ScarletInputLicensePlate],
-      html: `<scarlet-input-license-plate value="ABC-1234"></scarlet-input-license-plate>`,
+      html: '<scarlet-input-license-plate value="ABC-1234"></scarlet-input-license-plate>'
     });
     await expect(oldFormat.rootInstance.getFormat()).resolves.toBe('old');
 
     const mercosul = await newSpecPage({
       components: [ScarletInputLicensePlate],
-      html: `<scarlet-input-license-plate value="ABC1D23"></scarlet-input-license-plate>`,
+      html: '<scarlet-input-license-plate value="ABC1D23"></scarlet-input-license-plate>'
     });
     await expect(mercosul.rootInstance.getFormat()).resolves.toBe('mercosul');
   });
@@ -47,7 +47,7 @@ describe('scarlet-input-license-plate', () => {
   it('uppercases letters as they are typed', async () => {
     const page = await newSpecPage({
       components: [ScarletInputLicensePlate],
-      html: `<scarlet-input-license-plate></scarlet-input-license-plate>`,
+      html: '<scarlet-input-license-plate></scarlet-input-license-plate>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;

@@ -13,7 +13,7 @@ import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/util
 @Component({
   tag: 'scarlet-input-date',
   styleUrl: 'scarlet-input-date.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletInputDate {
   private inputEl?: HTMLInputElement;
@@ -125,29 +125,33 @@ export class ScarletInputDate {
   };
 
   render() {
-    const effectiveErrorMessage = this.errorMessage ?? (this.autoInvalid ? 'Data inválida.' : undefined);
+    const effectiveErrorMessage =
+      this.errorMessage ?? (this.autoInvalid ? 'Data inválida.' : undefined);
     const isInvalid = this.invalid || Boolean(effectiveErrorMessage);
-    const describedBy = computeDescribedBy(effectiveErrorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
+    const describedBy = computeDescribedBy(effectiveErrorMessage, this.helperText, {
+      helperId: this.helperId,
+      errorId: this.errorId
+    });
 
     return (
-      <Host class="scarlet-input-date-host">
+      <Host class='scarlet-input-date-host'>
         {renderFieldLabel({
           htmlFor: this.inputId,
           label: this.label,
           required: this.required,
           labelClass: 'scarlet-input-date__label',
-          requiredClass: 'scarlet-input-date__required',
+          requiredClass: 'scarlet-input-date__required'
         })}
         <input
-          ref={(el) => (this.inputEl = el)}
+          ref={el => (this.inputEl = el)}
           id={this.inputId}
           class={{
             'scarlet-input-date': true,
             [`scarlet-input-date--${this.size}`]: true,
-            'scarlet-input-date--invalid': isInvalid,
+            'scarlet-input-date--invalid': isInvalid
           }}
-          type="text"
-          inputMode="numeric"
+          type='text'
+          inputMode='numeric'
           name={this.name}
           value={this.value}
           placeholder={this.placeholder}
@@ -165,7 +169,7 @@ export class ScarletInputDate {
           helperText: this.helperText,
           ids: { helperId: this.helperId, errorId: this.errorId },
           errorClass: 'scarlet-input-date__message scarlet-input-date__message--error',
-          helperClass: 'scarlet-input-date__message scarlet-input-date__message--helper',
+          helperClass: 'scarlet-input-date__message scarlet-input-date__message--helper'
         })}
       </Host>
     );

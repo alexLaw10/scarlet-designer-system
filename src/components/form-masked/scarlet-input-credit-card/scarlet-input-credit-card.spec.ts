@@ -8,7 +8,7 @@ describe('scarlet-input-credit-card', () => {
   it('formats digits in groups of 4 by default', async () => {
     const page = await newSpecPage({
       components: [ScarletInputCreditCard],
-      html: `<scarlet-input-credit-card></scarlet-input-credit-card>`,
+      html: '<scarlet-input-credit-card></scarlet-input-credit-card>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -22,7 +22,7 @@ describe('scarlet-input-credit-card', () => {
   it('detects the Visa brand and shows it next to the field', async () => {
     const page = await newSpecPage({
       components: [ScarletInputCreditCard],
-      html: `<scarlet-input-credit-card></scarlet-input-credit-card>`,
+      html: '<scarlet-input-credit-card></scarlet-input-credit-card>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -38,7 +38,7 @@ describe('scarlet-input-credit-card', () => {
   it('uses the 4-6-5 grouping once an Amex prefix is detected', async () => {
     const page = await newSpecPage({
       components: [ScarletInputCreditCard],
-      html: `<scarlet-input-credit-card></scarlet-input-credit-card>`,
+      html: '<scarlet-input-credit-card></scarlet-input-credit-card>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
@@ -52,7 +52,7 @@ describe('scarlet-input-credit-card', () => {
   it('passes Luhn validation for a valid card and reports it via isValid()', async () => {
     const page = await newSpecPage({
       components: [ScarletInputCreditCard],
-      html: `<scarlet-input-credit-card value="4111 1111 1111 1111"></scarlet-input-credit-card>`,
+      html: '<scarlet-input-credit-card value="4111 1111 1111 1111"></scarlet-input-credit-card>'
     });
 
     await expect(page.rootInstance.isValid()).resolves.toBe(true);
@@ -62,14 +62,16 @@ describe('scarlet-input-credit-card', () => {
     const page = await newSpecPage({
       components: [ScarletInputCreditCard],
       // Last digit of the valid Visa number changed.
-      html: `<scarlet-input-credit-card value="4111 1111 1111 1112"></scarlet-input-credit-card>`,
+      html: '<scarlet-input-credit-card value="4111 1111 1111 1112"></scarlet-input-credit-card>'
     });
 
     const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
     input.dispatchEvent(new Event('blur'));
     await page.waitForChanges();
 
-    const message = page.root?.shadowRoot?.querySelector('.scarlet-input-credit-card__message--error');
+    const message = page.root?.shadowRoot?.querySelector(
+      '.scarlet-input-credit-card__message--error'
+    );
     expect(message?.textContent?.trim()).toBe('Número de cartão inválido.');
   });
 });

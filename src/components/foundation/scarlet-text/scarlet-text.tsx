@@ -12,7 +12,7 @@ export type ScarletTextWeight = 'normal' | 'medium' | 'semibold' | 'bold';
 @Component({
   tag: 'scarlet-text',
   styleUrl: 'scarlet-text.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletText {
   /** HTML tag rendered for the text. */
@@ -45,7 +45,7 @@ export class ScarletText {
             [`scarlet-text--color-${this.color}`]: true,
             [`scarlet-text--align-${this.align}`]: true,
             [`scarlet-text--weight-${this.weight}`]: Boolean(this.weight),
-            'scarlet-text--truncate': this.truncate,
+            'scarlet-text--truncate': this.truncate
           }}
         >
           <slot />

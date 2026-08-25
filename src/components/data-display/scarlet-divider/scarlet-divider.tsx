@@ -8,7 +8,7 @@ export type ScarletDividerOrientation = 'horizontal' | 'vertical';
 @Component({
   tag: 'scarlet-divider',
   styleUrl: 'scarlet-divider.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletDivider {
   /** Direction of the divider line. */
@@ -24,18 +24,18 @@ export class ScarletDivider {
       <Host
         class={{
           'scarlet-divider-host': true,
-          [`scarlet-divider-host--${this.orientation}`]: true,
+          [`scarlet-divider-host--${this.orientation}`]: true
         }}
-        role="separator"
+        role='separator'
         aria-orientation={this.orientation}
       >
         {hasLabel
           ? [
-              <span class="scarlet-divider__line" key="line-start" />,
-              <span class="scarlet-divider__label" key="label">
+              <span class='scarlet-divider__line' key='line-start' />,
+              <span class='scarlet-divider__label' key='label'>
                 {this.label}
               </span>,
-              <span class="scarlet-divider__line" key="line-end" />,
+              <span class='scarlet-divider__line' key='line-end' />
             ]
           : null}
       </Host>

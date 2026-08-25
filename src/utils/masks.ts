@@ -89,7 +89,10 @@ export function maskTime(rawValue: string): string {
  * honored; defaults to plain groups of 4.
  */
 export function maskCreditCard(rawValue: string, brand?: 'amex' | 'diners'): string {
-  const digits = onlyDigits(rawValue).slice(0, brand === 'amex' ? 15 : brand === 'diners' ? 14 : 16);
+  const digits = onlyDigits(rawValue).slice(
+    0,
+    brand === 'amex' ? 15 : brand === 'diners' ? 14 : 16
+  );
   if (brand === 'amex') {
     return applyDigitGroups(digits, [4, 6, 5], [' ', ' ']);
   }

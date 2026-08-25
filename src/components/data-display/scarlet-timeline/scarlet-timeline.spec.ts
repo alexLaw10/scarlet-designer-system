@@ -5,21 +5,27 @@ describe('scarlet-timeline', () => {
   it('renders one item per entry, with title/timestamp/description', async () => {
     const page = await newSpecPage({
       components: [ScarletTimeline],
-      html: `<scarlet-timeline></scarlet-timeline>`,
+      html: '<scarlet-timeline></scarlet-timeline>'
     });
-    page.rootInstance.items = [{ title: 'Pedido realizado', timestamp: '12/08', description: 'Recebemos seu pedido.' }];
+    page.rootInstance.items = [
+      { title: 'Pedido realizado', timestamp: '12/08', description: 'Recebemos seu pedido.' }
+    ];
     await page.waitForChanges();
 
     const item = page.root!.shadowRoot!.querySelector('.scarlet-timeline__item')!;
-    expect(item.querySelector('.scarlet-timeline__title')?.textContent?.trim()).toBe('Pedido realizado');
+    expect(item.querySelector('.scarlet-timeline__title')?.textContent?.trim()).toBe(
+      'Pedido realizado'
+    );
     expect(item.querySelector('.scarlet-timeline__timestamp')?.textContent?.trim()).toBe('12/08');
-    expect(item.querySelector('.scarlet-timeline__description')?.textContent?.trim()).toBe('Recebemos seu pedido.');
+    expect(item.querySelector('.scarlet-timeline__description')?.textContent?.trim()).toBe(
+      'Recebemos seu pedido.'
+    );
   });
 
   it('defaults the marker status to "default" and reflects a custom status', async () => {
     const page = await newSpecPage({
       components: [ScarletTimeline],
-      html: `<scarlet-timeline></scarlet-timeline>`,
+      html: '<scarlet-timeline></scarlet-timeline>'
     });
     page.rootInstance.items = [{ title: 'A' }, { title: 'B', status: 'success' }];
     await page.waitForChanges();
@@ -32,7 +38,7 @@ describe('scarlet-timeline', () => {
   it('draws a connecting line between items but not after the last one', async () => {
     const page = await newSpecPage({
       components: [ScarletTimeline],
-      html: `<scarlet-timeline></scarlet-timeline>`,
+      html: '<scarlet-timeline></scarlet-timeline>'
     });
     page.rootInstance.items = [{ title: 'A' }, { title: 'B' }, { title: 'C' }];
     await page.waitForChanges();

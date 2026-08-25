@@ -17,9 +17,15 @@ export interface FormFieldIds {
 }
 
 /** `aria-describedby` value for a field with optional helper/error text — error wins when both are set. */
-export function computeDescribedBy(errorMessage: string | undefined, helperText: string | undefined, ids: FormFieldIds): string | undefined {
+export function computeDescribedBy(
+  errorMessage: string | undefined,
+  helperText: string | undefined,
+  ids: FormFieldIds
+): string | undefined {
   return (
-    [errorMessage ? ids.errorId : null, !errorMessage && helperText ? ids.helperId : null].filter(Boolean).join(' ') || undefined
+    [errorMessage ? ids.errorId : null, !errorMessage && helperText ? ids.helperId : null]
+      .filter(Boolean)
+      .join(' ') || undefined
   );
 }
 
@@ -38,7 +44,7 @@ export function renderFieldLabel(props: FieldLabelProps) {
     <label class={props.labelClass} htmlFor={props.htmlFor}>
       {props.label}
       {props.required ? (
-        <span class={props.requiredClass} aria-hidden="true">
+        <span class={props.requiredClass} aria-hidden='true'>
           {' '}
           *
         </span>
@@ -59,7 +65,7 @@ export interface FieldMessageProps {
 export function renderFieldMessage(props: FieldMessageProps) {
   if (props.errorMessage) {
     return (
-      <p class={props.errorClass} id={props.ids.errorId} role="alert">
+      <p class={props.errorClass} id={props.ids.errorId} role='alert'>
         {props.errorMessage}
       </p>
     );

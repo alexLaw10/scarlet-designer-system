@@ -18,7 +18,7 @@ export interface ScarletSelectOption {
 @Component({
   tag: 'scarlet-select',
   styleUrl: 'scarlet-select.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletSelect {
   private selectEl?: HTMLSelectElement;
@@ -90,26 +90,29 @@ export class ScarletSelect {
 
   render() {
     const isInvalid = this.invalid || Boolean(this.errorMessage);
-    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, { helperId: this.helperId, errorId: this.errorId });
+    const describedBy = computeDescribedBy(this.errorMessage, this.helperText, {
+      helperId: this.helperId,
+      errorId: this.errorId
+    });
 
     return (
-      <Host class="scarlet-select-host">
+      <Host class='scarlet-select-host'>
         {renderFieldLabel({
           htmlFor: this.selectId,
           label: this.label,
           required: this.required,
           labelClass: 'scarlet-select__label',
-          requiredClass: 'scarlet-select__required',
+          requiredClass: 'scarlet-select__required'
         })}
-        <div class="scarlet-select__wrapper">
+        <div class='scarlet-select__wrapper'>
           <select
-            ref={(el) => (this.selectEl = el)}
+            ref={el => (this.selectEl = el)}
             id={this.selectId}
             class={{
               'scarlet-select': true,
               [`scarlet-select--${this.size}`]: true,
               'scarlet-select--invalid': isInvalid,
-              'scarlet-select--placeholder': !this.value && Boolean(this.placeholder),
+              'scarlet-select--placeholder': !this.value && Boolean(this.placeholder)
             }}
             name={this.name}
             disabled={this.disabled}
@@ -121,18 +124,30 @@ export class ScarletSelect {
             onBlur={this.handleBlur}
           >
             {this.placeholder ? (
-              <option value="" disabled hidden={this.required} selected={!this.value}>
+              <option value='' disabled hidden={this.required} selected={!this.value}>
                 {this.placeholder}
               </option>
             ) : null}
-            {this.options.map((option) => (
-              <option key={option.value} value={option.value} disabled={option.disabled} selected={option.value === this.value}>
+            {this.options.map(option => (
+              <option
+                key={option.value}
+                value={option.value}
+                disabled={option.disabled}
+                selected={option.value === this.value}
+              >
                 {option.label}
               </option>
             ))}
           </select>
-          <svg class="scarlet-select__chevron" viewBox="0 0 24 24" aria-hidden="true">
-            <polyline points="6,9 12,15 18,9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          <svg class='scarlet-select__chevron' viewBox='0 0 24 24' aria-hidden='true'>
+            <polyline
+              points='6,9 12,15 18,9'
+              fill='none'
+              stroke='currentColor'
+              stroke-width='2'
+              stroke-linecap='round'
+              stroke-linejoin='round'
+            />
           </svg>
         </div>
         {renderFieldMessage({
@@ -140,7 +155,7 @@ export class ScarletSelect {
           helperText: this.helperText,
           ids: { helperId: this.helperId, errorId: this.errorId },
           errorClass: 'scarlet-select__message scarlet-select__message--error',
-          helperClass: 'scarlet-select__message scarlet-select__message--helper',
+          helperClass: 'scarlet-select__message scarlet-select__message--helper'
         })}
       </Host>
     );

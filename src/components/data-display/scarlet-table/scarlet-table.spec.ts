@@ -3,13 +3,13 @@ import { ScarletTable, type ScarletTableRow, type ScarletTableColumn } from './s
 
 const columns = [
   { key: 'name', label: 'Nome', sortable: true },
-  { key: 'age', label: 'Idade', sortable: true },
+  { key: 'age', label: 'Idade', sortable: true }
 ];
 
 const rows = [
   { id: 1, name: 'Carla', age: 30 },
   { id: 2, name: 'Ana', age: 25 },
-  { id: 3, name: 'Bruno', age: 40 },
+  { id: 3, name: 'Bruno', age: 40 }
 ];
 
 // A plain, widened shape instead of `Partial<ScarletTable>`: Stencil's
@@ -28,7 +28,7 @@ interface SetupOverrides {
 async function setup(overrides: SetupOverrides = {}) {
   const page = await newSpecPage({
     components: [ScarletTable],
-    html: `<scarlet-table></scarlet-table>`,
+    html: '<scarlet-table></scarlet-table>'
   });
   page.rootInstance.columns = columns;
   page.rootInstance.rows = rows;
@@ -41,11 +41,16 @@ describe('scarlet-table', () => {
   it('renders one row per item, with a cell per column', async () => {
     const page = await setup();
 
-    const bodyRows = page.root!.shadowRoot!.querySelectorAll('.scarlet-table__body .scarlet-table__row');
+    const bodyRows = page.root!.shadowRoot!.querySelectorAll(
+      '.scarlet-table__body .scarlet-table__row'
+    );
     expect(bodyRows.length).toBe(3);
 
     const firstRowCells = bodyRows[0].querySelectorAll('.scarlet-table__cell');
-    expect(Array.from(firstRowCells).map((cell) => cell.textContent?.trim())).toEqual(['Carla', '30']);
+    expect(Array.from(firstRowCells).map(cell => cell.textContent?.trim())).toEqual([
+      'Carla',
+      '30'
+    ]);
   });
 
   it('shows emptyMessage instead of rows when there is no data', async () => {
@@ -68,14 +73,14 @@ describe('scarlet-table', () => {
     const sortSpy = jest.fn();
     page.root?.addEventListener('scarletSort', sortSpy);
 
-    const nameHeaderButton = Array.from(page.root!.shadowRoot!.querySelectorAll('.scarlet-table__sort')).find(
-      (el) => el.textContent?.includes('Nome'),
-    ) as HTMLButtonElement;
+    const nameHeaderButton = Array.from(
+      page.root!.shadowRoot!.querySelectorAll('.scarlet-table__sort')
+    ).find(el => el.textContent?.includes('Nome')) as HTMLButtonElement;
     nameHeaderButton.click();
     await page.waitForChanges();
 
     let names = Array.from(page.root!.shadowRoot!.querySelectorAll('.scarlet-table__row')).map(
-      (row) => row.querySelector('.scarlet-table__cell')?.textContent?.trim(),
+      row => row.querySelector('.scarlet-table__cell')?.textContent?.trim()
     );
     expect(names).toEqual(['Ana', 'Bruno', 'Carla']);
     expect(sortSpy).toHaveBeenCalledTimes(1);
@@ -87,8 +92,8 @@ describe('scarlet-table', () => {
     nameHeaderButton.click();
     await page.waitForChanges();
 
-    names = Array.from(page.root!.shadowRoot!.querySelectorAll('.scarlet-table__row')).map(
-      (row) => row.querySelector('.scarlet-table__cell')?.textContent?.trim(),
+    names = Array.from(page.root!.shadowRoot!.querySelectorAll('.scarlet-table__row')).map(row =>
+      row.querySelector('.scarlet-table__cell')?.textContent?.trim()
     );
     expect(names).toEqual(['Carla', 'Bruno', 'Ana']);
     expect(nameHeaderCell?.getAttribute('aria-sort')).toBe('descending');
@@ -97,14 +102,14 @@ describe('scarlet-table', () => {
   it('sorts numeric columns numerically, not lexicographically', async () => {
     const page = await setup();
 
-    const ageHeaderButton = Array.from(page.root!.shadowRoot!.querySelectorAll('.scarlet-table__sort')).find((el) =>
-      el.textContent?.includes('Idade'),
-    ) as HTMLButtonElement;
+    const ageHeaderButton = Array.from(
+      page.root!.shadowRoot!.querySelectorAll('.scarlet-table__sort')
+    ).find(el => el.textContent?.includes('Idade')) as HTMLButtonElement;
     ageHeaderButton.click();
     await page.waitForChanges();
 
-    const ages = Array.from(page.root!.shadowRoot!.querySelectorAll('.scarlet-table__row')).map((row) =>
-      row.querySelectorAll('.scarlet-table__cell')[1]?.textContent?.trim(),
+    const ages = Array.from(page.root!.shadowRoot!.querySelectorAll('.scarlet-table__row')).map(
+      row => row.querySelectorAll('.scarlet-table__cell')[1]?.textContent?.trim()
     );
     expect(ages).toEqual(['25', '30', '40']);
   });
@@ -114,7 +119,9 @@ describe('scarlet-table', () => {
     const selectionSpy = jest.fn();
     page.root?.addEventListener('scarletSelectionChange', selectionSpy);
 
-    const firstRowCheckbox = page.root!.shadowRoot!.querySelector('.scarlet-table__row input[type="checkbox"]') as HTMLInputElement;
+    const firstRowCheckbox = page.root!.shadowRoot!.querySelector(
+      '.scarlet-table__row input[type="checkbox"]'
+    ) as HTMLInputElement;
     firstRowCheckbox.checked = true;
     firstRowCheckbox.dispatchEvent(new Event('change'));
     await page.waitForChanges();
@@ -127,7 +134,9 @@ describe('scarlet-table', () => {
   it('selects and deselects every row via the header checkbox', async () => {
     const page = await setup({ selectable: true });
 
-    const headerCheckbox = page.root!.shadowRoot!.querySelector('thead input[type="checkbox"]') as HTMLInputElement;
+    const headerCheckbox = page.root!.shadowRoot!.querySelector(
+      'thead input[type="checkbox"]'
+    ) as HTMLInputElement;
     headerCheckbox.dispatchEvent(new Event('change'));
     await page.waitForChanges();
 
@@ -152,9 +161,17 @@ describe('scarlet-table', () => {
   });
 
   it('uses formatCell instead of the raw value when provided', async () => {
-    const page = await setup({ formatCell: (row, column) => (column.key === 'age' ? `${row.age} anos` : String(row.name)) });
+    const page = await setup({
+      formatCell: (row, column) => (column.key === 'age' ? `${row.age} anos` : String(row.name))
+    });
 
-    const firstRowCells = page.root!.shadowRoot!.querySelectorAll('.scarlet-table__row .scarlet-table__cell');
-    expect(Array.from(firstRowCells).map((cell) => cell.textContent?.trim())).toEqual(['Carla', '30 anos']);
+    const firstRow = page.root!.shadowRoot!.querySelector(
+      '.scarlet-table__body .scarlet-table__row'
+    ) as HTMLElement;
+    const firstRowCells = firstRow.querySelectorAll('.scarlet-table__cell');
+    expect(Array.from(firstRowCells).map(cell => cell.textContent?.trim())).toEqual([
+      'Carla',
+      '30 anos'
+    ]);
   });
 });

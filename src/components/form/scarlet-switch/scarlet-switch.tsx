@@ -7,7 +7,7 @@ import { generateId } from '@/utils';
 @Component({
   tag: 'scarlet-switch',
   styleUrl: 'scarlet-switch.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletSwitch {
   private readonly inputId = generateId('scarlet-switch');
@@ -41,13 +41,16 @@ export class ScarletSwitch {
 
   render() {
     return (
-      <Host class="scarlet-switch-host">
-        <label class={{ 'scarlet-switch': true, 'scarlet-switch--disabled': this.disabled }} htmlFor={this.inputId}>
+      <Host class='scarlet-switch-host'>
+        <label
+          class={{ 'scarlet-switch': true, 'scarlet-switch--disabled': this.disabled }}
+          htmlFor={this.inputId}
+        >
           <input
             id={this.inputId}
-            class="scarlet-switch__input"
-            type="checkbox"
-            role="switch"
+            class='scarlet-switch__input'
+            type='checkbox'
+            role='switch'
             checked={this.checked}
             disabled={this.disabled}
             required={this.required}
@@ -55,10 +58,10 @@ export class ScarletSwitch {
             value={this.value}
             onChange={this.handleChange}
           />
-          <span class="scarlet-switch__track" aria-hidden="true">
-            <span class="scarlet-switch__thumb" />
+          <span class='scarlet-switch__track' aria-hidden='true'>
+            <span class='scarlet-switch__thumb' />
           </span>
-          {this.label ? <span class="scarlet-switch__label">{this.label}</span> : null}
+          {this.label ? <span class='scarlet-switch__label'>{this.label}</span> : null}
         </label>
       </Host>
     );

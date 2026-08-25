@@ -15,7 +15,7 @@ export interface ScarletTabItem {
 @Component({
   tag: 'scarlet-tabs',
   styleUrl: 'scarlet-tabs.scss',
-  shadow: true,
+  shadow: true
 })
 export class ScarletTabs {
   @Element() el!: HTMLElement;
@@ -31,7 +31,7 @@ export class ScarletTabs {
 
   componentWillLoad(): void {
     if (!this.value) {
-      const firstEnabled = this.items.find((item) => !item.disabled);
+      const firstEnabled = this.items.find(item => !item.disabled);
       this.value = firstEnabled?.value;
     }
   }
@@ -53,9 +53,9 @@ export class ScarletTabs {
   }
 
   private handleKeyDown = (event: KeyboardEvent): void => {
-    const enabledItems = this.items.filter((item) => !item.disabled);
+    const enabledItems = this.items.filter(item => !item.disabled);
     if (enabledItems.length === 0) return;
-    const currentIndex = enabledItems.findIndex((item) => item.value === this.value);
+    const currentIndex = enabledItems.findIndex(item => item.value === this.value);
 
     let nextIndex: number | null = null;
     if (event.key === 'ArrowRight') {
@@ -76,18 +76,18 @@ export class ScarletTabs {
 
   render() {
     return (
-      <Host class="scarlet-tabs-host">
-        <div class="scarlet-tabs__list" role="tablist" onKeyDown={this.handleKeyDown}>
-          {this.items.map((item) => (
+      <Host class='scarlet-tabs-host'>
+        <div class='scarlet-tabs__list' role='tablist' onKeyDown={this.handleKeyDown}>
+          {this.items.map(item => (
             <button
-              type="button"
+              type='button'
               key={item.value}
               data-value={item.value}
               class={{
                 'scarlet-tabs__tab': true,
-                'scarlet-tabs__tab--selected': item.value === this.value,
+                'scarlet-tabs__tab--selected': item.value === this.value
               }}
-              role="tab"
+              role='tab'
               id={`tab-${item.value}`}
               aria-selected={item.value === this.value ? 'true' : 'false'}
               aria-controls={`panel-${item.value}`}
@@ -99,11 +99,11 @@ export class ScarletTabs {
             </button>
           ))}
         </div>
-        {this.items.map((item) => (
+        {this.items.map(item => (
           <div
             key={item.value}
-            class="scarlet-tabs__panel"
-            role="tabpanel"
+            class='scarlet-tabs__panel'
+            role='tabpanel'
             id={`panel-${item.value}`}
             aria-labelledby={`tab-${item.value}`}
             hidden={item.value !== this.value}
