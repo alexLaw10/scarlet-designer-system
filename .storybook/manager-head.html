@@ -12,7 +12,7 @@
   hard timeout as a fallback so it can never get stuck on screen.
 -->
 <style>
-  #scarllet-splash {
+  #scarlet-splash {
     position: fixed;
     inset: 0;
     z-index: 2147483647;
@@ -23,18 +23,18 @@
     transition: opacity 0.4s ease;
   }
 
-  #scarllet-splash svg {
+  #scarlet-splash svg {
     width: 180px;
     height: 180px;
-    animation: scarllet-splash-pulse 1.4s ease-in-out infinite;
+    animation: scarlet-splash-pulse 1.4s ease-in-out infinite;
   }
 
-  #scarllet-splash.scarllet-splash--hidden {
+  #scarlet-splash.scarlet-splash--hidden {
     opacity: 0;
     pointer-events: none;
   }
 
-  @keyframes scarllet-splash-pulse {
+  @keyframes scarlet-splash-pulse {
     0%,
     100% {
       transform: scale(1);
@@ -47,7 +47,7 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    #scarllet-splash svg {
+    #scarlet-splash svg {
       animation: none;
     }
   }
@@ -56,7 +56,7 @@
   (function () {
     function init() {
       var splash = document.createElement('div');
-      splash.id = 'scarllet-splash';
+      splash.id = 'scarlet-splash';
       splash.innerHTML =
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Carregando Scarlet Design System">' +
         '<g transform="translate(200,200) scale(1.6)"><g>' +
@@ -83,7 +83,7 @@
         var elapsed = Date.now() - startedAt;
         var remaining = Math.max(0, MIN_VISIBLE_MS - elapsed);
         setTimeout(function () {
-          splash.classList.add('scarllet-splash--hidden');
+          splash.classList.add('scarlet-splash--hidden');
           setTimeout(function () {
             splash.remove();
           }, 500);
