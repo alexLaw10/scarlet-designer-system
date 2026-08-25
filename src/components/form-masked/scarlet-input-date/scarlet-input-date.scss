@@ -1,0 +1,49 @@
+@import '../../../tokens/field-mixins';
+
+:host {
+  display: block;
+}
+
+.scarlet-input-date__label {
+  @include scarlet-field-label;
+}
+
+.scarlet-input-date__required {
+  @include scarlet-field-required;
+}
+
+.scarlet-input-date {
+  @include scarlet-field-input;
+}
+
+.scarlet-input-date--invalid {
+  @include scarlet-field-invalid;
+}
+
+.scarlet-input-date--xs {
+  @include scarlet-field-size(xs);
+}
+
+.scarlet-input-date--sm {
+  @include scarlet-field-size(sm);
+}
+
+.scarlet-input-date--md {
+  @include scarlet-field-size(md);
+}
+
+.scarlet-input-date--lg {
+  @include scarlet-field-size(lg);
+}
+
+.scarlet-input-date--xl {
+  @include scarlet-field-size(xl);
+}
+
+.scarlet-input-date__message {
+  @include scarlet-field-message;
+}
+
+.scarlet-input-date__message--error {
+  @include scarlet-field-message-error;
+}

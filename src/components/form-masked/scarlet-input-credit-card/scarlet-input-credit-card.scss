@@ -1,0 +1,71 @@
+@import '../../../tokens/field-mixins';
+
+:host {
+  display: block;
+}
+
+.scarlet-input-credit-card__label {
+  @include scarlet-field-label;
+}
+
+.scarlet-input-credit-card__required {
+  @include scarlet-field-required;
+}
+
+.scarlet-input-credit-card__wrapper {
+  position: relative;
+}
+
+.scarlet-input-credit-card {
+  @include scarlet-field-input;
+  padding-right: var(--scarlet-space-20);
+  font-variant-numeric: tabular-nums;
+}
+
+.scarlet-input-credit-card--invalid {
+  @include scarlet-field-invalid;
+}
+
+.scarlet-input-credit-card--xs {
+  @include scarlet-field-size(xs);
+}
+
+.scarlet-input-credit-card--sm {
+  @include scarlet-field-size(sm);
+}
+
+.scarlet-input-credit-card--md {
+  @include scarlet-field-size(md);
+}
+
+.scarlet-input-credit-card--lg {
+  @include scarlet-field-size(lg);
+}
+
+.scarlet-input-credit-card--xl {
+  @include scarlet-field-size(xl);
+}
+
+.scarlet-input-credit-card__brand {
+  position: absolute;
+  top: 50%;
+  right: var(--scarlet-space-3);
+  transform: translateY(-50%);
+  padding: var(--scarlet-space-0-5) var(--scarlet-space-2);
+  border-radius: var(--scarlet-border-radius-sm);
+  background-color: var(--scarlet-color-background-secondary);
+  color: var(--scarlet-color-text-secondary);
+  font-size: var(--scarlet-font-size-xs);
+  font-weight: var(--scarlet-font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--scarlet-letter-spacing-wide);
+  pointer-events: none;
+}
+
+.scarlet-input-credit-card__message {
+  @include scarlet-field-message;
+}
+
+.scarlet-input-credit-card__message--error {
+  @include scarlet-field-message-error;
+}

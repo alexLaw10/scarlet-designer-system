@@ -1,0 +1,78 @@
+@import '../../../tokens/typography-mixins';
+
+:host {
+  display: block;
+}
+
+.scarlet-heading {
+  margin: 0;
+  font-family: var(--scarlet-font-family-primary);
+}
+
+.scarlet-heading--display-2xl {
+  @include scarlet-text-display-2xl;
+}
+
+.scarlet-heading--display-xl {
+  @include scarlet-text-display-xl;
+}
+
+.scarlet-heading--display-lg {
+  @include scarlet-text-display-lg;
+}
+
+.scarlet-heading--display-md {
+  @include scarlet-text-display-md;
+}
+
+.scarlet-heading--display-sm {
+  @include scarlet-text-display-sm;
+}
+
+.scarlet-heading--heading-xl {
+  @include scarlet-text-heading-xl;
+}
+
+.scarlet-heading--heading-lg {
+  @include scarlet-text-heading-lg;
+}
+
+.scarlet-heading--heading-md {
+  @include scarlet-text-heading-md;
+}
+
+.scarlet-heading--heading-sm {
+  @include scarlet-text-heading-sm;
+}
+
+.scarlet-heading--color-primary {
+  color: var(--scarlet-color-text-primary);
+}
+
+.scarlet-heading--color-secondary {
+  color: var(--scarlet-color-text-secondary);
+}
+
+.scarlet-heading--color-tertiary {
+  color: var(--scarlet-color-text-tertiary);
+}
+
+.scarlet-heading--color-inverse {
+  color: var(--scarlet-color-text-inverse);
+}
+
+.scarlet-heading--color-disabled {
+  color: var(--scarlet-color-text-disabled);
+}
+
+.scarlet-heading--align-left {
+  text-align: left;
+}
+
+.scarlet-heading--align-center {
+  text-align: center;
+}
+
+.scarlet-heading--align-right {
+  text-align: right;
+}

@@ -10,7 +10,22 @@ npm run storybook     # documentação interativa
 
 ## Criando um novo componente
 
-1. Crie a pasta `src/components/scarlet-<nome>/` com:
+1. Os componentes vivem organizados por categoria dentro de `src/components/`, não soltos direto na raiz:
+
+   | Categoria | Pasta | Contém |
+   |---|---|---|
+   | Foundation | `foundation/` | Primitivas visuais base (ícone, heading, text) |
+   | Layout | `layout/` | Composição de layout (stack, grid, grid-item, container) |
+   | Actions | `actions/` | Elementos acionáveis (button) |
+   | Form | `form/` | Campos de formulário padrão (input, textarea, select, checkbox, switch, radio, radio-group) |
+   | Form Masked | `form-masked/` | Inputs mascarados/validados pt-BR (phone, cep, document, currency, percentage, date, credit-card, license-plate) |
+   | Feedback | `feedback/` | Feedback e overlays (alert, badge, toast, tooltip, modal) |
+   | Navigation | `navigation/` | Navegação (tabs, accordion) |
+   | Data Display | `data-display/` | Exibição de dados (card, avatar, divider) |
+
+   Escolha a categoria que melhor descreve o papel do componente; na dúvida, siga o precedente do componente mais parecido já existente na pasta.
+
+   Crie a pasta `src/components/<categoria>/scarlet-<nome>/` com:
    - `scarlet-<nome>.tsx` — implementação do componente (Stencil)
    - `scarlet-<nome>.scss` — estilos, usando os design tokens de `src/tokens`
    - `scarlet-<nome>.stories.ts` — stories do Storybook
@@ -25,8 +40,9 @@ npm run storybook     # documentação interativa
    - Use as custom properties de `src/tokens/*.scss` para cor, espaçamento, tipografia, sombra e borda — nunca valores "hardcoded". Para estilos de texto compostos, use os mixins de `src/tokens/typography-mixins.scss`
    - Todo componente interativo precisa de suporte a teclado e atributos ARIA coerentes com seu papel (veja `src/types/index.ts#AccessibilityProps`)
    - Emita eventos customizados prefixados (`scarletChange`, `scarletDismiss`, etc.) em vez de depender só do evento nativo, para funcionar bem em React/Vue/Angular
+   - Imports de `src/types`, `src/utils` e `src/utils/*` usam os aliases `@/types`, `@/utils`, `@/utils/form-field` etc. (configurados em `tsconfig.json`) em vez de caminhos relativos `../../` — evita que o caminho quebre se o componente mudar de categoria. Import de outro componente usa `@/components/<categoria>/scarlet-<nome>/scarlet-<nome>`. Já os `@import` de `.scss` (Sass não entende os aliases do TS) continuam relativos, ex. `../../../tokens/field-mixins` a partir de `src/components/<categoria>/scarlet-<nome>/`.
 
-3. Exporte o componente em `src/components/index.ts`.
+3. Exporte o componente em `src/components/index.ts`, dentro do bloco da categoria correspondente.
 
 4. Rode antes de abrir o PR:
 

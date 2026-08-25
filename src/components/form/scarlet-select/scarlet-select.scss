@@ -1,0 +1,81 @@
+@import '../../../tokens/field-mixins';
+
+:host {
+  display: block;
+}
+
+.scarlet-select__label {
+  @include scarlet-field-label;
+}
+
+.scarlet-select__required {
+  @include scarlet-field-required;
+}
+
+.scarlet-select__wrapper {
+  position: relative;
+}
+
+.scarlet-select {
+  @include scarlet-field-input;
+  appearance: none;
+  cursor: pointer;
+  padding-right: var(--scarlet-space-8);
+}
+
+.scarlet-select--placeholder {
+  color: var(--scarlet-color-text-tertiary);
+}
+
+.scarlet-select--invalid {
+  @include scarlet-field-invalid;
+}
+
+.scarlet-select--xs {
+  height: var(--scarlet-space-6);
+  padding-left: var(--scarlet-space-2);
+  font-size: var(--scarlet-font-size-xs);
+}
+
+.scarlet-select--sm {
+  height: var(--scarlet-space-8);
+  padding-left: var(--scarlet-space-3);
+  font-size: var(--scarlet-font-size-sm);
+}
+
+.scarlet-select--md {
+  height: var(--scarlet-space-10);
+  padding-left: var(--scarlet-space-4);
+  font-size: var(--scarlet-font-size-base);
+}
+
+.scarlet-select--lg {
+  height: var(--scarlet-space-12);
+  padding-left: var(--scarlet-space-4);
+  font-size: var(--scarlet-font-size-lg);
+}
+
+.scarlet-select--xl {
+  height: var(--scarlet-space-14);
+  padding-left: var(--scarlet-space-5);
+  font-size: var(--scarlet-font-size-xl);
+}
+
+.scarlet-select__chevron {
+  position: absolute;
+  top: 50%;
+  right: var(--scarlet-space-3);
+  width: var(--scarlet-space-4);
+  height: var(--scarlet-space-4);
+  transform: translateY(-50%);
+  color: var(--scarlet-color-text-tertiary);
+  pointer-events: none;
+}
+
+.scarlet-select__message {
+  @include scarlet-field-message;
+}
+
+.scarlet-select__message--error {
+  @include scarlet-field-message-error;
+}

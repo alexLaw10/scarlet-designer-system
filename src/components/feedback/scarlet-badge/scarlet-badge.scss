@@ -1,0 +1,58 @@
+@import '../../../tokens/typography-mixins';
+
+$scarlet-badge-colors: primary, secondary, success, warning, error, info, neutral;
+
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--scarlet-border-radius-badge);
+  border: var(--scarlet-border-width-1) solid transparent;
+  font-family: var(--scarlet-font-family-primary);
+  font-weight: var(--scarlet-font-weight-medium);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+:host(.scarlet-badge-host--xs) {
+  padding: 2px var(--scarlet-space-1-5);
+  font-size: 10px;
+}
+
+:host(.scarlet-badge-host--sm) {
+  padding: var(--scarlet-space-0-5) var(--scarlet-space-2);
+  font-size: var(--scarlet-font-size-xs);
+}
+
+:host(.scarlet-badge-host--md) {
+  padding: var(--scarlet-space-1) var(--scarlet-space-2-5);
+  font-size: var(--scarlet-font-size-sm);
+}
+
+:host(.scarlet-badge-host--dot) {
+  padding: 0;
+  width: var(--scarlet-space-2-5);
+  height: var(--scarlet-space-2-5);
+  min-width: 0;
+  border-radius: var(--scarlet-border-radius-full);
+}
+
+@each $color in $scarlet-badge-colors {
+  :host(.scarlet-badge-host--solid.scarlet-badge-host--#{$color}) {
+    background-color: var(--scarlet-color-#{$color}-500);
+    border-color: var(--scarlet-color-#{$color}-500);
+    color: var(--scarlet-color-text-inverse);
+  }
+
+  :host(.scarlet-badge-host--outline.scarlet-badge-host--#{$color}) {
+    background-color: transparent;
+    border-color: var(--scarlet-color-#{$color}-500);
+    color: var(--scarlet-color-#{$color}-700);
+  }
+
+  :host(.scarlet-badge-host--soft.scarlet-badge-host--#{$color}) {
+    background-color: var(--scarlet-color-#{$color}-50);
+    border-color: transparent;
+    color: var(--scarlet-color-#{$color}-800);
+  }
+}
