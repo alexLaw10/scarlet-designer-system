@@ -22,6 +22,27 @@ describe('scarlet-radio-group', () => {
     expect(checkedValues).toEqual(['b']);
   });
 
+  it('re-syncs the checked child when `value` is reassigned from outside (e.g. a framework resetting a form)', async () => {
+    const page = await newSpecPage({
+      components: [ScarletRadioGroup, ScarletRadio],
+      html: `
+        <scarlet-radio-group value="a">
+          <scarlet-radio value="a"></scarlet-radio>
+          <scarlet-radio value="b"></scarlet-radio>
+        </scarlet-radio-group>
+      `,
+    });
+    await page.waitForChanges();
+
+    page.rootInstance.value = 'b';
+    await page.waitForChanges();
+
+    const radios = Array.from(page.root!.querySelectorAll('scarlet-radio'));
+    const checkedValues = radios.filter((radio: any) => radio.checked).map((radio: any) => radio.value);
+
+    expect(checkedValues).toEqual(['b']);
+  });
+
   it('selects a radio and unchecks the previous one when a child input changes', async () => {
     const page = await newSpecPage({
       components: [ScarletRadioGroup, ScarletRadio],

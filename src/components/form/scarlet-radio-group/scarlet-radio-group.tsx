@@ -1,4 +1,4 @@
-import { Component, Prop, Event, type EventEmitter, h, Host, Listen, Element } from '@stencil/core';
+import { Component, Prop, Watch, Event, type EventEmitter, h, Host, Listen, Element } from '@stencil/core';
 
 interface ScarletRadioElement extends HTMLElement {
   value?: string;
@@ -44,6 +44,16 @@ export class ScarletRadioGroup {
   @Event() scarletChange!: EventEmitter<string | undefined>;
 
   componentDidLoad(): void {
+    this.syncChildren();
+  }
+
+  // Keeps the children in sync when `value` is set programmatically from
+  // outside (e.g. a framework re-rendering `[value]="form.tipoConta"` after
+  // a reset) — `handleChildChange`/`handleKeyDown` already call
+  // `syncChildren()` themselves for changes that originate *inside* this
+  // component, but an external assignment bypasses both of those.
+  @Watch('value')
+  handleValueChange(): void {
     this.syncChildren();
   }
 
