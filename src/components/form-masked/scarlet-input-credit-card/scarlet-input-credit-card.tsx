@@ -5,8 +5,6 @@ import { maskCreditCard, onlyDigits } from '@/utils/masks';
 import { type CreditCardBrand, detectCardBrand, isValidCreditCardLuhn } from '@/utils/validators';
 import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/utils/form-field';
 
-export type { CreditCardBrand } from '@/utils/validators';
-
 /**
  * A credit card number input — formats in groups of 4 (or Amex's 4-6-5 /
  * Diners' 4-6-4 grouping once that brand is detected from the card's

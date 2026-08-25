@@ -41,7 +41,7 @@ export { ScarletInputCurrency } from './form-masked/scarlet-input-currency/scarl
 export { ScarletInputPercentage } from './form-masked/scarlet-input-percentage/scarlet-input-percentage';
 export { ScarletInputDate } from './form-masked/scarlet-input-date/scarlet-input-date';
 export { ScarletInputCreditCard } from './form-masked/scarlet-input-credit-card/scarlet-input-credit-card';
-export type { CreditCardBrand } from './form-masked/scarlet-input-credit-card/scarlet-input-credit-card';
+export type { CreditCardBrand } from '@/utils/validators';
 export { ScarletInputLicensePlate } from './form-masked/scarlet-input-license-plate/scarlet-input-license-plate';
 export type { ScarletLicensePlateFormat } from './form-masked/scarlet-input-license-plate/scarlet-input-license-plate';
 
