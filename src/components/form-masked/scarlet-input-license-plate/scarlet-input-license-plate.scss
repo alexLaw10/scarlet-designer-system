@@ -4,48 +4,48 @@
   display: block;
 }
 
-.scarlet-input-license-plate__label {
-  @include scarlet-field-label;
-}
-
-.scarlet-input-license-plate__required {
-  @include scarlet-field-required;
-}
-
 .scarlet-input-license-plate {
   @include scarlet-field-input;
   text-transform: uppercase;
   letter-spacing: var(--scarlet-letter-spacing-wider);
-}
 
-.scarlet-input-license-plate--invalid {
-  @include scarlet-field-invalid;
-}
+  &--invalid {
+    @include scarlet-field-invalid;
+  }
 
-.scarlet-input-license-plate--xs {
-  @include scarlet-field-size(xs);
-}
+  &--xs {
+    @include scarlet-field-size(xs);
+  }
 
-.scarlet-input-license-plate--sm {
-  @include scarlet-field-size(sm);
-}
+  &--sm {
+    @include scarlet-field-size(sm);
+  }
 
-.scarlet-input-license-plate--md {
-  @include scarlet-field-size(md);
-}
+  &--md {
+    @include scarlet-field-size(md);
+  }
 
-.scarlet-input-license-plate--lg {
-  @include scarlet-field-size(lg);
-}
+  &--lg {
+    @include scarlet-field-size(lg);
+  }
 
-.scarlet-input-license-plate--xl {
-  @include scarlet-field-size(xl);
-}
+  &--xl {
+    @include scarlet-field-size(xl);
+  }
 
-.scarlet-input-license-plate__message {
-  @include scarlet-field-message;
-}
+  &__label {
+    @include scarlet-field-label;
+  }
 
-.scarlet-input-license-plate__message--error {
-  @include scarlet-field-message-error;
+  &__required {
+    @include scarlet-field-required;
+  }
+
+  &__message {
+    @include scarlet-field-message;
+
+    &--error {
+      @include scarlet-field-message-error;
+    }
+  }
 }

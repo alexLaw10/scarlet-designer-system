@@ -49,18 +49,20 @@
   font-size: var(--scarlet-font-size-2xl);
 }
 
-.scarlet-avatar__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+.scarlet-avatar {
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 
-.scarlet-avatar__initials {
-  font-weight: var(--scarlet-font-weight-semibold);
-  letter-spacing: var(--scarlet-letter-spacing-wide);
-}
+  &__initials {
+    font-weight: var(--scarlet-font-weight-semibold);
+    letter-spacing: var(--scarlet-letter-spacing-wide);
+  }
 
-.scarlet-avatar__placeholder {
-  width: 65%;
-  height: 65%;
+  &__placeholder {
+    width: 65%;
+    height: 65%;
+  }
 }

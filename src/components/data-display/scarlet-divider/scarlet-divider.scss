@@ -27,14 +27,16 @@
   background-color: var(--scarlet-color-border-secondary);
 }
 
-.scarlet-divider__line {
-  flex: 1;
-  height: var(--scarlet-border-width-1);
-  background-color: var(--scarlet-color-border-secondary);
-}
+.scarlet-divider {
+  &__line {
+    flex: 1;
+    height: var(--scarlet-border-width-1);
+    background-color: var(--scarlet-color-border-secondary);
+  }
 
-.scarlet-divider__label {
-  @include scarlet-text-caption;
-  flex-shrink: 0;
-  color: var(--scarlet-color-text-tertiary);
+  &__label {
+    @include scarlet-text-caption;
+    flex-shrink: 0;
+    color: var(--scarlet-color-text-tertiary);
+  }
 }

@@ -39,126 +39,128 @@ $scarlet-button-colors: primary, secondary, success, warning, error, info, neutr
     cursor: not-allowed;
     opacity: 0.5;
   }
-}
 
-.scarlet-button--xs {
-  height: var(--scarlet-space-6);
-  padding: 0 var(--scarlet-space-2);
-  font-size: var(--scarlet-font-size-xs);
-}
+  &--xs {
+    height: var(--scarlet-space-6);
+    padding: 0 var(--scarlet-space-2);
+    font-size: var(--scarlet-font-size-xs);
+  }
 
-.scarlet-button--sm {
-  height: var(--scarlet-space-8);
-  padding: 0 var(--scarlet-space-3);
-  font-size: var(--scarlet-font-size-sm);
-}
+  &--sm {
+    height: var(--scarlet-space-8);
+    padding: 0 var(--scarlet-space-3);
+    font-size: var(--scarlet-font-size-sm);
+  }
 
-.scarlet-button--md {
-  height: var(--scarlet-space-10);
-  padding: 0 var(--scarlet-space-4);
-  font-size: var(--scarlet-font-size-base);
-}
+  &--md {
+    height: var(--scarlet-space-10);
+    padding: 0 var(--scarlet-space-4);
+    font-size: var(--scarlet-font-size-base);
+  }
 
-.scarlet-button--lg {
-  height: var(--scarlet-space-12);
-  padding: 0 var(--scarlet-space-6);
-  font-size: var(--scarlet-font-size-lg);
-}
+  &--lg {
+    height: var(--scarlet-space-12);
+    padding: 0 var(--scarlet-space-6);
+    font-size: var(--scarlet-font-size-lg);
+  }
 
-.scarlet-button--xl {
-  height: var(--scarlet-space-14);
-  padding: 0 var(--scarlet-space-8);
-  font-size: var(--scarlet-font-size-xl);
-}
+  &--xl {
+    height: var(--scarlet-space-14);
+    padding: 0 var(--scarlet-space-8);
+    font-size: var(--scarlet-font-size-xl);
+  }
 
-@each $color in $scarlet-button-colors {
-  .scarlet-button--solid.scarlet-button--#{$color} {
-    background-color: var(--scarlet-color-#{$color}-500);
-    border-color: var(--scarlet-color-#{$color}-500);
-    color: var(--scarlet-color-text-inverse);
+  @each $color in $scarlet-button-colors {
+    &--solid.scarlet-button--#{$color} {
+      background-color: var(--scarlet-color-#{$color}-500);
+      border-color: var(--scarlet-color-#{$color}-500);
+      color: var(--scarlet-color-text-inverse);
 
-    &:hover:not(:disabled) {
-      background-color: var(--scarlet-color-#{$color}-600);
-      border-color: var(--scarlet-color-#{$color}-600);
+      &:hover:not(:disabled) {
+        background-color: var(--scarlet-color-#{$color}-600);
+        border-color: var(--scarlet-color-#{$color}-600);
+      }
+
+      &:active:not(:disabled) {
+        background-color: var(--scarlet-color-#{$color}-700);
+        border-color: var(--scarlet-color-#{$color}-700);
+      }
     }
 
-    &:active:not(:disabled) {
-      background-color: var(--scarlet-color-#{$color}-700);
-      border-color: var(--scarlet-color-#{$color}-700);
+    &--outline.scarlet-button--#{$color} {
+      background-color: transparent;
+      border-color: var(--scarlet-color-#{$color}-500);
+      color: var(--scarlet-color-#{$color}-600);
+
+      &:hover:not(:disabled) {
+        background-color: var(--scarlet-color-#{$color}-50);
+      }
+
+      &:active:not(:disabled) {
+        background-color: var(--scarlet-color-#{$color}-100);
+      }
+    }
+
+    &--ghost.scarlet-button--#{$color} {
+      background-color: transparent;
+      border-color: transparent;
+      color: var(--scarlet-color-#{$color}-600);
+
+      &:hover:not(:disabled) {
+        background-color: var(--scarlet-color-#{$color}-50);
+      }
+
+      &:active:not(:disabled) {
+        background-color: var(--scarlet-color-#{$color}-100);
+      }
+    }
+
+    &--link.scarlet-button--#{$color} {
+      background-color: transparent;
+      border-color: transparent;
+      color: var(--scarlet-color-#{$color}-600);
+      height: auto;
+      padding: 0;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+
+      &:hover:not(:disabled) {
+        color: var(--scarlet-color-#{$color}-700);
+      }
     }
   }
 
-  .scarlet-button--outline.scarlet-button--#{$color} {
-    background-color: transparent;
-    border-color: var(--scarlet-color-#{$color}-500);
-    color: var(--scarlet-color-#{$color}-600);
+  &__content {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--scarlet-space-2);
+  }
 
-    &:hover:not(:disabled) {
-      background-color: var(--scarlet-color-#{$color}-50);
-    }
-
-    &:active:not(:disabled) {
-      background-color: var(--scarlet-color-#{$color}-100);
+  &--loading {
+    .scarlet-button__content {
+      opacity: 0.6;
     }
   }
 
-  .scarlet-button--ghost.scarlet-button--#{$color} {
-    background-color: transparent;
-    border-color: transparent;
-    color: var(--scarlet-color-#{$color}-600);
-
-    &:hover:not(:disabled) {
-      background-color: var(--scarlet-color-#{$color}-50);
-    }
-
-    &:active:not(:disabled) {
-      background-color: var(--scarlet-color-#{$color}-100);
-    }
+  &__spinner {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-radius: var(--scarlet-border-radius-full);
+    animation: scarlet-button-spin 0.6s linear infinite;
   }
 
-  .scarlet-button--link.scarlet-button--#{$color} {
-    background-color: transparent;
-    border-color: transparent;
-    color: var(--scarlet-color-#{$color}-600);
-    height: auto;
-    padding: 0;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-
-    &:hover:not(:disabled) {
-      color: var(--scarlet-color-#{$color}-700);
+  @media (prefers-reduced-motion: reduce) {
+    &__spinner {
+      animation-duration: 1.5s;
     }
   }
-}
-
-.scarlet-button__content {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--scarlet-space-2);
-}
-
-.scarlet-button--loading .scarlet-button__content {
-  opacity: 0.6;
-}
-
-.scarlet-button__spinner {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  border: 2px solid currentColor;
-  border-right-color: transparent;
-  border-radius: var(--scarlet-border-radius-full);
-  animation: scarlet-button-spin 0.6s linear infinite;
 }
 
 @keyframes scarlet-button-spin {
   to {
     transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scarlet-button__spinner {
-    animation-duration: 1.5s;
   }
 }

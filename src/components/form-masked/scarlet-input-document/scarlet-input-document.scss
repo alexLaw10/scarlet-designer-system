@@ -4,46 +4,46 @@
   display: block;
 }
 
-.scarlet-input-document__label {
-  @include scarlet-field-label;
-}
-
-.scarlet-input-document__required {
-  @include scarlet-field-required;
-}
-
 .scarlet-input-document {
   @include scarlet-field-input;
-}
 
-.scarlet-input-document--invalid {
-  @include scarlet-field-invalid;
-}
+  &--invalid {
+    @include scarlet-field-invalid;
+  }
 
-.scarlet-input-document--xs {
-  @include scarlet-field-size(xs);
-}
+  &--xs {
+    @include scarlet-field-size(xs);
+  }
 
-.scarlet-input-document--sm {
-  @include scarlet-field-size(sm);
-}
+  &--sm {
+    @include scarlet-field-size(sm);
+  }
 
-.scarlet-input-document--md {
-  @include scarlet-field-size(md);
-}
+  &--md {
+    @include scarlet-field-size(md);
+  }
 
-.scarlet-input-document--lg {
-  @include scarlet-field-size(lg);
-}
+  &--lg {
+    @include scarlet-field-size(lg);
+  }
 
-.scarlet-input-document--xl {
-  @include scarlet-field-size(xl);
-}
+  &--xl {
+    @include scarlet-field-size(xl);
+  }
 
-.scarlet-input-document__message {
-  @include scarlet-field-message;
-}
+  &__label {
+    @include scarlet-field-label;
+  }
 
-.scarlet-input-document__message--error {
-  @include scarlet-field-message-error;
+  &__required {
+    @include scarlet-field-required;
+  }
+
+  &__message {
+    @include scarlet-field-message;
+
+    &--error {
+      @include scarlet-field-message-error;
+    }
+  }
 }

@@ -23,37 +23,37 @@
   transition:
     opacity 0.1s ease,
     visibility 0.1s ease;
-}
 
-.scarlet-tooltip--visible {
-  opacity: 1;
-  visibility: visible;
-}
+  &--visible {
+    opacity: 1;
+    visibility: visible;
+  }
 
-.scarlet-tooltip--top {
-  bottom: 100%;
-  left: 50%;
-  margin-bottom: var(--scarlet-space-2);
-  transform: translateX(-50%);
-}
+  &--top {
+    bottom: 100%;
+    left: 50%;
+    margin-bottom: var(--scarlet-space-2);
+    transform: translateX(-50%);
+  }
 
-.scarlet-tooltip--bottom {
-  top: 100%;
-  left: 50%;
-  margin-top: var(--scarlet-space-2);
-  transform: translateX(-50%);
-}
+  &--bottom {
+    top: 100%;
+    left: 50%;
+    margin-top: var(--scarlet-space-2);
+    transform: translateX(-50%);
+  }
 
-.scarlet-tooltip--left {
-  right: 100%;
-  top: 50%;
-  margin-right: var(--scarlet-space-2);
-  transform: translateY(-50%);
-}
+  &--left {
+    right: 100%;
+    top: 50%;
+    margin-right: var(--scarlet-space-2);
+    transform: translateY(-50%);
+  }
 
-.scarlet-tooltip--right {
-  left: 100%;
-  top: 50%;
-  margin-left: var(--scarlet-space-2);
-  transform: translateY(-50%);
+  &--right {
+    left: 100%;
+    top: 50%;
+    margin-left: var(--scarlet-space-2);
+    transform: translateY(-50%);
+  }
 }

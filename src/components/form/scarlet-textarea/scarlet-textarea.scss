@@ -4,68 +4,68 @@
   display: block;
 }
 
-.scarlet-textarea__label {
-  @include scarlet-field-label;
-}
-
-.scarlet-textarea__required {
-  @include scarlet-field-required;
-}
-
 .scarlet-textarea {
   @include scarlet-field-input;
   min-height: var(--scarlet-space-16);
-}
 
-.scarlet-textarea--invalid {
-  @include scarlet-field-invalid;
-}
+  &--invalid {
+    @include scarlet-field-invalid;
+  }
 
-.scarlet-textarea--resize-none {
-  resize: none;
-}
+  &--resize-none {
+    resize: none;
+  }
 
-.scarlet-textarea--resize-vertical {
-  resize: vertical;
-}
+  &--resize-vertical {
+    resize: vertical;
+  }
 
-.scarlet-textarea--resize-horizontal {
-  resize: horizontal;
-}
+  &--resize-horizontal {
+    resize: horizontal;
+  }
 
-.scarlet-textarea--resize-both {
-  resize: both;
-}
+  &--resize-both {
+    resize: both;
+  }
 
-.scarlet-textarea--xs {
-  padding: var(--scarlet-space-1-5) var(--scarlet-space-2);
-  font-size: var(--scarlet-font-size-xs);
-}
+  &--xs {
+    padding: var(--scarlet-space-1-5) var(--scarlet-space-2);
+    font-size: var(--scarlet-font-size-xs);
+  }
 
-.scarlet-textarea--sm {
-  padding: var(--scarlet-space-2) var(--scarlet-space-3);
-  font-size: var(--scarlet-font-size-sm);
-}
+  &--sm {
+    padding: var(--scarlet-space-2) var(--scarlet-space-3);
+    font-size: var(--scarlet-font-size-sm);
+  }
 
-.scarlet-textarea--md {
-  padding: var(--scarlet-space-2-5) var(--scarlet-space-4);
-  font-size: var(--scarlet-font-size-base);
-}
+  &--md {
+    padding: var(--scarlet-space-2-5) var(--scarlet-space-4);
+    font-size: var(--scarlet-font-size-base);
+  }
 
-.scarlet-textarea--lg {
-  padding: var(--scarlet-space-3) var(--scarlet-space-4);
-  font-size: var(--scarlet-font-size-lg);
-}
+  &--lg {
+    padding: var(--scarlet-space-3) var(--scarlet-space-4);
+    font-size: var(--scarlet-font-size-lg);
+  }
 
-.scarlet-textarea--xl {
-  padding: var(--scarlet-space-3-5) var(--scarlet-space-5);
-  font-size: var(--scarlet-font-size-xl);
-}
+  &--xl {
+    padding: var(--scarlet-space-3-5) var(--scarlet-space-5);
+    font-size: var(--scarlet-font-size-xl);
+  }
 
-.scarlet-textarea__message {
-  @include scarlet-field-message;
-}
+  &__label {
+    @include scarlet-field-label;
+  }
 
-.scarlet-textarea__message--error {
-  @include scarlet-field-message-error;
+  &__required {
+    @include scarlet-field-required;
+  }
+
+  &__message {
+    @include scarlet-field-message;
+
+    &--error {
+      @include scarlet-field-message-error;
+    }
+  }
 }

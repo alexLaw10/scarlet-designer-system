@@ -4,46 +4,46 @@
   display: block;
 }
 
-.scarlet-input-phone__label {
-  @include scarlet-field-label;
-}
-
-.scarlet-input-phone__required {
-  @include scarlet-field-required;
-}
-
 .scarlet-input-phone {
   @include scarlet-field-input;
-}
 
-.scarlet-input-phone--invalid {
-  @include scarlet-field-invalid;
-}
+  &--invalid {
+    @include scarlet-field-invalid;
+  }
 
-.scarlet-input-phone--xs {
-  @include scarlet-field-size(xs);
-}
+  &--xs {
+    @include scarlet-field-size(xs);
+  }
 
-.scarlet-input-phone--sm {
-  @include scarlet-field-size(sm);
-}
+  &--sm {
+    @include scarlet-field-size(sm);
+  }
 
-.scarlet-input-phone--md {
-  @include scarlet-field-size(md);
-}
+  &--md {
+    @include scarlet-field-size(md);
+  }
 
-.scarlet-input-phone--lg {
-  @include scarlet-field-size(lg);
-}
+  &--lg {
+    @include scarlet-field-size(lg);
+  }
 
-.scarlet-input-phone--xl {
-  @include scarlet-field-size(xl);
-}
+  &--xl {
+    @include scarlet-field-size(xl);
+  }
 
-.scarlet-input-phone__message {
-  @include scarlet-field-message;
-}
+  &__label {
+    @include scarlet-field-label;
+  }
 
-.scarlet-input-phone__message--error {
-  @include scarlet-field-message-error;
+  &__required {
+    @include scarlet-field-required;
+  }
+
+  &__message {
+    @include scarlet-field-message;
+
+    &--error {
+      @include scarlet-field-message-error;
+    }
+  }
 }
