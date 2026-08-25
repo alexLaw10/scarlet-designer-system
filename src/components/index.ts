@@ -27,11 +27,14 @@ export { ScarletTextarea } from './form/scarlet-textarea/scarlet-textarea';
 export type { ScarletTextareaResize } from './form/scarlet-textarea/scarlet-textarea';
 export { ScarletSelect } from './form/scarlet-select/scarlet-select';
 export type { ScarletSelectOption } from './form/scarlet-select/scarlet-select';
+export { ScarletCombobox } from './form/scarlet-combobox/scarlet-combobox';
+export type { ScarletComboboxOption } from './form/scarlet-combobox/scarlet-combobox';
 export { ScarletCheckbox } from './form/scarlet-checkbox/scarlet-checkbox';
 export { ScarletCheckboxGroup } from './form/scarlet-checkbox-group/scarlet-checkbox-group';
 export { ScarletSwitch } from './form/scarlet-switch/scarlet-switch';
 export { ScarletRadio } from './form/scarlet-radio/scarlet-radio';
 export { ScarletRadioGroup } from './form/scarlet-radio-group/scarlet-radio-group';
+export { ScarletFileUpload } from './form/scarlet-file-upload/scarlet-file-upload';
 
 // Masked/specialized inputs (pt-BR)
 export { ScarletInputPhone } from './form-masked/scarlet-input-phone/scarlet-input-phone';
@@ -58,6 +61,10 @@ export { ScarletTooltip } from './feedback/scarlet-tooltip/scarlet-tooltip';
 export type { ScarletTooltipPlacement } from './feedback/scarlet-tooltip/scarlet-tooltip';
 export { ScarletModal } from './feedback/scarlet-modal/scarlet-modal';
 export type { ScarletModalSize } from './feedback/scarlet-modal/scarlet-modal';
+export { ScarletDrawer } from './feedback/scarlet-drawer/scarlet-drawer';
+export type { ScarletDrawerPlacement, ScarletDrawerSize } from './feedback/scarlet-drawer/scarlet-drawer';
+export { ScarletSkeleton } from './feedback/scarlet-skeleton/scarlet-skeleton';
+export type { ScarletSkeletonVariant } from './feedback/scarlet-skeleton/scarlet-skeleton';
 
 // Navigation
 export { ScarletTabs } from './navigation/scarlet-tabs/scarlet-tabs';
@@ -66,6 +73,7 @@ export { ScarletBreadcrumb } from './navigation/scarlet-breadcrumb/scarlet-bread
 export type { ScarletBreadcrumbItem } from './navigation/scarlet-breadcrumb/scarlet-breadcrumb';
 export { ScarletMenu } from './navigation/scarlet-menu/scarlet-menu';
 export type { ScarletMenuItem } from './navigation/scarlet-menu/scarlet-menu';
+export { ScarletPagination } from './navigation/scarlet-pagination/scarlet-pagination';
 export { ScarletAccordion } from './navigation/scarlet-accordion/scarlet-accordion';
 export type { ScarletAccordionItem } from './navigation/scarlet-accordion/scarlet-accordion';
 
@@ -76,5 +84,8 @@ export { ScarletTable } from './data-display/scarlet-table/scarlet-table';
 export type { ScarletTableColumn, ScarletTableRow, ScarletTableSortDirection, ScarletTableSortChange } from './data-display/scarlet-table/scarlet-table';
 export { ScarletAvatar } from './data-display/scarlet-avatar/scarlet-avatar';
 export type { ScarletAvatarShape } from './data-display/scarlet-avatar/scarlet-avatar';
+export { ScarletAvatarGroup } from './data-display/scarlet-avatar-group/scarlet-avatar-group';
+export { ScarletChip } from './data-display/scarlet-chip/scarlet-chip';
+export type { ScarletChipVariant } from './data-display/scarlet-chip/scarlet-chip';
 export { ScarletDivider } from './data-display/scarlet-divider/scarlet-divider';
 export type { ScarletDividerOrientation } from './data-display/scarlet-divider/scarlet-divider';

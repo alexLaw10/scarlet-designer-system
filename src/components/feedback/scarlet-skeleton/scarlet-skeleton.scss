@@ -1,0 +1,56 @@
+:host {
+  display: block;
+}
+
+.scarlet-skeleton {
+  display: block;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--scarlet-color-neutral-200) 25%,
+    var(--scarlet-color-neutral-100) 37%,
+    var(--scarlet-color-neutral-200) 63%
+  );
+  background-size: 400% 100%;
+  animation: scarlet-skeleton-shimmer 1.4s ease infinite;
+
+  & + & {
+    margin-top: var(--scarlet-space-2);
+  }
+
+  &--text {
+    height: 0.85em;
+    border-radius: var(--scarlet-border-radius-sm);
+
+    &:last-child:not(:only-child) {
+      width: 70%;
+    }
+  }
+
+  &--circle {
+    width: var(--scarlet-space-10);
+    height: var(--scarlet-space-10);
+    border-radius: var(--scarlet-border-radius-full);
+  }
+
+  &--rect {
+    height: var(--scarlet-space-24);
+    border-radius: var(--scarlet-border-radius-md);
+  }
+}
+
+@keyframes scarlet-skeleton-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scarlet-skeleton {
+    animation-duration: 3s;
+  }
+}

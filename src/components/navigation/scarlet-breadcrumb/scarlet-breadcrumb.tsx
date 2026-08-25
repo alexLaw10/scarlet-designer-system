@@ -26,7 +26,7 @@ export class ScarletBreadcrumb {
   @Prop() readonly items: ScarletBreadcrumbItem[] = [];
 
   /** Accessible label for the `<nav>` landmark. */
-  @Prop() readonly ariaLabel = 'Breadcrumb';
+  @Prop() readonly ariaLabel = 'Navegação estrutural';
 
   /** Text rendered between items. Purely decorative (hidden from assistive tech) — the DOM order already conveys the hierarchy. */
   @Prop() readonly separator = '›';

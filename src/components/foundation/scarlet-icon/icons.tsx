@@ -39,7 +39,9 @@ export type ScarletIconName =
   | 'settings'
   | 'external-link'
   | 'more-horizontal'
-  | 'more-vertical';
+  | 'more-vertical'
+  | 'upload'
+  | 'file';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type IconRenderer = () => any;
@@ -233,6 +235,19 @@ export const scarletIcons: Record<ScarletIconName, IconRenderer> = {
       <circle cx="12" cy="5" r="1.4" />
       <circle cx="12" cy="12" r="1.4" />
       <circle cx="12" cy="19" r="1.4" />
+    </g>
+  ),
+  upload: () => (
+    <g>
+      <path d="M12 15.5V4" />
+      <polyline points="7,8.5 12,3.5 17,8.5" />
+      <path d="M4.5 15v3.5A1.5 1.5 0 0 0 6 20h12a1.5 1.5 0 0 0 1.5-1.5V15" />
+    </g>
+  ),
+  file: () => (
+    <g>
+      <path d="M6.5 3.5h8l4 4V19a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 5 19V5A1.5 1.5 0 0 1 6.5 3.5z" stroke-linejoin="round" />
+      <polyline points="14.5,3.5 14.5,7.5 18.5,7.5" stroke-linejoin="round" />
     </g>
   ),
 };
