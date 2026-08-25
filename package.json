@@ -2,7 +2,7 @@
   "name": "@scarlet/design-system",
   "version": "1.0.0",
   "description": "Scarlet Designer System - A comprehensive design system built with Stencil.js Web Components",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "collection": "dist/collection/collection-manifest.json",
   "types": "dist/types/components.d.ts",

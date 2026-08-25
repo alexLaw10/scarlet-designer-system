@@ -206,6 +206,12 @@ export namespace Components {
     }
     /**
      * A clickable action element with solid, outline, ghost and link variants.
+     * An icon (e.g. `<scarlet-icon>`) goes in the `start`/`end` slot alongside
+     * the default slot's text — `<scarlet-button><scarlet-icon slot="start"
+     * name="check" />Salvar</scarlet-button>`. For an icon with no visible text
+     * at all, add `iconOnly` (which turns the button square instead of its
+     * usual text-driven width) and `ariaLabel` (required then — nothing else
+     * gives the button an accessible name).
      */
     interface ScarletButton {
         /**
@@ -227,6 +233,11 @@ export namespace Components {
           * @default false
          */
         "fullWidth": false;
+        /**
+          * Makes the button square (width matches its height) instead of sized to its text — for a button whose only content is an icon. Set `ariaLabel` alongside it.
+          * @default false
+         */
+        "iconOnly": false;
         /**
           * Shows a loading spinner and blocks interaction, without changing layout width.
           * @default false
@@ -2207,6 +2218,12 @@ declare global {
     }
     /**
      * A clickable action element with solid, outline, ghost and link variants.
+     * An icon (e.g. `<scarlet-icon>`) goes in the `start`/`end` slot alongside
+     * the default slot's text — `<scarlet-button><scarlet-icon slot="start"
+     * name="check" />Salvar</scarlet-button>`. For an icon with no visible text
+     * at all, add `iconOnly` (which turns the button square instead of its
+     * usual text-driven width) and `ariaLabel` (required then — nothing else
+     * gives the button an accessible name).
      */
     interface HTMLScarletButtonElement extends Components.ScarletButton, HTMLStencilElement {
         addEventListener<K extends keyof HTMLScarletButtonElementEventMap>(type: K, listener: (this: HTMLScarletButtonElement, ev: ScarletButtonCustomEvent<HTMLScarletButtonElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3273,6 +3290,12 @@ declare namespace LocalJSX {
     }
     /**
      * A clickable action element with solid, outline, ghost and link variants.
+     * An icon (e.g. `<scarlet-icon>`) goes in the `start`/`end` slot alongside
+     * the default slot's text — `<scarlet-button><scarlet-icon slot="start"
+     * name="check" />Salvar</scarlet-button>`. For an icon with no visible text
+     * at all, add `iconOnly` (which turns the button square instead of its
+     * usual text-driven width) and `ariaLabel` (required then — nothing else
+     * gives the button an accessible name).
      */
     interface ScarletButton {
         /**
@@ -3294,6 +3317,11 @@ declare namespace LocalJSX {
           * @default false
          */
         "fullWidth"?: false;
+        /**
+          * Makes the button square (width matches its height) instead of sized to its text — for a button whose only content is an icon. Set `ariaLabel` alongside it.
+          * @default false
+         */
+        "iconOnly"?: false;
         /**
           * Shows a loading spinner and blocks interaction, without changing layout width.
           * @default false
@@ -5269,6 +5297,7 @@ declare namespace LocalJSX {
         "disabled": false;
         "loading": false;
         "fullWidth": false;
+        "iconOnly": false;
         "ariaLabel": string;
     }
     interface ScarletCardAttributes {
@@ -5700,6 +5729,12 @@ declare module "@stencil/core" {
             "scarlet-breadcrumb": LocalJSX.IntrinsicElements["scarlet-breadcrumb"] & JSXBase.HTMLAttributes<HTMLScarletBreadcrumbElement>;
             /**
              * A clickable action element with solid, outline, ghost and link variants.
+             * An icon (e.g. `<scarlet-icon>`) goes in the `start`/`end` slot alongside
+             * the default slot's text — `<scarlet-button><scarlet-icon slot="start"
+             * name="check" />Salvar</scarlet-button>`. For an icon with no visible text
+             * at all, add `iconOnly` (which turns the button square instead of its
+             * usual text-driven width) and `ariaLabel` (required then — nothing else
+             * gives the button an accessible name).
              */
             "scarlet-button": LocalJSX.IntrinsicElements["scarlet-button"] & JSXBase.HTMLAttributes<HTMLScarletButtonElement>;
             /**
