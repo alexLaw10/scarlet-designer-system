@@ -3,10 +3,11 @@
 // Composite text styles built on top of the typography custom properties
 // defined in `typography.scss`. These are Sass mixins (not custom
 // properties) because a CSS custom property cannot hold a declaration
-// block. Import this file from any component stylesheet and `@include`
-// the style you need:
+// block. @use this file from any component stylesheet (`as *` to call its
+// mixins unprefixed, matching every other token file's own convention) and
+// `@include` the style you need:
 //
-//   @import '../../tokens/typography-mixins';
+//   @use '../../tokens/typography-mixins' as *;
 //
 //   .title {
 //     @include scarlet-text-heading-lg;

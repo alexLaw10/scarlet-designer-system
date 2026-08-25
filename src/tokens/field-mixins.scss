@@ -7,7 +7,16 @@
 // component's .scss (each still needs its own stylesheet — Shadow DOM
 // styles can't be shared as a stylesheet across components — but the
 // *rules* only need to be written once).
-@import 'typography-mixins';
+// Both @forward (so a file that only @uses this one still gets
+// typography-mixins' own mixins, unprefixed via `as *` on its end — several
+// component .scss files rely on exactly that, e.g. scarlet-date-picker.scss
+// calls scarlet-text-body-sm without importing typography-mixins itself)
+// and @use (so this file's own mixins below, like scarlet-field-input, can
+// call scarlet-text-body-md directly). @import was transitive by default;
+// @use/@forward aren't, so unlike the old @import this needs to be explicit
+// about both directions.
+@forward 'typography-mixins';
+@use 'typography-mixins' as *;
 
 @mixin scarlet-field-input {
   @include scarlet-text-body-md;

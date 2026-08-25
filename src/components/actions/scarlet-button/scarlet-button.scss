@@ -1,4 +1,4 @@
-@import '../../../tokens/typography-mixins';
+@use '../../../tokens/typography-mixins' as *;
 
 $scarlet-button-colors: primary, secondary, success, warning, error, info, neutral;
 

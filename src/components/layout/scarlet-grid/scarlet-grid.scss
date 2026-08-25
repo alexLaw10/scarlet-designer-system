@@ -1,4 +1,4 @@
-@import '../../../tokens/breakpoints';
+@use '../../../tokens/breakpoints' as *;
 
 :host {
   display: grid;

@@ -5,11 +5,11 @@
 // `:root { ... }`, so they're self-contained and valid on their own — no
 // outer :root wrapper here (nesting one inside another would compile to the
 // descendant selector `:root :root`, which matches nothing).
-@import '../tokens/colors.scss';
-@import '../tokens/typography.scss';
-@import '../tokens/spacing.scss';
-@import '../tokens/shadows.scss';
-@import '../tokens/borders.scss';
+@use '../tokens/colors.scss' as *;
+@use '../tokens/typography.scss' as *;
+@use '../tokens/spacing.scss' as *;
+@use '../tokens/shadows.scss' as *;
+@use '../tokens/borders.scss' as *;
 
 // Reset and base styles
 *,

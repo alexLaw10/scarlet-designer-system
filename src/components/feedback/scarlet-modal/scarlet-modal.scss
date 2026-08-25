@@ -1,5 +1,5 @@
-@import '../../../tokens/typography-mixins';
-@import '../../../tokens/breakpoints';
+@use '../../../tokens/typography-mixins' as *;
+@use '../../../tokens/breakpoints' as *;
 
 .scarlet-modal {
   padding: 0;
