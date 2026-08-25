@@ -1,0 +1,40 @@
+@use '../../../tokens/typography-mixins' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--scarlet-space-10) var(--scarlet-space-6);
+}
+
+// Styles whatever ends up in the icon slot — the prop-driven scarlet-icon
+// fallback (given the class directly, see the .tsx) or externally slotted
+// content (::slotted only reaches real assigned nodes, not fallback
+// content, hence covering both here rather than one shared wrapper class).
+.scarlet-empty-state__icon,
+::slotted([slot='icon']) {
+  display: block;
+  margin-bottom: var(--scarlet-space-3);
+  color: var(--scarlet-color-text-tertiary);
+}
+
+.scarlet-empty-state {
+  &__heading {
+    @include scarlet-text-heading-sm;
+    margin: 0;
+    color: var(--scarlet-color-text-primary);
+  }
+
+  &__description {
+    @include scarlet-text-body-sm;
+    margin: var(--scarlet-space-1-5) 0 0;
+    max-width: 40ch;
+    color: var(--scarlet-color-text-secondary);
+  }
+
+}
+
+::slotted([slot='action']) {
+  margin-top: var(--scarlet-space-4);
+}

@@ -1,0 +1,49 @@
+@use '../../../tokens/typography-mixins' as *;
+
+$scarlet-progress-colors: primary, secondary, success, warning, error, info, neutral;
+
+:host {
+  display: flex;
+  align-items: center;
+  gap: var(--scarlet-space-2);
+}
+
+.scarlet-progress {
+  &__track {
+    flex: 1;
+    overflow: hidden;
+    border-radius: var(--scarlet-border-radius-full);
+    background-color: var(--scarlet-color-neutral-200);
+
+    &--sm {
+      height: var(--scarlet-space-1);
+    }
+
+    &--md {
+      height: var(--scarlet-space-2);
+    }
+
+    &--lg {
+      height: var(--scarlet-space-3);
+    }
+  }
+
+  &__fill {
+    height: 100%;
+    border-radius: var(--scarlet-border-radius-full);
+    transition: width 0.2s ease;
+  }
+
+  &__label {
+    @include scarlet-text-caption;
+    flex-shrink: 0;
+    color: var(--scarlet-color-text-secondary);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@each $color in $scarlet-progress-colors {
+  .scarlet-progress__fill--#{$color} {
+    background-color: var(--scarlet-color-#{$color}-500);
+  }
+}

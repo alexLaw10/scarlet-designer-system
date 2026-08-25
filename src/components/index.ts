@@ -9,6 +9,8 @@ export { ScarletHeading } from './foundation/scarlet-heading/scarlet-heading';
 export type { ScarletHeadingLevel, ScarletHeadingVariant } from './foundation/scarlet-heading/scarlet-heading';
 export { ScarletText } from './foundation/scarlet-text/scarlet-text';
 export type { ScarletTextAs, ScarletTextVariant, ScarletTextWeight } from './foundation/scarlet-text/scarlet-text';
+export { ScarletLink } from './foundation/scarlet-link/scarlet-link';
+export type { ScarletLinkUnderline } from './foundation/scarlet-link/scarlet-link';
 
 // Layout
 export { ScarletStack } from './layout/scarlet-stack/scarlet-stack';
@@ -16,6 +18,7 @@ export { ScarletGrid } from './layout/scarlet-grid/scarlet-grid';
 export { ScarletGridItem } from './layout/scarlet-grid-item/scarlet-grid-item';
 export { ScarletContainer } from './layout/scarlet-container/scarlet-container';
 export type { ScarletContainerMaxWidth } from './layout/scarlet-container/scarlet-container';
+export { ScarletToolbar } from './layout/scarlet-toolbar/scarlet-toolbar';
 
 // Actions
 export { ScarletButton } from './actions/scarlet-button/scarlet-button';
@@ -35,6 +38,7 @@ export { ScarletSwitch } from './form/scarlet-switch/scarlet-switch';
 export { ScarletRadio } from './form/scarlet-radio/scarlet-radio';
 export { ScarletRadioGroup } from './form/scarlet-radio-group/scarlet-radio-group';
 export { ScarletFileUpload } from './form/scarlet-file-upload/scarlet-file-upload';
+export { ScarletNumberInput } from './form/scarlet-number-input/scarlet-number-input';
 
 // Masked/specialized inputs (pt-BR)
 export { ScarletInputPhone } from './form-masked/scarlet-input-phone/scarlet-input-phone';
@@ -45,6 +49,8 @@ export { ScarletInputCurrency } from './form-masked/scarlet-input-currency/scarl
 export { ScarletInputPercentage } from './form-masked/scarlet-input-percentage/scarlet-input-percentage';
 export { ScarletInputDate } from './form-masked/scarlet-input-date/scarlet-input-date';
 export { ScarletDatePicker } from './form-masked/scarlet-date-picker/scarlet-date-picker';
+export { ScarletDateRangePicker } from './form-masked/scarlet-date-range-picker/scarlet-date-range-picker';
+export type { ScarletDateRangeChange } from './form-masked/scarlet-date-range-picker/scarlet-date-range-picker';
 export { ScarletInputCreditCard } from './form-masked/scarlet-input-credit-card/scarlet-input-credit-card';
 export type { CreditCardBrand } from '@/utils/validators';
 export { ScarletInputLicensePlate } from './form-masked/scarlet-input-license-plate/scarlet-input-license-plate';
@@ -65,6 +71,12 @@ export { ScarletDrawer } from './feedback/scarlet-drawer/scarlet-drawer';
 export type { ScarletDrawerPlacement, ScarletDrawerSize } from './feedback/scarlet-drawer/scarlet-drawer';
 export { ScarletSkeleton } from './feedback/scarlet-skeleton/scarlet-skeleton';
 export type { ScarletSkeletonVariant } from './feedback/scarlet-skeleton/scarlet-skeleton';
+export { ScarletSpinner } from './feedback/scarlet-spinner/scarlet-spinner';
+export type { ScarletSpinnerVariant, ScarletSpinnerSize } from './feedback/scarlet-spinner/scarlet-spinner';
+export { ScarletProgress } from './feedback/scarlet-progress/scarlet-progress';
+export type { ScarletProgressSize } from './feedback/scarlet-progress/scarlet-progress';
+export { ScarletPopover } from './feedback/scarlet-popover/scarlet-popover';
+export type { ScarletPopoverPlacement, ScarletPopoverTriggerMode } from './feedback/scarlet-popover/scarlet-popover';
 
 // Navigation
 export { ScarletTabs } from './navigation/scarlet-tabs/scarlet-tabs';
@@ -89,3 +101,8 @@ export { ScarletChip } from './data-display/scarlet-chip/scarlet-chip';
 export type { ScarletChipVariant } from './data-display/scarlet-chip/scarlet-chip';
 export { ScarletDivider } from './data-display/scarlet-divider/scarlet-divider';
 export type { ScarletDividerOrientation } from './data-display/scarlet-divider/scarlet-divider';
+export { ScarletEmptyState } from './data-display/scarlet-empty-state/scarlet-empty-state';
+export { ScarletStat } from './data-display/scarlet-stat/scarlet-stat';
+export type { ScarletStatTrend } from './data-display/scarlet-stat/scarlet-stat';
+export { ScarletTimeline } from './data-display/scarlet-timeline/scarlet-timeline';
+export type { ScarletTimelineItem, ScarletTimelineStatus } from './data-display/scarlet-timeline/scarlet-timeline';

@@ -1,0 +1,112 @@
+@use '../../../tokens/field-mixins' as *;
+
+:host {
+  display: block;
+}
+
+.scarlet-number-input {
+  &__label {
+    @include scarlet-field-label;
+  }
+
+  &__required {
+    @include scarlet-field-required;
+  }
+
+  &__field {
+    display: inline-flex;
+    align-items: stretch;
+    border: var(--scarlet-border-width-1) solid var(--scarlet-color-border-primary);
+    border-radius: var(--scarlet-border-radius-input);
+    overflow: hidden;
+
+    &:focus-within {
+      border-color: var(--scarlet-color-border-focus);
+      box-shadow: var(--scarlet-shadow-focus);
+    }
+
+    &--invalid {
+      border-color: var(--scarlet-color-border-error);
+
+      &:focus-within {
+        border-color: var(--scarlet-color-border-error);
+        box-shadow: var(--scarlet-shadow-focus-error);
+      }
+    }
+
+    &--xs {
+      height: var(--scarlet-space-6);
+    }
+
+    &--sm {
+      height: var(--scarlet-space-8);
+    }
+
+    &--md {
+      height: var(--scarlet-space-10);
+    }
+
+    &--lg {
+      height: var(--scarlet-space-12);
+    }
+
+    &--xl {
+      height: var(--scarlet-space-14);
+    }
+  }
+
+  &__button {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25em;
+    border: none;
+    background-color: var(--scarlet-color-background-secondary);
+    color: var(--scarlet-color-text-secondary);
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      background-color: var(--scarlet-color-neutral-200);
+      color: var(--scarlet-color-text-primary);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--scarlet-shadow-focus);
+    }
+
+    &:disabled {
+      color: var(--scarlet-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  &__input {
+    flex: 1;
+    min-width: 3em;
+    border: none;
+    background-color: var(--scarlet-color-background-primary);
+    color: var(--scarlet-color-text-primary);
+    font-family: var(--scarlet-font-family-primary);
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+
+    &:focus {
+      outline: none;
+    }
+
+    &:disabled {
+      background-color: var(--scarlet-color-background-disabled);
+      color: var(--scarlet-color-text-disabled);
+    }
+  }
+
+  &__message {
+    @include scarlet-field-message;
+
+    &--error {
+      @include scarlet-field-message-error;
+    }
+  }
+}

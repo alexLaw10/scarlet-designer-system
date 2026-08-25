@@ -1,0 +1,59 @@
+@use '../../../tokens/typography-mixins' as *;
+
+$scarlet-link-colors: primary, secondary, success, warning, error, info, neutral;
+
+:host {
+  display: inline;
+}
+
+.scarlet-link {
+  @include scarlet-text-body-md;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--scarlet-space-1);
+  cursor: pointer;
+  border-radius: var(--scarlet-border-radius-sm);
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--scarlet-shadow-focus);
+  }
+
+  &--underline-always {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  &--underline-hover {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+  }
+
+  &--underline-none {
+    text-decoration: none;
+  }
+
+  &--disabled {
+    color: var(--scarlet-color-text-disabled);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+  }
+}
+
+@each $color in $scarlet-link-colors {
+  .scarlet-link--#{$color} {
+    color: var(--scarlet-color-#{$color}-600);
+
+    &:hover:not(.scarlet-link--disabled) {
+      color: var(--scarlet-color-#{$color}-700);
+    }
+  }
+}

@@ -1,0 +1,37 @@
+@use '../../../tokens/typography-mixins' as *;
+
+:host {
+  display: block;
+}
+
+.scarlet-stat {
+  &__label {
+    @include scarlet-text-body-sm;
+    margin: 0;
+    color: var(--scarlet-color-text-secondary);
+  }
+
+  &__value {
+    @include scarlet-text-display-sm;
+    margin: var(--scarlet-space-1) 0 0;
+    color: var(--scarlet-color-text-primary);
+  }
+
+  &__change {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--scarlet-space-0-5);
+    margin: var(--scarlet-space-1-5) 0 0;
+    font-size: var(--scarlet-font-size-sm);
+    font-weight: var(--scarlet-font-weight-medium);
+    color: var(--scarlet-color-text-tertiary);
+
+    &--up {
+      color: var(--scarlet-color-success-600);
+    }
+
+    &--down {
+      color: var(--scarlet-color-error-600);
+    }
+  }
+}
