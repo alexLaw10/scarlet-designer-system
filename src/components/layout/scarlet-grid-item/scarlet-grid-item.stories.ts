@@ -39,3 +39,17 @@ export const Default: Story = {};
 export const SpansTwoRows: Story = {
   args: { colSpan: 1, rowSpan: 2 },
 };
+
+export const ResponsiveSpan: Story = {
+  name: 'Span responsivo (colSpan por breakpoint)',
+  render: () => html`
+    <p style="margin: 0 0 12px; font-size: 14px; color: var(--scarlet-color-text-secondary, #64748b);">
+      O primeiro item ocupa a linha inteira (4 colunas) abaixo de 768px e só 2 colunas a partir de <code>md</code>.
+      Troque o viewport na barra de ferramentas do Storybook pra ver mudar.
+    </p>
+    <scarlet-grid columns="4" gap="md">
+      <scarlet-grid-item col-span="4" col-span-md="2">${cell('col-span=4, col-span-md=2')}</scarlet-grid-item>
+      ${cell('Item')} ${cell('Item')} ${cell('Item')} ${cell('Item')}
+    </scarlet-grid>
+  `,
+};

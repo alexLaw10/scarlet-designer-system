@@ -59,3 +59,19 @@
 :host(.scarlet-grid-host--align-stretch) {
   align-items: stretch;
 }
+
+:host(.scarlet-grid-host--justify-start) {
+  justify-items: start;
+}
+
+:host(.scarlet-grid-host--justify-center) {
+  justify-items: center;
+}
+
+:host(.scarlet-grid-host--justify-end) {
+  justify-items: end;
+}
+
+:host(.scarlet-grid-host--justify-stretch) {
+  justify-items: stretch;
+}

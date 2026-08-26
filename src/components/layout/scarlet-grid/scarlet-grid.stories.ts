@@ -43,6 +43,19 @@ export const WithSpanningItems: Story = {
   `,
 };
 
+export const AlignAndJustify: Story = {
+  name: 'align e justify',
+  render: () => html`
+    <p style="margin: 0 0 12px; font-size: 14px; color: var(--scarlet-color-text-secondary, #64748b);">
+      <code>align</code> (align-items) e <code>justify</code> (justify-items) controlam onde o conteúdo fica dentro de
+      cada célula quando ele não preenche a célula toda.
+    </p>
+    <scarlet-grid columns="4" gap="md" align="center" justify="center" style="min-height: 96px;">
+      ${cell('Item')} ${cell('Item')} ${cell('Item')} ${cell('Item')}
+    </scarlet-grid>
+  `,
+};
+
 export const Responsive: Story = {
   name: 'Responsivo (columns por breakpoint)',
   render: () => html`

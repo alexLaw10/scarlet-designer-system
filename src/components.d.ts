@@ -801,7 +801,7 @@ export namespace Components {
      */
     interface ScarletGrid {
         /**
-          * Cross-axis alignment (`align-items`) for items within their cell.
+          * Cross-axis alignment (`align-items`) of each item within its own cell.
           * @default 'stretch'
          */
         "align": Alignment;
@@ -836,24 +836,68 @@ export namespace Components {
          */
         "gap": Size;
         /**
+          * In-cell horizontal alignment (`justify-items`) of each item within its own cell — the column analog of `align`.
+          * @default 'stretch'
+         */
+        "justify": Alignment;
+        /**
           * Overrides the row gap.
          */
         "rowGap"?: Size;
     }
     /**
      * A cell inside a `<scarlet-grid>` that can span multiple columns/rows.
+     * `colSpan`/`rowSpan` can change per breakpoint via `colSpanSm`/`colSpanMd`/
+     * `colSpanLg`/`colSpanXl` (and the `rowSpan` equivalents) — the classic "full
+     * row on mobile, a couple columns on desktop" pattern is
+     * `col-span="{columns}" col-span-md="2"`. Each one only takes effect from
+     * its breakpoint up and, left unset, falls back to the next smaller
+     * breakpoint that *is* set (mobile-first cascade, same as `<scarlet-grid>`'s
+     * own `columns`/`columnsSm`/etc.), down to `colSpan`/`rowSpan` themselves.
      */
     interface ScarletGridItem {
         /**
-          * Number of columns this item spans.
+          * Number of columns this item spans below the `sm` breakpoint (or at every size, if no responsive override is set).
           * @default 1
          */
         "colSpan": 1;
         /**
-          * Number of rows this item spans.
+          * Column span from the `lg` breakpoint (1024px) up. Falls back to `colSpanMd`/`colSpanSm`/`colSpan` when unset.
+         */
+        "colSpanLg"?: number;
+        /**
+          * Column span from the `md` breakpoint (768px) up. Falls back to `colSpanSm`/`colSpan` when unset.
+         */
+        "colSpanMd"?: number;
+        /**
+          * Column span from the `sm` breakpoint (640px) up. Falls back to `colSpan` when unset.
+         */
+        "colSpanSm"?: number;
+        /**
+          * Column span from the `xl` breakpoint (1280px) up. Falls back to `colSpanLg`/`colSpanMd`/`colSpanSm`/`colSpan` when unset.
+         */
+        "colSpanXl"?: number;
+        /**
+          * Number of rows this item spans below the `sm` breakpoint (or at every size, if no responsive override is set).
           * @default 1
          */
         "rowSpan": 1;
+        /**
+          * Row span from the `lg` breakpoint (1024px) up. Falls back to `rowSpanMd`/`rowSpanSm`/`rowSpan` when unset.
+         */
+        "rowSpanLg"?: number;
+        /**
+          * Row span from the `md` breakpoint (768px) up. Falls back to `rowSpanSm`/`rowSpan` when unset.
+         */
+        "rowSpanMd"?: number;
+        /**
+          * Row span from the `sm` breakpoint (640px) up. Falls back to `rowSpan` when unset.
+         */
+        "rowSpanSm"?: number;
+        /**
+          * Row span from the `xl` breakpoint (1280px) up. Falls back to `rowSpanLg`/`rowSpanMd`/`rowSpanSm`/`rowSpan` when unset.
+         */
+        "rowSpanXl"?: number;
     }
     /**
      * A semantic heading (`<h1>`–`<h6>`) with an independently controllable
@@ -2908,6 +2952,13 @@ declare global {
     };
     /**
      * A cell inside a `<scarlet-grid>` that can span multiple columns/rows.
+     * `colSpan`/`rowSpan` can change per breakpoint via `colSpanSm`/`colSpanMd`/
+     * `colSpanLg`/`colSpanXl` (and the `rowSpan` equivalents) — the classic "full
+     * row on mobile, a couple columns on desktop" pattern is
+     * `col-span="{columns}" col-span-md="2"`. Each one only takes effect from
+     * its breakpoint up and, left unset, falls back to the next smaller
+     * breakpoint that *is* set (mobile-first cascade, same as `<scarlet-grid>`'s
+     * own `columns`/`columnsSm`/etc.), down to `colSpan`/`rowSpan` themselves.
      */
     interface HTMLScarletGridItemElement extends Components.ScarletGridItem, HTMLStencilElement {
     }
@@ -4472,7 +4523,7 @@ declare namespace LocalJSX {
      */
     interface ScarletGrid {
         /**
-          * Cross-axis alignment (`align-items`) for items within their cell.
+          * Cross-axis alignment (`align-items`) of each item within its own cell.
           * @default 'stretch'
          */
         "align"?: Alignment;
@@ -4507,24 +4558,68 @@ declare namespace LocalJSX {
          */
         "gap"?: Size;
         /**
+          * In-cell horizontal alignment (`justify-items`) of each item within its own cell — the column analog of `align`.
+          * @default 'stretch'
+         */
+        "justify"?: Alignment;
+        /**
           * Overrides the row gap.
          */
         "rowGap"?: Size;
     }
     /**
      * A cell inside a `<scarlet-grid>` that can span multiple columns/rows.
+     * `colSpan`/`rowSpan` can change per breakpoint via `colSpanSm`/`colSpanMd`/
+     * `colSpanLg`/`colSpanXl` (and the `rowSpan` equivalents) — the classic "full
+     * row on mobile, a couple columns on desktop" pattern is
+     * `col-span="{columns}" col-span-md="2"`. Each one only takes effect from
+     * its breakpoint up and, left unset, falls back to the next smaller
+     * breakpoint that *is* set (mobile-first cascade, same as `<scarlet-grid>`'s
+     * own `columns`/`columnsSm`/etc.), down to `colSpan`/`rowSpan` themselves.
      */
     interface ScarletGridItem {
         /**
-          * Number of columns this item spans.
+          * Number of columns this item spans below the `sm` breakpoint (or at every size, if no responsive override is set).
           * @default 1
          */
         "colSpan"?: 1;
         /**
-          * Number of rows this item spans.
+          * Column span from the `lg` breakpoint (1024px) up. Falls back to `colSpanMd`/`colSpanSm`/`colSpan` when unset.
+         */
+        "colSpanLg"?: number;
+        /**
+          * Column span from the `md` breakpoint (768px) up. Falls back to `colSpanSm`/`colSpan` when unset.
+         */
+        "colSpanMd"?: number;
+        /**
+          * Column span from the `sm` breakpoint (640px) up. Falls back to `colSpan` when unset.
+         */
+        "colSpanSm"?: number;
+        /**
+          * Column span from the `xl` breakpoint (1280px) up. Falls back to `colSpanLg`/`colSpanMd`/`colSpanSm`/`colSpan` when unset.
+         */
+        "colSpanXl"?: number;
+        /**
+          * Number of rows this item spans below the `sm` breakpoint (or at every size, if no responsive override is set).
           * @default 1
          */
         "rowSpan"?: 1;
+        /**
+          * Row span from the `lg` breakpoint (1024px) up. Falls back to `rowSpanMd`/`rowSpanSm`/`rowSpan` when unset.
+         */
+        "rowSpanLg"?: number;
+        /**
+          * Row span from the `md` breakpoint (768px) up. Falls back to `rowSpanSm`/`rowSpan` when unset.
+         */
+        "rowSpanMd"?: number;
+        /**
+          * Row span from the `sm` breakpoint (640px) up. Falls back to `rowSpan` when unset.
+         */
+        "rowSpanSm"?: number;
+        /**
+          * Row span from the `xl` breakpoint (1280px) up. Falls back to `rowSpanLg`/`rowSpanMd`/`rowSpanSm`/`rowSpan` when unset.
+         */
+        "rowSpanXl"?: number;
     }
     /**
      * A semantic heading (`<h1>`–`<h6>`) with an independently controllable
@@ -6333,10 +6428,19 @@ declare namespace LocalJSX {
         "rowGap": Size;
         "columnGap": Size;
         "align": Alignment;
+        "justify": Alignment;
     }
     interface ScarletGridItemAttributes {
         "colSpan": 1;
+        "colSpanSm": number;
+        "colSpanMd": number;
+        "colSpanLg": number;
+        "colSpanXl": number;
         "rowSpan": 1;
+        "rowSpanSm": number;
+        "rowSpanMd": number;
+        "rowSpanLg": number;
+        "rowSpanXl": number;
     }
     interface ScarletHeadingAttributes {
         "level": ScarletHeadingLevel;
@@ -6852,6 +6956,13 @@ declare module "@stencil/core" {
             "scarlet-grid": LocalJSX.IntrinsicElements["scarlet-grid"] & JSXBase.HTMLAttributes<HTMLScarletGridElement>;
             /**
              * A cell inside a `<scarlet-grid>` that can span multiple columns/rows.
+             * `colSpan`/`rowSpan` can change per breakpoint via `colSpanSm`/`colSpanMd`/
+             * `colSpanLg`/`colSpanXl` (and the `rowSpan` equivalents) — the classic "full
+             * row on mobile, a couple columns on desktop" pattern is
+             * `col-span="{columns}" col-span-md="2"`. Each one only takes effect from
+             * its breakpoint up and, left unset, falls back to the next smaller
+             * breakpoint that *is* set (mobile-first cascade, same as `<scarlet-grid>`'s
+             * own `columns`/`columnsSm`/etc.), down to `colSpan`/`rowSpan` themselves.
              */
             "scarlet-grid-item": LocalJSX.IntrinsicElements["scarlet-grid-item"] & JSXBase.HTMLAttributes<HTMLScarletGridItemElement>;
             /**

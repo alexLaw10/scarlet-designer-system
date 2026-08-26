@@ -52,8 +52,11 @@ export class ScarletGrid {
   /** Overrides the column gap. */
   @Prop() readonly columnGap?: Size;
 
-  /** Cross-axis alignment (`align-items`) for items within their cell. */
+  /** Cross-axis alignment (`align-items`) of each item within its own cell. */
   @Prop() readonly align: Alignment = 'stretch';
+
+  /** In-cell horizontal alignment (`justify-items`) of each item within its own cell — the column analog of `align`. */
+  @Prop() readonly justify: Alignment = 'stretch';
 
   render() {
     const style: { [key: string]: string } = {
@@ -70,7 +73,8 @@ export class ScarletGrid {
       <Host
         class={{
           'scarlet-grid-host': true,
-          [`scarlet-grid-host--align-${this.align}`]: true
+          [`scarlet-grid-host--align-${this.align}`]: true,
+          [`scarlet-grid-host--justify-${this.justify}`]: true
         }}
         style={style}
       >

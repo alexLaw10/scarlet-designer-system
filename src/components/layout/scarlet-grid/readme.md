@@ -21,7 +21,7 @@ no separate `sm`/`lg`/`xl` value needed.
 
 | Property    | Attribute    | Description                                                                                                                | Type                                                | Default     |
 | ----------- | ------------ | -------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- | ----------- |
-| `align`     | `align`      | Cross-axis alignment (`align-items`) for items within their cell.                                                          | `"center" \| "end" \| "start" \| "stretch"`         | `'stretch'` |
+| `align`     | `align`      | Cross-axis alignment (`align-items`) of each item within its own cell.                                                     | `"center" \| "end" \| "start" \| "stretch"`         | `'stretch'` |
 | `columnGap` | `column-gap` | Overrides the column gap.                                                                                                  | `"lg" \| "md" \| "sm" \| "xl" \| "xs" \| undefined` | `undefined` |
 | `columns`   | `columns`    | Number of equal-width columns below the `sm` breakpoint (or at every size, if no responsive override is set).              | `12`                                                | `12`        |
 | `columnsLg` | `columns-lg` | Column count from the `lg` breakpoint (1024px) up. Falls back to `columnsMd`/`columnsSm`/`columns` when unset.             | `number \| undefined`                               | `undefined` |
@@ -29,6 +29,7 @@ no separate `sm`/`lg`/`xl` value needed.
 | `columnsSm` | `columns-sm` | Column count from the `sm` breakpoint (640px) up. Falls back to `columns` when unset.                                      | `number \| undefined`                               | `undefined` |
 | `columnsXl` | `columns-xl` | Column count from the `xl` breakpoint (1280px) up. Falls back to `columnsLg`/`columnsMd`/`columnsSm`/`columns` when unset. | `number \| undefined`                               | `undefined` |
 | `gap`       | `gap`        | Gap between rows and columns, from the design system's spacing scale. Overridden individually by `rowGap`/`columnGap`.     | `"lg" \| "md" \| "sm" \| "xl" \| "xs"`              | `'md'`      |
+| `justify`   | `justify`    | In-cell horizontal alignment (`justify-items`) of each item within its own cell — the column analog of `align`.            | `"center" \| "end" \| "start" \| "stretch"`         | `'stretch'` |
 | `rowGap`    | `row-gap`    | Overrides the row gap.                                                                                                     | `"lg" \| "md" \| "sm" \| "xl" \| "xs" \| undefined` | `undefined` |
 
 

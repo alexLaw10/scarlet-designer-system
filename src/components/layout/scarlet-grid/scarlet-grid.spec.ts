@@ -52,4 +52,20 @@ describe('scarlet-grid', () => {
     expect(page.root?.style.rowGap).toBe('var(--scarlet-space-1)');
     expect(page.root?.style.columnGap).toBe('var(--scarlet-space-8)');
   });
+
+  it('defaults align/justify to stretch and reflects a custom value in the host class', async () => {
+    const defaultPage = await newSpecPage({
+      components: [ScarletGrid],
+      html: '<scarlet-grid></scarlet-grid>'
+    });
+    expect(defaultPage.root?.classList.contains('scarlet-grid-host--align-stretch')).toBe(true);
+    expect(defaultPage.root?.classList.contains('scarlet-grid-host--justify-stretch')).toBe(true);
+
+    const page = await newSpecPage({
+      components: [ScarletGrid],
+      html: '<scarlet-grid align="center" justify="end"></scarlet-grid>'
+    });
+    expect(page.root?.classList.contains('scarlet-grid-host--align-center')).toBe(true);
+    expect(page.root?.classList.contains('scarlet-grid-host--justify-end')).toBe(true);
+  });
 });
