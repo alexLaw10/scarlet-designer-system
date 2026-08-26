@@ -168,6 +168,22 @@ describe('scarlet-modal', () => {
     expect(labeledDialog.hasAttribute('aria-labelledby')).toBe(false);
   });
 
+  it('renders footer-start and footer-end as independent slots, each in its own flex group', async () => {
+    const page = await newSpecPage({
+      components: [ScarletModal],
+      html: '<scarlet-modal></scarlet-modal>'
+    });
+
+    const startSlot = page.root?.shadowRoot?.querySelector(
+      '.scarlet-modal__footer-group--start slot[name="footer-start"]'
+    );
+    const endSlot = page.root?.shadowRoot?.querySelector(
+      '.scarlet-modal__footer-group--end slot[name="footer-end"]'
+    );
+    expect(startSlot).not.toBeNull();
+    expect(endSlot).not.toBeNull();
+  });
+
   it('restores focus to the previously focused element when closed', async () => {
     const page = await newSpecPage({
       components: [ScarletModal],

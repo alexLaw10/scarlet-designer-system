@@ -17,9 +17,19 @@ export type ScarletModalSize = 'sm' | 'md' | 'lg' | 'xl' | 'full';
  * A modal dialog built on the native `<dialog>` element, which provides
  * focus trapping, top-layer stacking and Escape handling for free.
  *
+ * The footer has two independent groups — `footer-start` (left-aligned)
+ * and `footer-end` (right-aligned) — so any mix of button counts works on
+ * either side (1, 2, 3 buttons on one side and/or the other) without any
+ * layout prop: just slot as many `<scarlet-button>`s as needed into
+ * whichever side(s) apply, e.g. a single "Cancelar" in `footer-start` and
+ * both "Voltar"/"Confirmar" in `footer-end`. A side left empty collapses
+ * to nothing — no leftover gap — and the whole footer hides itself when
+ * both are empty.
+ *
  * @slot header - Content rendered in the dialog header, e.g. a title.
  * @slot - Default slot for the dialog body.
- * @slot footer - Content rendered in the dialog footer, e.g. action buttons.
+ * @slot footer-start - Left-aligned footer content, e.g. a "Cancelar" button.
+ * @slot footer-end - Right-aligned footer content, e.g. the primary action button(s).
  */
 @Component({
   tag: 'scarlet-modal',
@@ -183,7 +193,12 @@ export class ScarletModal {
               <slot />
             </div>
             <div class='scarlet-modal__footer'>
-              <slot name='footer' />
+              <div class='scarlet-modal__footer-group scarlet-modal__footer-group--start'>
+                <slot name='footer-start' />
+              </div>
+              <div class='scarlet-modal__footer-group scarlet-modal__footer-group--end'>
+                <slot name='footer-end' />
+              </div>
             </div>
           </div>
         </dialog>
