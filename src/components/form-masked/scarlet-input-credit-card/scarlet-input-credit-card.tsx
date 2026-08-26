@@ -1,7 +1,7 @@
 import { Component, Prop, State, Event, type EventEmitter, h, Host, Method } from '@stencil/core';
 import type { Size } from '@/types';
 import { generateId } from '@/utils';
-import { maskCreditCard, onlyDigits } from '@/utils/masks';
+import { maskCreditCard, onlyDigits, blockNonDigitTyping } from '@/utils/masks';
 import { type CreditCardBrand, detectCardBrand, isValidCreditCardLuhn } from '@/utils/validators';
 import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/utils/form-field';
 
@@ -103,6 +103,15 @@ export class ScarletInputCreditCard {
     return detectCardBrand(this.value);
   }
 
+  // Stencil's JSX typings don't include `onBeforeInput` (unlike React's),
+  // so it's wired via a plain addEventListener instead of a JSX prop.
+  private handleInputRef = (el?: HTMLInputElement): void => {
+    if (el && el !== this.inputEl) {
+      el.addEventListener('beforeinput', blockNonDigitTyping);
+    }
+    this.inputEl = el;
+  };
+
   private handleInput = (event: Event): void => {
     const target = event.target as HTMLInputElement;
     const previousBrand = detectCardBrand(this.value);
@@ -146,6 +155,10 @@ export class ScarletInputCreditCard {
       errorId: this.errorId
     });
     const brand = detectCardBrand(this.value);
+    // Widest formatted length for each grouping: Amex "0000 000000 00000"
+    // (17), Diners "0000 000000 0000" (16), everything else grouped in 4s
+    // up to 16 digits, "0000 0000 0000 0000" (19).
+    const maxLength = brand === 'amex' ? 17 : brand === 'diners' ? 16 : 19;
 
     return (
       <Host class='scarlet-input-credit-card-host'>
@@ -158,7 +171,7 @@ export class ScarletInputCreditCard {
         })}
         <div class='scarlet-input-credit-card__wrapper'>
           <input
-            ref={el => (this.inputEl = el)}
+            ref={this.handleInputRef}
             id={this.inputId}
             class={{
               'scarlet-input-credit-card': true,
@@ -167,6 +180,7 @@ export class ScarletInputCreditCard {
             }}
             type='text'
             inputMode='numeric'
+            maxLength={maxLength}
             autoComplete='cc-number'
             name={this.name}
             value={this.value}

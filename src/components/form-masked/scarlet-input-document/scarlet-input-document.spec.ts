@@ -102,4 +102,14 @@ describe('scarlet-input-document', () => {
     const message = page.root?.shadowRoot?.querySelector('.scarlet-input-document__message--error');
     expect(message?.textContent?.trim()).toBe('Documento já cadastrado.');
   });
+
+  it('caps the field at 18 characters (the longer CNPJ format) via maxlength', async () => {
+    const page = await newSpecPage({
+      components: [ScarletInputDocument],
+      html: '<scarlet-input-document></scarlet-input-document>'
+    });
+
+    const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
+    expect(input.maxLength).toBe(18);
+  });
 });

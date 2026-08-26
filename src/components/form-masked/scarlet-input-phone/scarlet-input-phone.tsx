@@ -1,7 +1,7 @@
 import { Component, Prop, Event, type EventEmitter, h, Host, Method } from '@stencil/core';
 import type { Size } from '@/types';
 import { generateId } from '@/utils';
-import { maskPhone, onlyDigits } from '@/utils/masks';
+import { maskPhone, onlyDigits, blockNonDigitTyping } from '@/utils/masks';
 import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/utils/form-field';
 
 /**
@@ -74,6 +74,15 @@ export class ScarletInputPhone {
     return onlyDigits(this.value);
   }
 
+  // Stencil's JSX typings don't include `onBeforeInput` (unlike React's),
+  // so it's wired via a plain addEventListener instead of a JSX prop.
+  private handleInputRef = (el?: HTMLInputElement): void => {
+    if (el && el !== this.inputEl) {
+      el.addEventListener('beforeinput', blockNonDigitTyping);
+    }
+    this.inputEl = el;
+  };
+
   private handleInput = (event: Event): void => {
     const target = event.target as HTMLInputElement;
     this.value = maskPhone(target.value);
@@ -109,7 +118,7 @@ export class ScarletInputPhone {
           requiredClass: 'scarlet-input-phone__required'
         })}
         <input
-          ref={el => (this.inputEl = el)}
+          ref={this.handleInputRef}
           id={this.inputId}
           class={{
             'scarlet-input-phone': true,
@@ -118,6 +127,7 @@ export class ScarletInputPhone {
           }}
           type='text'
           inputMode='tel'
+          maxLength={15}
           autoComplete='tel'
           name={this.name}
           value={this.value}

@@ -78,6 +78,39 @@ describe('scarlet-number-input', () => {
     expect(page.rootInstance.value).toBe(10);
   });
 
+  it('strips letters typed into the field instead of leaving them in place', async () => {
+    const page = await newSpecPage({
+      components: [ScarletNumberInput],
+      html: '<scarlet-number-input value="1"></scarlet-number-input>'
+    });
+    const input = page.root!.shadowRoot!.querySelector('input') as HTMLInputElement;
+
+    // Simulates typing "abc" after the existing "1": a real <input> updates
+    // its own .value before the 'input' event fires, same as the browser
+    // would, regardless of type='text' not blocking the keystroke itself.
+    input.value = '1abc';
+    input.dispatchEvent(new Event('input'));
+    await page.waitForChanges();
+
+    expect(input.value).toBe('1');
+    expect(page.rootInstance.value).toBe(1);
+  });
+
+  it('reverts the field to the last valid value when the typed text is unparseable even after stripping letters', async () => {
+    const page = await newSpecPage({
+      components: [ScarletNumberInput],
+      html: '<scarlet-number-input value="7"></scarlet-number-input>'
+    });
+    const input = page.root!.shadowRoot!.querySelector('input') as HTMLInputElement;
+
+    input.value = '1.2.3';
+    input.dispatchEvent(new Event('input'));
+    await page.waitForChanges();
+
+    expect(input.value).toBe('7');
+    expect(page.rootInstance.value).toBe(7);
+  });
+
   it('disables both buttons and the input when disabled', async () => {
     const page = await newSpecPage({
       components: [ScarletNumberInput],

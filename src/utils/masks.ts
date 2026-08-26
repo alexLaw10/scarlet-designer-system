@@ -17,6 +17,34 @@ export function onlyAlphanumeric(value: string): string {
   return value.replace(/[^a-zA-Z0-9]/g, '');
 }
 
+// The mask functions above always correct an invalid character right back
+// out on the very next render (their result replaces the input's own
+// `value`) — but that correction happens *after* the browser has already
+// shown the typed character for one frame, a visible flash on a fast
+// device/typist that reads as "letters are allowed here" even though they
+// never actually stick. `onBeforeInput` runs before the browser inserts
+// anything, so blocking there removes the flash entirely — for a genuinely
+// *typed* character only (`inputType === 'insertText'`); paste,
+// autofill, backspace, IME composition etc. all still go through
+// untouched and get sorted out by the mask function as before, since
+// filtering *those* the same way would be more likely to break them than
+// to help (e.g. pasting a fully formatted "(11) 91234-5678" should still
+// work, not get rejected outright for containing parentheses).
+
+/** `onBeforeInput` handler for a digit-only field (CEP, phone, CPF/CNPJ, date, credit card): blocks a typed non-digit character before it's ever inserted. */
+export function blockNonDigitTyping(event: InputEvent): void {
+  if (event.inputType === 'insertText' && event.data != null && /\D/.test(event.data)) {
+    event.preventDefault();
+  }
+}
+
+/** `onBeforeInput` handler for an alphanumeric-only field (license plates): blocks a typed symbol/space before it's ever inserted. */
+export function blockNonAlphanumericTyping(event: InputEvent): void {
+  if (event.inputType === 'insertText' && event.data != null && /[^a-zA-Z0-9]/.test(event.data)) {
+    event.preventDefault();
+  }
+}
+
 /**
  * Groups digits with separators, e.g. groups=[3,3,3,2] separators=['.','.','-']
  * turns "12345678901" into "123.456.789-01". A separator is only appended
@@ -128,7 +156,13 @@ export function maskLicensePlate(rawValue: string): string {
  * for another currency (decimal/thousands separators stay pt-BR style).
  */
 export function maskCurrency(rawValue: string, currencySymbol = 'R$'): string {
-  const digits = onlyDigits(rawValue).replace(/^0+(?=\d)/, '');
+  // Unlike every other mask here, a currency amount has no natural fixed
+  // width to slice to — but leaving it fully unbounded would let a garbage
+  // paste (or a stuck key) grow the value indefinitely. 15 digits is a
+  // generous ceiling (up to R$ 9.999.999.999.999,99) well past any
+  // realistic amount, and past where `Number()` parsing loses precision
+  // anyway.
+  const digits = onlyDigits(rawValue).slice(0, 15).replace(/^0+(?=\d)/, '');
   if (digits.length === 0) return '';
 
   const padded = digits.padStart(3, '0');
@@ -151,7 +185,10 @@ export function parseCurrencyToNumber(maskedValue: string): number {
  * `decimals` controls how many digits sit after the comma (default 2).
  */
 export function maskPercentage(rawValue: string, decimals = 2): string {
-  const digits = onlyDigits(rawValue).replace(/^0+(?=\d)/, '');
+  // Same reasoning as maskCurrency: no natural fixed width, but still
+  // bounded so a garbage paste can't grow it forever. 9 digits covers up to
+  // a 7-figure percentage, comfortably past any realistic use case.
+  const digits = onlyDigits(rawValue).slice(0, 9).replace(/^0+(?=\d)/, '');
   if (digits.length === 0) return '';
   const padded = digits.padStart(decimals + 1, '0');
   const whole = padded.slice(0, padded.length - decimals).replace(/^0+(?=\d)/, '') || '0';

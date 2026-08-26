@@ -189,4 +189,15 @@ describe('scarlet-date-range-picker', () => {
 
     expect(page.root!.shadowRoot!.querySelector('.scarlet-date-range-picker__panel')).toBeNull();
   });
+
+  it('caps both text fields at 10 characters (DD/MM/AAAA) via maxlength', async () => {
+    const page = await newSpecPage({
+      components: [ScarletDateRangePicker],
+      html: '<scarlet-date-range-picker></scarlet-date-range-picker>'
+    });
+
+    const [startInput, endInput] = page.root!.shadowRoot!.querySelectorAll('input') as NodeListOf<HTMLInputElement>;
+    expect(startInput.maxLength).toBe(10);
+    expect(endInput.maxLength).toBe(10);
+  });
 });

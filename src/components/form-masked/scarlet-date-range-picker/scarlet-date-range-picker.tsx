@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import type { Size } from '@/types';
 import { generateId } from '@/utils';
-import { maskDate, onlyDigits } from '@/utils/masks';
+import { maskDate, onlyDigits, blockNonDigitTyping } from '@/utils/masks';
 import { isValidDateBR } from '@/utils/validators';
 import {
   WEEKDAY_LABELS_PT_BR,
@@ -206,6 +206,22 @@ export class ScarletDateRangePicker {
     }
   };
 
+  // Stencil's JSX typings don't include `onBeforeInput` (unlike React's),
+  // so it's wired via a plain addEventListener instead of a JSX prop.
+  private handleStartInputRef = (el?: HTMLInputElement): void => {
+    if (el && el !== this.startInputEl) {
+      el.addEventListener('beforeinput', blockNonDigitTyping);
+    }
+    this.startInputEl = el;
+  };
+
+  private handleEndInputRef = (el?: HTMLInputElement): void => {
+    if (el && el !== this.endInputEl) {
+      el.addEventListener('beforeinput', blockNonDigitTyping);
+    }
+    this.endInputEl = el;
+  };
+
   private handleStartInput = (event: Event): void => {
     const target = event.target as HTMLInputElement;
     this.startValue = maskDate(target.value);
@@ -340,7 +356,7 @@ export class ScarletDateRangePicker {
         })}
         <div class='scarlet-date-range-picker__field'>
           <input
-            ref={el => (this.startInputEl = el)}
+            ref={this.handleStartInputRef}
             id={this.startInputId}
             class={{
               'scarlet-date-range-picker__input': true,
@@ -349,6 +365,7 @@ export class ScarletDateRangePicker {
             }}
             type='text'
             inputMode='numeric'
+            maxLength={10}
             value={this.startValue}
             placeholder={this.startPlaceholder}
             disabled={this.disabled}
@@ -363,7 +380,7 @@ export class ScarletDateRangePicker {
             –
           </span>
           <input
-            ref={el => (this.endInputEl = el)}
+            ref={this.handleEndInputRef}
             id={this.endInputId}
             class={{
               'scarlet-date-range-picker__input': true,
@@ -372,6 +389,7 @@ export class ScarletDateRangePicker {
             }}
             type='text'
             inputMode='numeric'
+            maxLength={10}
             value={this.endValue}
             placeholder={this.endPlaceholder}
             disabled={this.disabled}

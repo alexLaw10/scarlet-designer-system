@@ -1,7 +1,7 @@
 import { Component, Prop, Event, type EventEmitter, h, Host, Method } from '@stencil/core';
 import type { Size } from '@/types';
 import { generateId } from '@/utils';
-import { maskPercentage, parsePercentageToNumber } from '@/utils/masks';
+import { maskPercentage, parsePercentageToNumber, blockNonDigitTyping } from '@/utils/masks';
 import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/utils/form-field';
 
 /**
@@ -77,6 +77,15 @@ export class ScarletInputPercentage {
     return parsePercentageToNumber(this.value);
   }
 
+  // Stencil's JSX typings don't include `onBeforeInput` (unlike React's),
+  // so it's wired via a plain addEventListener instead of a JSX prop.
+  private handleInputRef = (el?: HTMLInputElement): void => {
+    if (el && el !== this.inputEl) {
+      el.addEventListener('beforeinput', blockNonDigitTyping);
+    }
+    this.inputEl = el;
+  };
+
   private handleInput = (event: Event): void => {
     const target = event.target as HTMLInputElement;
     this.value = maskPercentage(target.value, this.decimals);
@@ -112,7 +121,7 @@ export class ScarletInputPercentage {
           requiredClass: 'scarlet-input-percentage__required'
         })}
         <input
-          ref={el => (this.inputEl = el)}
+          ref={this.handleInputRef}
           id={this.inputId}
           class={{
             'scarlet-input-percentage': true,

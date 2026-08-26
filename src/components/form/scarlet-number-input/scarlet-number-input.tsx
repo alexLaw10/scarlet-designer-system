@@ -92,9 +92,24 @@ export class ScarletNumberInput {
   };
 
   private handleInput = (event: Event): void => {
-    const raw = (event.target as HTMLInputElement).value;
-    const parsed = raw === '' || raw === '-' ? 0 : Number(raw);
-    if (Number.isNaN(parsed)) return;
+    const target = event.target as HTMLInputElement;
+    const raw = target.value;
+    // Strip anything that isn't part of a number as the user types (a
+    // letter, say) instead of just bailing on NaN below — unlike the masked
+    // inputs elsewhere, a plain `return` here never re-renders (this.value,
+    // a @Prop, wouldn't have changed), so whatever garbage was typed would
+    // otherwise sit in the field with nothing left to correct it.
+    const sanitized = raw.replace(/[^0-9.-]/g, '');
+    if (sanitized !== raw) {
+      target.value = sanitized;
+    }
+    const parsed = sanitized === '' || sanitized === '-' ? 0 : Number(sanitized);
+    if (Number.isNaN(parsed)) {
+      // Still malformed even after stripping (e.g. "1.2.3", "1--2") — revert
+      // the field to the last value that *was* valid.
+      target.value = String(this.value);
+      return;
+    }
     this.value = parsed;
     this.scarletInput.emit(parsed);
   };

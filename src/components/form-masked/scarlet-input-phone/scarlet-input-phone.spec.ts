@@ -70,4 +70,14 @@ describe('scarlet-input-phone', () => {
     expect(inputSpy).toHaveBeenCalledTimes(1);
     expect(inputSpy.mock.calls[0][0].detail).toBe('(11) 3456-7890');
   });
+
+  it('caps the field at 15 characters ("(11) 91234-5678") via maxlength', async () => {
+    const page = await newSpecPage({
+      components: [ScarletInputPhone],
+      html: '<scarlet-input-phone></scarlet-input-phone>'
+    });
+
+    const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
+    expect(input.maxLength).toBe(15);
+  });
 });

@@ -61,4 +61,14 @@ describe('scarlet-input-date', () => {
 
     await expect(page.rootInstance.toDate()).resolves.toBeUndefined();
   });
+
+  it('caps the field at 10 characters (DD/MM/AAAA) via maxlength', async () => {
+    const page = await newSpecPage({
+      components: [ScarletInputDate],
+      html: '<scarlet-input-date></scarlet-input-date>'
+    });
+
+    const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
+    expect(input.maxLength).toBe(10);
+  });
 });

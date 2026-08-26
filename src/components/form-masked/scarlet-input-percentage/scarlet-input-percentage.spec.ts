@@ -41,4 +41,18 @@ describe('scarlet-input-percentage', () => {
 
     await expect(page.rootInstance.getNumericValue()).resolves.toBe(12.34);
   });
+
+  it('caps the raw digits at 9 instead of growing the value without bound', async () => {
+    const page = await newSpecPage({
+      components: [ScarletInputPercentage],
+      html: '<scarlet-input-percentage></scarlet-input-percentage>'
+    });
+
+    const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
+    input.value = '12345678901'; // 11 digits, past the 9-digit cap
+    input.dispatchEvent(new Event('input'));
+    await page.waitForChanges();
+
+    expect(page.rootInstance.value).toBe('1234567,89%');
+  });
 });

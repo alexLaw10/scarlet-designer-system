@@ -12,7 +12,7 @@ import {
 } from '@stencil/core';
 import type { Size } from '@/types';
 import { generateId } from '@/utils';
-import { maskDate, onlyDigits } from '@/utils/masks';
+import { maskDate, onlyDigits, blockNonDigitTyping } from '@/utils/masks';
 import { isValidDateBR } from '@/utils/validators';
 import {
   WEEKDAY_LABELS_PT_BR,
@@ -243,6 +243,15 @@ export class ScarletDatePicker {
     }
   };
 
+  // Stencil's JSX typings don't include `onBeforeInput` (unlike React's),
+  // so it's wired via a plain addEventListener instead of a JSX prop.
+  private handleInputRef = (el?: HTMLInputElement): void => {
+    if (el && el !== this.inputEl) {
+      el.addEventListener('beforeinput', blockNonDigitTyping);
+    }
+    this.inputEl = el;
+  };
+
   private handleTextInput = (event: Event): void => {
     const target = event.target as HTMLInputElement;
     this.value = maskDate(target.value);
@@ -382,7 +391,7 @@ export class ScarletDatePicker {
         })}
         <div class='scarlet-date-picker__field'>
           <input
-            ref={el => (this.inputEl = el)}
+            ref={this.handleInputRef}
             id={this.inputId}
             class={{
               'scarlet-date-picker__input': true,
@@ -391,6 +400,7 @@ export class ScarletDatePicker {
             }}
             type='text'
             inputMode='numeric'
+            maxLength={10}
             role='combobox'
             aria-haspopup='dialog'
             aria-expanded={this.open ? 'true' : 'false'}

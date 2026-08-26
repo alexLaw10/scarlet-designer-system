@@ -154,4 +154,14 @@ describe('scarlet-date-picker', () => {
 
     expect(page.root?.shadowRoot?.querySelector('.scarlet-date-picker__panel')).toBeNull();
   });
+
+  it('caps the text field at 10 characters (DD/MM/AAAA) via maxlength', async () => {
+    const page = await newSpecPage({
+      components: [ScarletDatePicker],
+      html: '<scarlet-date-picker></scarlet-date-picker>'
+    });
+
+    const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
+    expect(input.maxLength).toBe(10);
+  });
 });

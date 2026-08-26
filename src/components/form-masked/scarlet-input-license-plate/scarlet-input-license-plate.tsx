@@ -1,7 +1,7 @@
 import { Component, Prop, Event, type EventEmitter, h, Host, Method } from '@stencil/core';
 import type { Size } from '@/types';
 import { generateId } from '@/utils';
-import { maskLicensePlate, onlyAlphanumeric } from '@/utils/masks';
+import { maskLicensePlate, onlyAlphanumeric, blockNonAlphanumericTyping } from '@/utils/masks';
 import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/utils/form-field';
 
 export type ScarletLicensePlateFormat = 'old' | 'mercosul';
@@ -84,6 +84,15 @@ export class ScarletInputLicensePlate {
     return /[a-zA-Z]/.test(raw[4]) ? 'mercosul' : 'old';
   }
 
+  // Stencil's JSX typings don't include `onBeforeInput` (unlike React's),
+  // so it's wired via a plain addEventListener instead of a JSX prop.
+  private handleInputRef = (el?: HTMLInputElement): void => {
+    if (el && el !== this.inputEl) {
+      el.addEventListener('beforeinput', blockNonAlphanumericTyping);
+    }
+    this.inputEl = el;
+  };
+
   private handleInput = (event: Event): void => {
     const target = event.target as HTMLInputElement;
     this.value = maskLicensePlate(target.value);
@@ -119,7 +128,7 @@ export class ScarletInputLicensePlate {
           requiredClass: 'scarlet-input-license-plate__required'
         })}
         <input
-          ref={el => (this.inputEl = el)}
+          ref={this.handleInputRef}
           id={this.inputId}
           class={{
             'scarlet-input-license-plate': true,
@@ -128,6 +137,7 @@ export class ScarletInputLicensePlate {
           }}
           type='text'
           autoCapitalize='characters'
+          maxLength={8}
           name={this.name}
           value={this.value}
           placeholder={this.placeholder}

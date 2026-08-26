@@ -74,4 +74,19 @@ describe('scarlet-input-credit-card', () => {
     );
     expect(message?.textContent?.trim()).toBe('Número de cartão inválido.');
   });
+
+  it('caps the field at 19 characters (4 groups of 4) by default, tightening once a shorter brand is detected', async () => {
+    const page = await newSpecPage({
+      components: [ScarletInputCreditCard],
+      html: '<scarlet-input-credit-card></scarlet-input-credit-card>'
+    });
+    const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
+    expect(input.maxLength).toBe(19);
+
+    // Amex BIN (34/37) — the field should tighten from the default 19 to 17.
+    input.value = '378282246310005';
+    input.dispatchEvent(new Event('input'));
+    await page.waitForChanges();
+    expect(input.maxLength).toBe(17);
+  });
 });

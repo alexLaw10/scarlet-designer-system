@@ -1,7 +1,7 @@
 import { Component, Prop, State, Event, type EventEmitter, h, Host, Method } from '@stencil/core';
 import type { Size } from '@/types';
 import { generateId } from '@/utils';
-import { maskDate, onlyDigits } from '@/utils/masks';
+import { maskDate, onlyDigits, blockNonDigitTyping } from '@/utils/masks';
 import { isValidDateBR } from '@/utils/validators';
 import { computeDescribedBy, renderFieldLabel, renderFieldMessage } from '@/utils/form-field';
 
@@ -99,6 +99,15 @@ export class ScarletInputDate {
     return new Date(year, month - 1, day);
   }
 
+  // Stencil's JSX typings don't include `onBeforeInput` (unlike React's),
+  // so it's wired via a plain addEventListener instead of a JSX prop.
+  private handleInputRef = (el?: HTMLInputElement): void => {
+    if (el && el !== this.inputEl) {
+      el.addEventListener('beforeinput', blockNonDigitTyping);
+    }
+    this.inputEl = el;
+  };
+
   private handleInput = (event: Event): void => {
     const target = event.target as HTMLInputElement;
     this.value = maskDate(target.value);
@@ -143,7 +152,7 @@ export class ScarletInputDate {
           requiredClass: 'scarlet-input-date__required'
         })}
         <input
-          ref={el => (this.inputEl = el)}
+          ref={this.handleInputRef}
           id={this.inputId}
           class={{
             'scarlet-input-date': true,
@@ -152,6 +161,7 @@ export class ScarletInputDate {
           }}
           type='text'
           inputMode='numeric'
+          maxLength={10}
           name={this.name}
           value={this.value}
           placeholder={this.placeholder}

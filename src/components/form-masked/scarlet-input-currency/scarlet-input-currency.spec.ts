@@ -55,4 +55,18 @@ describe('scarlet-input-currency', () => {
 
     expect(page.rootInstance.value).toBe('US$ 12,34');
   });
+
+  it('caps the raw digits at 15 instead of growing the value without bound', async () => {
+    const page = await newSpecPage({
+      components: [ScarletInputCurrency],
+      html: '<scarlet-input-currency></scarlet-input-currency>'
+    });
+
+    const input = page.root?.shadowRoot?.querySelector('input') as HTMLInputElement;
+    input.value = '123456789012345678'; // 18 digits, well past the 15-digit cap
+    input.dispatchEvent(new Event('input'));
+    await page.waitForChanges();
+
+    expect(page.rootInstance.value).toBe('R$ 1.234.567.890.123,45');
+  });
 });
