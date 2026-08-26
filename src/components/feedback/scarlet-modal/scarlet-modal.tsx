@@ -1,6 +1,7 @@
 import {
   Component,
   Prop,
+  State,
   Watch,
   Event,
   type EventEmitter,
@@ -43,6 +44,15 @@ export class ScarletModal {
   private readonly headerId = generateId('scarlet-modal-header');
   /** Element focused right before the modal opened, restored to on close per WCAG 2.4.3. */
   private lastFocusedEl?: HTMLElement;
+  private footerStartSlotEl?: HTMLSlotElement;
+  private footerEndSlotEl?: HTMLSlotElement;
+
+  // Whether to show the footer bar at all. CSS alone can't do this: the
+  // obvious `.scarlet-modal__footer:has(::slotted(*))` never matches in any
+  // browser, since `:has()`'s argument can't contain a pseudo-element like
+  // `::slotted()` — so this is tracked in JS via slotchange instead, the
+  // same way `scarlet-popover` tracks its trigger slot's content.
+  @State() private hasFooterContent = false;
 
   /** Whether the modal is open. */
   @Prop({ mutable: true }) open = false;
@@ -78,7 +88,28 @@ export class ScarletModal {
     if (this.open) {
       this.openDialog();
     }
+    this.updateHasFooterContent();
   }
+
+  private updateHasFooterContent = (): void => {
+    const startCount = this.footerStartSlotEl?.assignedNodes({ flatten: true }).length ?? 0;
+    const endCount = this.footerEndSlotEl?.assignedNodes({ flatten: true }).length ?? 0;
+    this.hasFooterContent = startCount > 0 || endCount > 0;
+  };
+
+  private handleFooterStartRef = (el?: HTMLSlotElement): void => {
+    if (el && el !== this.footerStartSlotEl) {
+      el.addEventListener('slotchange', this.updateHasFooterContent);
+    }
+    this.footerStartSlotEl = el;
+  };
+
+  private handleFooterEndRef = (el?: HTMLSlotElement): void => {
+    if (el && el !== this.footerEndSlotEl) {
+      el.addEventListener('slotchange', this.updateHasFooterContent);
+    }
+    this.footerEndSlotEl = el;
+  };
 
   @Watch('open')
   handleOpenChange(open: boolean): void {
@@ -192,12 +223,17 @@ export class ScarletModal {
             <div class='scarlet-modal__body'>
               <slot />
             </div>
-            <div class='scarlet-modal__footer'>
+            <div
+              class={{
+                'scarlet-modal__footer': true,
+                'scarlet-modal__footer--visible': this.hasFooterContent
+              }}
+            >
               <div class='scarlet-modal__footer-group scarlet-modal__footer-group--start'>
-                <slot name='footer-start' />
+                <slot name='footer-start' ref={this.handleFooterStartRef} />
               </div>
               <div class='scarlet-modal__footer-group scarlet-modal__footer-group--end'>
-                <slot name='footer-end' />
+                <slot name='footer-end' ref={this.handleFooterEndRef} />
               </div>
             </div>
           </div>

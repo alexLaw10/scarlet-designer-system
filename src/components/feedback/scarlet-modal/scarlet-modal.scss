@@ -115,7 +115,10 @@
     gap: var(--scarlet-space-3);
     padding: var(--scarlet-space-4) var(--scarlet-space-6);
 
-    &:has(::slotted(*)) {
+    // Visibility is tracked in JS (slotchange), not CSS: `:has(::slotted())`
+    // never matches in any browser, since `:has()`'s argument can't contain
+    // a pseudo-element like `::slotted()`.
+    &--visible {
       display: flex;
     }
   }

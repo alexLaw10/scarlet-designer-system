@@ -184,6 +184,31 @@ describe('scarlet-modal', () => {
     expect(endSlot).not.toBeNull();
   });
 
+  it('hides the footer bar when nothing is slotted into footer-start/footer-end', async () => {
+    // CSS alone can't detect slotted content here — `:has(::slotted(*))`
+    // never matches in any browser (`:has()`'s argument can't contain a
+    // pseudo-element) — so this is tracked via slotchange instead. mock-doc
+    // doesn't implement `slotchange` at all, so re-slotting content into an
+    // already-rendered modal isn't something this suite can exercise; the
+    // next test below covers content present from the start instead.
+    const page = await newSpecPage({
+      components: [ScarletModal],
+      html: '<scarlet-modal></scarlet-modal>'
+    });
+    const footer = page.root?.shadowRoot?.querySelector('.scarlet-modal__footer');
+    expect(footer?.classList.contains('scarlet-modal__footer--visible')).toBe(false);
+  });
+
+  it('shows the footer bar right away when it starts out with slotted content (no slotchange fires for it)', async () => {
+    const page = await newSpecPage({
+      components: [ScarletModal],
+      html: '<scarlet-modal><button slot="footer-start">Cancelar</button></scarlet-modal>'
+    });
+
+    const footer = page.root?.shadowRoot?.querySelector('.scarlet-modal__footer');
+    expect(footer?.classList.contains('scarlet-modal__footer--visible')).toBe(true);
+  });
+
   it('restores focus to the previously focused element when closed', async () => {
     const page = await newSpecPage({
       components: [ScarletModal],
