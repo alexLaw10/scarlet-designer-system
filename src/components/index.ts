@@ -29,6 +29,8 @@ export { ScarletToolbar } from './layout/scarlet-toolbar/scarlet-toolbar';
 
 // Actions
 export { ScarletButton } from './actions/scarlet-button/scarlet-button';
+export { ScarletCopy } from './actions/scarlet-copy/scarlet-copy';
+export type { ScarletCopyStatus } from './actions/scarlet-copy/scarlet-copy';
 
 // Form essentials
 export { ScarletInput } from './form/scarlet-input/scarlet-input';

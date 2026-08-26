@@ -42,7 +42,8 @@ export type ScarletIconName =
   | 'more-vertical'
   | 'upload'
   | 'file'
-  | 'grip-vertical';
+  | 'grip-vertical'
+  | 'copy';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type IconRenderer = () => any;
@@ -265,6 +266,12 @@ export const scarletIcons: Record<ScarletIconName, IconRenderer> = {
       <circle cx='15' cy='5' r='1.3' />
       <circle cx='15' cy='12' r='1.3' />
       <circle cx='15' cy='19' r='1.3' />
+    </g>
+  ),
+  copy: () => (
+    <g>
+      <rect x='8.5' y='8.5' width='12' height='12' rx='1.5' />
+      <path d='M15.5 8.5V5.5A1.5 1.5 0 0 0 14 4H5a1.5 1.5 0 0 0-1.5 1.5v9A1.5 1.5 0 0 0 5 16h3' />
     </g>
   )
 };

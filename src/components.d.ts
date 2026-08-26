@@ -481,6 +481,59 @@ export namespace Components {
         "padding": true;
     }
     /**
+     * A small icon button that copies `value` to the clipboard on click,
+     * showing a brief "Copiado!" (or error) bubble and swapping its icon to a
+     * checkmark before reverting automatically.
+     * Uses the async Clipboard API (`navigator.clipboard.writeText`) when
+     * available, falling back to a hidden `<textarea>` + `document.execCommand`
+     * for non-secure contexts (plain HTTP, some older browsers) where the
+     * Clipboard API doesn't exist at all.
+     * `scarletCopy`/`scarletCopyError` fire on the outcome either way — listen
+     * there instead of the visual feedback alone if the app needs to react to
+     * a failed copy (e.g. logging it).
+     */
+    interface ScarletCopy {
+        /**
+          * Label (both visible bubble text and accessible label) shown right after a successful copy.
+          * @default 'Copiado!'
+         */
+        "copiedLabel": "Copiado!";
+        /**
+          * Copies `value` to the clipboard, exactly as if the button had been clicked.
+         */
+        "copy": () => Promise<void>;
+        /**
+          * Disables the button.
+          * @default false
+         */
+        "disabled": false;
+        /**
+          * Label (both visible bubble text and accessible label) shown after a failed copy.
+          * @default 'Não foi possível copiar'
+         */
+        "errorLabel": "Não foi possível copiar";
+        /**
+          * Accessible label for the button in its resting state.
+          * @default 'Copiar'
+         */
+        "label": "Copiar";
+        /**
+          * How long the copied/error state stays before reverting to idle, in milliseconds.
+          * @default 2000
+         */
+        "resetAfter": 2000;
+        /**
+          * Size of the button.
+          * @default 'md'
+         */
+        "size": Size;
+        /**
+          * The text copied to the clipboard on click.
+          * @default ''
+         */
+        "value": "";
+    }
+    /**
      * A `DD/MM/AAAA` date input (typing, masking and calendar validation shared
      * with `scarlet-input-date`) plus a calendar popover for picking a date
      * visually — a button next to the field opens a month grid; arrow keys move
@@ -2480,6 +2533,10 @@ export interface ScarletComboboxCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLScarletComboboxElement;
 }
+export interface ScarletCopyCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLScarletCopyElement;
+}
 export interface ScarletDatePickerCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLScarletDatePickerElement;
@@ -2840,6 +2897,36 @@ declare global {
     var HTMLScarletContainerElement: {
         prototype: HTMLScarletContainerElement;
         new (): HTMLScarletContainerElement;
+    };
+    interface HTMLScarletCopyElementEventMap {
+        "scarletCopy": string;
+        "scarletCopyError": Error;
+    }
+    /**
+     * A small icon button that copies `value` to the clipboard on click,
+     * showing a brief "Copiado!" (or error) bubble and swapping its icon to a
+     * checkmark before reverting automatically.
+     * Uses the async Clipboard API (`navigator.clipboard.writeText`) when
+     * available, falling back to a hidden `<textarea>` + `document.execCommand`
+     * for non-secure contexts (plain HTTP, some older browsers) where the
+     * Clipboard API doesn't exist at all.
+     * `scarletCopy`/`scarletCopyError` fire on the outcome either way — listen
+     * there instead of the visual feedback alone if the app needs to react to
+     * a failed copy (e.g. logging it).
+     */
+    interface HTMLScarletCopyElement extends Components.ScarletCopy, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLScarletCopyElementEventMap>(type: K, listener: (this: HTMLScarletCopyElement, ev: ScarletCopyCustomEvent<HTMLScarletCopyElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLScarletCopyElementEventMap>(type: K, listener: (this: HTMLScarletCopyElement, ev: ScarletCopyCustomEvent<HTMLScarletCopyElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLScarletCopyElement: {
+        prototype: HTMLScarletCopyElement;
+        new (): HTMLScarletCopyElement;
     };
     interface HTMLScarletDatePickerElementEventMap {
         "scarletInput": string;
@@ -3770,6 +3857,7 @@ declare global {
         "scarlet-chip": HTMLScarletChipElement;
         "scarlet-combobox": HTMLScarletComboboxElement;
         "scarlet-container": HTMLScarletContainerElement;
+        "scarlet-copy": HTMLScarletCopyElement;
         "scarlet-date-picker": HTMLScarletDatePickerElement;
         "scarlet-date-range-picker": HTMLScarletDateRangePickerElement;
         "scarlet-divider": HTMLScarletDividerElement;
@@ -4264,6 +4352,63 @@ declare namespace LocalJSX {
           * @default true
          */
         "padding"?: true;
+    }
+    /**
+     * A small icon button that copies `value` to the clipboard on click,
+     * showing a brief "Copiado!" (or error) bubble and swapping its icon to a
+     * checkmark before reverting automatically.
+     * Uses the async Clipboard API (`navigator.clipboard.writeText`) when
+     * available, falling back to a hidden `<textarea>` + `document.execCommand`
+     * for non-secure contexts (plain HTTP, some older browsers) where the
+     * Clipboard API doesn't exist at all.
+     * `scarletCopy`/`scarletCopyError` fire on the outcome either way — listen
+     * there instead of the visual feedback alone if the app needs to react to
+     * a failed copy (e.g. logging it).
+     */
+    interface ScarletCopy {
+        /**
+          * Label (both visible bubble text and accessible label) shown right after a successful copy.
+          * @default 'Copiado!'
+         */
+        "copiedLabel"?: "Copiado!";
+        /**
+          * Disables the button.
+          * @default false
+         */
+        "disabled"?: false;
+        /**
+          * Label (both visible bubble text and accessible label) shown after a failed copy.
+          * @default 'Não foi possível copiar'
+         */
+        "errorLabel"?: "Não foi possível copiar";
+        /**
+          * Accessible label for the button in its resting state.
+          * @default 'Copiar'
+         */
+        "label"?: "Copiar";
+        /**
+          * Emitted with the copied value after a successful copy.
+         */
+        "onScarletCopy"?: (event: ScarletCopyCustomEvent<string>) => void;
+        /**
+          * Emitted with the underlying error after a failed copy attempt.
+         */
+        "onScarletCopyError"?: (event: ScarletCopyCustomEvent<Error>) => void;
+        /**
+          * How long the copied/error state stays before reverting to idle, in milliseconds.
+          * @default 2000
+         */
+        "resetAfter"?: 2000;
+        /**
+          * Size of the button.
+          * @default 'md'
+         */
+        "size"?: Size;
+        /**
+          * The text copied to the clipboard on click.
+          * @default ''
+         */
+        "value"?: "";
     }
     /**
      * A `DD/MM/AAAA` date input (typing, masking and calendar validation shared
@@ -6490,6 +6635,15 @@ declare namespace LocalJSX {
         "padding": true;
         "center": true;
     }
+    interface ScarletCopyAttributes {
+        "value": "";
+        "label": "Copiar";
+        "copiedLabel": "Copiado!";
+        "errorLabel": "Não foi possível copiar";
+        "resetAfter": 2000;
+        "size": Size;
+        "disabled": false;
+    }
     interface ScarletDatePickerAttributes {
         "name": string;
         "value": string;
@@ -6886,6 +7040,7 @@ declare namespace LocalJSX {
         "scarlet-chip": Omit<ScarletChip, keyof ScarletChipAttributes> & { [K in keyof ScarletChip & keyof ScarletChipAttributes]?: ScarletChip[K] } & { [K in keyof ScarletChip & keyof ScarletChipAttributes as `attr:${K}`]?: ScarletChipAttributes[K] } & { [K in keyof ScarletChip & keyof ScarletChipAttributes as `prop:${K}`]?: ScarletChip[K] };
         "scarlet-combobox": Omit<ScarletCombobox, keyof ScarletComboboxAttributes> & { [K in keyof ScarletCombobox & keyof ScarletComboboxAttributes]?: ScarletCombobox[K] } & { [K in keyof ScarletCombobox & keyof ScarletComboboxAttributes as `attr:${K}`]?: ScarletComboboxAttributes[K] } & { [K in keyof ScarletCombobox & keyof ScarletComboboxAttributes as `prop:${K}`]?: ScarletCombobox[K] };
         "scarlet-container": Omit<ScarletContainer, keyof ScarletContainerAttributes> & { [K in keyof ScarletContainer & keyof ScarletContainerAttributes]?: ScarletContainer[K] } & { [K in keyof ScarletContainer & keyof ScarletContainerAttributes as `attr:${K}`]?: ScarletContainerAttributes[K] } & { [K in keyof ScarletContainer & keyof ScarletContainerAttributes as `prop:${K}`]?: ScarletContainer[K] };
+        "scarlet-copy": Omit<ScarletCopy, keyof ScarletCopyAttributes> & { [K in keyof ScarletCopy & keyof ScarletCopyAttributes]?: ScarletCopy[K] } & { [K in keyof ScarletCopy & keyof ScarletCopyAttributes as `attr:${K}`]?: ScarletCopyAttributes[K] } & { [K in keyof ScarletCopy & keyof ScarletCopyAttributes as `prop:${K}`]?: ScarletCopy[K] };
         "scarlet-date-picker": Omit<ScarletDatePicker, keyof ScarletDatePickerAttributes> & { [K in keyof ScarletDatePicker & keyof ScarletDatePickerAttributes]?: ScarletDatePicker[K] } & { [K in keyof ScarletDatePicker & keyof ScarletDatePickerAttributes as `attr:${K}`]?: ScarletDatePickerAttributes[K] } & { [K in keyof ScarletDatePicker & keyof ScarletDatePickerAttributes as `prop:${K}`]?: ScarletDatePicker[K] };
         "scarlet-date-range-picker": Omit<ScarletDateRangePicker, keyof ScarletDateRangePickerAttributes> & { [K in keyof ScarletDateRangePicker & keyof ScarletDateRangePickerAttributes]?: ScarletDateRangePicker[K] } & { [K in keyof ScarletDateRangePicker & keyof ScarletDateRangePickerAttributes as `attr:${K}`]?: ScarletDateRangePickerAttributes[K] } & { [K in keyof ScarletDateRangePicker & keyof ScarletDateRangePickerAttributes as `prop:${K}`]?: ScarletDateRangePicker[K] };
         "scarlet-divider": Omit<ScarletDivider, keyof ScarletDividerAttributes> & { [K in keyof ScarletDivider & keyof ScarletDividerAttributes]?: ScarletDivider[K] } & { [K in keyof ScarletDivider & keyof ScarletDividerAttributes as `attr:${K}`]?: ScarletDividerAttributes[K] } & { [K in keyof ScarletDivider & keyof ScarletDividerAttributes as `prop:${K}`]?: ScarletDivider[K] };
@@ -7018,6 +7173,19 @@ declare module "@stencil/core" {
              * for page sections.
              */
             "scarlet-container": LocalJSX.IntrinsicElements["scarlet-container"] & JSXBase.HTMLAttributes<HTMLScarletContainerElement>;
+            /**
+             * A small icon button that copies `value` to the clipboard on click,
+             * showing a brief "Copiado!" (or error) bubble and swapping its icon to a
+             * checkmark before reverting automatically.
+             * Uses the async Clipboard API (`navigator.clipboard.writeText`) when
+             * available, falling back to a hidden `<textarea>` + `document.execCommand`
+             * for non-secure contexts (plain HTTP, some older browsers) where the
+             * Clipboard API doesn't exist at all.
+             * `scarletCopy`/`scarletCopyError` fire on the outcome either way — listen
+             * there instead of the visual feedback alone if the app needs to react to
+             * a failed copy (e.g. logging it).
+             */
+            "scarlet-copy": LocalJSX.IntrinsicElements["scarlet-copy"] & JSXBase.HTMLAttributes<HTMLScarletCopyElement>;
             /**
              * A `DD/MM/AAAA` date input (typing, masking and calendar validation shared
              * with `scarlet-input-date`) plus a calendar popover for picking a date

@@ -1,0 +1,106 @@
+@use '../../../tokens/typography-mixins' as *;
+
+:host {
+  position: relative;
+  display: inline-block;
+}
+
+.scarlet-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: var(--scarlet-border-width-1) solid var(--scarlet-color-border-primary);
+  border-radius: var(--scarlet-border-radius-md);
+  background-color: transparent;
+  color: var(--scarlet-color-text-secondary);
+  cursor: pointer;
+  transition:
+    color 0.1s ease,
+    border-color 0.1s ease,
+    background-color 0.1s ease;
+
+  &:hover:not(:disabled) {
+    background-color: var(--scarlet-color-background-secondary);
+    color: var(--scarlet-color-text-primary);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--scarlet-shadow-focus);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &--copied {
+    border-color: var(--scarlet-color-success-500);
+    color: var(--scarlet-color-success-600);
+  }
+
+  &--error {
+    border-color: var(--scarlet-color-error-500);
+    color: var(--scarlet-color-error-600);
+  }
+
+  &--xs {
+    width: var(--scarlet-space-6);
+    height: var(--scarlet-space-6);
+    font-size: var(--scarlet-font-size-xs);
+  }
+
+  &--sm {
+    width: var(--scarlet-space-8);
+    height: var(--scarlet-space-8);
+    font-size: var(--scarlet-font-size-sm);
+  }
+
+  &--md {
+    width: var(--scarlet-space-10);
+    height: var(--scarlet-space-10);
+    font-size: var(--scarlet-font-size-base);
+  }
+
+  &--lg {
+    width: var(--scarlet-space-12);
+    height: var(--scarlet-space-12);
+    font-size: var(--scarlet-font-size-lg);
+  }
+
+  &--xl {
+    width: var(--scarlet-space-14);
+    height: var(--scarlet-space-14);
+    font-size: var(--scarlet-font-size-xl);
+  }
+}
+
+.scarlet-copy__bubble {
+  @include scarlet-text-caption;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  z-index: 1000;
+  margin-bottom: var(--scarlet-space-2);
+  padding: var(--scarlet-space-1-5) var(--scarlet-space-2-5);
+  border-radius: var(--scarlet-border-radius-md);
+  background-color: var(--scarlet-color-neutral-900);
+  color: var(--scarlet-color-neutral-50);
+  box-shadow: var(--scarlet-shadow-md);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-50%) translateY(2px);
+  transition:
+    opacity 0.1s ease,
+    visibility 0.1s ease,
+    transform 0.1s ease;
+
+  &--visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+  }
+}
