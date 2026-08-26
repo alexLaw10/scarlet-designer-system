@@ -22,6 +22,19 @@ being replaced) is the consumer's responsibility, not this component's.
 | `width`   | `width`   | Any valid CSS width. Defaults to 100% for `text`/`rect`, or `height`'s value for `circle`.                          | `string \| undefined`          | `undefined` |
 
 
+## Dependencies
+
+### Used by
+
+ - [scarlet-table](../../data-display/scarlet-table)
+
+### Graph
+```mermaid
+graph TD;
+  scarlet-table --> scarlet-skeleton
+  style scarlet-skeleton fill:#f9f,stroke:#333,stroke-width:4px
+```
+
 ----------------------------------------------
 
 *Built with [StencilJS](https://stenciljs.com/)*

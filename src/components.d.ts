@@ -1627,6 +1627,14 @@ export namespace Components {
     /**
      * A modal dialog built on the native `<dialog>` element, which provides
      * focus trapping, top-layer stacking and Escape handling for free.
+     * The footer has two independent groups — `footer-start` (left-aligned)
+     * and `footer-end` (right-aligned) — so any mix of button counts works on
+     * either side (1, 2, 3 buttons on one side and/or the other) without any
+     * layout prop: just slot as many `<scarlet-button>`s as needed into
+     * whichever side(s) apply, e.g. a single "Cancelar" in `footer-start` and
+     * both "Voltar"/"Confirmar" in `footer-end`. A side left empty collapses
+     * to nothing — no leftover gap — and the whole footer hides itself when
+     * both are empty.
      */
     interface ScarletModal {
         /**
@@ -2112,10 +2120,11 @@ export namespace Components {
         "value"?: string;
     }
     /**
-     * A data table: sortable columns, optional row selection (checkboxes),
-     * empty/loading states, and a horizontally-scrolling wrapper so a wide
-     * table never breaks the surrounding layout on a narrow viewport (same
-     * pattern `scarlet-tabs` uses for its tab list).
+     * A data table: sortable columns (including multi-column sort), optional
+     * row selection (checkboxes), drag-and-drop column/row reordering, empty/
+     * loading states, and a horizontally-scrolling wrapper so a wide table
+     * never breaks the surrounding layout on a narrow viewport (same pattern
+     * `scarlet-tabs` uses for its tab list).
      * Cell content is `String(row[column.key])` by default — good enough for
      * plain text/numbers, but there's no per-cell slot system (that needs a
      * stable id per row and gets complex fast). For anything richer — a
@@ -2128,7 +2137,18 @@ export namespace Components {
      * text/number columns without any setup. `scarletSort` still fires on every
      * click if a consumer wants to replace that with their own comparator (e.g.
      * sorting a formatted date column by its real underlying timestamp) by
-     * reassigning `rows` themselves in response.
+     * reassigning `rows` themselves in response. A plain click always sorts by
+     * that column alone (toggling asc/desc); with `multiSort`, shift-clicking a
+     * second sortable header adds it as a tiebreaker instead of replacing the
+     * first, cycling asc → desc → removed on repeated shift-clicks.
+     * `scarletSort` always emits the *complete* current sort, in priority
+     * order — an empty array once every column is cleared.
+     * `reorderableColumns`/`reorderableRows` add drag handles for reordering
+     * columns and rows by dragging. Known limitation: native HTML5 drag-and-
+     * drop isn't keyboard-accessible — there's no non-pointer way to reorder.
+     * Row reordering is disabled while any sort is active, since the row order
+     * would just be re-derived from the sort on the next render; clear the
+     * sort first (or don't combine the two features) to drag rows freely.
      */
     interface ScarletTable {
         /**
@@ -2141,7 +2161,7 @@ export namespace Components {
          */
         "clickableRows": false;
         /**
-          * Column definitions, in display order.
+          * Column definitions, in display order — unless `reorderableColumns` has been used to drag them into a different order since.
           * @default []
          */
         "columns": ScarletTableColumn[];
@@ -2155,15 +2175,39 @@ export namespace Components {
          */
         "formatCell"?: (row: ScarletTableRow, column: ScarletTableColumn) => string;
         /**
-          * Shows `loadingMessage` instead of rows/empty state.
+          * Shows placeholder skeleton rows instead of rows/empty state.
           * @default false
          */
         "loading": false;
         /**
-          * Message shown while `loading` is true.
+          * Message shown alongside/instead of the skeleton rows while `loading` is true — kept for consumers that prefer plain text, or as the `aria-label` describing the skeleton state.
           * @default 'Carregando…'
          */
         "loadingMessage": "Carregando…";
+        /**
+          * Number of placeholder skeleton rows rendered while `loading` is true.
+          * @default 5
+         */
+        "loadingRowCount": 5;
+        /**
+          * Caps the table's height and makes it scroll vertically (in addition to the horizontal scroll it already has). Any valid CSS length, e.g. `'320px'`.
+         */
+        "maxHeight"?: string;
+        /**
+          * Allows shift-clicking a second (third, ...) sortable header to sort by it as a tiebreaker, instead of replacing the current sort outright.
+          * @default false
+         */
+        "multiSort": false;
+        /**
+          * Shows a drag handle per column header for reordering columns by dragging.
+          * @default false
+         */
+        "reorderableColumns": false;
+        /**
+          * Shows a drag handle per row for reordering rows by dragging. Disabled while any column sort is active — see the class doc comment.
+          * @default false
+         */
+        "reorderableRows": false;
         /**
           * Field on each row object holding its unique identifier — used for selection tracking.
           * @default 'id'
@@ -2184,6 +2228,11 @@ export namespace Components {
           * @default []
          */
         "selectedRowKeys": Array<string | number>;
+        /**
+          * Keeps the header row visible while the table's own body scrolls vertically — set `maxHeight` too, or there's nothing for it to stick against.
+          * @default false
+         */
+        "stickyHeader": false;
     }
     /**
      * A set of tabs with associated panels. Panel content is projected via a
@@ -3277,6 +3326,14 @@ declare global {
     /**
      * A modal dialog built on the native `<dialog>` element, which provides
      * focus trapping, top-layer stacking and Escape handling for free.
+     * The footer has two independent groups — `footer-start` (left-aligned)
+     * and `footer-end` (right-aligned) — so any mix of button counts works on
+     * either side (1, 2, 3 buttons on one side and/or the other) without any
+     * layout prop: just slot as many `<scarlet-button>`s as needed into
+     * whichever side(s) apply, e.g. a single "Cancelar" in `footer-start` and
+     * both "Voltar"/"Confirmar" in `footer-end`. A side left empty collapses
+     * to nothing — no leftover gap — and the whole footer hides itself when
+     * both are empty.
      */
     interface HTMLScarletModalElement extends Components.ScarletModal, HTMLStencilElement {
         addEventListener<K extends keyof HTMLScarletModalElementEventMap>(type: K, listener: (this: HTMLScarletModalElement, ev: ScarletModalCustomEvent<HTMLScarletModalElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -3527,15 +3584,18 @@ declare global {
         new (): HTMLScarletSwitchElement;
     };
     interface HTMLScarletTableElementEventMap {
-        "scarletSort": ScarletTableSortChange;
+        "scarletSort": ScarletTableSortChange[];
         "scarletSelectionChange": Array<string | number>;
         "scarletRowClick": ScarletTableRow;
+        "scarletColumnReorder": ScarletTableColumn[];
+        "scarletRowReorder": ScarletTableRow[];
     }
     /**
-     * A data table: sortable columns, optional row selection (checkboxes),
-     * empty/loading states, and a horizontally-scrolling wrapper so a wide
-     * table never breaks the surrounding layout on a narrow viewport (same
-     * pattern `scarlet-tabs` uses for its tab list).
+     * A data table: sortable columns (including multi-column sort), optional
+     * row selection (checkboxes), drag-and-drop column/row reordering, empty/
+     * loading states, and a horizontally-scrolling wrapper so a wide table
+     * never breaks the surrounding layout on a narrow viewport (same pattern
+     * `scarlet-tabs` uses for its tab list).
      * Cell content is `String(row[column.key])` by default — good enough for
      * plain text/numbers, but there's no per-cell slot system (that needs a
      * stable id per row and gets complex fast). For anything richer — a
@@ -3548,7 +3608,18 @@ declare global {
      * text/number columns without any setup. `scarletSort` still fires on every
      * click if a consumer wants to replace that with their own comparator (e.g.
      * sorting a formatted date column by its real underlying timestamp) by
-     * reassigning `rows` themselves in response.
+     * reassigning `rows` themselves in response. A plain click always sorts by
+     * that column alone (toggling asc/desc); with `multiSort`, shift-clicking a
+     * second sortable header adds it as a tiebreaker instead of replacing the
+     * first, cycling asc → desc → removed on repeated shift-clicks.
+     * `scarletSort` always emits the *complete* current sort, in priority
+     * order — an empty array once every column is cleared.
+     * `reorderableColumns`/`reorderableRows` add drag handles for reordering
+     * columns and rows by dragging. Known limitation: native HTML5 drag-and-
+     * drop isn't keyboard-accessible — there's no non-pointer way to reorder.
+     * Row reordering is disabled while any sort is active, since the row order
+     * would just be re-derived from the sort on the next render; clear the
+     * sort first (or don't combine the two features) to drag rows freely.
      */
     interface HTMLScarletTableElement extends Components.ScarletTable, HTMLStencilElement {
         addEventListener<K extends keyof HTMLScarletTableElementEventMap>(type: K, listener: (this: HTMLScarletTableElement, ev: ScarletTableCustomEvent<HTMLScarletTableElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -5433,6 +5504,14 @@ declare namespace LocalJSX {
     /**
      * A modal dialog built on the native `<dialog>` element, which provides
      * focus trapping, top-layer stacking and Escape handling for free.
+     * The footer has two independent groups — `footer-start` (left-aligned)
+     * and `footer-end` (right-aligned) — so any mix of button counts works on
+     * either side (1, 2, 3 buttons on one side and/or the other) without any
+     * layout prop: just slot as many `<scarlet-button>`s as needed into
+     * whichever side(s) apply, e.g. a single "Cancelar" in `footer-start` and
+     * both "Voltar"/"Confirmar" in `footer-end`. A side left empty collapses
+     * to nothing — no leftover gap — and the whole footer hides itself when
+     * both are empty.
      */
     interface ScarletModal {
         /**
@@ -5955,10 +6034,11 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     /**
-     * A data table: sortable columns, optional row selection (checkboxes),
-     * empty/loading states, and a horizontally-scrolling wrapper so a wide
-     * table never breaks the surrounding layout on a narrow viewport (same
-     * pattern `scarlet-tabs` uses for its tab list).
+     * A data table: sortable columns (including multi-column sort), optional
+     * row selection (checkboxes), drag-and-drop column/row reordering, empty/
+     * loading states, and a horizontally-scrolling wrapper so a wide table
+     * never breaks the surrounding layout on a narrow viewport (same pattern
+     * `scarlet-tabs` uses for its tab list).
      * Cell content is `String(row[column.key])` by default — good enough for
      * plain text/numbers, but there's no per-cell slot system (that needs a
      * stable id per row and gets complex fast). For anything richer — a
@@ -5971,7 +6051,18 @@ declare namespace LocalJSX {
      * text/number columns without any setup. `scarletSort` still fires on every
      * click if a consumer wants to replace that with their own comparator (e.g.
      * sorting a formatted date column by its real underlying timestamp) by
-     * reassigning `rows` themselves in response.
+     * reassigning `rows` themselves in response. A plain click always sorts by
+     * that column alone (toggling asc/desc); with `multiSort`, shift-clicking a
+     * second sortable header adds it as a tiebreaker instead of replacing the
+     * first, cycling asc → desc → removed on repeated shift-clicks.
+     * `scarletSort` always emits the *complete* current sort, in priority
+     * order — an empty array once every column is cleared.
+     * `reorderableColumns`/`reorderableRows` add drag handles for reordering
+     * columns and rows by dragging. Known limitation: native HTML5 drag-and-
+     * drop isn't keyboard-accessible — there's no non-pointer way to reorder.
+     * Row reordering is disabled while any sort is active, since the row order
+     * would just be re-derived from the sort on the next render; clear the
+     * sort first (or don't combine the two features) to drag rows freely.
      */
     interface ScarletTable {
         /**
@@ -5984,7 +6075,7 @@ declare namespace LocalJSX {
          */
         "clickableRows"?: false;
         /**
-          * Column definitions, in display order.
+          * Column definitions, in display order — unless `reorderableColumns` has been used to drag them into a different order since.
           * @default []
          */
         "columns"?: ScarletTableColumn[];
@@ -5998,27 +6089,59 @@ declare namespace LocalJSX {
          */
         "formatCell"?: (row: ScarletTableRow, column: ScarletTableColumn) => string;
         /**
-          * Shows `loadingMessage` instead of rows/empty state.
+          * Shows placeholder skeleton rows instead of rows/empty state.
           * @default false
          */
         "loading"?: false;
         /**
-          * Message shown while `loading` is true.
+          * Message shown alongside/instead of the skeleton rows while `loading` is true — kept for consumers that prefer plain text, or as the `aria-label` describing the skeleton state.
           * @default 'Carregando…'
          */
         "loadingMessage"?: "Carregando…";
+        /**
+          * Number of placeholder skeleton rows rendered while `loading` is true.
+          * @default 5
+         */
+        "loadingRowCount"?: 5;
+        /**
+          * Caps the table's height and makes it scroll vertically (in addition to the horizontal scroll it already has). Any valid CSS length, e.g. `'320px'`.
+         */
+        "maxHeight"?: string;
+        /**
+          * Allows shift-clicking a second (third, ...) sortable header to sort by it as a tiebreaker, instead of replacing the current sort outright.
+          * @default false
+         */
+        "multiSort"?: false;
+        /**
+          * Emitted with the columns in their new order after a drag-and-drop column reorder.
+         */
+        "onScarletColumnReorder"?: (event: ScarletTableCustomEvent<ScarletTableColumn[]>) => void;
         /**
           * Emitted with the row's data when a row is clicked. Only fires when `clickableRows` is set.
          */
         "onScarletRowClick"?: (event: ScarletTableCustomEvent<ScarletTableRow>) => void;
         /**
+          * Emitted with `rows` in their new order after a drag-and-drop row reorder — `rows` itself is already updated to match by the time this fires.
+         */
+        "onScarletRowReorder"?: (event: ScarletTableCustomEvent<ScarletTableRow[]>) => void;
+        /**
           * Emitted with the full array of selected row keys whenever a row or the "select all" checkbox is toggled.
          */
         "onScarletSelectionChange"?: (event: ScarletTableCustomEvent<Array<string | number>>) => void;
         /**
-          * Emitted when a sortable column header is activated. The table already re-sorts itself with a generic comparator — listen here only to replace that with custom logic.
+          * Emitted with the complete current sort (in priority order; empty once cleared) whenever a sortable header is clicked. The table already re-sorts itself with a generic comparator — listen here only to replace that with custom logic.
          */
-        "onScarletSort"?: (event: ScarletTableCustomEvent<ScarletTableSortChange>) => void;
+        "onScarletSort"?: (event: ScarletTableCustomEvent<ScarletTableSortChange[]>) => void;
+        /**
+          * Shows a drag handle per column header for reordering columns by dragging.
+          * @default false
+         */
+        "reorderableColumns"?: false;
+        /**
+          * Shows a drag handle per row for reordering rows by dragging. Disabled while any column sort is active — see the class doc comment.
+          * @default false
+         */
+        "reorderableRows"?: false;
         /**
           * Field on each row object holding its unique identifier — used for selection tracking.
           * @default 'id'
@@ -6039,6 +6162,11 @@ declare namespace LocalJSX {
           * @default []
          */
         "selectedRowKeys"?: Array<string | number>;
+        /**
+          * Keeps the header row visible while the table's own body scrolls vertically — set `maxHeight` too, or there's nothing for it to stick against.
+          * @default false
+         */
+        "stickyHeader"?: false;
     }
     /**
      * A set of tabs with associated panels. Panel content is projected via a
@@ -6691,7 +6819,13 @@ declare namespace LocalJSX {
         "emptyMessage": "Nenhum registro encontrado.";
         "loading": false;
         "loadingMessage": "Carregando…";
+        "loadingRowCount": 5;
         "ariaLabel": string;
+        "stickyHeader": false;
+        "maxHeight": string;
+        "multiSort": false;
+        "reorderableColumns": false;
+        "reorderableRows": false;
     }
     interface ScarletTabsAttributes {
         "value": string;
@@ -7063,6 +7197,14 @@ declare module "@stencil/core" {
             /**
              * A modal dialog built on the native `<dialog>` element, which provides
              * focus trapping, top-layer stacking and Escape handling for free.
+             * The footer has two independent groups — `footer-start` (left-aligned)
+             * and `footer-end` (right-aligned) — so any mix of button counts works on
+             * either side (1, 2, 3 buttons on one side and/or the other) without any
+             * layout prop: just slot as many `<scarlet-button>`s as needed into
+             * whichever side(s) apply, e.g. a single "Cancelar" in `footer-start` and
+             * both "Voltar"/"Confirmar" in `footer-end`. A side left empty collapses
+             * to nothing — no leftover gap — and the whole footer hides itself when
+             * both are empty.
              */
             "scarlet-modal": LocalJSX.IntrinsicElements["scarlet-modal"] & JSXBase.HTMLAttributes<HTMLScarletModalElement>;
             /**
@@ -7158,10 +7300,11 @@ declare module "@stencil/core" {
              */
             "scarlet-switch": LocalJSX.IntrinsicElements["scarlet-switch"] & JSXBase.HTMLAttributes<HTMLScarletSwitchElement>;
             /**
-             * A data table: sortable columns, optional row selection (checkboxes),
-             * empty/loading states, and a horizontally-scrolling wrapper so a wide
-             * table never breaks the surrounding layout on a narrow viewport (same
-             * pattern `scarlet-tabs` uses for its tab list).
+             * A data table: sortable columns (including multi-column sort), optional
+             * row selection (checkboxes), drag-and-drop column/row reordering, empty/
+             * loading states, and a horizontally-scrolling wrapper so a wide table
+             * never breaks the surrounding layout on a narrow viewport (same pattern
+             * `scarlet-tabs` uses for its tab list).
              * Cell content is `String(row[column.key])` by default — good enough for
              * plain text/numbers, but there's no per-cell slot system (that needs a
              * stable id per row and gets complex fast). For anything richer — a
@@ -7174,7 +7317,18 @@ declare module "@stencil/core" {
              * text/number columns without any setup. `scarletSort` still fires on every
              * click if a consumer wants to replace that with their own comparator (e.g.
              * sorting a formatted date column by its real underlying timestamp) by
-             * reassigning `rows` themselves in response.
+             * reassigning `rows` themselves in response. A plain click always sorts by
+             * that column alone (toggling asc/desc); with `multiSort`, shift-clicking a
+             * second sortable header adds it as a tiebreaker instead of replacing the
+             * first, cycling asc → desc → removed on repeated shift-clicks.
+             * `scarletSort` always emits the *complete* current sort, in priority
+             * order — an empty array once every column is cleared.
+             * `reorderableColumns`/`reorderableRows` add drag handles for reordering
+             * columns and rows by dragging. Known limitation: native HTML5 drag-and-
+             * drop isn't keyboard-accessible — there's no non-pointer way to reorder.
+             * Row reordering is disabled while any sort is active, since the row order
+             * would just be re-derived from the sort on the next render; clear the
+             * sort first (or don't combine the two features) to drag rows freely.
              */
             "scarlet-table": LocalJSX.IntrinsicElements["scarlet-table"] & JSXBase.HTMLAttributes<HTMLScarletTableElement>;
             /**

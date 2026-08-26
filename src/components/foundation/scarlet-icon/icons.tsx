@@ -41,7 +41,8 @@ export type ScarletIconName =
   | 'more-horizontal'
   | 'more-vertical'
   | 'upload'
-  | 'file';
+  | 'file'
+  | 'grip-vertical';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type IconRenderer = () => any;
@@ -254,6 +255,16 @@ export const scarletIcons: Record<ScarletIconName, IconRenderer> = {
         stroke-linejoin='round'
       />
       <polyline points='14.5,3.5 14.5,7.5 18.5,7.5' stroke-linejoin='round' />
+    </g>
+  ),
+  'grip-vertical': () => (
+    <g fill='currentColor' stroke='none'>
+      <circle cx='9' cy='5' r='1.3' />
+      <circle cx='9' cy='12' r='1.3' />
+      <circle cx='9' cy='19' r='1.3' />
+      <circle cx='15' cy='5' r='1.3' />
+      <circle cx='15' cy='12' r='1.3' />
+      <circle cx='15' cy='19' r='1.3' />
     </g>
   )
 };

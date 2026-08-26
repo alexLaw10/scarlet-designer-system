@@ -77,3 +77,65 @@ export const Loading: Story = {
   name: 'Carregando',
   args: { loading: true },
 };
+
+export const StickyHeader: Story = {
+  name: 'Cabeçalho fixo',
+  render: (args) => html`
+    <p style="margin: 0 0 12px; font-size: 14px; color: var(--scarlet-color-text-secondary, #64748b);">
+      Com <code>stickyHeader</code> e <code>maxHeight</code>, o cabeçalho fica visível enquanto o corpo rola.
+    </p>
+    <scarlet-table
+      .columns=${args.columns}
+      .rows=${[...args.rows, ...args.rows, ...args.rows]}
+      sticky-header
+      max-height="220px"
+      aria-label="Funcionários"
+    ></scarlet-table>
+  `,
+};
+
+export const MultiSort: Story = {
+  name: 'Sort em várias colunas (shift+clique)',
+  render: (args) => html`
+    <p style="margin: 0 0 12px; font-size: 14px; color: var(--scarlet-color-text-secondary, #64748b);">
+      Clique em um cabeçalho pra ordenar por ele. Segure Shift e clique em outro pra adicioná-lo como critério de
+      desempate — um numerinho mostra a prioridade. Shift+clique de novo no mesmo cicla asc → desc → remove.
+    </p>
+    <scarlet-table
+      .columns=${args.columns}
+      .rows=${args.rows}
+      multi-sort
+      aria-label="Funcionários"
+    ></scarlet-table>
+  `,
+};
+
+export const ReorderableColumns: Story = {
+  name: 'Reordenar colunas (arrastar)',
+  render: (args) => html`
+    <p style="margin: 0 0 12px; font-size: 14px; color: var(--scarlet-color-text-secondary, #64748b);">
+      Arraste o ícone de alça em cada cabeçalho pra mudar a ordem das colunas.
+    </p>
+    <scarlet-table
+      .columns=${args.columns}
+      .rows=${args.rows}
+      reorderable-columns
+      aria-label="Funcionários"
+    ></scarlet-table>
+  `,
+};
+
+export const ReorderableRows: Story = {
+  name: 'Reordenar linhas (arrastar)',
+  render: (args) => html`
+    <p style="margin: 0 0 12px; font-size: 14px; color: var(--scarlet-color-text-secondary, #64748b);">
+      Arraste o ícone de alça em cada linha pra reordenar — desativado enquanto algum sort estiver ativo.
+    </p>
+    <scarlet-table
+      .columns=${args.columns}
+      .rows=${args.rows}
+      reorderable-rows
+      aria-label="Funcionários"
+    ></scarlet-table>
+  `,
+};

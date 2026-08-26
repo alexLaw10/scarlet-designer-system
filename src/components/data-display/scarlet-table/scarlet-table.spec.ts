@@ -61,11 +61,27 @@ describe('scarlet-table', () => {
     expect(empty?.textContent?.trim()).toBe('Nenhum registro encontrado.');
   });
 
-  it('shows loadingMessage instead of rows/empty state while loading', async () => {
+  it('shows loadingRowCount skeleton rows instead of rows/empty state while loading', async () => {
     const page = await setup({ loading: true, rows: [] });
 
-    const empty = page.root!.shadowRoot!.querySelector('.scarlet-table__empty');
-    expect(empty?.textContent?.trim()).toBe('Carregando…');
+    expect(page.root!.shadowRoot!.querySelectorAll('.scarlet-table__empty').length).toBe(0);
+    const skeletonRows = page.root!.shadowRoot!.querySelectorAll('.scarlet-table__body .scarlet-table__row');
+    expect(skeletonRows.length).toBe(5);
+    expect(skeletonRows[0].querySelectorAll('scarlet-skeleton').length).toBe(columns.length);
+    expect(page.root!.shadowRoot!.querySelector('table')?.getAttribute('aria-busy')).toBe('true');
+  });
+
+  it('respects a custom loadingRowCount', async () => {
+    const page = await newSpecPage({
+      components: [ScarletTable],
+      html: '<scarlet-table></scarlet-table>'
+    });
+    page.rootInstance.columns = columns;
+    page.rootInstance.loading = true;
+    page.rootInstance.loadingRowCount = 3;
+    await page.waitForChanges();
+
+    expect(page.root!.shadowRoot!.querySelectorAll('.scarlet-table__body .scarlet-table__row').length).toBe(3);
   });
 
   it('sorts ascending on the first header click, descending on the second, and toggles aria-sort', async () => {
@@ -84,7 +100,7 @@ describe('scarlet-table', () => {
     );
     expect(names).toEqual(['Ana', 'Bruno', 'Carla']);
     expect(sortSpy).toHaveBeenCalledTimes(1);
-    expect(sortSpy.mock.calls[0][0].detail).toEqual({ key: 'name', direction: 'asc' });
+    expect(sortSpy.mock.calls[0][0].detail).toEqual([{ key: 'name', direction: 'asc' }]);
 
     const nameHeaderCell = nameHeaderButton.closest('th');
     expect(nameHeaderCell?.getAttribute('aria-sort')).toBe('ascending');
@@ -173,5 +189,148 @@ describe('scarlet-table', () => {
       'Carla',
       '30 anos'
     ]);
+  });
+
+  it('marks the header sticky via a host class when stickyHeader is set', async () => {
+    const page = await newSpecPage({
+      components: [ScarletTable],
+      html: '<scarlet-table sticky-header></scarlet-table>'
+    });
+    page.rootInstance.columns = columns;
+    page.rootInstance.rows = rows;
+    await page.waitForChanges();
+
+    expect(page.root!.shadowRoot!.querySelector('thead')?.classList.contains('scarlet-table__head--sticky')).toBe(
+      true
+    );
+  });
+
+  // jsdom doesn't implement DragEvent/DataTransfer at all, so drag
+  // interactions here are simulated with a plain Event carrying a
+  // minimal fake dataTransfer — enough for the component's own handlers,
+  // which only ever call `.setData`/read `.effectAllowed`.
+  function fakeDragEvent(type: string): Event {
+    const event = new Event(type, { bubbles: true, cancelable: true });
+    Object.defineProperty(event, 'dataTransfer', {
+      value: { setData: jest.fn(), effectAllowed: '' },
+      configurable: true
+    });
+    return event;
+  }
+
+  it('reorders columns by dragging a header onto another, preserving column definitions', async () => {
+    const page = await newSpecPage({
+      components: [ScarletTable],
+      html: '<scarlet-table reorderable-columns></scarlet-table>'
+    });
+    page.rootInstance.columns = columns;
+    page.rootInstance.rows = rows;
+    await page.waitForChanges();
+
+    const reorderSpy = jest.fn();
+    page.root?.addEventListener('scarletColumnReorder', reorderSpy);
+
+    const headerCells = page.root!.shadowRoot!.querySelectorAll('.scarlet-table__cell--head');
+    const nameHandle = headerCells[0].querySelector('.scarlet-table__drag-handle') as HTMLElement;
+    const ageHeader = headerCells[1] as HTMLElement;
+
+    nameHandle.dispatchEvent(fakeDragEvent('dragstart'));
+    ageHeader.dispatchEvent(fakeDragEvent('dragover'));
+    ageHeader.dispatchEvent(fakeDragEvent('drop'));
+    await page.waitForChanges();
+
+    expect(reorderSpy).toHaveBeenCalledTimes(1);
+    expect(reorderSpy.mock.calls[0][0].detail).toEqual([columns[1], columns[0]]);
+
+    const labels = Array.from(page.root!.shadowRoot!.querySelectorAll('.scarlet-table__cell--head')).map(cell =>
+      cell.textContent?.trim()
+    );
+    expect(labels[0]).toBe('Idade');
+  });
+
+  it('reorders rows by dragging one onto another, updating rows and emitting scarletRowReorder', async () => {
+    const page = await newSpecPage({
+      components: [ScarletTable],
+      html: '<scarlet-table reorderable-rows></scarlet-table>'
+    });
+    page.rootInstance.columns = columns;
+    page.rootInstance.rows = rows;
+    await page.waitForChanges();
+
+    const reorderSpy = jest.fn();
+    page.root?.addEventListener('scarletRowReorder', reorderSpy);
+
+    const bodyRows = page.root!.shadowRoot!.querySelectorAll('.scarlet-table__body .scarlet-table__row');
+    const firstHandle = bodyRows[0].querySelector('.scarlet-table__drag-handle') as HTMLElement;
+
+    firstHandle.dispatchEvent(fakeDragEvent('dragstart'));
+    bodyRows[2].dispatchEvent(fakeDragEvent('dragover'));
+    bodyRows[2].dispatchEvent(fakeDragEvent('drop'));
+    await page.waitForChanges();
+
+    expect(reorderSpy).toHaveBeenCalledTimes(1);
+    expect(reorderSpy.mock.calls[0][0].detail).toEqual([rows[1], rows[2], rows[0]]);
+    expect(page.rootInstance.rows).toEqual([rows[1], rows[2], rows[0]]);
+  });
+
+  it('does not let rows be dragged while a column sort is active', async () => {
+    const page = await newSpecPage({
+      components: [ScarletTable],
+      html: '<scarlet-table reorderable-rows></scarlet-table>'
+    });
+    page.rootInstance.columns = columns;
+    page.rootInstance.rows = rows;
+    await page.waitForChanges();
+
+    const nameHeaderButton = Array.from(page.root!.shadowRoot!.querySelectorAll('.scarlet-table__sort')).find(el =>
+      el.textContent?.includes('Nome')
+    ) as HTMLButtonElement;
+    nameHeaderButton.click();
+    await page.waitForChanges();
+
+    const handle = page.root!.shadowRoot!.querySelector('.scarlet-table__drag-handle') as HTMLElement;
+    expect(handle.classList.contains('scarlet-table__drag-handle--disabled')).toBe(true);
+    expect(handle.getAttribute('draggable')).toBe('false');
+  });
+
+  it('multiSort: shift-clicking a second sortable header adds it as a tiebreaker, cycling asc -> desc -> removed', async () => {
+    const page = await newSpecPage({
+      components: [ScarletTable],
+      html: '<scarlet-table multi-sort></scarlet-table>'
+    });
+    page.rootInstance.columns = columns;
+    page.rootInstance.rows = rows;
+    await page.waitForChanges();
+
+    const sortSpy = jest.fn();
+    page.root?.addEventListener('scarletSort', sortSpy);
+    const [nameButton, ageButton] = Array.from(
+      page.root!.shadowRoot!.querySelectorAll('.scarlet-table__sort')
+    ) as HTMLButtonElement[];
+
+    nameButton.click();
+    ageButton.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, shiftKey: true }));
+    await page.waitForChanges();
+
+    expect(sortSpy.mock.calls[1][0].detail).toEqual([
+      { key: 'name', direction: 'asc' },
+      { key: 'age', direction: 'asc' }
+    ]);
+
+    ageButton.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, shiftKey: true }));
+    await page.waitForChanges();
+    expect(sortSpy.mock.calls[2][0].detail).toEqual([
+      { key: 'name', direction: 'asc' },
+      { key: 'age', direction: 'desc' }
+    ]);
+
+    ageButton.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, shiftKey: true }));
+    await page.waitForChanges();
+    expect(sortSpy.mock.calls[3][0].detail).toEqual([{ key: 'name', direction: 'asc' }]);
+
+    // A plain (non-shift) click always collapses back to a single-column sort.
+    ageButton.click();
+    await page.waitForChanges();
+    expect(sortSpy.mock.calls[4][0].detail).toEqual([{ key: 'age', direction: 'asc' }]);
   });
 });
