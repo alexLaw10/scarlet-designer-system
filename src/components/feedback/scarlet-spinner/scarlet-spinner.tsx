@@ -23,7 +23,7 @@ export class ScarletSpinner {
   @Prop() readonly size: ScarletSpinnerSize = 'md';
 
   /** Accessible label, announced by assistive tech via `role="status"`. */
-  @Prop() readonly label = 'Carregando';
+  @Prop() readonly label: string = 'Carregando';
 
   render() {
     return (

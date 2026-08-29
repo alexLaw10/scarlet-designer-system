@@ -37,6 +37,7 @@ line up with surrounding text and other components by default.
  - [scarlet-date-range-picker](../../form-masked/scarlet-date-range-picker)
  - [scarlet-empty-state](../../data-display/scarlet-empty-state)
  - [scarlet-file-upload](../../form/scarlet-file-upload)
+ - [scarlet-input-ai](../../form/scarlet-input-ai)
  - [scarlet-link](../scarlet-link)
  - [scarlet-number-input](../../form/scarlet-number-input)
  - [scarlet-pagination](../../navigation/scarlet-pagination)
@@ -52,6 +53,7 @@ graph TD;
   scarlet-date-range-picker --> scarlet-icon
   scarlet-empty-state --> scarlet-icon
   scarlet-file-upload --> scarlet-icon
+  scarlet-input-ai --> scarlet-icon
   scarlet-link --> scarlet-icon
   scarlet-number-input --> scarlet-icon
   scarlet-pagination --> scarlet-icon

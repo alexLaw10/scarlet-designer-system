@@ -1066,6 +1066,127 @@ export namespace Components {
         "value": string;
     }
     /**
+     * A single-line text input with a "melhorar texto" button that hands the
+     * current value off to an AI provider for a rewrite suggestion, then lets
+     * the user apply or discard it — nothing replaces the value on its own.
+     * This component never calls any AI provider itself: embedding a provider
+     * API key in a design system that ships to a browser bundle would leak it
+     * to every consuming app's users. `improve` is a plain async function,
+     * set as a JS property (like `scarlet-table`'s `formatCell`, not parseable
+     * from an HTML attribute) — wire it to your own backend endpoint, which is
+     * the one that actually holds the API key and calls the provider. Leaving
+     * `improve` unset hides the button entirely; the input still works as a
+     * plain field.
+     * Flow: click → `improve(value, aiContext)` → while pending, the button
+     * shows a spinner and the input stays editable. If the promise resolves to
+     * text identical to the current value, a brief "already good" note shows
+     * instead of a suggestion. Otherwise the suggestion appears in a preview
+     * with Aplicar/Descartar — Aplicar replaces `value` and emits
+     * `scarletChange`/`scarletImprove`; Descartar just dismisses it. Editing
+     * the field while a suggestion/note is showing dismisses it (it no longer
+     * describes the current text). A response that arrives after the value
+     * changed, or after a newer `improve` call started, is silently dropped —
+     * it's for a version of the text that's no longer current.
+     */
+    interface ScarletInputAi {
+        /**
+          * Passed as `improve`'s second argument, alongside the current value — whatever the rewrite needs to know about where this text is used.
+         */
+        "aiContext"?: string;
+        /**
+          * Label for the button that replaces the value with the suggestion.
+          * @default 'Aplicar'
+         */
+        "applyLabel": "Aplicar";
+        /**
+          * Disables the field and the improve button.
+          * @default false
+         */
+        "disabled": false;
+        /**
+          * Label for the button that dismisses the suggestion, keeping the current value.
+          * @default 'Descartar'
+         */
+        "discardLabel": "Descartar";
+        /**
+          * Error message rendered below the field. Implies the invalid state.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the field. Hidden while `errorMessage` is set.
+         */
+        "helperText"?: string;
+        /**
+          * Called with the current value (and `aiContext`, if set) when the improve button is clicked. Must resolve with the suggested replacement text. Set as a JS property — see the class doc comment for why this can't call an AI provider directly. Omitting it hides the button.
+         */
+        "improve"?: (value: string, context?: string) => Promise<string>;
+        /**
+          * Shown briefly when `improve` rejects.
+          * @default 'Não foi possível melhorar o texto.'
+         */
+        "improveErrorLabel": "Não foi possível melhorar o texto.";
+        /**
+          * Accessible label for the improve button.
+          * @default 'Melhorar texto'
+         */
+        "improveLabel": "Melhorar texto";
+        /**
+          * Marks the field as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid": false;
+        /**
+          * Visible label rendered above the field.
+         */
+        "label"?: string;
+        /**
+          * Maximum number of characters allowed.
+         */
+        "maxlength"?: number;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Placeholder text shown when the field is empty.
+         */
+        "placeholder"?: string;
+        /**
+          * Makes the field read-only (the improve button stays usable — rewriting isn't editing the field directly until Aplicar).
+          * @default false
+         */
+        "readonly": false;
+        /**
+          * Marks the field as required in a parent form.
+          * @default false
+         */
+        "required": false;
+        /**
+          * How long the "already good"/error note stays before reverting to idle, in milliseconds.
+          * @default 4000
+         */
+        "resetAfter": 4000;
+        /**
+          * Shown briefly when the suggestion comes back identical to the current value.
+          * @default 'Já está bom 👍'
+         */
+        "sameLabel": "Já está bom 👍";
+        /**
+          * Focuses the internal input element.
+         */
+        "setFocus": () => Promise<void>;
+        /**
+          * Size of the field.
+          * @default 'md'
+         */
+        "size": Size;
+        /**
+          * Current value of the field.
+          * @default ''
+         */
+        "value": string;
+    }
+    /**
      * A Brazilian postal code (CEP) input — formats as `01310-100`. This
      * component only formats the value; looking up the matching address (e.g.
      * via ViaCEP) is the consuming app's responsibility — listen for
@@ -2050,7 +2171,7 @@ export namespace Components {
           * Accessible label, announced by assistive tech via `role="status"`.
           * @default 'Carregando'
          */
-        "label": "Carregando";
+        "label": string;
         /**
           * Size of the indicator.
           * @default 'md'
@@ -2556,6 +2677,10 @@ export interface ScarletFileUploadCustomEvent<T> extends CustomEvent<T> {
 export interface ScarletInputCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLScarletInputElement;
+}
+export interface ScarletInputAiCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLScarletInputAiElement;
 }
 export interface ScarletInputCepCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -3146,6 +3271,51 @@ declare global {
     var HTMLScarletInputElement: {
         prototype: HTMLScarletInputElement;
         new (): HTMLScarletInputElement;
+    };
+    interface HTMLScarletInputAiElementEventMap {
+        "scarletInput": string;
+        "scarletChange": string;
+        "scarletFocus": FocusEvent;
+        "scarletBlur": FocusEvent;
+        "scarletImprove": string;
+        "scarletImproveError": Error;
+    }
+    /**
+     * A single-line text input with a "melhorar texto" button that hands the
+     * current value off to an AI provider for a rewrite suggestion, then lets
+     * the user apply or discard it — nothing replaces the value on its own.
+     * This component never calls any AI provider itself: embedding a provider
+     * API key in a design system that ships to a browser bundle would leak it
+     * to every consuming app's users. `improve` is a plain async function,
+     * set as a JS property (like `scarlet-table`'s `formatCell`, not parseable
+     * from an HTML attribute) — wire it to your own backend endpoint, which is
+     * the one that actually holds the API key and calls the provider. Leaving
+     * `improve` unset hides the button entirely; the input still works as a
+     * plain field.
+     * Flow: click → `improve(value, aiContext)` → while pending, the button
+     * shows a spinner and the input stays editable. If the promise resolves to
+     * text identical to the current value, a brief "already good" note shows
+     * instead of a suggestion. Otherwise the suggestion appears in a preview
+     * with Aplicar/Descartar — Aplicar replaces `value` and emits
+     * `scarletChange`/`scarletImprove`; Descartar just dismisses it. Editing
+     * the field while a suggestion/note is showing dismisses it (it no longer
+     * describes the current text). A response that arrives after the value
+     * changed, or after a newer `improve` call started, is silently dropped —
+     * it's for a version of the text that's no longer current.
+     */
+    interface HTMLScarletInputAiElement extends Components.ScarletInputAi, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLScarletInputAiElementEventMap>(type: K, listener: (this: HTMLScarletInputAiElement, ev: ScarletInputAiCustomEvent<HTMLScarletInputAiElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLScarletInputAiElementEventMap>(type: K, listener: (this: HTMLScarletInputAiElement, ev: ScarletInputAiCustomEvent<HTMLScarletInputAiElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLScarletInputAiElement: {
+        prototype: HTMLScarletInputAiElement;
+        new (): HTMLScarletInputAiElement;
     };
     interface HTMLScarletInputCepElementEventMap {
         "scarletInput": string;
@@ -3869,6 +4039,7 @@ declare global {
         "scarlet-heading": HTMLScarletHeadingElement;
         "scarlet-icon": HTMLScarletIconElement;
         "scarlet-input": HTMLScarletInputElement;
+        "scarlet-input-ai": HTMLScarletInputAiElement;
         "scarlet-input-cep": HTMLScarletInputCepElement;
         "scarlet-input-credit-card": HTMLScarletInputCreditCardElement;
         "scarlet-input-currency": HTMLScarletInputCurrencyElement;
@@ -4963,6 +5134,147 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     /**
+     * A single-line text input with a "melhorar texto" button that hands the
+     * current value off to an AI provider for a rewrite suggestion, then lets
+     * the user apply or discard it — nothing replaces the value on its own.
+     * This component never calls any AI provider itself: embedding a provider
+     * API key in a design system that ships to a browser bundle would leak it
+     * to every consuming app's users. `improve` is a plain async function,
+     * set as a JS property (like `scarlet-table`'s `formatCell`, not parseable
+     * from an HTML attribute) — wire it to your own backend endpoint, which is
+     * the one that actually holds the API key and calls the provider. Leaving
+     * `improve` unset hides the button entirely; the input still works as a
+     * plain field.
+     * Flow: click → `improve(value, aiContext)` → while pending, the button
+     * shows a spinner and the input stays editable. If the promise resolves to
+     * text identical to the current value, a brief "already good" note shows
+     * instead of a suggestion. Otherwise the suggestion appears in a preview
+     * with Aplicar/Descartar — Aplicar replaces `value` and emits
+     * `scarletChange`/`scarletImprove`; Descartar just dismisses it. Editing
+     * the field while a suggestion/note is showing dismisses it (it no longer
+     * describes the current text). A response that arrives after the value
+     * changed, or after a newer `improve` call started, is silently dropped —
+     * it's for a version of the text that's no longer current.
+     */
+    interface ScarletInputAi {
+        /**
+          * Passed as `improve`'s second argument, alongside the current value — whatever the rewrite needs to know about where this text is used.
+         */
+        "aiContext"?: string;
+        /**
+          * Label for the button that replaces the value with the suggestion.
+          * @default 'Aplicar'
+         */
+        "applyLabel"?: "Aplicar";
+        /**
+          * Disables the field and the improve button.
+          * @default false
+         */
+        "disabled"?: false;
+        /**
+          * Label for the button that dismisses the suggestion, keeping the current value.
+          * @default 'Descartar'
+         */
+        "discardLabel"?: "Descartar";
+        /**
+          * Error message rendered below the field. Implies the invalid state.
+         */
+        "errorMessage"?: string;
+        /**
+          * Helper text rendered below the field. Hidden while `errorMessage` is set.
+         */
+        "helperText"?: string;
+        /**
+          * Called with the current value (and `aiContext`, if set) when the improve button is clicked. Must resolve with the suggested replacement text. Set as a JS property — see the class doc comment for why this can't call an AI provider directly. Omitting it hides the button.
+         */
+        "improve"?: (value: string, context?: string) => Promise<string>;
+        /**
+          * Shown briefly when `improve` rejects.
+          * @default 'Não foi possível melhorar o texto.'
+         */
+        "improveErrorLabel"?: "Não foi possível melhorar o texto.";
+        /**
+          * Accessible label for the improve button.
+          * @default 'Melhorar texto'
+         */
+        "improveLabel"?: "Melhorar texto";
+        /**
+          * Marks the field as invalid, independent of `errorMessage`.
+          * @default false
+         */
+        "invalid"?: false;
+        /**
+          * Visible label rendered above the field.
+         */
+        "label"?: string;
+        /**
+          * Maximum number of characters allowed.
+         */
+        "maxlength"?: number;
+        /**
+          * Name submitted with a parent form.
+         */
+        "name"?: string;
+        /**
+          * Emitted when the field loses focus.
+         */
+        "onScarletBlur"?: (event: ScarletInputAiCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted when the field loses focus after its value has changed, and right after a suggestion is applied.
+         */
+        "onScarletChange"?: (event: ScarletInputAiCustomEvent<string>) => void;
+        /**
+          * Emitted when the field gains focus.
+         */
+        "onScarletFocus"?: (event: ScarletInputAiCustomEvent<FocusEvent>) => void;
+        /**
+          * Emitted with the new value right after a suggestion is applied (alongside `scarletChange`) — listen here specifically to react to an AI-driven edit.
+         */
+        "onScarletImprove"?: (event: ScarletInputAiCustomEvent<string>) => void;
+        /**
+          * Emitted with the error thrown/rejected by `improve`.
+         */
+        "onScarletImproveError"?: (event: ScarletInputAiCustomEvent<Error>) => void;
+        /**
+          * Emitted on every keystroke with the current value.
+         */
+        "onScarletInput"?: (event: ScarletInputAiCustomEvent<string>) => void;
+        /**
+          * Placeholder text shown when the field is empty.
+         */
+        "placeholder"?: string;
+        /**
+          * Makes the field read-only (the improve button stays usable — rewriting isn't editing the field directly until Aplicar).
+          * @default false
+         */
+        "readonly"?: false;
+        /**
+          * Marks the field as required in a parent form.
+          * @default false
+         */
+        "required"?: false;
+        /**
+          * How long the "already good"/error note stays before reverting to idle, in milliseconds.
+          * @default 4000
+         */
+        "resetAfter"?: 4000;
+        /**
+          * Shown briefly when the suggestion comes back identical to the current value.
+          * @default 'Já está bom 👍'
+         */
+        "sameLabel"?: "Já está bom 👍";
+        /**
+          * Size of the field.
+          * @default 'md'
+         */
+        "size"?: Size;
+        /**
+          * Current value of the field.
+          * @default ''
+         */
+        "value"?: string;
+    }
+    /**
      * A Brazilian postal code (CEP) input — formats as `01310-100`. This
      * component only formats the value; looking up the matching address (e.g.
      * via ViaCEP) is the consuming app's responsibility — listen for
@@ -6052,7 +6364,7 @@ declare namespace LocalJSX {
           * Accessible label, announced by assistive tech via `role="status"`.
           * @default 'Carregando'
          */
-        "label"?: "Carregando";
+        "label"?: string;
         /**
           * Size of the indicator.
           * @default 'md'
@@ -6750,6 +7062,27 @@ declare namespace LocalJSX {
         "size": Size;
         "autocomplete": string;
     }
+    interface ScarletInputAiAttributes {
+        "name": string;
+        "value": string;
+        "placeholder": string;
+        "label": string;
+        "helperText": string;
+        "errorMessage": string;
+        "invalid": false;
+        "disabled": false;
+        "readonly": false;
+        "required": false;
+        "size": Size;
+        "maxlength": number;
+        "aiContext": string;
+        "improveLabel": "Melhorar texto";
+        "sameLabel": "Já está bom 👍";
+        "improveErrorLabel": "Não foi possível melhorar o texto.";
+        "applyLabel": "Aplicar";
+        "discardLabel": "Descartar";
+        "resetAfter": 4000;
+    }
     interface ScarletInputCepAttributes {
         "name": string;
         "value": string;
@@ -6939,7 +7272,7 @@ declare namespace LocalJSX {
     interface ScarletSpinnerAttributes {
         "variant": ScarletSpinnerVariant;
         "size": ScarletSpinnerSize;
-        "label": "Carregando";
+        "label": string;
     }
     interface ScarletStackAttributes {
         "direction": Direction;
@@ -7052,6 +7385,7 @@ declare namespace LocalJSX {
         "scarlet-heading": Omit<ScarletHeading, keyof ScarletHeadingAttributes> & { [K in keyof ScarletHeading & keyof ScarletHeadingAttributes]?: ScarletHeading[K] } & { [K in keyof ScarletHeading & keyof ScarletHeadingAttributes as `attr:${K}`]?: ScarletHeadingAttributes[K] } & { [K in keyof ScarletHeading & keyof ScarletHeadingAttributes as `prop:${K}`]?: ScarletHeading[K] };
         "scarlet-icon": Omit<ScarletIcon, keyof ScarletIconAttributes> & { [K in keyof ScarletIcon & keyof ScarletIconAttributes]?: ScarletIcon[K] } & { [K in keyof ScarletIcon & keyof ScarletIconAttributes as `attr:${K}`]?: ScarletIconAttributes[K] } & { [K in keyof ScarletIcon & keyof ScarletIconAttributes as `prop:${K}`]?: ScarletIcon[K] };
         "scarlet-input": Omit<ScarletInput, keyof ScarletInputAttributes> & { [K in keyof ScarletInput & keyof ScarletInputAttributes]?: ScarletInput[K] } & { [K in keyof ScarletInput & keyof ScarletInputAttributes as `attr:${K}`]?: ScarletInputAttributes[K] } & { [K in keyof ScarletInput & keyof ScarletInputAttributes as `prop:${K}`]?: ScarletInput[K] };
+        "scarlet-input-ai": Omit<ScarletInputAi, keyof ScarletInputAiAttributes> & { [K in keyof ScarletInputAi & keyof ScarletInputAiAttributes]?: ScarletInputAi[K] } & { [K in keyof ScarletInputAi & keyof ScarletInputAiAttributes as `attr:${K}`]?: ScarletInputAiAttributes[K] } & { [K in keyof ScarletInputAi & keyof ScarletInputAiAttributes as `prop:${K}`]?: ScarletInputAi[K] };
         "scarlet-input-cep": Omit<ScarletInputCep, keyof ScarletInputCepAttributes> & { [K in keyof ScarletInputCep & keyof ScarletInputCepAttributes]?: ScarletInputCep[K] } & { [K in keyof ScarletInputCep & keyof ScarletInputCepAttributes as `attr:${K}`]?: ScarletInputCepAttributes[K] } & { [K in keyof ScarletInputCep & keyof ScarletInputCepAttributes as `prop:${K}`]?: ScarletInputCep[K] };
         "scarlet-input-credit-card": Omit<ScarletInputCreditCard, keyof ScarletInputCreditCardAttributes> & { [K in keyof ScarletInputCreditCard & keyof ScarletInputCreditCardAttributes]?: ScarletInputCreditCard[K] } & { [K in keyof ScarletInputCreditCard & keyof ScarletInputCreditCardAttributes as `attr:${K}`]?: ScarletInputCreditCardAttributes[K] } & { [K in keyof ScarletInputCreditCard & keyof ScarletInputCreditCardAttributes as `prop:${K}`]?: ScarletInputCreditCard[K] };
         "scarlet-input-currency": Omit<ScarletInputCurrency, keyof ScarletInputCurrencyAttributes> & { [K in keyof ScarletInputCurrency & keyof ScarletInputCurrencyAttributes]?: ScarletInputCurrency[K] } & { [K in keyof ScarletInputCurrency & keyof ScarletInputCurrencyAttributes as `attr:${K}`]?: ScarletInputCurrencyAttributes[K] } & { [K in keyof ScarletInputCurrency & keyof ScarletInputCurrencyAttributes as `prop:${K}`]?: ScarletInputCurrency[K] };
@@ -7283,6 +7617,30 @@ declare module "@stencil/core" {
              * A labeled text input with helper/error text and built-in accessibility wiring.
              */
             "scarlet-input": LocalJSX.IntrinsicElements["scarlet-input"] & JSXBase.HTMLAttributes<HTMLScarletInputElement>;
+            /**
+             * A single-line text input with a "melhorar texto" button that hands the
+             * current value off to an AI provider for a rewrite suggestion, then lets
+             * the user apply or discard it — nothing replaces the value on its own.
+             * This component never calls any AI provider itself: embedding a provider
+             * API key in a design system that ships to a browser bundle would leak it
+             * to every consuming app's users. `improve` is a plain async function,
+             * set as a JS property (like `scarlet-table`'s `formatCell`, not parseable
+             * from an HTML attribute) — wire it to your own backend endpoint, which is
+             * the one that actually holds the API key and calls the provider. Leaving
+             * `improve` unset hides the button entirely; the input still works as a
+             * plain field.
+             * Flow: click → `improve(value, aiContext)` → while pending, the button
+             * shows a spinner and the input stays editable. If the promise resolves to
+             * text identical to the current value, a brief "already good" note shows
+             * instead of a suggestion. Otherwise the suggestion appears in a preview
+             * with Aplicar/Descartar — Aplicar replaces `value` and emits
+             * `scarletChange`/`scarletImprove`; Descartar just dismisses it. Editing
+             * the field while a suggestion/note is showing dismisses it (it no longer
+             * describes the current text). A response that arrives after the value
+             * changed, or after a newer `improve` call started, is silently dropped —
+             * it's for a version of the text that's no longer current.
+             */
+            "scarlet-input-ai": LocalJSX.IntrinsicElements["scarlet-input-ai"] & JSXBase.HTMLAttributes<HTMLScarletInputAiElement>;
             /**
              * A Brazilian postal code (CEP) input — formats as `01310-100`. This
              * component only formats the value; looking up the matching address (e.g.

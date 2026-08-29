@@ -48,6 +48,8 @@ export { ScarletRadio } from './form/scarlet-radio/scarlet-radio';
 export { ScarletRadioGroup } from './form/scarlet-radio-group/scarlet-radio-group';
 export { ScarletFileUpload } from './form/scarlet-file-upload/scarlet-file-upload';
 export { ScarletNumberInput } from './form/scarlet-number-input/scarlet-number-input';
+export { ScarletInputAi } from './form/scarlet-input-ai/scarlet-input-ai';
+export type { ScarletInputAiStatus } from './form/scarlet-input-ai/scarlet-input-ai';
 
 // Masked/specialized inputs (pt-BR)
 export { ScarletInputPhone } from './form-masked/scarlet-input-phone/scarlet-input-phone';

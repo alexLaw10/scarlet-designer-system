@@ -17,10 +17,23 @@ announces the loading state without needing separate visible text.
 
 | Property  | Attribute | Description                                                        | Type                                   | Default        |
 | --------- | --------- | ------------------------------------------------------------------ | -------------------------------------- | -------------- |
-| `label`   | `label`   | Accessible label, announced by assistive tech via `role="status"`. | `"Carregando"`                         | `'Carregando'` |
+| `label`   | `label`   | Accessible label, announced by assistive tech via `role="status"`. | `string`                               | `'Carregando'` |
 | `size`    | `size`    | Size of the indicator.                                             | `"lg" \| "md" \| "sm" \| "xl" \| "xs"` | `'md'`         |
 | `variant` | `variant` | Which loading indicator to show.                                   | `"circle" \| "logo"`                   | `'circle'`     |
 
+
+## Dependencies
+
+### Used by
+
+ - [scarlet-input-ai](../../form/scarlet-input-ai)
+
+### Graph
+```mermaid
+graph TD;
+  scarlet-input-ai --> scarlet-spinner
+  style scarlet-spinner fill:#f9f,stroke:#333,stroke-width:4px
+```
 
 ----------------------------------------------
 

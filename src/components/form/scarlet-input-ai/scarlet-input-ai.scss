@@ -1,0 +1,183 @@
+@use '../../../tokens/field-mixins' as *;
+
+:host {
+  display: block;
+}
+
+.scarlet-input-ai {
+  @include scarlet-field-input;
+
+  &--invalid {
+    @include scarlet-field-invalid;
+  }
+
+  &--xs {
+    @include scarlet-field-size(xs);
+  }
+
+  &--sm {
+    @include scarlet-field-size(sm);
+  }
+
+  &--md {
+    @include scarlet-field-size(md);
+  }
+
+  &--lg {
+    @include scarlet-field-size(lg);
+  }
+
+  &--xl {
+    @include scarlet-field-size(xl);
+  }
+
+  // Room for the improve button sitting inside the field, regardless of
+  // size step — the button itself doesn't scale with `size`, so a single
+  // fixed reservation is enough at every step.
+  &--with-button {
+    padding-right: var(--scarlet-space-8);
+  }
+
+  &__label {
+    @include scarlet-field-label;
+  }
+
+  &__required {
+    @include scarlet-field-required;
+  }
+
+  &__message {
+    @include scarlet-field-message;
+
+    &--error {
+      @include scarlet-field-message-error;
+    }
+  }
+
+  &__wrapper {
+    position: relative;
+  }
+
+  &__improve {
+    position: absolute;
+    top: 50%;
+    right: var(--scarlet-space-1-5);
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--scarlet-space-6);
+    height: var(--scarlet-space-6);
+    padding: 0;
+    border: none;
+    border-radius: var(--scarlet-border-radius-sm);
+    background: transparent;
+    color: var(--scarlet-color-text-secondary);
+    cursor: pointer;
+    transition: background-color 0.1s ease, color 0.1s ease;
+
+    &:hover:not(:disabled) {
+      background-color: var(--scarlet-color-background-secondary);
+      color: var(--scarlet-color-text-primary);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--scarlet-shadow-focus);
+    }
+
+    &:disabled {
+      color: var(--scarlet-color-text-disabled);
+      cursor: not-allowed;
+    }
+
+    &--loading {
+      cursor: default;
+    }
+  }
+
+  &__note {
+    @include scarlet-text-caption;
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    z-index: 10;
+    margin-bottom: var(--scarlet-space-2);
+    padding: var(--scarlet-space-1-5) var(--scarlet-space-2-5);
+    border-radius: var(--scarlet-border-radius-md);
+    background-color: var(--scarlet-color-neutral-900);
+    color: var(--scarlet-color-neutral-50);
+    box-shadow: var(--scarlet-shadow-md);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(2px);
+    transition: opacity 0.1s ease, visibility 0.1s ease, transform 0.1s ease;
+
+    &--visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    &--error {
+      background-color: var(--scarlet-color-error-600);
+    }
+  }
+
+  &__preview {
+    margin-top: var(--scarlet-space-2);
+    padding: var(--scarlet-space-3);
+    border: var(--scarlet-border-width-1) solid var(--scarlet-color-border-primary);
+    border-radius: var(--scarlet-border-radius-md);
+    background-color: var(--scarlet-color-background-secondary);
+  }
+
+  &__suggestion {
+    @include scarlet-text-body-sm;
+    margin: 0 0 var(--scarlet-space-3);
+    color: var(--scarlet-color-text-primary);
+    white-space: pre-wrap;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--scarlet-space-2);
+  }
+
+  &__discard,
+  &__apply {
+    @include scarlet-text-body-sm;
+    padding: var(--scarlet-space-1-5) var(--scarlet-space-3);
+    border-radius: var(--scarlet-border-radius-md);
+    cursor: pointer;
+    font-weight: var(--scarlet-font-weight-medium);
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--scarlet-shadow-focus);
+    }
+  }
+
+  &__discard {
+    border: var(--scarlet-border-width-1) solid var(--scarlet-color-border-primary);
+    background: transparent;
+    color: var(--scarlet-color-text-secondary);
+
+    &:hover {
+      background-color: var(--scarlet-color-background-primary);
+    }
+  }
+
+  &__apply {
+    border: none;
+    background-color: var(--scarlet-color-primary-500);
+    color: var(--scarlet-color-neutral-50);
+
+    &:hover {
+      background-color: var(--scarlet-color-primary-600);
+    }
+  }
+}
