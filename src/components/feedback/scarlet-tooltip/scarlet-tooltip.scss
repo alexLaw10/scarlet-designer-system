@@ -1,0 +1,59 @@
+@use '../../../tokens/typography-mixins' as *;
+
+:host {
+  position: relative;
+  display: inline-block;
+}
+
+.scarlet-tooltip {
+  @include scarlet-text-caption;
+  position: absolute;
+  z-index: 1000;
+  max-width: 240px;
+  padding: var(--scarlet-space-1-5) var(--scarlet-space-2-5);
+  border-radius: var(--scarlet-border-radius-md);
+  background-color: var(--scarlet-color-neutral-900);
+  color: var(--scarlet-color-neutral-50);
+  box-shadow: var(--scarlet-shadow-md);
+  white-space: normal;
+  text-align: center;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.1s ease,
+    visibility 0.1s ease;
+
+  &--visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &--top {
+    bottom: 100%;
+    left: 50%;
+    margin-bottom: var(--scarlet-space-2);
+    transform: translateX(-50%);
+  }
+
+  &--bottom {
+    top: 100%;
+    left: 50%;
+    margin-top: var(--scarlet-space-2);
+    transform: translateX(-50%);
+  }
+
+  &--left {
+    right: 100%;
+    top: 50%;
+    margin-right: var(--scarlet-space-2);
+    transform: translateY(-50%);
+  }
+
+  &--right {
+    left: 100%;
+    top: 50%;
+    margin-left: var(--scarlet-space-2);
+    transform: translateY(-50%);
+  }
+}

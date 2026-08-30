@@ -143,5 +143,18 @@ Estes sandboxes permitem:
 
 - Cada sandbox é independente e pode ser executado separadamente
 - Os componentes são importados como dependência local do design system
-- Todos os sandboxes incluem exemplos básicos de uso dos componentes
+- Todos os sandboxes incluem exemplos básicos de uso dos componentes (Button, Input, Card, Alert) e uma seção
+  **"Formulário de cadastro"** mais completa — nome, e-mail, telefone, CPF/CNPJ, CEP, estado, data de nascimento,
+  tipo de conta, mensagem, opt-in de novidades e aceite de termos, cobrindo praticamente todo componente de
+  formulário do DS (inclusive os inputs mascarados pt-BR e o date picker) ligado a um único objeto de estado
+  — o jeito mais rápido de ver, em cada framework, como ler/escrever `value`/`checked`/`options` e ouvir
+  `scarletInput`/`scarletChange` num caso real
 - Os estilos globais do design system são aplicados automaticamente
+- **Nomes de evento**: os componentes disparam `CustomEvent`s em **camelCase** (`scarletInput`, `scarletChange`,
+  `scarletClick`, `scarletDismiss`). Angular e Vanilla escutam com o nome exato (`(scarletInput)`,
+  `addEventListener('scarletInput', ...)`); no Vue, escreva o listener também em camelCase (`@scarletInput`) — o
+  compilador de template do Vue preserva a caixa como está escrita e **não** converte `@scarlet-input` (kebab) de
+  volta para `scarletInput` em elementos nativos/custom (só faz isso para `emits` declarados de um componente Vue),
+  então a versão kebab nunca dispara
+- O Angular usa **Signals** (`signal()`/`computed()`, Angular 17+) para o estado dos dois sandboxes de exemplo, não
+  propriedades de classe simples — chame-os como função no template (`form()`, não `form`)

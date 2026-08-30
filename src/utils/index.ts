@@ -1,5 +1,9 @@
 // Scarlet Design System - Utility Functions
 
+export * from './masks';
+export * from './validators';
+export * from './calendar';
+
 /**
  * Generates a unique ID for components
  */
@@ -115,20 +119,20 @@ export function getContrastRatio(color1: string, color2: string): number {
   const getLuminance = (color: string): number => {
     const rgb = color.match(/\d+/g);
     if (!rgb) return 0;
-    
+
     const [r, g, b] = rgb.map(Number).map(c => {
-      c = c / 255;
+      c /= 255;
       return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
     });
-    
+
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
   };
-  
+
   const lum1 = getLuminance(color1);
   const lum2 = getLuminance(color2);
   const brightest = Math.max(lum1, lum2);
   const darkest = Math.min(lum1, lum2);
-  
+
   return (brightest + 0.05) / (darkest + 0.05);
 }
 

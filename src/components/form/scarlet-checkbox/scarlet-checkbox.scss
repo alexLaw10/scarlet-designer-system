@@ -1,0 +1,101 @@
+@use '../../../tokens/typography-mixins' as *;
+
+:host {
+  display: inline-block;
+}
+
+.scarlet-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--scarlet-space-2);
+  cursor: pointer;
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+
+    &:checked ~ .scarlet-checkbox__box {
+      border-color: var(--scarlet-color-primary-500);
+      background-color: var(--scarlet-color-primary-500);
+
+      .scarlet-checkbox__check {
+        opacity: 1;
+      }
+    }
+
+    &:indeterminate ~ .scarlet-checkbox__box {
+      border-color: var(--scarlet-color-primary-500);
+      background-color: var(--scarlet-color-primary-500);
+
+      .scarlet-checkbox__check {
+        opacity: 0;
+      }
+
+      .scarlet-checkbox__dash {
+        opacity: 1;
+      }
+    }
+
+    &:focus-visible ~ .scarlet-checkbox__box {
+      outline: none;
+      box-shadow: var(--scarlet-shadow-focus);
+    }
+
+    &:disabled ~ .scarlet-checkbox__box {
+      background-color: var(--scarlet-color-background-disabled);
+    }
+  }
+
+  &__box {
+    position: relative;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--scarlet-space-5);
+    height: var(--scarlet-space-5);
+    border: var(--scarlet-border-width-2) solid var(--scarlet-color-border-primary);
+    border-radius: var(--scarlet-border-radius-sm);
+    background-color: var(--scarlet-color-background-primary);
+    color: var(--scarlet-color-text-inverse);
+    transition:
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  &__check,
+  &__dash {
+    opacity: 0;
+    transition: opacity 0.1s ease;
+  }
+
+  &__check {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__dash {
+    position: absolute;
+    width: 60%;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: var(--scarlet-border-radius-full);
+  }
+
+  &__label {
+    @include scarlet-text-body-md;
+    color: var(--scarlet-color-text-primary);
+  }
+}

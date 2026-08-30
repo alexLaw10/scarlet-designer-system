@@ -1,0 +1,223 @@
+@use '../../../tokens/field-mixins' as *;
+
+:host {
+  display: block;
+}
+
+.scarlet-date-picker {
+  &__label {
+    @include scarlet-field-label;
+  }
+
+  &__required {
+    @include scarlet-field-required;
+  }
+
+  &__field {
+    position: relative;
+  }
+
+  &__input {
+    @include scarlet-field-input;
+
+    &--invalid {
+      @include scarlet-field-invalid;
+    }
+
+    &--xs {
+      @include scarlet-field-size(xs);
+      padding-right: var(--scarlet-space-7);
+    }
+
+    &--sm {
+      @include scarlet-field-size(sm);
+      padding-right: var(--scarlet-space-8);
+    }
+
+    &--md {
+      @include scarlet-field-size(md);
+      padding-right: var(--scarlet-space-9);
+    }
+
+    &--lg {
+      @include scarlet-field-size(lg);
+      padding-right: var(--scarlet-space-10);
+    }
+
+    &--xl {
+      @include scarlet-field-size(xl);
+      padding-right: var(--scarlet-space-11);
+    }
+  }
+
+  &__toggle {
+    position: absolute;
+    top: 50%;
+    right: var(--scarlet-space-2);
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--scarlet-space-6);
+    height: var(--scarlet-space-6);
+    padding: 0;
+    border: none;
+    border-radius: var(--scarlet-border-radius-md);
+    background: transparent;
+    color: var(--scarlet-color-text-secondary);
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      background-color: var(--scarlet-color-neutral-100);
+      color: var(--scarlet-color-text-primary);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--scarlet-shadow-focus);
+    }
+
+    &:disabled {
+      color: var(--scarlet-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  &__panel {
+    position: absolute;
+    top: calc(100% + var(--scarlet-space-1-5));
+    left: 0;
+    z-index: 20;
+    // min() instead of a flat 280px: this is anchored to the *field's*
+    // left edge, not the viewport's — inside a narrow column (e.g. a
+    // 3-column responsive grid on mobile) 280px can be wider than the
+    // field itself and run past the viewport's right edge. Doesn't fix
+    // the reverse case (a field near the viewport's right edge overflowing
+    // there instead) — same documented flip/collision limitation as
+    // scarlet-tooltip; see the class doc comment on the component.
+    width: min(280px, calc(100vw - var(--scarlet-space-8)));
+    padding: var(--scarlet-space-3);
+    border: var(--scarlet-border-width-1) solid var(--scarlet-color-border-primary);
+    border-radius: var(--scarlet-border-radius-lg);
+    background-color: var(--scarlet-color-background-primary);
+    box-shadow: var(--scarlet-shadow-lg);
+  }
+
+  &__panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--scarlet-space-2);
+  }
+
+  &__panel-title {
+    @include scarlet-text-body-sm;
+    font-weight: var(--scarlet-font-weight-medium);
+    color: var(--scarlet-color-text-primary);
+    text-transform: capitalize;
+  }
+
+  &__nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--scarlet-space-7);
+    height: var(--scarlet-space-7);
+    padding: 0;
+    border: none;
+    border-radius: var(--scarlet-border-radius-md);
+    background: transparent;
+    color: var(--scarlet-color-text-secondary);
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--scarlet-color-neutral-100);
+      color: var(--scarlet-color-text-primary);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--scarlet-shadow-focus);
+    }
+  }
+
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--scarlet-space-1);
+  }
+
+  &__weekdays,
+  &__week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  &__weekday {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: var(--scarlet-space-6);
+    font-size: var(--scarlet-font-size-xs);
+    font-weight: var(--scarlet-font-weight-medium);
+    color: var(--scarlet-color-text-tertiary);
+  }
+
+  &__cell {
+    display: flex;
+  }
+
+  &__day {
+    width: 100%;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: var(--scarlet-border-radius-md);
+    background: transparent;
+    color: var(--scarlet-color-text-primary);
+    font-size: var(--scarlet-font-size-sm);
+    cursor: pointer;
+
+    &:hover:not([aria-disabled='true']) {
+      background-color: var(--scarlet-color-neutral-100);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--scarlet-shadow-focus);
+    }
+
+    &--outside {
+      color: var(--scarlet-color-text-tertiary);
+    }
+
+    &--today {
+      font-weight: var(--scarlet-font-weight-semibold);
+      color: var(--scarlet-color-primary-600);
+    }
+
+    &--selected {
+      background-color: var(--scarlet-color-primary-500);
+      color: var(--scarlet-color-text-inverse);
+
+      &:hover {
+        background-color: var(--scarlet-color-primary-600);
+      }
+    }
+
+    &[aria-disabled='true'] {
+      color: var(--scarlet-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  &__message {
+    @include scarlet-field-message;
+
+    &--error {
+      @include scarlet-field-message-error;
+    }
+  }
+}

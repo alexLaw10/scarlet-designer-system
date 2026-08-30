@@ -1,0 +1,71 @@
+@use '../../../tokens/field-mixins' as *;
+
+:host {
+  display: block;
+}
+
+.scarlet-textarea {
+  @include scarlet-field-input;
+  min-height: var(--scarlet-space-16);
+
+  &--invalid {
+    @include scarlet-field-invalid;
+  }
+
+  &--resize-none {
+    resize: none;
+  }
+
+  &--resize-vertical {
+    resize: vertical;
+  }
+
+  &--resize-horizontal {
+    resize: horizontal;
+  }
+
+  &--resize-both {
+    resize: both;
+  }
+
+  &--xs {
+    padding: var(--scarlet-space-1-5) var(--scarlet-space-2);
+    font-size: var(--scarlet-font-size-xs);
+  }
+
+  &--sm {
+    padding: var(--scarlet-space-2) var(--scarlet-space-3);
+    font-size: var(--scarlet-font-size-sm);
+  }
+
+  &--md {
+    padding: var(--scarlet-space-2-5) var(--scarlet-space-4);
+    font-size: var(--scarlet-font-size-base);
+  }
+
+  &--lg {
+    padding: var(--scarlet-space-3) var(--scarlet-space-4);
+    font-size: var(--scarlet-font-size-lg);
+  }
+
+  &--xl {
+    padding: var(--scarlet-space-3-5) var(--scarlet-space-5);
+    font-size: var(--scarlet-font-size-xl);
+  }
+
+  &__label {
+    @include scarlet-field-label;
+  }
+
+  &__required {
+    @include scarlet-field-required;
+  }
+
+  &__message {
+    @include scarlet-field-message;
+
+    &--error {
+      @include scarlet-field-message-error;
+    }
+  }
+}

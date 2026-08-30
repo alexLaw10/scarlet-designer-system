@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: var(--scarlet-space-3);
+}
+
+:host(.scarlet-checkbox-group--horizontal) {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--scarlet-space-5);
+}

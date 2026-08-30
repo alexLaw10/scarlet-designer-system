@@ -1,0 +1,59 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+# Prevents two releases racing each other on rapid pushes to main.
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check
+        run: npm run type-check
+
+      - name: Unit tests
+        run: npm run test.spec -- --ci
+
+      - name: Build
+        run: npm run build
+
+      # Reads .changeset/*.md files committed on this branch:
+      # - if there are unreleased changesets, opens/updates a "Version
+      #   Packages" PR that applies them (bumps package.json, updates
+      #   CHANGELOG.md, deletes the consumed changeset files) — nothing
+      #   is published from *this* run.
+      # - once that PR is merged (so main's package.json version no
+      #   longer matches what's on npm), this same step publishes the
+      #   new version to npm instead.
+      - name: Create release PR or publish to npm
+        uses: changesets/action@v1
+        with:
+          publish: npm run release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # actions/setup-node's registry-url above writes an .npmrc that
+          # reads the auth token from this exact env var name — the GitHub
+          # secret itself can still be named anything (NPM_TOKEN here).
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

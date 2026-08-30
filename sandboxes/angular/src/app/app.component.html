@@ -5,6 +5,151 @@
   </header>
 
   <main class="main">
-   chamada dos futuros Components
+    <section class="section">
+      <h2>Button</h2>
+      <div class="button-group">
+        <scarlet-button variant="solid" color="primary" (scarletClick)="onButtonClick('Primary')">Primary</scarlet-button>
+        <scarlet-button variant="solid" color="secondary" (scarletClick)="onButtonClick('Secondary')">Secondary</scarlet-button>
+        <scarlet-button variant="outline" (scarletClick)="onButtonClick('Outline')">Outline</scarlet-button>
+        <scarlet-button variant="ghost" (scarletClick)="onButtonClick('Ghost')">Ghost</scarlet-button>
+        <scarlet-button variant="link" (scarletClick)="onButtonClick('Link')">Link</scarlet-button>
+        <scarlet-button variant="solid" disabled="true">Disabled</scarlet-button>
+      </div>
+      <p>Último clicado: <strong>{{ lastClicked() }}</strong> — Total de cliques: <strong>{{ clickCount() }}</strong></p>
+    </section>
+
+    <section class="section">
+      <h2>Input</h2>
+      <div class="input-group">
+        <scarlet-input label="Nome" placeholder="Digite seu nome" [value]="inputValue()" (scarletInput)="onInputChange($event)"></scarlet-input>
+        <scarlet-input type="email" label="E-mail" placeholder="voce@exemplo.com"></scarlet-input>
+        <scarlet-input type="password" label="Senha" helper-text="Mínimo de 8 caracteres"></scarlet-input>
+        <scarlet-input label="Com erro" error-message="Este campo é obrigatório" invalid="true"></scarlet-input>
+      </div>
+      <p>Valor digitado: <strong>{{ inputValue() || '-' }}</strong></p>
+    </section>
+
+    <section class="section">
+      <h2>Card</h2>
+      <div class="card-group">
+        <scarlet-card variant="elevated">
+          <span slot="header">Card elevado</span>
+          <p>Conteúdo de exemplo dentro do card.</p>
+        </scarlet-card>
+        <scarlet-card variant="outlined">
+          <span slot="header">Card com borda</span>
+          <p>Conteúdo de exemplo dentro do card.</p>
+        </scarlet-card>
+        <scarlet-card interactive="true" (scarletClick)="onButtonClick('Card interativo')">
+          <span slot="header">Card interativo</span>
+          <p>Clique em qualquer lugar deste card.</p>
+        </scarlet-card>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Alert</h2>
+      <div class="alert-group">
+        <scarlet-alert status="info">Este é um alerta informativo.</scarlet-alert>
+        <scarlet-alert status="success">Operação concluída com sucesso.</scarlet-alert>
+        <scarlet-alert status="warning">Atenção: revise os dados informados.</scarlet-alert>
+        <scarlet-alert *ngIf="alertVisible()" status="error" dismissible="true" (scarletDismiss)="onAlertDismiss()">
+          Ocorreu um erro ao processar sua solicitação.
+        </scarlet-alert>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Formulário de cadastro</h2>
+      <p class="section-note">
+        Um exemplo mais completo, combinando os componentes de formulário do Scarlet num cadastro real: texto, inputs
+        mascarados pt-BR, select, date picker, radio group, textarea, switch e checkbox — cada um ligado a uma chave do
+        signal <code>form</code> via <code>[value]</code>/<code>[checked]</code> e <code>(scarletInput)</code>/<code>(scarletChange)</code>.
+      </p>
+      <div class="form">
+        <div class="form-grid">
+          <scarlet-input
+            label="Nome completo"
+            placeholder="Seu nome"
+            required="true"
+            [value]="form().nome"
+            (scarletInput)="setField('nome', $event)"
+          ></scarlet-input>
+          <scarlet-input
+            type="email"
+            label="E-mail"
+            placeholder="voce@exemplo.com"
+            required="true"
+            [value]="form().email"
+            (scarletInput)="setField('email', $event)"
+          ></scarlet-input>
+          <scarlet-input-phone label="Telefone" [value]="form().telefone" (scarletInput)="setField('telefone', $event)"></scarlet-input-phone>
+          <scarlet-input-document
+            label="CPF ou CNPJ"
+            [value]="form().documento"
+            (scarletInput)="setField('documento', $event)"
+          ></scarlet-input-document>
+          <scarlet-input-cep label="CEP" [value]="form().cep" (scarletInput)="setField('cep', $event)"></scarlet-input-cep>
+          <scarlet-select
+            label="Estado"
+            placeholder="Selecione"
+            [options]="ufOptions"
+            [value]="form().uf"
+            (scarletChange)="setField('uf', $event)"
+          ></scarlet-select>
+          <scarlet-date-picker
+            label="Data de nascimento"
+            [value]="form().nascimento"
+            (scarletInput)="setField('nascimento', $event)"
+          ></scarlet-date-picker>
+        </div>
+
+        <fieldset class="form-fieldset">
+          <legend>Tipo de conta</legend>
+          <scarlet-radio-group [value]="form().tipoConta" horizontal="true" (scarletChange)="setField('tipoConta', $event)">
+            <scarlet-radio value="pessoal" label="Pessoal"></scarlet-radio>
+            <scarlet-radio value="empresa" label="Empresa"></scarlet-radio>
+          </scarlet-radio-group>
+        </fieldset>
+
+        <scarlet-textarea
+          label="Mensagem"
+          placeholder="Conte um pouco sobre o motivo do contato"
+          rows="4"
+          [value]="form().mensagem"
+          (scarletInput)="setField('mensagem', $event)"
+        ></scarlet-textarea>
+
+        <div class="form-toggles">
+          <scarlet-switch
+            label="Quero receber novidades por e-mail"
+            [checked]="form().novidades"
+            (scarletChange)="setField('novidades', $event)"
+          ></scarlet-switch>
+          <scarlet-checkbox
+            label="Li e aceito os termos de uso"
+            required="true"
+            [checked]="form().aceitaTermos"
+            (scarletChange)="setField('aceitaTermos', $event)"
+          ></scarlet-checkbox>
+        </div>
+
+        <scarlet-alert *ngIf="submitted()" status="success" dismissible="true" (scarletDismiss)="submitted.set(false)">
+          Cadastro enviado! Confira abaixo os dados coletados pelo formulário.
+        </scarlet-alert>
+
+        <div class="form-actions">
+          <scarlet-button variant="ghost" color="neutral" (scarletClick)="resetForm()">Limpar</scarlet-button>
+          <scarlet-button variant="solid" color="primary" [disabled]="!canSubmit()" (scarletClick)="submitForm()">
+            Enviar cadastro
+          </scarlet-button>
+        </div>
+
+        <details class="form-preview">
+          <summary>Estado atual do formulário (JSON)</summary>
+          <pre>{{ form() | json }}</pre>
+        </details>
+      </div>
+    </section>
   </main>
 </div>

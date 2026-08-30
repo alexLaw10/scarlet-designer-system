@@ -29,8 +29,26 @@ export type Color = 'primary' | 'secondary' | 'success' | 'warning' | 'error' | 
 // Variant types
 export type Variant = 'solid' | 'outline' | 'ghost' | 'link';
 
+// Text color tokens, matching the `--scarlet-color-text-*` custom properties
+export type TextColor = 'primary' | 'secondary' | 'tertiary' | 'inverse' | 'disabled';
+
+// Text alignment
+export type TextAlign = 'left' | 'center' | 'right';
+
 // Position types
-export type Position = 'top' | 'right' | 'bottom' | 'left' | 'top-start' | 'top-end' | 'right-start' | 'right-end' | 'bottom-start' | 'bottom-end' | 'left-start' | 'left-end';
+export type Position =
+  | 'top'
+  | 'right'
+  | 'bottom'
+  | 'left'
+  | 'top-start'
+  | 'top-end'
+  | 'right-start'
+  | 'right-end'
+  | 'bottom-start'
+  | 'bottom-end'
+  | 'left-start'
+  | 'left-end';
 
 // Alignment types
 export type Alignment = 'start' | 'center' | 'end' | 'stretch';

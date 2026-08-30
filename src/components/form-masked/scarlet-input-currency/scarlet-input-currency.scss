@@ -1,0 +1,51 @@
+@use '../../../tokens/field-mixins' as *;
+
+:host {
+  display: block;
+}
+
+.scarlet-input-currency {
+  @include scarlet-field-input;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+
+  &--invalid {
+    @include scarlet-field-invalid;
+  }
+
+  &--xs {
+    @include scarlet-field-size(xs);
+  }
+
+  &--sm {
+    @include scarlet-field-size(sm);
+  }
+
+  &--md {
+    @include scarlet-field-size(md);
+  }
+
+  &--lg {
+    @include scarlet-field-size(lg);
+  }
+
+  &--xl {
+    @include scarlet-field-size(xl);
+  }
+
+  &__label {
+    @include scarlet-field-label;
+  }
+
+  &__required {
+    @include scarlet-field-required;
+  }
+
+  &__message {
+    @include scarlet-field-message;
+
+    &--error {
+      @include scarlet-field-message-error;
+    }
+  }
+}

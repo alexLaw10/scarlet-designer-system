@@ -1,0 +1,73 @@
+@use '../../../tokens/typography-mixins' as *;
+
+$scarlet-chip-colors: primary, secondary, success, warning, error, info, neutral;
+
+:host {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--scarlet-space-1);
+  border-radius: var(--scarlet-border-radius-full);
+  border: var(--scarlet-border-width-1) solid transparent;
+  padding: var(--scarlet-space-1) var(--scarlet-space-1) var(--scarlet-space-1) var(--scarlet-space-3);
+  font-family: var(--scarlet-font-family-primary);
+  font-weight: var(--scarlet-font-weight-medium);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+:host(.scarlet-chip-host--disabled) {
+  opacity: 0.5;
+}
+
+.scarlet-chip {
+  &__label {
+    @include scarlet-text-caption;
+  }
+
+  &__remove {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--scarlet-space-5);
+    height: var(--scarlet-space-5);
+    padding: 0;
+    border: none;
+    border-radius: var(--scarlet-border-radius-full);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+
+    &:hover:not(:disabled) {
+      background-color: rgba(0, 0, 0, 0.08);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--scarlet-shadow-focus);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}
+
+@each $color in $scarlet-chip-colors {
+  :host(.scarlet-chip-host--solid.scarlet-chip-host--#{$color}) {
+    background-color: var(--scarlet-color-#{$color}-500);
+    border-color: var(--scarlet-color-#{$color}-500);
+    color: var(--scarlet-color-text-inverse);
+  }
+
+  :host(.scarlet-chip-host--outline.scarlet-chip-host--#{$color}) {
+    background-color: transparent;
+    border-color: var(--scarlet-color-#{$color}-500);
+    color: var(--scarlet-color-#{$color}-700);
+  }
+
+  :host(.scarlet-chip-host--soft.scarlet-chip-host--#{$color}) {
+    background-color: var(--scarlet-color-#{$color}-50);
+    border-color: transparent;
+    color: var(--scarlet-color-#{$color}-800);
+  }
+}

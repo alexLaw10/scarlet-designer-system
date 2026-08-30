@@ -1,0 +1,49 @@
+@use '../../../tokens/typography-mixins' as *;
+
+:host {
+  display: block;
+}
+
+.scarlet-breadcrumb {
+  &__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
+
+  &__link {
+    @include scarlet-text-body-sm;
+    color: var(--scarlet-color-text-secondary);
+    text-decoration: none;
+    border-radius: var(--scarlet-border-radius-sm);
+
+    &:hover {
+      color: var(--scarlet-color-primary-600);
+      text-decoration: underline;
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--scarlet-shadow-focus);
+    }
+  }
+
+  &__current {
+    @include scarlet-text-body-sm;
+    color: var(--scarlet-color-text-primary);
+    font-weight: var(--scarlet-font-weight-medium);
+  }
+
+  &__separator {
+    margin: 0 var(--scarlet-space-2);
+    color: var(--scarlet-color-text-tertiary);
+  }
+}

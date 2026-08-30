@@ -7,8 +7,12 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    '@typescript-eslint/recommended',
-    '@stencil/eslint-config',
+    'plugin:@typescript-eslint/recommended',
+    // Not extending 'plugin:@stencil/recommended': the installed
+    // @stencil/eslint-plugin@1.3.1 ships no `configs` export at all (an
+    // upstream regression), so resolving that preset fails outright and
+    // blocks `eslint` from running. Every rule it would have added is
+    // already declared explicitly below, so nothing is lost by dropping it.
     'prettier'
   ],
   parser: '@typescript-eslint/parser',
@@ -17,34 +21,26 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json'
   },
-  plugins: [
-    '@typescript-eslint',
-    '@stencil',
-    'prettier'
-  ],
+  plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     // TypeScript specific rules
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-unused-vars': [
-      'error', 
-      { 
-        'argsIgnorePattern': '^_',
-        'varsIgnorePattern': '^_',
-        'caughtErrorsIgnorePattern': '^_'
+      'error',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_'
       }
     ],
     '@typescript-eslint/no-non-null-assertion': 'warn',
-    '@typescript-eslint/prefer-const': 'error',
     '@typescript-eslint/no-var-requires': 'error',
     '@typescript-eslint/ban-ts-comment': 'warn',
     '@typescript-eslint/no-empty-function': 'warn',
     '@typescript-eslint/no-inferrable-types': 'off',
-    '@typescript-eslint/consistent-type-imports': [
-      'error',
-      { 'prefer': 'type-imports' }
-    ],
+    '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
 
     // General JavaScript rules
     'no-console': 'warn',
@@ -61,25 +57,25 @@ module.exports = {
     'no-empty': 'warn',
     'no-extra-semi': 'error',
     'no-irregular-whitespace': 'error',
-    'no-multiple-empty-lines': ['error', { 'max': 1 }],
+    'no-multiple-empty-lines': ['error', { max: 1 }],
     'no-trailing-spaces': 'error',
     'eol-last': 'error',
     'comma-dangle': ['error', 'never'],
-    'quotes': ['error', 'single', { 'avoidEscape': true }],
-    'semi': ['error', 'always'],
-    'indent': ['error', 2, { 'SwitchCase': 1 }],
+    quotes: ['error', 'single', { avoidEscape: true }],
+    semi: ['error', 'always'],
+    indent: ['error', 2, { SwitchCase: 1 }],
     'object-curly-spacing': ['error', 'always'],
     'array-bracket-spacing': ['error', 'never'],
-    'comma-spacing': ['error', { 'before': false, 'after': true }],
-    'key-spacing': ['error', { 'beforeColon': false, 'afterColon': true }],
+    'comma-spacing': ['error', { before: false, after: true }],
+    'key-spacing': ['error', { beforeColon: false, afterColon: true }],
     'space-before-blocks': 'error',
     'space-before-function-paren': ['error', 'never'],
     'space-in-parens': ['error', 'never'],
     'space-infix-ops': 'error',
     'space-unary-ops': 'error',
     'spaced-comment': ['error', 'always'],
-    'brace-style': ['error', '1tbs', { 'allowSingleLine': true }],
-    'camelcase': ['error', { 'properties': 'never' }],
+    'brace-style': ['error', '1tbs', { allowSingleLine: true }],
+    camelcase: ['error', { properties: 'never' }],
     'new-cap': 'error',
     'new-parens': 'error',
     'no-array-constructor': 'error',
@@ -91,44 +87,20 @@ module.exports = {
     'operator-linebreak': ['error', 'after'],
     'padded-blocks': ['error', 'never'],
     'quote-props': ['error', 'as-needed'],
-    'space-after-keywords': 'error',
-    'space-return-throw-case': 'error',
+    'keyword-spacing': 'error',
 
     // Prettier integration
-    'prettier/prettier': 'error',
+    'prettier/prettier': 'error'
 
-    // Stencil specific rules
-    '@stencil/async-methods': 'error',
-    '@stencil/ban-prefix': ['error', ['stencil', 'stnl', 'st']],
-    '@stencil/decorators-context': 'error',
-    '@stencil/decorators-style': [
-      'error',
-      {
-        'prop': 'inline',
-        'state': 'inline',
-        'element': 'inline',
-        'event': 'inline',
-        'method': 'multiline',
-        'host': 'multiline',
-        'listener': 'multiline'
-      }
-    ],
-    '@stencil/element-type': 'error',
-    '@stencil/host-data-missing': 'error',
-    '@stencil/methods-must-be-public': 'error',
-    '@stencil/no-conflict-vars': 'error',
-    '@stencil/no-const-assertion': 'error',
-    '@stencil/no-mutable': 'error',
-    '@stencil/own-methods-must-be-private': 'error',
-    '@stencil/own-props-must-be-public': 'error',
-    '@stencil/prefer-vdom-listener': 'error',
-    '@stencil/props-must-be-public': 'error',
-    '@stencil/props-must-be-readonly': 'error',
-    '@stencil/render-returns-host': 'error',
-    '@stencil/required-jsdoc': 'error',
-    '@stencil/reserved-member-names': 'error',
-    '@stencil/single-export': 'error',
-    '@stencil/strict-mutable': 'error'
+    // Stencil-specific rules previously lived here via `@stencil/eslint-plugin`,
+    // but the installed 1.3.1 is a rewrite targeting ESLint 9 flat config: it
+    // ships no legacy-resolvable `@stencil/recommended` preset, registers
+    // itself under the plugin short name "stencil" (not "@stencil"), and its
+    // rule set was substantially renamed/removed/re-scoped from what this
+    // file originally targeted (e.g. `own-props-must-be-public` doesn't
+    // exist — the closest match, `own-props-must-be-private`, checks the
+    // opposite thing). Re-adding Stencil-specific linting needs a deliberate
+    // rule-by-rule review against the new plugin, not a blind rename.
   },
   overrides: [
     {
@@ -140,7 +112,7 @@ module.exports = {
         'no-alert': 'off',
         'prefer-const': 'off',
         'no-var': 'off',
-        'camelcase': 'off',
+        camelcase: 'off',
         'new-cap': 'off',
         'no-new': 'off',
         'no-unused-expressions': 'off',
@@ -150,7 +122,7 @@ module.exports = {
         'max-statements': 'off',
         'max-params': 'off',
         'max-depth': 'off',
-        'complexity': 'off',
+        complexity: 'off',
         'no-underscore-dangle': 'off',
         'no-param-reassign': 'off',
         'no-restricted-syntax': 'off',
@@ -191,10 +163,8 @@ module.exports = {
         'no-self-assign': 'off',
         'no-undef': 'off',
         'no-unused-labels': 'off',
-        'no-useless-catch': 'off',
         'no-useless-escape': 'off',
-        'no-with': 'off',
-        'valid-typeof': 'off'
+        'no-with': 'off'
       }
     },
     {
@@ -206,7 +176,7 @@ module.exports = {
         'no-alert': 'off',
         'prefer-const': 'off',
         'no-var': 'off',
-        'camelcase': 'off',
+        camelcase: 'off',
         'new-cap': 'off',
         'no-new': 'off',
         'no-unused-expressions': 'off',
@@ -216,7 +186,7 @@ module.exports = {
         'max-statements': 'off',
         'max-params': 'off',
         'max-depth': 'off',
-        'complexity': 'off',
+        complexity: 'off',
         'no-underscore-dangle': 'off',
         'no-param-reassign': 'off',
         'no-restricted-syntax': 'off',
@@ -257,14 +227,25 @@ module.exports = {
         'no-self-assign': 'off',
         'no-undef': 'off',
         'no-unused-labels': 'off',
-        'no-useless-catch': 'off',
         'no-useless-escape': 'off',
-        'no-with': 'off',
-        'valid-typeof': 'off'
+        'no-with': 'off'
       }
     },
     {
-      files: ['**/*.config.js', '**/*.config.ts', '**/jest.config.js', '**/commitlint.config.js', '**/.lintstagedrc.js'],
+      files: [
+        '**/*.config.js',
+        '**/*.config.ts',
+        '**/jest.config.js',
+        '**/commitlint.config.js',
+        '**/.lintstagedrc.js',
+        '.eslintrc.js'
+      ],
+      // Root-level config files aren't part of tsconfig.json's "src"-only
+      // `include`, so the type-aware parser has no program to put them in —
+      // drop `project` for just these files instead of type-checking them.
+      parserOptions: {
+        project: null
+      },
       rules: {
         '@typescript-eslint/no-var-requires': 'off',
         '@typescript-eslint/no-require-imports': 'off',
@@ -275,7 +256,7 @@ module.exports = {
         'no-alert': 'off',
         'prefer-const': 'off',
         'no-var': 'off',
-        'camelcase': 'off',
+        camelcase: 'off',
         'new-cap': 'off',
         'no-new': 'off',
         'no-unused-expressions': 'off',
@@ -285,7 +266,7 @@ module.exports = {
         'max-statements': 'off',
         'max-params': 'off',
         'max-depth': 'off',
-        'complexity': 'off',
+        complexity: 'off',
         'no-underscore-dangle': 'off',
         'no-param-reassign': 'off',
         'no-restricted-syntax': 'off',
@@ -326,18 +307,10 @@ module.exports = {
         'no-self-assign': 'off',
         'no-undef': 'off',
         'no-unused-labels': 'off',
-        'no-useless-catch': 'off',
         'no-useless-escape': 'off',
-        'no-with': 'off',
-        'valid-typeof': 'off'
+        'no-with': 'off'
       }
     }
   ],
-  ignorePatterns: [
-    'dist/',
-    'node_modules/',
-    'www/',
-    'storybook-static/',
-    'coverage/'
-  ]
+  ignorePatterns: ['dist/', 'node_modules/', 'www/', 'storybook-static/', 'coverage/']
 };

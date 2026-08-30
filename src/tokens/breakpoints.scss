@@ -1,0 +1,18 @@
+// Scarlet Design System - Breakpoint Tokens
+//
+// Sass variables, not CSS custom properties: an `@media` condition can't
+// reference a `var(--x)` (no browser resolves custom properties inside a
+// media query), so unlike every other token file, these need to be actual
+// Sass values to be usable at all. That also means this file — like
+// field-mixins.scss/typography-mixins.scss — has no `:root { ... }` block
+// of its own and is meant to be @used (`as *`) directly from any component
+// stylesheet that needs a breakpoint, not just from global/scarlet.scss.
+//
+// The values mirror scarlet-container's existing size scale (sm/md/lg/xl/2xl
+// max-widths) on purpose — a page's container width and its content's
+// responsive breakpoints line up with the same numbers.
+$scarlet-breakpoint-sm: 640px;
+$scarlet-breakpoint-md: 768px;
+$scarlet-breakpoint-lg: 1024px;
+$scarlet-breakpoint-xl: 1280px;
+$scarlet-breakpoint-2xl: 1536px;

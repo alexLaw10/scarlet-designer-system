@@ -1,0 +1,101 @@
+@use '../../../tokens/field-mixins' as *;
+
+:host {
+  display: block;
+}
+
+.scarlet-combobox {
+  &__label {
+    @include scarlet-field-label;
+  }
+
+  &__required {
+    @include scarlet-field-required;
+  }
+
+  &__field {
+    position: relative;
+  }
+
+  &__input {
+    @include scarlet-field-input;
+
+    &--invalid {
+      @include scarlet-field-invalid;
+    }
+
+    &--xs {
+      @include scarlet-field-size(xs);
+    }
+
+    &--sm {
+      @include scarlet-field-size(sm);
+    }
+
+    &--md {
+      @include scarlet-field-size(md);
+    }
+
+    &--lg {
+      @include scarlet-field-size(lg);
+    }
+
+    &--xl {
+      @include scarlet-field-size(xl);
+    }
+  }
+
+  &__list {
+    position: absolute;
+    top: calc(100% + var(--scarlet-space-1-5));
+    left: 0;
+    z-index: 20;
+    width: min(320px, calc(100vw - var(--scarlet-space-8)));
+    max-height: 280px;
+    overflow-y: auto;
+    margin: 0;
+    padding: var(--scarlet-space-1-5);
+    border: var(--scarlet-border-width-1) solid var(--scarlet-color-border-primary);
+    border-radius: var(--scarlet-border-radius-lg);
+    background-color: var(--scarlet-color-background-primary);
+    box-shadow: var(--scarlet-shadow-lg);
+    list-style: none;
+  }
+
+  &__option {
+    @include scarlet-text-body-sm;
+    padding: var(--scarlet-space-2) var(--scarlet-space-3);
+    border-radius: var(--scarlet-border-radius-md);
+    color: var(--scarlet-color-text-primary);
+    cursor: pointer;
+
+    &--focused {
+      background-color: var(--scarlet-color-neutral-100);
+    }
+
+    &--selected {
+      color: var(--scarlet-color-primary-600);
+      font-weight: var(--scarlet-font-weight-medium);
+    }
+
+    &[aria-disabled='true'] {
+      color: var(--scarlet-color-text-disabled);
+      cursor: not-allowed;
+    }
+  }
+
+  &__empty {
+    @include scarlet-text-body-sm;
+    padding: var(--scarlet-space-3);
+    color: var(--scarlet-color-text-tertiary);
+    text-align: center;
+  }
+
+  &__message {
+    @include scarlet-field-message;
+
+    &--error {
+      @include scarlet-field-message-error;
+    }
+  }
+}

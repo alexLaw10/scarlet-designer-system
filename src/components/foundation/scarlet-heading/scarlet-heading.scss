@@ -1,0 +1,78 @@
+@use '../../../tokens/typography-mixins' as *;
+
+:host {
+  display: block;
+}
+
+.scarlet-heading {
+  margin: 0;
+  font-family: var(--scarlet-font-family-primary);
+
+  &--display-2xl {
+    @include scarlet-text-display-2xl;
+  }
+
+  &--display-xl {
+    @include scarlet-text-display-xl;
+  }
+
+  &--display-lg {
+    @include scarlet-text-display-lg;
+  }
+
+  &--display-md {
+    @include scarlet-text-display-md;
+  }
+
+  &--display-sm {
+    @include scarlet-text-display-sm;
+  }
+
+  &--heading-xl {
+    @include scarlet-text-heading-xl;
+  }
+
+  &--heading-lg {
+    @include scarlet-text-heading-lg;
+  }
+
+  &--heading-md {
+    @include scarlet-text-heading-md;
+  }
+
+  &--heading-sm {
+    @include scarlet-text-heading-sm;
+  }
+
+  &--color-primary {
+    color: var(--scarlet-color-text-primary);
+  }
+
+  &--color-secondary {
+    color: var(--scarlet-color-text-secondary);
+  }
+
+  &--color-tertiary {
+    color: var(--scarlet-color-text-tertiary);
+  }
+
+  &--color-inverse {
+    color: var(--scarlet-color-text-inverse);
+  }
+
+  &--color-disabled {
+    color: var(--scarlet-color-text-disabled);
+  }
+
+  &--align-left {
+    text-align: left;
+  }
+
+  &--align-center {
+    text-align: center;
+  }
+
+  &--align-right {
+    text-align: right;
+  }
+}

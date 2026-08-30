@@ -1,0 +1,114 @@
+// Scarlet Design System - Typography Scale Mixins
+//
+// Composite text styles built on top of the typography custom properties
+// defined in `typography.scss`. These are Sass mixins (not custom
+// properties) because a CSS custom property cannot hold a declaration
+// block. @use this file from any component stylesheet (`as *` to call its
+// mixins unprefixed, matching every other token file's own convention) and
+// `@include` the style you need:
+//
+//   @use '../../tokens/typography-mixins' as *;
+//
+//   .title {
+//     @include scarlet-text-heading-lg;
+//   }
+
+// The four largest display sizes use clamp() instead of the fixed
+// --scarlet-font-size-* tokens every other mixin below uses: at their fixed
+// size (up to 60px for 2xl) they're prone to overflowing or wrapping badly
+// on a small phone viewport. Each clamp's upper bound is the exact value
+// the fixed token held before, so nothing changes at a typical desktop
+// viewport (~900px+) — only viewports narrower than that scale the size
+// down smoothly, bottoming out at the lower bound instead of shrinking
+// forever. Every other text style below is small enough already that this
+// isn't needed.
+@mixin scarlet-text-display-2xl {
+  font-size: clamp(2.25rem, 1.5rem + 4vw, var(--scarlet-font-size-6xl));
+  font-weight: var(--scarlet-font-weight-bold);
+  line-height: var(--scarlet-line-height-none);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+}
+
+@mixin scarlet-text-display-xl {
+  font-size: clamp(2rem, 1.4rem + 3vw, var(--scarlet-font-size-5xl));
+  font-weight: var(--scarlet-font-weight-bold);
+  line-height: var(--scarlet-line-height-none);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+}
+
+@mixin scarlet-text-display-lg {
+  font-size: clamp(1.75rem, 1.4rem + 2vw, var(--scarlet-font-size-4xl));
+  font-weight: var(--scarlet-font-weight-bold);
+  line-height: var(--scarlet-line-height-tight);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+}
+
+@mixin scarlet-text-display-md {
+  font-size: clamp(1.5rem, 1.25rem + 1.25vw, var(--scarlet-font-size-3xl));
+  font-weight: var(--scarlet-font-weight-bold);
+  line-height: var(--scarlet-line-height-tight);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+}
+
+@mixin scarlet-text-display-sm {
+  font-size: var(--scarlet-font-size-2xl);
+  font-weight: var(--scarlet-font-weight-bold);
+  line-height: var(--scarlet-line-height-snug);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+}
+
+@mixin scarlet-text-heading-xl {
+  font-size: var(--scarlet-font-size-2xl);
+  font-weight: var(--scarlet-font-weight-semibold);
+  line-height: var(--scarlet-line-height-snug);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+}
+
+@mixin scarlet-text-heading-lg {
+  font-size: var(--scarlet-font-size-xl);
+  font-weight: var(--scarlet-font-weight-semibold);
+  line-height: var(--scarlet-line-height-snug);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+}
+
+@mixin scarlet-text-heading-md {
+  font-size: var(--scarlet-font-size-lg);
+  font-weight: var(--scarlet-font-weight-semibold);
+  line-height: var(--scarlet-line-height-snug);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+}
+
+@mixin scarlet-text-heading-sm {
+  font-size: var(--scarlet-font-size-base);
+  font-weight: var(--scarlet-font-weight-semibold);
+  line-height: var(--scarlet-line-height-snug);
+  letter-spacing: var(--scarlet-letter-spacing-tight);
+}
+
+@mixin scarlet-text-body-lg {
+  font-size: var(--scarlet-font-size-lg);
+  font-weight: var(--scarlet-font-weight-normal);
+  line-height: var(--scarlet-line-height-relaxed);
+  letter-spacing: var(--scarlet-letter-spacing-normal);
+}
+
+@mixin scarlet-text-body-md {
+  font-size: var(--scarlet-font-size-base);
+  font-weight: var(--scarlet-font-weight-normal);
+  line-height: var(--scarlet-line-height-normal);
+  letter-spacing: var(--scarlet-letter-spacing-normal);
+}
+
+@mixin scarlet-text-body-sm {
+  font-size: var(--scarlet-font-size-sm);
+  font-weight: var(--scarlet-font-weight-normal);
+  line-height: var(--scarlet-line-height-normal);
+  letter-spacing: var(--scarlet-letter-spacing-normal);
+}
+
+@mixin scarlet-text-caption {
+  font-size: var(--scarlet-font-size-xs);
+  font-weight: var(--scarlet-font-weight-normal);
+  line-height: var(--scarlet-line-height-normal);
+  letter-spacing: var(--scarlet-letter-spacing-wide);
+}

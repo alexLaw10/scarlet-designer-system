@@ -1,0 +1,77 @@
+@use '../../../tokens/breakpoints' as *;
+
+:host {
+  display: grid;
+  grid-template-columns: repeat(var(--scarlet-grid-columns), minmax(0, 1fr));
+}
+
+// Each breakpoint falls back through the ones below it, then to the base
+// --scarlet-grid-columns — so setting only `columnsMd` still applies from
+// `md` all the way up through `xl`, not just inside the `md` window.
+@media (min-width: $scarlet-breakpoint-sm) {
+  :host {
+    grid-template-columns: repeat(var(--scarlet-grid-columns-sm, var(--scarlet-grid-columns)), minmax(0, 1fr));
+  }
+}
+
+@media (min-width: $scarlet-breakpoint-md) {
+  :host {
+    grid-template-columns: repeat(
+      var(--scarlet-grid-columns-md, var(--scarlet-grid-columns-sm, var(--scarlet-grid-columns))),
+      minmax(0, 1fr)
+    );
+  }
+}
+
+@media (min-width: $scarlet-breakpoint-lg) {
+  :host {
+    grid-template-columns: repeat(
+      var(--scarlet-grid-columns-lg, var(--scarlet-grid-columns-md, var(--scarlet-grid-columns-sm, var(--scarlet-grid-columns)))),
+      minmax(0, 1fr)
+    );
+  }
+}
+
+@media (min-width: $scarlet-breakpoint-xl) {
+  :host {
+    grid-template-columns: repeat(
+      var(
+        --scarlet-grid-columns-xl,
+        var(--scarlet-grid-columns-lg, var(--scarlet-grid-columns-md, var(--scarlet-grid-columns-sm, var(--scarlet-grid-columns))))
+      ),
+      minmax(0, 1fr)
+    );
+  }
+}
+
+:host(.scarlet-grid-host--align-start) {
+  align-items: start;
+}
+
+:host(.scarlet-grid-host--align-center) {
+  align-items: center;
+}
+
+:host(.scarlet-grid-host--align-end) {
+  align-items: end;
+}
+
+:host(.scarlet-grid-host--align-stretch) {
+  align-items: stretch;
+}
+
+:host(.scarlet-grid-host--justify-start) {
+  justify-items: start;
+}
+
+:host(.scarlet-grid-host--justify-center) {
+  justify-items: center;
+}
+
+:host(.scarlet-grid-host--justify-end) {
+  justify-items: end;
+}
+
+:host(.scarlet-grid-host--justify-stretch) {
+  justify-items: stretch;
+}

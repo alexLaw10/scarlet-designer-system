@@ -9,12 +9,16 @@ global.ResizeObserver = class ResizeObserver {
 };
 
 // Mock IntersectionObserver
+// Cast needed: this deliberately-minimal mock doesn't implement every member
+// of the real IntersectionObserver interface (root, rootMargin, thresholds,
+// takeRecords) — jsdom's tests don't need them, TypeScript's structural
+// check does.
 global.IntersectionObserver = class IntersectionObserver {
   constructor() {}
   observe() {}
   unobserve() {}
   disconnect() {}
-};
+} as unknown as typeof IntersectionObserver;
 
 // Mock matchMedia
 Object.defineProperty(window, 'matchMedia', {
@@ -27,8 +31,8 @@ Object.defineProperty(window, 'matchMedia', {
     removeListener: jest.fn(), // deprecated
     addEventListener: jest.fn(),
     removeEventListener: jest.fn(),
-    dispatchEvent: jest.fn(),
-  })),
+    dispatchEvent: jest.fn()
+  }))
 });
 
 // Export newSpecPage for use in tests

@@ -1,0 +1,111 @@
+@use '../../../tokens/breakpoints' as *;
+
+:host {
+  display: flex;
+  flex-direction: var(--scarlet-stack-direction);
+}
+
+// Each breakpoint falls back through the ones below it, then to the base
+// --scarlet-stack-direction — so setting only directionMd still applies
+// from `md` all the way up through `xl`, not just inside the `md` window.
+@media (min-width: $scarlet-breakpoint-sm) {
+  :host {
+    flex-direction: var(--scarlet-stack-direction-sm, var(--scarlet-stack-direction));
+  }
+}
+
+@media (min-width: $scarlet-breakpoint-md) {
+  :host {
+    flex-direction: var(--scarlet-stack-direction-md, var(--scarlet-stack-direction-sm, var(--scarlet-stack-direction)));
+  }
+}
+
+@media (min-width: $scarlet-breakpoint-lg) {
+  :host {
+    flex-direction: var(
+      --scarlet-stack-direction-lg,
+      var(--scarlet-stack-direction-md, var(--scarlet-stack-direction-sm, var(--scarlet-stack-direction)))
+    );
+  }
+}
+
+@media (min-width: $scarlet-breakpoint-xl) {
+  :host {
+    flex-direction: var(
+      --scarlet-stack-direction-xl,
+      var(--scarlet-stack-direction-lg, var(--scarlet-stack-direction-md, var(--scarlet-stack-direction-sm, var(--scarlet-stack-direction))))
+    );
+  }
+}
+
+:host(.scarlet-stack-host--gap-xs) {
+  gap: var(--scarlet-space-1);
+}
+
+:host(.scarlet-stack-host--gap-sm) {
+  gap: var(--scarlet-space-2);
+}
+
+:host(.scarlet-stack-host--gap-md) {
+  gap: var(--scarlet-space-4);
+}
+
+:host(.scarlet-stack-host--gap-lg) {
+  gap: var(--scarlet-space-6);
+}
+
+:host(.scarlet-stack-host--gap-xl) {
+  gap: var(--scarlet-space-8);
+}
+
+:host(.scarlet-stack-host--align-start) {
+  align-items: flex-start;
+}
+
+:host(.scarlet-stack-host--align-center) {
+  align-items: center;
+}
+
+:host(.scarlet-stack-host--align-end) {
+  align-items: flex-end;
+}
+
+:host(.scarlet-stack-host--align-stretch) {
+  align-items: stretch;
+}
+
+:host(.scarlet-stack-host--justify-start) {
+  justify-content: flex-start;
+}
+
+:host(.scarlet-stack-host--justify-center) {
+  justify-content: center;
+}
+
+:host(.scarlet-stack-host--justify-end) {
+  justify-content: flex-end;
+}
+
+:host(.scarlet-stack-host--justify-between) {
+  justify-content: space-between;
+}
+
+:host(.scarlet-stack-host--justify-around) {
+  justify-content: space-around;
+}
+
+:host(.scarlet-stack-host--justify-evenly) {
+  justify-content: space-evenly;
+}
+
+:host(.scarlet-stack-host--wrap-nowrap) {
+  flex-wrap: nowrap;
+}
+
+:host(.scarlet-stack-host--wrap-wrap) {
+  flex-wrap: wrap;
+}
+
+:host(.scarlet-stack-host--wrap-wrap-reverse) {
+  flex-wrap: wrap-reverse;
+}

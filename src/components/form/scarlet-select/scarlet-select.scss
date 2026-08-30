@@ -1,0 +1,81 @@
+@use '../../../tokens/field-mixins' as *;
+
+:host {
+  display: block;
+}
+
+.scarlet-select {
+  @include scarlet-field-input;
+  appearance: none;
+  cursor: pointer;
+  padding-right: var(--scarlet-space-8);
+
+  &--placeholder {
+    color: var(--scarlet-color-text-tertiary);
+  }
+
+  &--invalid {
+    @include scarlet-field-invalid;
+  }
+
+  &--xs {
+    height: var(--scarlet-space-6);
+    padding-left: var(--scarlet-space-2);
+    font-size: var(--scarlet-font-size-xs);
+  }
+
+  &--sm {
+    height: var(--scarlet-space-8);
+    padding-left: var(--scarlet-space-3);
+    font-size: var(--scarlet-font-size-sm);
+  }
+
+  &--md {
+    height: var(--scarlet-space-10);
+    padding-left: var(--scarlet-space-4);
+    font-size: var(--scarlet-font-size-base);
+  }
+
+  &--lg {
+    height: var(--scarlet-space-12);
+    padding-left: var(--scarlet-space-4);
+    font-size: var(--scarlet-font-size-lg);
+  }
+
+  &--xl {
+    height: var(--scarlet-space-14);
+    padding-left: var(--scarlet-space-5);
+    font-size: var(--scarlet-font-size-xl);
+  }
+
+  &__label {
+    @include scarlet-field-label;
+  }
+
+  &__required {
+    @include scarlet-field-required;
+  }
+
+  &__wrapper {
+    position: relative;
+  }
+
+  &__chevron {
+    position: absolute;
+    top: 50%;
+    right: var(--scarlet-space-3);
+    width: var(--scarlet-space-4);
+    height: var(--scarlet-space-4);
+    transform: translateY(-50%);
+    color: var(--scarlet-color-text-tertiary);
+    pointer-events: none;
+  }
+
+  &__message {
+    @include scarlet-field-message;
+
+    &--error {
+      @include scarlet-field-message-error;
+    }
+  }
+}

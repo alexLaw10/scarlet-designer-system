@@ -1,0 +1,108 @@
+// Scarlet Design System - Shared form-field style mixins
+//
+// The visual treatment of a text-like field (border, focus ring, invalid
+// state, size steps, label, helper/error text) is identical across
+// scarlet-input, scarlet-textarea, scarlet-select and every masked input
+// built on top of them. Pulled out once here instead of re-copied per
+// component's .scss (each still needs its own stylesheet — Shadow DOM
+// styles can't be shared as a stylesheet across components — but the
+// *rules* only need to be written once).
+// Both @forward (so a file that only @uses this one still gets
+// typography-mixins' own mixins, unprefixed via `as *` on its end — several
+// component .scss files rely on exactly that, e.g. scarlet-date-picker.scss
+// calls scarlet-text-body-sm without importing typography-mixins itself)
+// and @use (so this file's own mixins below, like scarlet-field-input, can
+// call scarlet-text-body-md directly). @import was transitive by default;
+// @use/@forward aren't, so unlike the old @import this needs to be explicit
+// about both directions.
+@forward 'typography-mixins';
+@use 'typography-mixins' as *;
+
+@mixin scarlet-field-input {
+  @include scarlet-text-body-md;
+  box-sizing: border-box;
+  width: 100%;
+  border: var(--scarlet-border-width-1) solid var(--scarlet-color-border-primary);
+  border-radius: var(--scarlet-border-radius-input);
+  background-color: var(--scarlet-color-background-primary);
+  color: var(--scarlet-color-text-primary);
+  font-family: var(--scarlet-font-family-primary);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+
+  &::placeholder {
+    color: var(--scarlet-color-text-tertiary);
+  }
+
+  &:hover:not(:disabled) {
+    border-color: var(--scarlet-color-neutral-400);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--scarlet-color-border-focus);
+    box-shadow: var(--scarlet-shadow-focus);
+  }
+
+  &:disabled {
+    background-color: var(--scarlet-color-background-disabled);
+    color: var(--scarlet-color-text-disabled);
+    cursor: not-allowed;
+  }
+}
+
+@mixin scarlet-field-invalid {
+  border-color: var(--scarlet-color-border-error);
+
+  &:focus-visible {
+    border-color: var(--scarlet-color-border-error);
+    box-shadow: var(--scarlet-shadow-focus-error);
+  }
+}
+
+@mixin scarlet-field-size($size) {
+  @if $size == xs {
+    height: var(--scarlet-space-6);
+    padding: 0 var(--scarlet-space-2);
+    font-size: var(--scarlet-font-size-xs);
+  } @else if $size == sm {
+    height: var(--scarlet-space-8);
+    padding: 0 var(--scarlet-space-3);
+    font-size: var(--scarlet-font-size-sm);
+  } @else if $size == md {
+    height: var(--scarlet-space-10);
+    padding: 0 var(--scarlet-space-4);
+    font-size: var(--scarlet-font-size-base);
+  } @else if $size == lg {
+    height: var(--scarlet-space-12);
+    padding: 0 var(--scarlet-space-4);
+    font-size: var(--scarlet-font-size-lg);
+  } @else if $size == xl {
+    height: var(--scarlet-space-14);
+    padding: 0 var(--scarlet-space-5);
+    font-size: var(--scarlet-font-size-xl);
+  }
+}
+
+@mixin scarlet-field-label {
+  @include scarlet-text-body-sm;
+  display: block;
+  margin-bottom: var(--scarlet-space-1-5);
+  color: var(--scarlet-color-text-secondary);
+  font-weight: var(--scarlet-font-weight-medium);
+}
+
+@mixin scarlet-field-required {
+  color: var(--scarlet-color-error-500);
+}
+
+@mixin scarlet-field-message {
+  @include scarlet-text-caption;
+  margin: var(--scarlet-space-1-5) 0 0;
+  color: var(--scarlet-color-text-tertiary);
+}
+
+@mixin scarlet-field-message-error {
+  color: var(--scarlet-color-error-600);
+}

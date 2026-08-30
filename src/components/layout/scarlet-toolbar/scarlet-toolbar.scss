@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  align-items: center;
+  gap: var(--scarlet-space-2);
+  padding: var(--scarlet-space-2);
+  border-radius: var(--scarlet-border-radius-lg);
+  background-color: var(--scarlet-color-background-secondary);
+}
+
+:host(.scarlet-toolbar-host--justify-start) {
+  justify-content: flex-start;
+}
+
+:host(.scarlet-toolbar-host--justify-center) {
+  justify-content: center;
+}
+
+:host(.scarlet-toolbar-host--justify-end) {
+  justify-content: flex-end;
+}
+
+:host(.scarlet-toolbar-host--justify-between) {
+  justify-content: space-between;
+}
+
+:host(.scarlet-toolbar-host--justify-around) {
+  justify-content: space-around;
+}
+
+:host(.scarlet-toolbar-host--justify-evenly) {
+  justify-content: space-evenly;
+}
+
+::slotted(scarlet-divider) {
+  align-self: stretch;
+}

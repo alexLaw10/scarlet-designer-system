@@ -1,0 +1,92 @@
+@use '../../../tokens/breakpoints' as *;
+
+:host {
+  display: block;
+  min-width: 0;
+  grid-column: span var(--scarlet-grid-item-col-span) / span var(--scarlet-grid-item-col-span);
+  grid-row: span var(--scarlet-grid-item-row-span) / span var(--scarlet-grid-item-row-span);
+}
+
+// Each breakpoint falls back through the ones below it, then to the base
+// span — same mobile-first cascade as <scarlet-grid>'s own columns.
+@media (min-width: $scarlet-breakpoint-sm) {
+  :host {
+    grid-column: span var(--scarlet-grid-item-col-span-sm, var(--scarlet-grid-item-col-span)) /
+      span var(--scarlet-grid-item-col-span-sm, var(--scarlet-grid-item-col-span));
+    grid-row: span var(--scarlet-grid-item-row-span-sm, var(--scarlet-grid-item-row-span)) /
+      span var(--scarlet-grid-item-row-span-sm, var(--scarlet-grid-item-row-span));
+  }
+}
+
+@media (min-width: $scarlet-breakpoint-md) {
+  :host {
+    grid-column: span
+        var(--scarlet-grid-item-col-span-md, var(--scarlet-grid-item-col-span-sm, var(--scarlet-grid-item-col-span))) /
+      span var(--scarlet-grid-item-col-span-md, var(--scarlet-grid-item-col-span-sm, var(--scarlet-grid-item-col-span)));
+    grid-row: span
+        var(--scarlet-grid-item-row-span-md, var(--scarlet-grid-item-row-span-sm, var(--scarlet-grid-item-row-span))) /
+      span var(--scarlet-grid-item-row-span-md, var(--scarlet-grid-item-row-span-sm, var(--scarlet-grid-item-row-span)));
+  }
+}
+
+@media (min-width: $scarlet-breakpoint-lg) {
+  :host {
+    grid-column: span
+        var(
+          --scarlet-grid-item-col-span-lg,
+          var(--scarlet-grid-item-col-span-md, var(--scarlet-grid-item-col-span-sm, var(--scarlet-grid-item-col-span)))
+        ) /
+      span
+        var(
+          --scarlet-grid-item-col-span-lg,
+          var(--scarlet-grid-item-col-span-md, var(--scarlet-grid-item-col-span-sm, var(--scarlet-grid-item-col-span)))
+        );
+    grid-row: span
+        var(
+          --scarlet-grid-item-row-span-lg,
+          var(--scarlet-grid-item-row-span-md, var(--scarlet-grid-item-row-span-sm, var(--scarlet-grid-item-row-span)))
+        ) /
+      span
+        var(
+          --scarlet-grid-item-row-span-lg,
+          var(--scarlet-grid-item-row-span-md, var(--scarlet-grid-item-row-span-sm, var(--scarlet-grid-item-row-span)))
+        );
+  }
+}
+
+@media (min-width: $scarlet-breakpoint-xl) {
+  :host {
+    grid-column: span
+        var(
+          --scarlet-grid-item-col-span-xl,
+          var(
+            --scarlet-grid-item-col-span-lg,
+            var(--scarlet-grid-item-col-span-md, var(--scarlet-grid-item-col-span-sm, var(--scarlet-grid-item-col-span)))
+          )
+        ) /
+      span
+        var(
+          --scarlet-grid-item-col-span-xl,
+          var(
+            --scarlet-grid-item-col-span-lg,
+            var(--scarlet-grid-item-col-span-md, var(--scarlet-grid-item-col-span-sm, var(--scarlet-grid-item-col-span)))
+          )
+        );
+    grid-row: span
+        var(
+          --scarlet-grid-item-row-span-xl,
+          var(
+            --scarlet-grid-item-row-span-lg,
+            var(--scarlet-grid-item-row-span-md, var(--scarlet-grid-item-row-span-sm, var(--scarlet-grid-item-row-span)))
+          )
+        ) /
+      span
+        var(
+          --scarlet-grid-item-row-span-xl,
+          var(
+            --scarlet-grid-item-row-span-lg,
+            var(--scarlet-grid-item-row-span-md, var(--scarlet-grid-item-row-span-sm, var(--scarlet-grid-item-row-span)))
+          )
+        );
+  }
+}
